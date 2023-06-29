@@ -16,6 +16,7 @@
 
 typedef void* HANDLE;
 void* g_pKeyHandle = 0;
+unsigned short g_usNodeId = 1;
 
 #ifndef MMC_SUCCESS
 	#define MMC_SUCCESS 0
@@ -41,8 +42,8 @@ int PrintDeviceVersion()
 
 	if(VCS_GetVersion(g_pKeyHandle, g_usNodeId, &usHardwareVersion, &usSoftwareVersion, &usApplicationNumber, &usApplicationVersion, &ulErrorCode))
 	{
-		printf("%s Hardware Version    = 0x%04x\n      Software Version    = 0x%04x\n      Application Number  = 0x%04x\n      Application Version = 0x%04x\n",
-				g_deviceName.c_str(), usHardwareVersion, usSoftwareVersion, usApplicationNumber, usApplicationVersion);
+		printf("Hardware Version    = 0x%04x\n      Software Version    = 0x%04x\n      Application Number  = 0x%04x\n      Application Version = 0x%04x\n",
+				usHardwareVersion, usSoftwareVersion, usApplicationNumber, usApplicationVersion);
 		lResult = MMC_SUCCESS;
 	}
 
@@ -67,7 +68,7 @@ int main(int argc, char** argv)
 	bind(s, (struct sockaddr *)&addr, sizeof(addr));
 
 	printf("socket = %d\n", s);
-	g_pKeyHandle = s;
+	g_pKeyHandle = (void)&s;
 
 	PrintDeviceVersion()
 
