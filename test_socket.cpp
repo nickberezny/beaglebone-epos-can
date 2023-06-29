@@ -13,10 +13,46 @@
 
 #include "Definitions.h"
 
+
+typedef void* HANDLE;
+void* g_pKeyHandle = 0;
+
+#ifndef MMC_SUCCESS
+	#define MMC_SUCCESS 0
+#endif
+
+#ifndef MMC_FAILED
+	#define MMC_FAILED 1
+#endif
+
+#ifndef MMC_MAX_LOG_MSG_SIZE
+	#define MMC_MAX_LOG_MSG_SIZE 512
+#endif
+
+
+int PrintDeviceVersion()
+{
+	int lResult = MMC_FAILED;
+	unsigned short usHardwareVersion = 0;
+	unsigned short usSoftwareVersion = 0;
+	unsigned short usApplicationNumber = 0;
+	unsigned short usApplicationVersion = 0;
+	unsigned int ulErrorCode = 0;
+
+	if(VCS_GetVersion(g_pKeyHandle, g_usNodeId, &usHardwareVersion, &usSoftwareVersion, &usApplicationNumber, &usApplicationVersion, &ulErrorCode))
+	{
+		printf("%s Hardware Version    = 0x%04x\n      Software Version    = 0x%04x\n      Application Number  = 0x%04x\n      Application Version = 0x%04x\n",
+				g_deviceName.c_str(), usHardwareVersion, usSoftwareVersion, usApplicationNumber, usApplicationVersion);
+		lResult = MMC_SUCCESS;
+	}
+
+	return lResult;
+}
+
 int main(int argc, char** argv)
 {
 
-	int s;
+		int s;
 	struct sockaddr_can addr;
 	struct ifreq ifr;
 
@@ -31,5 +67,8 @@ int main(int argc, char** argv)
 	bind(s, (struct sockaddr *)&addr, sizeof(addr));
 
 	printf("socket = %d\n", s);
+	g_pKeyHandle = s;
+
+	PrintDeviceVersion()
 
 }
