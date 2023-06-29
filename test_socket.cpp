@@ -26,6 +26,8 @@ typedef void* HANDLE;
 void* g_pKeyHandle = 0;
 unsigned short g_usNodeId = 1;
 
+using namespace std;
+
 #ifndef MMC_SUCCESS
 	#define MMC_SUCCESS 0
 #endif
