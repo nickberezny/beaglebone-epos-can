@@ -133,7 +133,7 @@ void SetDefaultParameters()
 	//USB
 	g_usNodeId = 1;
 	g_deviceName = "EPOS4"; 
-	g_protocolStackName = "MAXON SERIAL V2"; 
+	g_protocolStackName = "CANopen"; 
 	g_interfaceName = "USB"; 
 	g_portName = "USB0"; 
 	g_baudrate = 1000000; 
