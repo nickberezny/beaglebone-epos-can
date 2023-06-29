@@ -42,7 +42,7 @@ using namespace std;
 
 void LogError(string functionName, int p_lResult, unsigned int p_ulErrorCode)
 {
-	cerr << g_programName << ": " << functionName << " failed (result=" << p_lResult << ", errorCode=0x" << std::hex << p_ulErrorCode << ")"<< endl;
+	cerr  << ": " << functionName << " failed (result=" << p_lResult << ", errorCode=0x" << std::hex << p_ulErrorCode << ")"<< endl;
 }
 
 int PrintDeviceVersion()
