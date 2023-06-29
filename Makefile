@@ -4,10 +4,8 @@ TARGET = test_socket
 LIBS = -lEposCmd
 
 socket:
-	test_socket: test_socket.cpp
-	$(CC) -o test_socket test_socket.cpp $(CFLAGS) $(LIBS)
+	$(CC) test_socket.cpp -o test_socket  $(CFLAGS) $(LIBS)
 
 example:
-	HelloEposCmd: HelloEposCmd.cpp
-	$(CC) -o HelloEposCmd HelloEposCmd.cpp $(CFLAGS) $(LIBS)
+	$(CC) HelloEposCmd.cpp -o HelloEposCmd  $(CFLAGS) $(LIBS)
 
