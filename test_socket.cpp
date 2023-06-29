@@ -73,7 +73,7 @@ int PrintDeviceVersion()
 int main(int argc, char** argv)
 {
 
-	int s;
+	int s = 0;
 	struct sockaddr_can addr;
 	struct ifreq ifr;
 
