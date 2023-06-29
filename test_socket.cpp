@@ -46,6 +46,10 @@ int PrintDeviceVersion()
 				usHardwareVersion, usSoftwareVersion, usApplicationNumber, usApplicationVersion);
 		lResult = MMC_SUCCESS;
 	}
+	else
+	{
+		LogError("VCS_SetDisableState", lResult, ulErrorCode);
+	}
 
 	return lResult;
 }
