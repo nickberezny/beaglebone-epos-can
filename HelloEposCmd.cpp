@@ -156,6 +156,7 @@ int OpenDevice(unsigned int* p_pErrorCode)
 	LogInfo("Open device...");
 
 	g_pKeyHandle = VCS_OpenDevice(pDeviceName, pProtocolStackName, pInterfaceName, pPortName, p_pErrorCode);
+	printf("Handle: %d\n",g_pKeyHandle);
 
 	if(g_pKeyHandle!=0 && *p_pErrorCode == 0)
 	{
