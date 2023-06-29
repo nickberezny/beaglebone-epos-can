@@ -63,7 +63,7 @@ int PrintDeviceVersion()
 	}
 	else
 	{
-		printf("Error!\n");
+		printf("Error! %d \n", ulErrorCode);
 		LogError("VCS_SetDisableState", lResult, ulErrorCode);
 	}
 
