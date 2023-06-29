@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -I.
-TARGET = HelloEposCmd
+TARGET = test_socket
 LIBS = -lEposCmd
 
 all: $(TARGET)
