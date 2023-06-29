@@ -1,20 +1,13 @@
+CC = g++
+CFLAGS = -I.
+TARGET = test_socket
+LIBS = -lEposCmd
+
 socket:
-
-	CC = g++
-	CFLAGS = -I.
-	TARGET = test_socket
-	LIBS = -lEposCmd
-
-	$(TARGET): $(TARGET).cpp
-	$(CC) -o $(TARGET) $(TARGET).cpp $(CFLAGS) $(LIBS)
+	test_socket: test_socket.cpp
+	$(CC) -o test_socket test_socket.cpp $(CFLAGS) $(LIBS)
 
 example:
-
-	CC = g++
-	CFLAGS = -I.
-	TARGET = HelloEposCmd
-	LIBS = -lEposCmd
-
-	$(TARGET): $(TARGET).cpp
-	$(CC) -o $(TARGET) $(TARGET).cpp $(CFLAGS) $(LIBS)
+	HelloEposCmd: HelloEposCmd.cpp
+	$(CC) -o HelloEposCmd HelloEposCmd.cpp $(CFLAGS) $(LIBS)
 
