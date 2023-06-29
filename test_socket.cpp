@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Definitions.h"
-#include <string.h>
 #include <sstream>
 #include <unistd.h>
 #include <getopt.h>
