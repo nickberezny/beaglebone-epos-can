@@ -30,6 +30,10 @@ unsigned short g_usNodeId = 1;
 	#define MMC_MAX_LOG_MSG_SIZE 512
 #endif
 
+void LogError(string functionName, int p_lResult, unsigned int p_ulErrorCode)
+{
+	cerr << g_programName << ": " << functionName << " failed (result=" << p_lResult << ", errorCode=0x" << std::hex << p_ulErrorCode << ")"<< endl;
+}
 
 int PrintDeviceVersion()
 {
