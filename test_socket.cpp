@@ -30,4 +30,6 @@ int main(int argc, char** argv)
 
 	bind(s, (struct sockaddr *)&addr, sizeof(addr));
 
+	printf("socket = %d\n", s);
+
 }
