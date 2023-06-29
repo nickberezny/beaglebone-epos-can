@@ -68,8 +68,8 @@ int main(int argc, char** argv)
 	bind(s, (struct sockaddr *)&addr, sizeof(addr));
 
 	printf("socket = %d\n", s);
-	g_pKeyHandle = (void)&s;
+	g_pKeyHandle = &s;
 
-	PrintDeviceVersion()
+	PrintDeviceVersion();
 
 }
