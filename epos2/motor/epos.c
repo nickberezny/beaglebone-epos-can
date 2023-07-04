@@ -21,7 +21,7 @@ int epos_Receive_PDO_n_Parameter(uint16_t node_id, uint8_t n, uint32_t cob) {
 	d.nodeid = node_id;
 	//d.index = 0x1400 + n-1;
 	//d.subindex = 0x01;
-	d.index = 0x1000
+	d.index = 0x1000;
 	d.subindex = 0x00;
 	d.data.size = 4;
 	d.data.data = cob;
