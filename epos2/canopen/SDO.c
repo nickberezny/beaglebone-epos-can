@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "SDO.h"
 #include "socketcan/socketcan.h"
 #include "socketcan/printd.h"
