@@ -117,6 +117,8 @@ int motor_init(void) {
 		return MOTOR_ERROR;
 	}
 
+	printf("fd: %d\n",motor_pdo_fd);
+
 	// Configure each node
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
 	if (err != 0) {
