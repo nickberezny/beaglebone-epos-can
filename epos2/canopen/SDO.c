@@ -67,6 +67,10 @@ int SDO_write(int fd, const SDO_data* d) {
 		//printf("err=%d node=0x%x index=0x%x sub=0x%x from=0x%x res=0x%x\n", err, d->nodeid, d->index, d->subindex, f.id, f.data[0]);
 		printf("data %d,%d,%d,%d,%d,%d,%d,%d\n",f.data[0],f.data[1],f.data[2],f.data[3],f.data[4],f.data[5],f.data[6],f.data[7]);
 		
+		if(f.data[0] == SDO_RESPONSE_WRITE_OK) {
+			printf("ok\n\n");
+		}
+
 		if(err == 0 && f.dlc >= 4 && f.id == cob_r && f.data[1] == lsb && f.data[2] == msb && f.data[3] == d->subindex) {
 			// Response recived
 			if(f.data[0] == SDO_RESPONSE_WRITE_OK) {
