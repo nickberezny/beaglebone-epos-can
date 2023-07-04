@@ -61,6 +61,7 @@ int SDO_write(int fd, const SDO_data* d) {
 	msb = (d->index>>8 & 0xff);
 	lsb = (d->index & 0xff);
 
+	f.data = 320111111;
 	// Wait for result
 	for(int i=0; i<buffer; i++) {
 		err = socketcan_read(fd, &f, timeout/buffer);
