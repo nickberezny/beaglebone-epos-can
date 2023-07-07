@@ -6,7 +6,7 @@ LDFLAGS_SO = $(LDFLAGS) -shared -fPIC
 
 
 .SUFFIXES: .c .h .o .so
-.PHONY: all  clean
+.PHONY: build all  clean
 
 
 SOCKETCAN_SRC = socketcan/socketcan.c socketcan/printd.c
@@ -21,12 +21,14 @@ MOTOR_SRC = epos.c
 MOTOR_OBJ = $(MOTOR_SRC:.c=.o)
 MOTOR_LIB = libmotor.so
 
+
+
 #TEST_SRC=socketcan_sniffer.c
 
 
 ## Targets ##
 
-all: $(MOTOR_LIB)
+build: $(MOTOR_LIB)
 
 $(SOCKETCAN_LIB): $(SOCKETCAN_OBJ)
 	$(CC) $(SOCKETCAN_OBJ) $(LDFLAGS_SO)  -o $(SOCKETCAN_LIB)
@@ -36,6 +38,8 @@ $(CANOPEN_LIB): $(CANOPEN_OBJ) $(SOCKETCAN_LIB)
 
 $(MOTOR_LIB): $(MOTOR_OBJ) $(CANOPEN_LIB)
 	$(CC) $(MOTOR_OBJ) $(LDFLAGS_SO) -lsocketcan -lcanopen -o $(MOTOR_LIB)
+
+
 
 clean:
 	$(RM) -r $(SOCKETCAN_OBJ) $(CANOPEN_OBJ) $(MOTOR_OBJ) $(MOTORTEST_OBJ)

@@ -56,7 +56,7 @@ static int motor_config_node(int fd, uint16_t node) {
 
 int motor_setmode(enum Motor_mode mode) {
 	int err = 0;
-	err |= epos_Modes_of_Operation(MOTOR_EPOS_R_ID, (enum Epos_mode)mode);
+	err |= epos_Modes_of_Operation(fd, MOTOR_EPOS_ID, (enum Epos_mode)mode);
 	return err;
 }
 
@@ -97,7 +97,7 @@ int init_can()
 
 	
 	// Set the default mode (torque)
-	motor_setmode(10);
+	motor_setmode(Motor_mode_Torque);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
