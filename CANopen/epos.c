@@ -1,4 +1,3 @@
-#include "motor.h"
 #include "epos.h"
 
 #include "canopen/canopen.h"
