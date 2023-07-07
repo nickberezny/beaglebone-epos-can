@@ -51,7 +51,7 @@ int epos_Receive_PDO_n_Mapping(int fd, uint16_t node_id,  uint8_t n, uint8_t num
 
 		d.subindex = i+1;
 		d.data.data = ((uint32_t)obj.index << 16) | (obj.subindex<<8) | (obj.length);
-		err = SDO_write(motor_cfg_fd, &d);
+		err = SDO_write(fd, &d);
 		if (err != 0) {
 			return err;
 		}
@@ -61,7 +61,7 @@ int epos_Receive_PDO_n_Mapping(int fd, uint16_t node_id,  uint8_t n, uint8_t num
 	d.subindex = 0x00;
 	d.data.size = 1;
 	d.data.data = num_objects;
-	return SDO_write(motor_cfg_fd, &d);
+	return SDO_write(fd, &d);
 }
 
 
