@@ -124,3 +124,13 @@ int epos_Modes_of_Operation(int fd, uint16_t node_id, enum Epos_mode mode) {
 	return SDO_write(fd, &d);
 }
 
+int epos_Maximal_Profile_Velocity(int fd, uint16_t node_id, uint32_t value) {
+	SDO_data d;
+	d.nodeid = node_id;
+	d.index = 0x607F;
+	d.subindex = 0x00;
+	d.data.size = 4;
+	d.data.data = value;
+
+	return SDO_write(fd, &d);
+}

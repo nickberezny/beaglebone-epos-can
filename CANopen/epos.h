@@ -65,7 +65,7 @@ enum Epos_mode {
 };
 
 int epos_Modes_of_Operation(int fd, uint16_t node_id, enum Epos_mode mode);
-
+int epos_Maximal_Profile_Velocity(int fd, uint16_t node_id, uint32_t value);
 
 
 #endif
