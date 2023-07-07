@@ -14,6 +14,54 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
+
+/*
+#ifndef AF_CAN
+#define AF_CAN PF_CAN
+#endif
+*/
+
+
+int socketcan_open(uint16_t filter[], uint16_t filtermask[], uint16_t num_filters) {
+	int fd =  -1;
+	// Create the socket
+	fd = socket( PF_CAN, SOCK_RAW, CAN_RAW );
+	if(fd  == -1) {
+		printd(LOG_ERROR, "socketcan: Error opening socket\n");
+		return fd;
+	}
+
+	// Locate the interface you wish to use
+	struct ifreq ifr;
+	strcpy(ifr.ifr_name, "can0");
+	ioctl(fd, SIOCGIFINDEX, &ifr); // ifr.ifr_ifindex gets filled with that device's index
+
+	// Set Filter for this conection
+	struct can_filter rfilter[num_filters];
+	for(int i=0; i<num_filters; i++) {
+		rfilter[i].can_id   = filter[i];
+		rfilter[i].can_mask = filtermask[i];
+	}
+	setsockopt(fd, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, sizeof(rfilter));
+	
+	// Select that CAN interface, and bind the socket to it.
+	struct sockaddr_can addr;
+	addr.can_family = AF_CAN;
+	addr.can_ifindex = ifr.ifr_ifindex;
+	bind(fd, (struct sockaddr*)&addr, sizeof(addr));
+
+	// Set to non blocking
+	fcntl(fd, F_SETFL, O_NONBLOCK);
+
+	return fd;
+}
+
+
+void socketcan_close(int fd) {
+	close(fd);
+}
+
+
 int socketcan_read(int fd, my_can_frame* frame, int timeout) {
 	// Wait for data or timeout
 	int bytes, t;
