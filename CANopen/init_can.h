@@ -1,8 +1,10 @@
 #include <inttypes.h>
 
-#define MOTOR_EPOS_ID 0x01
+#define MOTOR_EPOS_ID 0x00
 #define MOTOR_ERROR   (-1)
 #define MOTOR_TIMEOUT (-2)
+
+#define MOTOR_MAX_SPEED     1200 
 
 enum Motor_mode {
 	Motor_mode_Velocity = 3,

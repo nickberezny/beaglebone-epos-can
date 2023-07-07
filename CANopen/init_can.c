@@ -15,6 +15,7 @@ static int motor_config_node(int fd, uint16_t node) {
 	int num_PDOs;
 
 	/*** Communication, from pc to epos ***/
+	err |= epos_Maximal_Profile_Velocity(node, MOTOR_MAX_SPEED);
 
 	// PDO RX1 target current
 	num_PDOs = 2;
