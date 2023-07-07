@@ -17,7 +17,7 @@ CANOPEN_SRC = canopen/NMT.c canopen/PDO.c canopen/SDO.c
 CANOPEN_OBJ = $(CANOPEN_SRC:.c=.o)
 CANOPEN_LIB = libcanopen.so
 
-MOTOR_SRC = epos.c 
+MOTOR_SRC = motor/epos.c
 MOTOR_OBJ = $(MOTOR_SRC:.c=.o)
 MOTOR_LIB = libmotor.so
 
@@ -26,15 +26,15 @@ MOTOR_LIB = libmotor.so
 
 ## Targets ##
 
-libraries: 
+all: $(MOTOR_LIB)
 
-	$(SOCKETCAN_LIB): $(SOCKETCAN_OBJ)
+$(SOCKETCAN_LIB): $(SOCKETCAN_OBJ)
 	$(CC) $(SOCKETCAN_OBJ) $(LDFLAGS_SO)  -o $(SOCKETCAN_LIB)
 
-	$(CANOPEN_LIB): $(CANOPEN_OBJ) $(SOCKETCAN_LIB)
+$(CANOPEN_LIB): $(CANOPEN_OBJ) $(SOCKETCAN_LIB)
 	$(CC) $(CANOPEN_OBJ) $(LDFLAGS_SO) -lsocketcan -o $(CANOPEN_LIB)
 
-	$(MOTOR_LIB): $(MOTOR_OBJ) $(CANOPEN_LIB)
+$(MOTOR_LIB): $(MOTOR_OBJ) $(CANOPEN_LIB)
 	$(CC) $(MOTOR_OBJ) $(LDFLAGS_SO) -lsocketcan -lcanopen -o $(MOTOR_LIB)
 
 clean:
