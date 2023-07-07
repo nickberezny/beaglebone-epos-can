@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-static int motor_config_node(uint16_t node) {
+static int motor_config_node(int fd, uint16_t node) {
 	int err = 0;
 	int num_PDOs;
 
@@ -22,11 +22,11 @@ static int motor_config_node(uint16_t node) {
 		{0x6071, 0x00, 32},   // Target Current
 		{0x6040, 0x00, 16}    // Controlword
 	};
-	err |= epos_Receive_PDO_n_Mapping(node, 1, num_PDOs, target_pos);
+	err |= epos_Receive_PDO_n_Mapping(fd, node, 1, num_PDOs, target_pos);
 
 	// Disable the rest
-	err |= epos_Receive_PDO_n_Mapping(node, 3, 0, NULL);
-	err |= epos_Receive_PDO_n_Mapping(node, 4, 0, NULL);
+	err |= epos_Receive_PDO_n_Mapping(fd, node, 3, 0, NULL);
+	err |= epos_Receive_PDO_n_Mapping(fd, node, 4, 0, NULL);
 
 
 	/*** Communication, from epos to pc ***/
@@ -36,7 +36,7 @@ static int motor_config_node(uint16_t node) {
 	Epos_pdo_mapping status[] = {
 		{0x6041, 0x00, 16}   // Statusword
 	};
-	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, status);
+	err |= epos_Transmit_PDO_n_Mapping(fd, node, 1, num_PDOs, status);
 
 	// PDO TX2 Position and speed
 	num_PDOs = 2;
@@ -44,11 +44,11 @@ static int motor_config_node(uint16_t node) {
 		{0x6064, 0x00, 32},  // Position Actual value
 		{0x606C, 0x00, 32}   // Velocity Actual value
 	};
-	err |= epos_Transmit_PDO_n_Mapping(node, 2, num_PDOs, enc);
+	err |= epos_Transmit_PDO_n_Mapping(fd, node, 2, num_PDOs, enc);
 
 	// Disable the rest
-	err |= epos_Transmit_PDO_n_Mapping(node, 3, 0, NULL);
-	err |= epos_Transmit_PDO_n_Mapping(node, 4, 0, NULL);
+	err |= epos_Transmit_PDO_n_Mapping(fd, node, 3, 0, NULL);
+	err |= epos_Transmit_PDO_n_Mapping(fd, node, 4, 0, NULL);
 
 
 	return err;
@@ -90,7 +90,7 @@ int init_can()
 	}
 
 
-	err |= motor_config_node(MOTOR_EPOS_ID);
+	err |= motor_config_node(fd, MOTOR_EPOS_ID);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
