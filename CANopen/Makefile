@@ -17,7 +17,7 @@ CANOPEN_SRC = canopen/NMT.c canopen/PDO.c canopen/SDO.c
 CANOPEN_OBJ = $(CANOPEN_SRC:.c=.o)
 CANOPEN_LIB = libcanopen.so
 
-MOTOR_SRC = epos.c
+MOTOR_SRC = motor/epos.c motor/motor.c
 MOTOR_OBJ = $(MOTOR_SRC:.c=.o)
 MOTOR_LIB = libmotor.so
 
