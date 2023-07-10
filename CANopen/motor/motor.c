@@ -50,7 +50,7 @@ static int motor_config_node(uint16_t node) {
 	// PDO RX1 target torque 
 	num_PDOs = 2;
 	Epos_pdo_mapping target_pos[] = {
-		{0x6071, 0x00, 32},   // Target torque
+		{0x6071, 0x00, 16},   // Target torque
 		{0x6040, 0x00, 16}    // Controlword
 	};
 	err |= epos_Receive_PDO_n_Mapping(node, 1, num_PDOs, target_pos);
