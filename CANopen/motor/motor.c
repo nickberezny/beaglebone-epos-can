@@ -31,7 +31,7 @@ static int motor_config_node(uint16_t node) {
 	err |= epos_Profile_Acceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
 	err |= epos_Profile_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
 	err |= epos_Motion_Profile_Type(node, trapezodial_profile);
-	err |= epos_Miscellaneous_Configuration(node, Meassure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time);
+	//err |= epos_Miscellaneous_Configuration(node, Meassure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time);
 	if(err != 0) {
 		printd(LOG_FATAL, "Motor: error configuring node %d.\n", node);
 		return err;
