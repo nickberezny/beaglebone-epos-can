@@ -39,7 +39,12 @@ $(CANOPEN_LIB): $(CANOPEN_OBJ) $(SOCKETCAN_LIB)
 $(MOTOR_LIB): $(MOTOR_OBJ) $(CANOPEN_LIB)
 	$(CC) $(MOTOR_OBJ) $(LDFLAGS_SO) -lsocketcan -lcanopen -o $(MOTOR_LIB)
 
-
+move:
+	sudo cp *.so /usr/lib/
+	sudo cp init_can* ../../controller_ert_rtw/
+	sudo cp -r socketcan ../../controller_ert_rtw/
+	sudo cp -r canopen ../../controller_ert_rtw/
+	sudo cp -r motor ../../controller_ert_rtw/
 
 clean:
 	$(RM) -r $(SOCKETCAN_OBJ) $(CANOPEN_OBJ) $(MOTOR_OBJ) $(MOTORTEST_OBJ)
