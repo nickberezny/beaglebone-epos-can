@@ -47,21 +47,14 @@ static int motor_config_node(uint16_t node) {
 
 	/*** Communication, from pc to epos ***/
 
-	// PDO RX1 target speed (used in profile pos mode)
+	// PDO RX1 target torque 
 	num_PDOs = 2;
 	Epos_pdo_mapping target_pos[] = {
-		{0x607A, 0x00, 32},   // Target Possition
+		{0x6071, 0x00, 32},   // Target torque
 		{0x6040, 0x00, 16}    // Controlword
 	};
 	err |= epos_Receive_PDO_n_Mapping(node, 1, num_PDOs, target_pos);
 
-	// PDO RX2 targer velocity (used in profile vel mode)
-	num_PDOs = 2;
-	Epos_pdo_mapping target_vel[] = {
-		{0x60FF, 0x00, 32},  // Target Velocity
-		{0x6040, 0x00, 16}   // Controlword
-	};
-	err |= epos_Receive_PDO_n_Mapping(node, 2, num_PDOs, target_vel);
 
 	// Disable the rest
 	err |= epos_Receive_PDO_n_Mapping(node, 3, 0, NULL);
@@ -133,7 +126,7 @@ int motor_init(void) {
 	}
 
 	// Set the default mode
-	motor_setmode(Motor_mode_Velocity);
+	motor_setmode(Motor_mode_Torque);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
