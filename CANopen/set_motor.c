@@ -1,5 +1,5 @@
 #include "set_motor.h"
-#include "epos.h"
+#include "motor/epos.h"
 #include "canopen/PDO.h"
 
 #include <inttypes.h>

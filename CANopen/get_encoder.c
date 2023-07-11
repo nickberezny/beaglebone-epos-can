@@ -1,5 +1,5 @@
 #include "socketcan/socketcan.h"
-#include "epos.h"
+#include "motor/epos.h"
 #include "canopen/PDO.h"
 
 #include <inttypes.h>
