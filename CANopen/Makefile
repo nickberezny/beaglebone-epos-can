@@ -42,6 +42,8 @@ $(MOTOR_LIB): $(MOTOR_OBJ) $(CANOPEN_LIB)
 move:
 	sudo cp *.so /usr/lib/
 	sudo cp init_can* ../../controller_ert_rtw/
+	sudo cp set_motor* ../../controller_ert_rtw/
+	sudo cp get_encoder* ../../controller_ert_rtw/
 	sudo cp -r socketcan ../../controller_ert_rtw/
 	sudo cp -r canopen ../../controller_ert_rtw/
 	sudo cp -r motor ../../controller_ert_rtw/
