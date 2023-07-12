@@ -13,8 +13,8 @@
 
 int init_can()
 {
-	motor_init();
-	motor_enable();
+	printf("init: %d\n",motor_init());
+	printf("enable: %d\n",motor_enable());
 	sleep(1);
 	
 
