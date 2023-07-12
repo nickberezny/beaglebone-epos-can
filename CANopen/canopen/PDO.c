@@ -22,7 +22,7 @@ int PDO_read(int fp, my_can_frame* pdo, int timeout) {
 	}
 
 	func = f.id & (~0x7f); // COB function code
-	printf("f.id: %d\n", f.id);
+	printf("fp: %d f.id: %d\n", fp, f.id);
 	if(func == 0 || func == SDO_RX || func == SDO_TX) {
 		// Not a PDO!
 		printd(LOG_WARN, "PDO.c recived non pdo-pkg\n");
