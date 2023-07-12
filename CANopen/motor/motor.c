@@ -131,7 +131,7 @@ int motor_init(void) {
 		return MOTOR_ERROR;
 	}
 
-	return 0;
+	return motor_pdo_fd;
 }
 
 

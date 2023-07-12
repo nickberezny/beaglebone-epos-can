@@ -13,10 +13,11 @@
 
 int init_can()
 {
-	printf("init: %d\n",motor_init());
+	int fd = motor_init();
+	printf("init: %d\n",fd);
 	printf("enable: %d\n",motor_enable());
 	sleep(1);
 	
 
-	return motor_pdo_fd;
+	return fd;
 }
