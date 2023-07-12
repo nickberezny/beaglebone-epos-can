@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 
+extern int motor_pdo_fd;
 
 /*** CAN-bus spesific ***/
 #define MOTOR_PC_ID     0x02
