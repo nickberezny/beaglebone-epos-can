@@ -10,6 +10,12 @@
 
 
 int init_can(){
+
+	int32_t pos_left;
+	int32_t vel_left;
+	int32_t pos_right;
+	int32_t vel_right;
+	
 	motor_init();
 	motor_enable();
 	sleep(1);
