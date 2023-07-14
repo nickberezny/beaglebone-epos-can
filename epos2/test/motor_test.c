@@ -43,7 +43,10 @@ int main(void) {
 	sleep(5);
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+
 	
 	printf("Run, but not enabled!\n");
 	vel_set_speed(50, 0);
