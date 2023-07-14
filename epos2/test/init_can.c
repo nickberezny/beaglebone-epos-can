@@ -15,10 +15,18 @@ int init_can(){
 	int32_t vel_left;
 	int32_t pos_right;
 	int32_t vel_right;
-	
+
 	motor_init();
 	motor_enable();
 	sleep(1);
+
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 
 	printf("Run 50 [mm/sec]\n");
 	vel_set_speed_right(50);
@@ -51,6 +59,14 @@ int init_can(){
 	printf("Zero speed\n");
 	vel_set_speed(0, 0);
 	sleep(5);
+
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 
 	/*
 	printf("Possition mode!\n");
