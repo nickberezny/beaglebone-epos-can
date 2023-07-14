@@ -65,14 +65,14 @@ int vel_read(int32_t* pos_left, int32_t* vel_left, int32_t* pos_right,
 		case(PDO_TX2_ID + MOTOR_EPOS_R_ID):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			rpm = ((uint32_t)f.data[4]<<0) | ((uint32_t)f.data[5]<<8) | ((uint32_t)f.data[6]<<16) | ((uint32_t)f.data[7]<<24);
-			*pos_right = motor_enc_to_mm(enc);
-			*vel_right = motor_rpm_to_mmsec(rpm);
+			*pos_right = enc;//motor_enc_to_mm(enc);
+			*vel_right = rpm;//motor_rpm_to_mmsec(rpm);
 			break;
 		case(PDO_TX2_ID + MOTOR_EPOS_L_ID):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			rpm = ((uint32_t)f.data[4]<<0) | ((uint32_t)f.data[5]<<8) | ((uint32_t)f.data[6]<<16) | ((uint32_t)f.data[7]<<24);
-			*pos_left = motor_enc_to_mm(-enc);
-			*vel_left = motor_rpm_to_mmsec(-rpm);
+			*pos_left = -enc;//motor_enc_to_mm(-enc);
+			*vel_left = -rpm;//motor_rpm_to_mmsec(-rpm);
 			break;
 		default:
 			printd(LOG_WARN, "motor/vel.c recived unkown PDO pkg 0x%x\n", f.id);
