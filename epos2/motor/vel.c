@@ -69,7 +69,7 @@ int vel_read(int32_t* pos_left, int32_t* vel_left, int32_t* pos_right,
 			rpm = ((uint32_t)f.data[4]<<0) | ((uint32_t)f.data[5]<<8) | ((uint32_t)f.data[6]<<16) | ((uint32_t)f.data[7]<<24);
 			*pos_right = enc;//motor_enc_to_mm(enc);
 			*vel_right = rpm;//motor_rpm_to_mmsec(rpm);
-			printf("right!\n");
+			printf("right! %d\n", rpm);
 			break;
 		case(PDO_TX2_ID + MOTOR_EPOS_L_ID):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);

@@ -19,13 +19,9 @@ int main(void) {
 	int32_t vel_right;
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 
 
 	sleep(1);
@@ -34,15 +30,11 @@ int main(void) {
 	vel_set_speed_right(50);
 	vel_set_speed_left(50);
 	
-	sleep(2);
+	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
 
 	sleep(5);
 
