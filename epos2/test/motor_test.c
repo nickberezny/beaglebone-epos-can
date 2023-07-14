@@ -27,6 +27,7 @@ int main(void) {
 	vel_set_speed_right(50);
 	vel_set_speed_left(50);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(2);
 	printf("vel: %d\n", vel_right);
 	sleep(5);
 
