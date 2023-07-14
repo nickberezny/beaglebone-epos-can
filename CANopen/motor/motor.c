@@ -126,7 +126,7 @@ int motor_init(void) {
 	}
 
 	// Set the default mode
-	motor_setmode(Motor_mode_Torque);
+	motor_setmode(Motor_mode_Velocity);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
