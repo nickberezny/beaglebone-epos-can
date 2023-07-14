@@ -61,7 +61,7 @@ enum Epos_mode {
 	Profile_Velocity_Mode = 3,
 	Profile_Position_Mode = 1,
 	Position_Mode = -1,
-	Velocity_Mode = -2,
+	Velocity_Mode = 9,
 	Current_Mode = -3,
 	Diagnostic_Mode = -4,
 	Master_Encoder_Mode = -5,
