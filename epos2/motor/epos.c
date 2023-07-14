@@ -19,10 +19,8 @@ uint8_t epos_Error_Register(uint16_t node_id) {
 int epos_Receive_PDO_n_Parameter(uint16_t node_id, uint8_t n, uint32_t cob) {
 	SDO_data d;
 	d.nodeid = node_id;
-	//d.index = 0x1400 + n-1;
-	//d.subindex = 0x01;
-	d.index = 0x1000;
-	d.subindex = 0x00;
+	d.index = 0x1400 + n-1;
+	d.subindex = 0x01;
 	d.data.size = 4;
 	d.data.data = cob;
 	return SDO_write(motor_cfg_fd, &d);
