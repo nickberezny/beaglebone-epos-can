@@ -42,7 +42,7 @@ static int motor_config_node(uint16_t node) {
 	err |= epos_Receive_PDO_n_Parameter(node, 1, PDO_RX1_ID + node);
 	err |= epos_Receive_PDO_n_Parameter(node, 2, PDO_RX2_ID + node);
 	err |= epos_Transmit_PDO_n_Parameter(node, 1, PDO_TX1_ID + node);
-	err |= epos_Transmit_PDO_n_Parameter(node, 2, PDO_TX2_ID + node);
+	//err |= epos_Transmit_PDO_n_Parameter(node, 2, PDO_TX2_ID + node);
 
 
 	/*** Communication, from pc to epos ***/
