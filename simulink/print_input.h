@@ -1,1 +1,1 @@
-void print_input(int a);
+void print_input(int a, int id);

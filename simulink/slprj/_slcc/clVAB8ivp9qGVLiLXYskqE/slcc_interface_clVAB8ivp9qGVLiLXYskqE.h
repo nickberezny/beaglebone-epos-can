@@ -18,7 +18,7 @@ DLL_EXPORT_CC extern int32_T add_numbers_clVAB8ivp9qGVLiLXYskqE(int32_T a, int32
 DLL_EXPORT_CC extern int32_T init_can_clVAB8ivp9qGVLiLXYskqE(void);
 DLL_EXPORT_CC extern real_T get_encoder_clVAB8ivp9qGVLiLXYskqE(int32_T fd);
 DLL_EXPORT_CC extern void set_motor_clVAB8ivp9qGVLiLXYskqE(int32_T fd, real_T set_val);
-DLL_EXPORT_CC extern void print_input_clVAB8ivp9qGVLiLXYskqE(int32_T a);
+DLL_EXPORT_CC extern void print_input_clVAB8ivp9qGVLiLXYskqE(int32_T a, int32_T id);
 
 /* Function Definitions */
 DLL_EXPORT_CC const uint8_T *get_checksum_source_info(int32_T *size);

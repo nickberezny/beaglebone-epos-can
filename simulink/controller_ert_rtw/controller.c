@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.37
+ * Model version              : 4.41
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 12:25:25 2023
+ * C source code generated on : Fri Jul 14 17:17:20 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,8 +20,8 @@
 
 #include "controller.h"
 #include "rtwtypes.h"
-#include "rt_nonfinite.h"
 #include <math.h>
+#include "rt_nonfinite.h"
 #include "controller_private.h"
 #include "coder_posix_time.h"
 #include <string.h>
@@ -80,8 +80,13 @@ static void rate_scheduler(void)
    * counter is reset when it reaches its limit (zero means run).
    */
   (controller_M->Timing.TaskCounters.TID[1])++;
-  if ((controller_M->Timing.TaskCounters.TID[1]) > 9999) {/* Sample time: [10000.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[1]) > 9) {/* Sample time: [1.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[1] = 0;
+  }
+
+  (controller_M->Timing.TaskCounters.TID[2])++;
+  if ((controller_M->Timing.TaskCounters.TID[2]) > 99999) {/* Sample time: [10000.0s, 0.0s] */
+    controller_M->Timing.TaskCounters.TID[2] = 0;
   }
 }
 
@@ -350,24 +355,37 @@ void controller_step(void)
 {
   int32_T trueCount;
   boolean_T expl_temp;
-  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
     /* CCaller: '<Root>/C Caller5' */
     controller_B.CCaller5 = init_can();
   }
 
-  /* CCaller: '<Root>/C Caller2' */
-  print_input(controller_B.CCaller5);
+  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
+     *  Constant: '<Root>/Constant1'
+     */
+    controller_B.shi = floor(controller_P.Constant1_Value);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+    }
 
-  /* CCaller: '<Root>/C Caller1' */
-  controller_B.Gain = get_encoder(controller_B.CCaller5);
+    /* CCaller: '<Root>/C Caller2' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion2'
+     */
+    print_input(controller_B.CCaller5, controller_B.shi < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
+                controller_B.shi);
+  }
 
   /* MATLAB Function: '<Root>/MATLAB Function' */
   controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
-    &controller_B.shi, &controller_B.Gain, &controller_B.d_ahi_k,
+    &controller_B.shi, &controller_B.b_alo, &controller_B.d_ahi_k,
     &controller_B.c_tm_mon, &controller_B.c_tm_year, &expl_temp);
   controller_B.fracSecs /= 1.0E+6;
   controller_B.check = (((((controller_B.c_tm_year + controller_B.c_tm_mon) +
-    controller_B.d_ahi_k) + controller_B.Gain) + controller_B.shi) +
+    controller_B.d_ahi_k) + controller_B.b_alo) + controller_B.shi) +
                         controller_B.second) + controller_B.fracSecs;
   if ((!rtIsInf(controller_B.check)) && (!rtIsNaN(controller_B.check))) {
     if ((controller_B.c_tm_mon < 1.0) || (controller_B.c_tm_mon > 12.0)) {
@@ -397,7 +415,7 @@ void controller_step(void)
       719529.0;
     controller_B.d_data.im = 0.0;
     controller_B.d_data = controller_plus(controller_plus(controller_plus
-      (controller_times(controller_B.d_data), (60.0 * controller_B.Gain +
+      (controller_times(controller_B.d_data), (60.0 * controller_B.b_alo +
       controller_B.shi) * 60000.0), controller_B.second * 1000.0),
       controller_B.fracSecs);
   } else {
@@ -419,34 +437,34 @@ void controller_step(void)
   controller_B.c_s.im = (controller_B.c_s.im + controller_B.d_data.im) -
     controller_B.t.im;
   controller_B.shi = (controller_B.c_s.re + controller_B.c_s.im) / 8.64E+7;
-  controller_B.Gain = 0.0;
+  controller_B.b_alo = 0.0;
   controller_B.d_ahi_k = controller_B.b_c.re;
   if (controller_B.shi != 0.0) {
     controller_B.d_ahi_k = controller_B.b_c.re + controller_B.shi;
-    controller_B.Gain = controller_B.shi - (controller_B.d_ahi_k -
+    controller_B.b_alo = controller_B.shi - (controller_B.d_ahi_k -
       controller_B.b_c.re);
   }
 
-  if (rtIsNaN(controller_B.Gain)) {
-    controller_B.Gain = 0.0;
+  if (rtIsNaN(controller_B.b_alo)) {
+    controller_B.b_alo = 0.0;
   }
 
   controller_B.d_ahi.re = controller_B.d_ahi_k;
-  controller_B.d_ahi.im = controller_B.Gain;
+  controller_B.d_ahi.im = controller_B.b_alo;
   controller_B.d_data = controller_minus(controller_B.d_data, controller_times
     (controller_floor(controller_B.d_ahi)));
   controller_B.b_c.re = controller_B.d_data.re / 1000.0;
   controller_B.t = controller_split(controller_B.b_c.re);
   controller_B.shi = controller_B.b_c.re * 1000.0;
-  controller_B.Gain = (controller_B.t.re * 1000.0 - controller_B.shi) +
+  controller_B.b_alo = (controller_B.t.re * 1000.0 - controller_B.shi) +
     controller_B.t.im * 1000.0;
   trueCount = 0;
-  if (rtIsNaN(controller_B.Gain)) {
+  if (rtIsNaN(controller_B.b_alo)) {
     trueCount = 1;
   }
 
   if (trueCount - 1 >= 0) {
-    controller_B.Gain = 0.0;
+    controller_B.b_alo = 0.0;
   }
 
   controller_B.c_s.re = 0.0;
@@ -457,24 +475,24 @@ void controller_step(void)
   }
 
   controller_B.c_s.re = (0.0 * controller_B.d_data.im + controller_B.c_s.re) -
-    0.0 * controller_B.Gain;
+    0.0 * controller_B.b_alo;
   controller_B.c_s.im = (controller_B.c_s.im + controller_B.d_data.im) -
-    controller_B.Gain;
+    controller_B.b_alo;
   controller_B.shi = (controller_B.c_s.re + controller_B.c_s.im) / 1000.0;
-  controller_B.Gain = 0.0;
+  controller_B.b_alo = 0.0;
   controller_B.d_ahi_k = controller_B.b_c.re;
   if (controller_B.shi != 0.0) {
     controller_B.d_ahi_k = controller_B.b_c.re + controller_B.shi;
-    controller_B.Gain = controller_B.shi - (controller_B.d_ahi_k -
+    controller_B.b_alo = controller_B.shi - (controller_B.d_ahi_k -
       controller_B.b_c.re);
   }
 
-  if (rtIsNaN(controller_B.Gain)) {
-    controller_B.Gain = 0.0;
+  if (rtIsNaN(controller_B.b_alo)) {
+    controller_B.b_alo = 0.0;
   }
 
   controller_B.d_data.re = controller_B.d_ahi_k;
-  controller_B.d_data.im = controller_B.Gain;
+  controller_B.d_data.im = controller_B.b_alo;
   controller_B.t = controller_floor(controller_B.d_data);
   controller_B.b_c = controller_minus(controller_B.d_data, controller_B.t);
   controller_B.shi = controller_B.t.re + controller_B.t.im;
@@ -487,9 +505,10 @@ void controller_step(void)
       3600.0) * 3600.0) / 60.0) * 60.0;
   }
 
-  controller_B.shi += controller_B.b_c.re + controller_B.b_c.im;
-  if (controller_B.shi == 60.0) {
-    controller_B.shi = 59.999999999999993;
+  controller_B.b_alo = (controller_B.b_c.re + controller_B.b_c.im) +
+    controller_B.shi;
+  if (controller_B.b_alo == 60.0) {
+    controller_B.b_alo = 59.999999999999993;
   }
 
   /* Gain: '<Root>/Gain' incorporates:
@@ -497,27 +516,40 @@ void controller_step(void)
    *  MATLAB Function: '<Root>/MATLAB Function'
    *  Sum: '<Root>/Sum'
    */
-  controller_B.Gain = (controller_B.shi - controller_DW.Delay_DSTATE) *
+  controller_B.d_ahi_k = (controller_B.b_alo - controller_DW.Delay_DSTATE) *
     controller_P.Gain_Gain;
 
   /* DataTypeConversion: '<Root>/Data Type Conversion' */
-  controller_B.Gain = floor(controller_B.Gain);
-  if (rtIsNaN(controller_B.Gain) || rtIsInf(controller_B.Gain)) {
-    controller_B.Gain = 0.0;
+  controller_B.shi = floor(controller_B.d_ahi_k);
+  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+    controller_B.shi = 0.0;
   } else {
-    controller_B.Gain = fmod(controller_B.Gain, 4.294967296E+9);
+    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
+   *  Constant: '<Root>/Constant2'
+   */
+  controller_B.c_tm_mon = floor(controller_P.Constant2_Value);
+  if (rtIsNaN(controller_B.c_tm_mon) || rtIsInf(controller_B.c_tm_mon)) {
+    controller_B.c_tm_mon = 0.0;
+  } else {
+    controller_B.c_tm_mon = fmod(controller_B.c_tm_mon, 4.294967296E+9);
   }
 
   /* CCaller: '<Root>/C Caller4' incorporates:
    *  DataTypeConversion: '<Root>/Data Type Conversion'
+   *  DataTypeConversion: '<Root>/Data Type Conversion1'
    */
-  print_input(controller_B.Gain < 0.0 ? -(int32_T)(uint32_T)-controller_B.Gain :
-              (int32_T)(uint32_T)controller_B.Gain);
+  print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi :
+              (int32_T)(uint32_T)controller_B.shi, controller_B.c_tm_mon < 0.0 ?
+              -(int32_T)(uint32_T)-controller_B.c_tm_mon : (int32_T)(uint32_T)
+              controller_B.c_tm_mon);
 
   /* Update for Delay: '<Root>/Delay' incorporates:
    *  MATLAB Function: '<Root>/MATLAB Function'
    */
-  controller_DW.Delay_DSTATE = controller_B.shi;
+  controller_DW.Delay_DSTATE = controller_B.b_alo;
   rate_scheduler();
 }
 

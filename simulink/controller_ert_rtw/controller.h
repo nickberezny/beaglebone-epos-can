@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.37
+ * Model version              : 4.41
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 12:25:25 2023
+ * C source code generated on : Fri Jul 14 17:17:20 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -66,8 +66,8 @@ typedef struct {
   real_T fracSecs;
   real_T check;
   real_T shi;
+  real_T b_alo;
   real_T d_ahi_k;
-  real_T Gain;                         /* '<Root>/Gain' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
 } B_controller_T;
 
@@ -78,11 +78,17 @@ typedef struct {
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
+  real_T Constant1_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant1'
+                                        */
   real_T Delay_InitialCondition;       /* Expression: 0
                                         * Referenced by: '<Root>/Delay'
                                         */
   real_T Gain_Gain;                    /* Expression: 1000
                                         * Referenced by: '<Root>/Gain'
+                                        */
+  real_T Constant2_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant2'
                                         */
 };
 
@@ -97,7 +103,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint16_T TID[2];
+      uint32_T TID[3];
     } TaskCounters;
   } Timing;
 };
