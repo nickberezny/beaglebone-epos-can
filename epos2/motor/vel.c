@@ -2,6 +2,8 @@
 #include "motor.h"
 #include "epos.h"
 
+#include<stdio.h>
+
 #include "socketcan/printd.h"
 #include "canopen/canopen.h"
 
