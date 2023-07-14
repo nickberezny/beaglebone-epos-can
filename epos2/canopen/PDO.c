@@ -2,6 +2,7 @@
 #include "SDO.h"
 #include "socketcan/printd.h"
 #include <string.h>
+#include <stdio.h>
 
 
 int PDO_send(int fp, uint16_t pdo_id, uint8_t length, Socketcan_t data[]) {
