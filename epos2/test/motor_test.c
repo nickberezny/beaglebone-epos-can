@@ -62,10 +62,14 @@ int main(void) {
 
 	printf("Zero speed\n");
 	vel_set_speed(0, 0);
-	sleep(5);
+	sleep(30);
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-	printf("vel: %d\n", vel_right);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+
+
 
 	/*
 	printf("Possition mode!\n");
