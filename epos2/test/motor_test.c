@@ -27,8 +27,8 @@ int main(void) {
 	sleep(1);
 
 	printf("Run 50 [mm/sec]\n");
-	vel_set_speed_right(50);
-	vel_set_speed_left(50);
+	//vel_set_speed_right(50);
+	//vel_set_speed_left(50);
 	
 	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
@@ -52,16 +52,16 @@ int main(void) {
 
 	
 	printf("Run, but not enabled!\n");
-	vel_set_speed(50, 0);
+	//vel_set_speed(50, 0);
 	sleep(5);
 
 	printf("Run again, and rotate!\n");
 	motor_enable();
-	vel_set_speed(0, (2.0*3.14/10.0)*1000); // Speed [mm/sec], Rotation [mRad/sec]
+	//vel_set_speed(0, (2.0*3.14/10.0)*1000); // Speed [mm/sec], Rotation [mRad/sec]
 	sleep(5);
 
 	printf("Zero speed\n");
-	vel_set_speed(0, 0);
+	//vel_set_speed(0, 0);
 	sleep(10);
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
