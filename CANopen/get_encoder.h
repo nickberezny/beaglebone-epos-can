@@ -1,1 +1,1 @@
-double get_encoder(int fd);
+double get_encoder(int fd, int dt);
