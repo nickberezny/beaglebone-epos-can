@@ -28,6 +28,8 @@ int PDO_read(int fp, my_can_frame* pdo, int timeout) {
 		return SOCKETCAN_ERROR;
 	}
 
+	printf("data %d,%d,%d,%d,%d,%d,%d,%d\n",f.data[0],f.data[1],f.data[2],f.data[3],f.data[4],f.data[5],f.data[6],f.data[7]);
+
 	// Copy data to return struct
 	memcpy(pdo, &f, sizeof(f));
 	return 0;
