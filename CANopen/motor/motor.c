@@ -93,12 +93,11 @@ int motor_init(void) {
 	int err = 0;
 
 	// Open two connections to the CAN-network
-	uint16_t pdo_masks[2] = {COB_MASK, COB_MASK};
-	uint16_t pdo_filters[2] = {
-		PDO_TX1_ID + MOTOR_EPOS_R_ID,
-		PDO_TX2_ID + MOTOR_EPOS_R_ID
+	uint16_t pdo_masks[1] = {COB_MASK};
+	uint16_t pdo_filters[1] = {
+		PDO_TX1_ID + MOTOR_EPOS_R_ID
 	};
-	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2);
+	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 1);
 
 	uint16_t cfg_masks[3] = {COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[3] = {
