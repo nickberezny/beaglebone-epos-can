@@ -51,3 +51,10 @@ clean:
 %.o: %.c $(wildcard *.h)
 	$(CC) -c $< $(CFLAGS) -o $@
 
+
+move:
+	sudo cp *.so /usr/lib/
+	sudo cp test/init_can* ../../controller_ert_rtw/
+	sudo cp -r socketcan ../../controller_ert_rtw/
+	sudo cp -r canopen ../../controller_ert_rtw/
+	sudo cp -r motor ../../controller_ert_rtw/
