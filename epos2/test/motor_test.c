@@ -32,8 +32,11 @@ int main(void) {
 	
 	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	sleep(1);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 
 	sleep(5);
