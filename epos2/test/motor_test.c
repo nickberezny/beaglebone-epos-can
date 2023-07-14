@@ -28,8 +28,7 @@ int main(void) {
 	int32_t pos_right;
 	int32_t vel_right;
 
-	vel_read(&pos_left, &vel_left, A&pos_right, &vel_right, 1000);
-
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 	printf("pos: %d\n", pos_right);
 
 	printf("Run, but not enabled!\n");
