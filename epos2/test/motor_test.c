@@ -12,6 +12,15 @@
 int main(void) {
 	motor_init();
 	motor_enable();
+
+	int32_t pos_left;
+	int32_t vel_left;
+	int32_t pos_right;
+	int32_t vel_right;
+
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	printf("pos: %d\n", pos_right);
+
 	sleep(1);
 
 	printf("Run 50 [mm/sec]\n");
@@ -23,14 +32,9 @@ int main(void) {
 	motor_halt();
 	sleep(5);
 
-	int32_t pos_left;
-	int32_t vel_left;
-	int32_t pos_right;
-	int32_t vel_right;
-
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 	printf("pos: %d\n", pos_right);
-
+	
 	printf("Run, but not enabled!\n");
 	vel_set_speed(50, 0);
 	sleep(5);
