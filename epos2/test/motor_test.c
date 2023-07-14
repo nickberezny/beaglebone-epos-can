@@ -62,7 +62,7 @@ int main(void) {
 
 	printf("Zero speed\n");
 	vel_set_speed(0, 0);
-	sleep(30);
+	sleep(10);
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
@@ -78,6 +78,14 @@ int main(void) {
 	*/
 
 	motor_disable();
+
+	sleep(10);
+
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+
 	motor_close();
 	return 0;
 }
