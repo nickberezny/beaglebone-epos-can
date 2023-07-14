@@ -22,14 +22,14 @@ static int motor_config_node(uint16_t node) {
 	int num_PDOs;
 
 	// Set Configuration parameters
-	err |= epos_Maximal_Profile_Velocity(node, motor_mmsec_to_rpm(MOTOR_MAX_SPEED));
+	err |= epos_Maximal_Profile_Velocity(node, 5000);
 	if( err != 0 ) {
 		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
 		return err;
 	}
-	err |= epos_Quickstop_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_QUICK_ACC));
-	err |= epos_Profile_Acceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
-	err |= epos_Profile_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
+	err |= epos_Quickstop_Deceleration(node, 10000);
+	err |= epos_Profile_Acceleration(node, 5000);
+	err |= epos_Profile_Deceleration(node, 5000);
 	err |= epos_Motion_Profile_Type(node, trapezodial_profile);
 	//err |= epos_Miscellaneous_Configuration(node, Meassure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time);
 	if(err != 0) {

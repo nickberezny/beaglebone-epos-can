@@ -9,7 +9,7 @@
  *
  * Model version              : 4.35
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 12 14:07:06 2023
+ * C source code generated on : Thu Jul 13 16:03:13 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -357,11 +357,6 @@ void controller_step(void)
 
   /* CCaller: '<Root>/C Caller2' */
   print_input(controller_B.CCaller5);
-
-  /* CCaller: '<Root>/C Caller3' incorporates:
-   *  Constant: '<Root>/Constant'
-   */
-  set_motor(controller_B.CCaller5, controller_P.Constant_Value);
 
   /* CCaller: '<Root>/C Caller1' */
   controller_B.Gain = get_encoder(controller_B.CCaller5);
