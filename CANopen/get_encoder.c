@@ -10,7 +10,7 @@
 double get_encoder(int fd, int dt)
 {
 	int32_t pos = 0;
-	if(dt > 100)
+	if(dt > 40)
 	{
 		printf("fd (get encoder): %d\n",fd);
 
