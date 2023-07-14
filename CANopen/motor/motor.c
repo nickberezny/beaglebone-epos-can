@@ -64,21 +64,23 @@ static int motor_config_node(uint16_t node) {
 	/*** Communication, from epos to pc ***/
 
 	// PDO TX1 Statusword
+	/*
 	num_PDOs = 1;
 	Epos_pdo_mapping status[] = {
 		{0x6041, 0x00, 16}   // Statusword
 	};
 	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, status);
-
+	*/
 	// PDO TX2 Position and speed
 	num_PDOs = 2;
 	Epos_pdo_mapping enc[] = {
 		{0x6064, 0x00, 32},  // Position Actual value
 		{0x606C, 0x00, 32}   // Velocity Actual value
 	};
-	err |= epos_Transmit_PDO_n_Mapping(node, 2, num_PDOs, enc);
+	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, enc);
 
 	// Disable the rest
+	err |= epos_Transmit_PDO_n_Mapping(node, 2, 0, NULL);
 	err |= epos_Transmit_PDO_n_Mapping(node, 3, 0, NULL);
 	err |= epos_Transmit_PDO_n_Mapping(node, 4, 0, NULL);
 
