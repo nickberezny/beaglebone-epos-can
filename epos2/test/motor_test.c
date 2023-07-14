@@ -20,7 +20,9 @@ int main(void) {
 
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 	printf("vel: %d\n", vel_right);
-
+	printf("vel: %d\n", vel_right);
+	printf("vel: %d\n", vel_right);
+	printf("vel: %d\n", vel_right);
 	sleep(1);
 
 	printf("Run 50 [mm/sec]\n");
@@ -28,6 +30,9 @@ int main(void) {
 	vel_set_speed_left(50);
 	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 	sleep(2);
+	printf("vel: %d\n", vel_right);
+	printf("vel: %d\n", vel_right);
+	printf("vel: %d\n", vel_right);
 	printf("vel: %d\n", vel_right);
 	sleep(5);
 
