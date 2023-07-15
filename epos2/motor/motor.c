@@ -58,7 +58,7 @@ static int motor_config_node(uint16_t node) {
 	// PDO RX2 targer velocity (used in profile vel mode)
 	num_PDOs = 2;
 	Epos_pdo_mapping target_vel[] = {
-		{0x071, 0x00, 16},  // Target Velocity 0x60ff
+		{0x6071, 0x00, 16},  // Target Velocity 0x60ff
 		{0x6040, 0x00, 16}   // Controlword
 	};
 	err |= epos_Receive_PDO_n_Mapping(node, 2, num_PDOs, target_vel);
