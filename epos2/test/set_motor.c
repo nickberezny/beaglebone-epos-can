@@ -9,6 +9,7 @@
 #include<stdio.h>
 
 #include "socketcan/printd.h"
+#include "socketcan/socketcan.h"
 #include "canopen/canopen.h"
 
 
