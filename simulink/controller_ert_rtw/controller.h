@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.58
+ * Model version              : 4.59
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 21:53:10 2023
+ * C source code generated on : Sat Jul 15 14:34:29 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -67,9 +67,9 @@ typedef struct {
   real_T fracSecs;
   real_T check;
   real_T shi;
-  real_T b_alo;
   real_T d_ahi_k;
-  real_T inc_p;                        /* '<Root>/Sum1' */
+  real_T Gain;                         /* '<Root>/Gain' */
+  real_T Switch;                       /* '<Root>/Switch' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
   int32_T DataTypeConversion;          /* '<Root>/Data Type Conversion' */
   int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
@@ -87,6 +87,15 @@ struct P_controller_T_ {
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
+  real_T Constant6_Value;              /* Expression: 5
+                                        * Referenced by: '<Root>/Constant6'
+                                        */
+  real_T Saturation_UpperSat;          /* Expression: 10
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
+  real_T Saturation_LowerSat;          /* Expression: -10
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
   real_T Delay_InitialCondition;       /* Expression: 0
                                         * Referenced by: '<Root>/Delay'
                                         */
@@ -95,18 +104,6 @@ struct P_controller_T_ {
                                         */
   real_T Delay1_InitialCondition;      /* Expression: 0
                                         * Referenced by: '<Root>/Delay1'
-                                        */
-  real_T Constant3_Value;              /* Expression: 200000
-                                        * Referenced by: '<Root>/Constant3'
-                                        */
-  real_T Gain1_Gain;                   /* Expression: -1/20
-                                        * Referenced by: '<Root>/Gain1'
-                                        */
-  real_T Saturation_UpperSat;          /* Expression: 500
-                                        * Referenced by: '<Root>/Saturation'
-                                        */
-  real_T Saturation_LowerSat;          /* Expression: -500
-                                        * Referenced by: '<Root>/Saturation'
                                         */
   real_T Constant4_Value;              /* Expression: 2
                                         * Referenced by: '<Root>/Constant4'
@@ -153,6 +150,14 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<Root>/Constant3' : Unused code path elimination
+ * Block '<Root>/Gain1' : Unused code path elimination
+ * Block '<Root>/Sum2' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly
