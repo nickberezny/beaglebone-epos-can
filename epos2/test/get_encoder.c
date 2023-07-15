@@ -17,7 +17,7 @@ double get_encoder(int fd, int dt)
 
 	printf("encoder %d\n", motor_pdo_fd);
 
-	if(dt > 40)
+	if(dt > 0)
 	{
 		vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 10);
 		//vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
