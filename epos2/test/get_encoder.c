@@ -20,9 +20,9 @@ double get_encoder(int fd, int dt)
 	if(dt > 40)
 	{
 		vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-		vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-		vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
-		vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+		//vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+		//vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
+		//vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 1000);
 
 		pos = pos_right;
 	}
