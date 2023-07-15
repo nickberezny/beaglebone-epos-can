@@ -56,6 +56,7 @@ move:
 	sudo cp *.so /usr/lib/
 	sudo cp test/init_can* ../../controller_ert_rtw/
 	sudo cp test/get_encoder* ../../controller_ert_rtw/
+	sudo cp test/set_motor* ../../controller_ert_rtw/
 	sudo cp -r socketcan ../../controller_ert_rtw/
 	sudo cp -r canopen ../../controller_ert_rtw/
 	sudo cp -r motor ../../controller_ert_rtw/
