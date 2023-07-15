@@ -15,6 +15,8 @@ int init_can(){
 	motor_enable();
 	sleep(1);
 
+	printf("init_can %d\n", motor_pdo_fd);
+
 
 	return 0;
 }
