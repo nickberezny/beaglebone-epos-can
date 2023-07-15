@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.55
+ * Model version              : 4.58
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 21:32:40 2023
+ * C source code generated on : Fri Jul 14 21:53:10 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -90,13 +90,8 @@ static void rate_scheduler(void)
   }
 
   (controller_M->Timing.TaskCounters.TID[3])++;
-  if ((controller_M->Timing.TaskCounters.TID[3]) > 9999) {/* Sample time: [10.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[3]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[3] = 0;
-  }
-
-  (controller_M->Timing.TaskCounters.TID[4])++;
-  if ((controller_M->Timing.TaskCounters.TID[4]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
-    controller_M->Timing.TaskCounters.TID[4] = 0;
   }
 }
 
@@ -365,7 +360,7 @@ void controller_step(void)
 {
   int32_T trueCount;
   boolean_T expl_temp;
-  if (controller_M->Timing.TaskCounters.TID[4] == 0) {
+  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
     /* CCaller: '<Root>/C Caller5' */
     controller_B.CCaller5 = init_can();
   }
@@ -535,13 +530,14 @@ void controller_step(void)
     controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
   }
 
-  /* CCaller: '<Root>/C Caller1' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion'
-   */
-  controller_B.CCaller1 = get_encoder(controller_B.CCaller5, controller_B.inc_p <
-    0.0 ? -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
-    controller_B.inc_p);
-  if (controller_M->Timing.TaskCounters.TID[4] == 0) {
+  /* DataTypeConversion: '<Root>/Data Type Conversion' */
+  controller_B.DataTypeConversion = controller_B.inc_p < 0.0 ? -(int32_T)
+    (uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)controller_B.inc_p;
+
+  /* CCaller: '<Root>/C Caller1' */
+  controller_B.CCaller1 = get_encoder(controller_B.CCaller5,
+    controller_B.DataTypeConversion);
+  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
     /* ZeroOrderHold: '<Root>/Zero-Order Hold' */
     controller_B.ZeroOrderHold = controller_B.CCaller1;
   }
@@ -564,27 +560,20 @@ void controller_step(void)
    *  Constant: '<Root>/Constant3'
    *  Sum: '<Root>/Sum2'
    */
-  controller_B.Saturation = (controller_B.inc_p - controller_P.Constant3_Value) *
+  controller_B.c_tm_year = (controller_B.inc_p - controller_P.Constant3_Value) *
     controller_P.Gain1_Gain;
 
   /* Saturate: '<Root>/Saturation' */
-  if (controller_B.Saturation > controller_P.Saturation_UpperSat) {
-    /* Gain: '<Root>/Gain1' incorporates:
-     *  Saturate: '<Root>/Saturation'
-     */
-    controller_B.Saturation = controller_P.Saturation_UpperSat;
-  } else if (controller_B.Saturation < controller_P.Saturation_LowerSat) {
-    /* Gain: '<Root>/Gain1' incorporates:
-     *  Saturate: '<Root>/Saturation'
-     */
-    controller_B.Saturation = controller_P.Saturation_LowerSat;
+  if (controller_B.c_tm_year > controller_P.Saturation_UpperSat) {
+    controller_B.c_tm_year = controller_P.Saturation_UpperSat;
+  } else if (controller_B.c_tm_year < controller_P.Saturation_LowerSat) {
+    controller_B.c_tm_year = controller_P.Saturation_LowerSat;
   }
 
-  /* End of Saturate: '<Root>/Saturation' */
-  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-    /* CCaller: '<Root>/C Caller3' */
-    set_motor(controller_B.CCaller5, controller_B.Saturation);
-  }
+  /* CCaller: '<Root>/C Caller3' incorporates:
+   *  Saturate: '<Root>/Saturation'
+   */
+  set_motor(controller_B.CCaller5, controller_B.c_tm_year);
 
   /* DataTypeConversion: '<Root>/Data Type Conversion5' */
   controller_B.inc_p = floor(controller_B.inc_p);
@@ -642,6 +631,23 @@ void controller_step(void)
      *  DataTypeConversion: '<Root>/Data Type Conversion4'
      */
     print_input(controller_B.DataTypeConversion6, controller_B.inc_p < 0.0 ?
+                -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
+                controller_B.inc_p);
+
+    /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
+     *  Constant: '<Root>/Constant2'
+     */
+    controller_B.inc_p = floor(controller_P.Constant2_Value);
+    if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+      controller_B.inc_p = 0.0;
+    } else {
+      controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
+    }
+
+    /* CCaller: '<Root>/C Caller4' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion1'
+     */
+    print_input(controller_B.DataTypeConversion, controller_B.inc_p < 0.0 ?
                 -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
                 controller_B.inc_p);
   }

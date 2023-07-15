@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.55
+ * Model version              : 4.58
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 21:32:40 2023
+ * C source code generated on : Fri Jul 14 21:53:10 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -62,7 +62,6 @@ typedef struct {
   creal_T t_c;
   real_T CCaller1;                     /* '<Root>/C Caller1' */
   real_T ZeroOrderHold;                /* '<Root>/Zero-Order Hold' */
-  real_T Saturation;                   /* '<Root>/Saturation' */
   real_T c_tm_year;
   real_T second;
   real_T fracSecs;
@@ -72,6 +71,7 @@ typedef struct {
   real_T d_ahi_k;
   real_T inc_p;                        /* '<Root>/Sum1' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
+  int32_T DataTypeConversion;          /* '<Root>/Data Type Conversion' */
   int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
   int32_T DataTypeConversion6;         /* '<Root>/Data Type Conversion6' */
 } B_controller_T;
@@ -96,10 +96,10 @@ struct P_controller_T_ {
   real_T Delay1_InitialCondition;      /* Expression: 0
                                         * Referenced by: '<Root>/Delay1'
                                         */
-  real_T Constant3_Value;              /* Expression: 10000
+  real_T Constant3_Value;              /* Expression: 200000
                                         * Referenced by: '<Root>/Constant3'
                                         */
-  real_T Gain1_Gain;                   /* Expression: 1/20
+  real_T Gain1_Gain;                   /* Expression: -1/20
                                         * Referenced by: '<Root>/Gain1'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 500
@@ -114,6 +114,9 @@ struct P_controller_T_ {
   real_T Constant5_Value;              /* Expression: 3
                                         * Referenced by: '<Root>/Constant5'
                                         */
+  real_T Constant2_Value;              /* Expression: 4
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
 };
 
 /* Real-time Model Data Structure */
@@ -127,7 +130,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[5];
+      uint32_T TID[4];
     } TaskCounters;
   } Timing;
 };
@@ -150,13 +153,6 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
-
-/*-
- * These blocks were eliminated from the model due to optimizations:
- *
- * Block '<Root>/Constant2' : Unused code path elimination
- * Block '<Root>/Data Type Conversion1' : Unused code path elimination
- */
 
 /*-
  * The generated code includes comments that allow you to trace directly

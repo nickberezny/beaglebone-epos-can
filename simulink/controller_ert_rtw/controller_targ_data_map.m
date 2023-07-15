@@ -28,16 +28,48 @@
         ;%
         ;% Auto data (controller_P)
         ;%
-            section.nData     = 2;
-            section.data(2)  = dumData; %prealloc
+            section.nData     = 10;
+            section.data(10)  = dumData; %prealloc
 
-                    ;% controller_P.Delay_InitialCondition
+                    ;% controller_P.Constant1_Value
                     section.data(1).logicalSrcIdx = 0;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% controller_P.Gain_Gain
+                    ;% controller_P.Delay_InitialCondition
                     section.data(2).logicalSrcIdx = 1;
                     section.data(2).dtTransOffset = 1;
+
+                    ;% controller_P.Gain_Gain
+                    section.data(3).logicalSrcIdx = 2;
+                    section.data(3).dtTransOffset = 2;
+
+                    ;% controller_P.Delay1_InitialCondition
+                    section.data(4).logicalSrcIdx = 3;
+                    section.data(4).dtTransOffset = 3;
+
+                    ;% controller_P.Constant3_Value
+                    section.data(5).logicalSrcIdx = 4;
+                    section.data(5).dtTransOffset = 4;
+
+                    ;% controller_P.Gain1_Gain
+                    section.data(6).logicalSrcIdx = 5;
+                    section.data(6).dtTransOffset = 5;
+
+                    ;% controller_P.Saturation_UpperSat
+                    section.data(7).logicalSrcIdx = 6;
+                    section.data(7).dtTransOffset = 6;
+
+                    ;% controller_P.Saturation_LowerSat
+                    section.data(8).logicalSrcIdx = 7;
+                    section.data(8).dtTransOffset = 7;
+
+                    ;% controller_P.Constant4_Value
+                    section.data(9).logicalSrcIdx = 8;
+                    section.data(9).dtTransOffset = 8;
+
+                    ;% controller_P.Constant5_Value
+                    section.data(10).logicalSrcIdx = 9;
+                    section.data(10).dtTransOffset = 9;
 
             nTotData = nTotData + section.nData;
             paramMap.sections(1) = section;
@@ -84,27 +116,43 @@
         ;%
         ;% Auto data (controller_B)
         ;%
-            section.nData     = 2;
-            section.data(2)  = dumData; %prealloc
+            section.nData     = 4;
+            section.data(4)  = dumData; %prealloc
 
-                    ;% controller_B.CCaller1
+                    ;% controller_B.Gain
                     section.data(1).logicalSrcIdx = 0;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% controller_B.Gain
+                    ;% controller_B.CCaller1
                     section.data(2).logicalSrcIdx = 1;
                     section.data(2).dtTransOffset = 1;
+
+                    ;% controller_B.ZeroOrderHold
+                    section.data(3).logicalSrcIdx = 2;
+                    section.data(3).dtTransOffset = 2;
+
+                    ;% controller_B.Saturation
+                    section.data(4).logicalSrcIdx = 3;
+                    section.data(4).dtTransOffset = 3;
 
             nTotData = nTotData + section.nData;
             sigMap.sections(1) = section;
             clear section
 
-            section.nData     = 1;
-            section.data(1)  = dumData; %prealloc
+            section.nData     = 3;
+            section.data(3)  = dumData; %prealloc
 
                     ;% controller_B.CCaller5
-                    section.data(1).logicalSrcIdx = 2;
+                    section.data(1).logicalSrcIdx = 4;
                     section.data(1).dtTransOffset = 0;
+
+                    ;% controller_B.DataTypeConversion5
+                    section.data(2).logicalSrcIdx = 5;
+                    section.data(2).dtTransOffset = 1;
+
+                    ;% controller_B.DataTypeConversion6
+                    section.data(3).logicalSrcIdx = 6;
+                    section.data(3).dtTransOffset = 2;
 
             nTotData = nTotData + section.nData;
             sigMap.sections(2) = section;
@@ -151,12 +199,16 @@
         ;%
         ;% Auto data (controller_DW)
         ;%
-            section.nData     = 1;
-            section.data(1)  = dumData; %prealloc
+            section.nData     = 2;
+            section.data(2)  = dumData; %prealloc
 
                     ;% controller_DW.Delay_DSTATE
                     section.data(1).logicalSrcIdx = 0;
                     section.data(1).dtTransOffset = 0;
+
+                    ;% controller_DW.Delay1_DSTATE
+                    section.data(2).logicalSrcIdx = 1;
+                    section.data(2).dtTransOffset = 1;
 
             nTotData = nTotData + section.nData;
             dworkMap.sections(1) = section;
@@ -165,12 +217,12 @@
             section.nData     = 2;
             section.data(2)  = dumData; %prealloc
 
-                    ;% controller_DW.Scope_PWORK.LoggedData
-                    section.data(1).logicalSrcIdx = 1;
+                    ;% controller_DW.Scope1_PWORK.LoggedData
+                    section.data(1).logicalSrcIdx = 2;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% controller_DW.Scope1_PWORK.LoggedData
-                    section.data(2).logicalSrcIdx = 2;
+                    ;% controller_DW.Scope_PWORK.LoggedData
+                    section.data(2).logicalSrcIdx = 3;
                     section.data(2).dtTransOffset = 1;
 
             nTotData = nTotData + section.nData;
@@ -203,8 +255,8 @@
     ;%
 
 
-    targMap.checksum0 = 894341265;
-    targMap.checksum1 = 3272718915;
-    targMap.checksum2 = 3087486346;
-    targMap.checksum3 = 3052825572;
+    targMap.checksum0 = 3836291119;
+    targMap.checksum1 = 567238665;
+    targMap.checksum2 = 3184604761;
+    targMap.checksum3 = 1381311009;
 
