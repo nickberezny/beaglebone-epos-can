@@ -14,7 +14,7 @@
 
 static int set_torque(int16_t set, uint16_t nodeid) {
 	int err = 0;
-	const int16_t rpm = set;
+	const int16_t rpm = 10;//set;
 	Socketcan_t target_vel[2] = {
 		{2, rpm},
 		{2, Switch_On_And_Enable_Operation}
