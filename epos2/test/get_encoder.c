@@ -15,7 +15,7 @@ double get_encoder(int fd, int dt)
 	int32_t vel_right;
 	int32_t pos = 0;
 
-	printf("encoder %d\n", motor_pdo_fd);
+	//printf("encoder %d\n", motor_pdo_fd);
 
 	if(dt > 0)
 	{
@@ -27,7 +27,7 @@ double get_encoder(int fd, int dt)
 		pos = pos_right;
 	}
 
-	printf("pos: %d\n", pos);
+	//printf("pos: %d\n", pos);
 	
 	return (double)pos;
 }

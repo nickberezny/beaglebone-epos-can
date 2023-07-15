@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.50
+ * Model version              : 4.55
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 20:59:07 2023
+ * C source code generated on : Fri Jul 14 21:32:40 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -60,7 +60,9 @@ typedef struct {
   creal_T t_m;
   creal_T da;
   creal_T t_c;
-  real_T c_tm_mon;
+  real_T CCaller1;                     /* '<Root>/C Caller1' */
+  real_T ZeroOrderHold;                /* '<Root>/Zero-Order Hold' */
+  real_T Saturation;                   /* '<Root>/Saturation' */
   real_T c_tm_year;
   real_T second;
   real_T fracSecs;
@@ -68,20 +70,20 @@ typedef struct {
   real_T shi;
   real_T b_alo;
   real_T d_ahi_k;
+  real_T inc_p;                        /* '<Root>/Sum1' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
-  int32_T DataTypeConversion;          /* '<Root>/Data Type Conversion' */
+  int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
+  int32_T DataTypeConversion6;         /* '<Root>/Data Type Conversion6' */
 } B_controller_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   real_T Delay_DSTATE;                 /* '<Root>/Delay' */
+  real_T Delay1_DSTATE;                /* '<Root>/Delay1' */
 } DW_controller_T;
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
-  real_T Constant_Value;               /* Expression: 500
-                                        * Referenced by: '<Root>/Constant'
-                                        */
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
@@ -91,8 +93,26 @@ struct P_controller_T_ {
   real_T Gain_Gain;                    /* Expression: 1000
                                         * Referenced by: '<Root>/Gain'
                                         */
-  real_T Constant2_Value;              /* Expression: 2
-                                        * Referenced by: '<Root>/Constant2'
+  real_T Delay1_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<Root>/Delay1'
+                                        */
+  real_T Constant3_Value;              /* Expression: 10000
+                                        * Referenced by: '<Root>/Constant3'
+                                        */
+  real_T Gain1_Gain;                   /* Expression: 1/20
+                                        * Referenced by: '<Root>/Gain1'
+                                        */
+  real_T Saturation_UpperSat;          /* Expression: 500
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
+  real_T Saturation_LowerSat;          /* Expression: -500
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
+  real_T Constant4_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant4'
+                                        */
+  real_T Constant5_Value;              /* Expression: 3
+                                        * Referenced by: '<Root>/Constant5'
                                         */
 };
 
@@ -130,6 +150,13 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<Root>/Constant2' : Unused code path elimination
+ * Block '<Root>/Data Type Conversion1' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly

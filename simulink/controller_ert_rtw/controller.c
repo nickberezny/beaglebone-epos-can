@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.50
+ * Model version              : 4.55
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 20:59:07 2023
+ * C source code generated on : Fri Jul 14 21:32:40 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -370,53 +370,46 @@ void controller_step(void)
     controller_B.CCaller5 = init_can();
   }
 
-  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-    /* CCaller: '<Root>/C Caller3' incorporates:
-     *  Constant: '<Root>/Constant'
-     */
-    set_motor(controller_B.CCaller5, controller_P.Constant_Value);
-  }
-
   if (controller_M->Timing.TaskCounters.TID[2] == 0) {
     /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
      *  Constant: '<Root>/Constant1'
      */
-    controller_B.d_ahi_k = floor(controller_P.Constant1_Value);
-    if (rtIsNaN(controller_B.d_ahi_k) || rtIsInf(controller_B.d_ahi_k)) {
-      controller_B.d_ahi_k = 0.0;
+    controller_B.inc_p = floor(controller_P.Constant1_Value);
+    if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+      controller_B.inc_p = 0.0;
     } else {
-      controller_B.d_ahi_k = fmod(controller_B.d_ahi_k, 4.294967296E+9);
+      controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
     }
 
     /* CCaller: '<Root>/C Caller2' incorporates:
      *  DataTypeConversion: '<Root>/Data Type Conversion2'
      */
-    print_input(controller_B.CCaller5, controller_B.d_ahi_k < 0.0 ? -(int32_T)
-                (uint32_T)-controller_B.d_ahi_k : (int32_T)(uint32_T)
-                controller_B.d_ahi_k);
+    print_input(controller_B.CCaller5, controller_B.inc_p < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
+                controller_B.inc_p);
   }
 
   /* MATLAB Function: '<Root>/MATLAB Function' */
   controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
     &controller_B.shi, &controller_B.b_alo, &controller_B.d_ahi_k,
-    &controller_B.c_tm_mon, &controller_B.c_tm_year, &expl_temp);
+    &controller_B.inc_p, &controller_B.c_tm_year, &expl_temp);
   controller_B.fracSecs /= 1.0E+6;
-  controller_B.check = (((((controller_B.c_tm_year + controller_B.c_tm_mon) +
+  controller_B.check = (((((controller_B.c_tm_year + controller_B.inc_p) +
     controller_B.d_ahi_k) + controller_B.b_alo) + controller_B.shi) +
                         controller_B.second) + controller_B.fracSecs;
   if ((!rtIsInf(controller_B.check)) && (!rtIsNaN(controller_B.check))) {
-    if ((controller_B.c_tm_mon < 1.0) || (controller_B.c_tm_mon > 12.0)) {
-      controller_B.check = floor((controller_B.c_tm_mon - 1.0) / 12.0);
+    if ((controller_B.inc_p < 1.0) || (controller_B.inc_p > 12.0)) {
+      controller_B.check = floor((controller_B.inc_p - 1.0) / 12.0);
       controller_B.c_tm_year += controller_B.check;
-      controller_B.c_tm_mon = ((controller_B.c_tm_mon - 1.0) -
-        controller_B.check * 12.0) + 1.0;
+      controller_B.inc_p = ((controller_B.inc_p - 1.0) - controller_B.check *
+                            12.0) + 1.0;
     }
 
-    if (controller_B.c_tm_mon < 3.0) {
+    if (controller_B.inc_p < 3.0) {
       controller_B.c_tm_year--;
-      controller_B.c_tm_mon += 9.0;
+      controller_B.inc_p += 9.0;
     } else {
-      controller_B.c_tm_mon -= 3.0;
+      controller_B.inc_p -= 3.0;
     }
 
     if ((controller_B.fracSecs < 0.0) || (controller_B.fracSecs >= 1000.0)) {
@@ -427,9 +420,8 @@ void controller_step(void)
 
     controller_B.d_data.re = ((((((365.0 * controller_B.c_tm_year + floor
       (controller_B.c_tm_year / 4.0)) - floor(controller_B.c_tm_year / 100.0)) +
-      floor(controller_B.c_tm_year / 400.0)) + floor((153.0 *
-      controller_B.c_tm_mon + 2.0) / 5.0)) + controller_B.d_ahi_k) + 60.0) -
-      719529.0;
+      floor(controller_B.c_tm_year / 400.0)) + floor((153.0 * controller_B.inc_p
+      + 2.0) / 5.0)) + controller_B.d_ahi_k) + 60.0) - 719529.0;
     controller_B.d_data.im = 0.0;
     controller_B.d_data = controller_plus(controller_plus(controller_plus
       (controller_times(controller_B.d_data), (60.0 * controller_B.b_alo +
@@ -536,43 +528,131 @@ void controller_step(void)
     controller_P.Gain_Gain;
 
   /* DataTypeConversion: '<Root>/Data Type Conversion' */
-  controller_B.d_ahi_k = floor(controller_B.b_alo);
-  if (rtIsNaN(controller_B.d_ahi_k) || rtIsInf(controller_B.d_ahi_k)) {
-    controller_B.d_ahi_k = 0.0;
+  controller_B.inc_p = floor(controller_B.b_alo);
+  if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+    controller_B.inc_p = 0.0;
   } else {
-    controller_B.d_ahi_k = fmod(controller_B.d_ahi_k, 4.294967296E+9);
+    controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
   }
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion' */
-  controller_B.DataTypeConversion = controller_B.d_ahi_k < 0.0 ? -(int32_T)
-    (uint32_T)-controller_B.d_ahi_k : (int32_T)(uint32_T)controller_B.d_ahi_k;
+  /* CCaller: '<Root>/C Caller1' incorporates:
+   *  DataTypeConversion: '<Root>/Data Type Conversion'
+   */
+  controller_B.CCaller1 = get_encoder(controller_B.CCaller5, controller_B.inc_p <
+    0.0 ? -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
+    controller_B.inc_p);
+  if (controller_M->Timing.TaskCounters.TID[4] == 0) {
+    /* ZeroOrderHold: '<Root>/Zero-Order Hold' */
+    controller_B.ZeroOrderHold = controller_B.CCaller1;
+  }
 
-  /* CCaller: '<Root>/C Caller1' */
-  controller_B.d_ahi_k = get_encoder(controller_B.CCaller5,
-    controller_B.DataTypeConversion);
-  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
-    /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
-     *  Constant: '<Root>/Constant2'
+  /* Switch: '<Root>/Switch' incorporates:
+   *  Delay: '<Root>/Delay1'
+   */
+  if (controller_B.CCaller1 != 0.0) {
+    controller_B.d_ahi_k = controller_B.CCaller1;
+  } else {
+    controller_B.d_ahi_k = controller_DW.Delay1_DSTATE;
+  }
+
+  /* End of Switch: '<Root>/Switch' */
+
+  /* Sum: '<Root>/Sum1' */
+  controller_B.inc_p = controller_B.d_ahi_k - controller_B.ZeroOrderHold;
+
+  /* Gain: '<Root>/Gain1' incorporates:
+   *  Constant: '<Root>/Constant3'
+   *  Sum: '<Root>/Sum2'
+   */
+  controller_B.Saturation = (controller_B.inc_p - controller_P.Constant3_Value) *
+    controller_P.Gain1_Gain;
+
+  /* Saturate: '<Root>/Saturation' */
+  if (controller_B.Saturation > controller_P.Saturation_UpperSat) {
+    /* Gain: '<Root>/Gain1' incorporates:
+     *  Saturate: '<Root>/Saturation'
      */
-    controller_B.d_ahi_k = floor(controller_P.Constant2_Value);
-    if (rtIsNaN(controller_B.d_ahi_k) || rtIsInf(controller_B.d_ahi_k)) {
-      controller_B.d_ahi_k = 0.0;
+    controller_B.Saturation = controller_P.Saturation_UpperSat;
+  } else if (controller_B.Saturation < controller_P.Saturation_LowerSat) {
+    /* Gain: '<Root>/Gain1' incorporates:
+     *  Saturate: '<Root>/Saturation'
+     */
+    controller_B.Saturation = controller_P.Saturation_LowerSat;
+  }
+
+  /* End of Saturate: '<Root>/Saturation' */
+  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
+    /* CCaller: '<Root>/C Caller3' */
+    set_motor(controller_B.CCaller5, controller_B.Saturation);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion5' */
+  controller_B.inc_p = floor(controller_B.inc_p);
+  if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+    controller_B.inc_p = 0.0;
+  } else {
+    controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion5' */
+  controller_B.DataTypeConversion5 = controller_B.inc_p < 0.0 ? -(int32_T)
+    (uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)controller_B.inc_p;
+  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion3' incorporates:
+     *  Constant: '<Root>/Constant4'
+     */
+    controller_B.inc_p = floor(controller_P.Constant4_Value);
+    if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+      controller_B.inc_p = 0.0;
     } else {
-      controller_B.d_ahi_k = fmod(controller_B.d_ahi_k, 4.294967296E+9);
+      controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
     }
 
-    /* CCaller: '<Root>/C Caller4' incorporates:
-     *  DataTypeConversion: '<Root>/Data Type Conversion1'
+    /* CCaller: '<Root>/C Caller6' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion3'
      */
-    print_input(controller_B.DataTypeConversion, controller_B.d_ahi_k < 0.0 ?
-                -(int32_T)(uint32_T)-controller_B.d_ahi_k : (int32_T)(uint32_T)
-                controller_B.d_ahi_k);
+    print_input(controller_B.DataTypeConversion5, controller_B.inc_p < 0.0 ?
+                -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
+                controller_B.inc_p);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion6' */
+  controller_B.inc_p = floor(controller_B.CCaller1);
+  if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+    controller_B.inc_p = 0.0;
+  } else {
+    controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion6' */
+  controller_B.DataTypeConversion6 = controller_B.inc_p < 0.0 ? -(int32_T)
+    (uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)controller_B.inc_p;
+  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion4' incorporates:
+     *  Constant: '<Root>/Constant5'
+     */
+    controller_B.inc_p = floor(controller_P.Constant5_Value);
+    if (rtIsNaN(controller_B.inc_p) || rtIsInf(controller_B.inc_p)) {
+      controller_B.inc_p = 0.0;
+    } else {
+      controller_B.inc_p = fmod(controller_B.inc_p, 4.294967296E+9);
+    }
+
+    /* CCaller: '<Root>/C Caller7' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion4'
+     */
+    print_input(controller_B.DataTypeConversion6, controller_B.inc_p < 0.0 ?
+                -(int32_T)(uint32_T)-controller_B.inc_p : (int32_T)(uint32_T)
+                controller_B.inc_p);
   }
 
   /* Update for Delay: '<Root>/Delay' incorporates:
    *  MATLAB Function: '<Root>/MATLAB Function'
    */
   controller_DW.Delay_DSTATE = controller_B.shi;
+
+  /* Update for Delay: '<Root>/Delay1' */
+  controller_DW.Delay1_DSTATE = controller_B.d_ahi_k;
   rate_scheduler();
 }
 
@@ -598,6 +678,9 @@ void controller_initialize(void)
 
   /* InitializeConditions for Delay: '<Root>/Delay' */
   controller_DW.Delay_DSTATE = controller_P.Delay_InitialCondition;
+
+  /* InitializeConditions for Delay: '<Root>/Delay1' */
+  controller_DW.Delay1_DSTATE = controller_P.Delay1_InitialCondition;
 }
 
 /* Model terminate function */
