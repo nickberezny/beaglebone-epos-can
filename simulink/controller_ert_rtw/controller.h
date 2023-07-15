@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.47
+ * Model version              : 4.50
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 14 20:19:49 2023
+ * C source code generated on : Fri Jul 14 20:59:07 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -69,6 +69,7 @@ typedef struct {
   real_T b_alo;
   real_T d_ahi_k;
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
+  int32_T DataTypeConversion;          /* '<Root>/Data Type Conversion' */
 } B_controller_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -78,6 +79,9 @@ typedef struct {
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
+  real_T Constant_Value;               /* Expression: 500
+                                        * Referenced by: '<Root>/Constant'
+                                        */
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
@@ -103,7 +107,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[4];
+      uint32_T TID[5];
     } TaskCounters;
   } Timing;
 };

@@ -12,7 +12,7 @@
 // Non-exported function
 static int _vel_speed(int32_t vel, uint16_t nodeid) {
 	int err = 0;
-	const int32_t rpm = -500;
+	const int32_t rpm = vel;
 	Socketcan_t target_vel[2] = {
 		{4, rpm},
 		{2, Switch_On_And_Enable_Operation}
