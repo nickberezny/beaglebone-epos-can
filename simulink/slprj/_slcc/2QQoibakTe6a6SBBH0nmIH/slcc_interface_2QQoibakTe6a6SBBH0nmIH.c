@@ -15,7 +15,7 @@
 /* Function Definitions */
 const char_T *get_dll_checksum_2QQoibakTe6a6SBBH0nmIH(void)
 {
-    return "kQtfk7oPrObD5xDBZICllB";
+    return "XdC0dwTkNfK6o2HQXfdECD";
 }
 
 int32_T init_can_2QQoibakTe6a6SBBH0nmIH(int32_T id)
@@ -23,9 +23,9 @@ int32_T init_can_2QQoibakTe6a6SBBH0nmIH(int32_T id)
     return init_can(id);
 }
 
-real_T get_encoder_2QQoibakTe6a6SBBH0nmIH(int32_T pdo_id)
+void get_encoder_2QQoibakTe6a6SBBH0nmIH(int32_T pdo_id, int32_T size, real_T *pos)
 {
-    return get_encoder(pdo_id);
+    get_encoder(pdo_id, size, pos);
 }
 
 void set_motor_2QQoibakTe6a6SBBH0nmIH(int32_T pdo_id, int32_T motor_id, real_T set_val)
@@ -409,19 +409,19 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 
-141U, 15U, 61U, 241U, 24U, 142U, 38U, 65U, 136U, 147U, 73U, 238U, 24U, 142U, 38U, 65U, 
+195U, 223U, 166U, 0U, 25U, 142U, 38U, 65U, 136U, 147U, 73U, 238U, 24U, 142U, 38U, 65U, 
 91U, 165U, 68U, 109U, 19U, 142U, 38U, 65U, 248U, 219U, 20U, 247U, 24U, 142U, 38U, 65U, 
 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 64U, 64U, 
+9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 78U, 64U, 
 0U, 0U, 0U, 0U, 0U, 0U, 53U, 64U, 0U, 0U, 0U, 0U, 0U, 0U, 64U, 64U, 
 0U, 0U, 0U, 0U, 0U, 128U, 76U, 64U, 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 
-0U, 0U, 192U, 92U, 165U, 42U, 216U, 65U, 0U, 0U, 32U, 78U, 184U, 213U, 229U, 65U, 
-0U, 0U, 192U, 143U, 9U, 68U, 228U, 65U, 0U, 0U, 64U, 232U, 80U, 234U, 218U, 65U, 
+0U, 0U, 64U, 57U, 218U, 203U, 213U, 65U, 0U, 0U, 128U, 67U, 137U, 145U, 194U, 65U, 
+0U, 0U, 0U, 255U, 68U, 138U, 193U, 65U, 0U, 0U, 192U, 15U, 222U, 31U, 215U, 65U, 
 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 2U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
@@ -660,11 +660,11 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 14U, 0U, 0U, 0U, 56U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 70U, 24U, 64U, 241U, 24U, 142U, 38U, 65U, 
+9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 24U, 75U, 126U, 1U, 25U, 142U, 38U, 65U, 
 14U, 0U, 0U, 0U, 56U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 88U, 64U, 
+9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 99U, 64U, 
 14U, 0U, 0U, 0U, 40U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
@@ -678,9 +678,9 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 64U, 14U, 229U, 204U, 237U, 65U, 
-0U, 0U, 160U, 43U, 197U, 218U, 227U, 65U, 0U, 0U, 0U, 182U, 175U, 213U, 202U, 65U, 
-0U, 0U, 96U, 150U, 109U, 2U, 230U, 65U, 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 
+9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 0U, 191U, 209U, 173U, 230U, 65U, 
+0U, 0U, 128U, 21U, 213U, 174U, 206U, 65U, 0U, 0U, 0U, 186U, 122U, 91U, 217U, 65U, 
+0U, 0U, 0U, 221U, 109U, 220U, 202U, 65U, 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 2U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 4U, 0U, 21U, 0U, 0U, 0U, 

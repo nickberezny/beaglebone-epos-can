@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.69
+ * Model version              : 4.76
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 11:36:44 2023
+ * C source code generated on : Mon Jul 17 12:09:57 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -50,42 +50,21 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  creal_T d_data;
-  creal_T b_c;
-  creal_T t;
-  creal_T c_s;
-  creal_T d_ahi;
-  creal_T c;
-  creal_T t_m;
-  creal_T da;
-  creal_T t_c;
-  real_T CCaller1;                     /* '<Root>/C Caller1' */
-  real_T ZeroOrderHold;                /* '<Root>/Zero-Order Hold' */
-  real_T c_tm_mon;
-  real_T c_tm_year;
-  real_T second;
-  real_T fracSecs;
-  real_T check;
-  real_T shi;
-  real_T b_alo;
-  real_T d_ahi_k;
-  real_T Switch;                       /* '<Root>/Switch' */
   int32_T DataTypeConversion2;         /* '<Root>/Data Type Conversion2' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
-  int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
-  int32_T DataTypeConversion6;         /* '<Root>/Data Type Conversion6' */
+  int32_T DataTypeConversion9;         /* '<Root>/Data Type Conversion9' */
 } B_controller_T;
-
-/* Block states (default storage) for system '<Root>' */
-typedef struct {
-  real_T Delay1_DSTATE;                /* '<Root>/Delay1' */
-  real_T Delay_DSTATE;                 /* '<Root>/Delay' */
-} DW_controller_T;
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Constant7_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant7'
+                                        */
+  real_T Constant8_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant8'
                                         */
   real_T Constant6_Value;              /* Expression: 5
                                         * Referenced by: '<Root>/Constant6'
@@ -95,24 +74,6 @@ struct P_controller_T_ {
                                         */
   real_T Saturation_LowerSat;          /* Expression: -10
                                         * Referenced by: '<Root>/Saturation'
-                                        */
-  real_T Delay1_InitialCondition;      /* Expression: 0
-                                        * Referenced by: '<Root>/Delay1'
-                                        */
-  real_T Constant4_Value;              /* Expression: 2
-                                        * Referenced by: '<Root>/Constant4'
-                                        */
-  real_T Constant5_Value;              /* Expression: 3
-                                        * Referenced by: '<Root>/Constant5'
-                                        */
-  real_T Delay_InitialCondition;       /* Expression: 0
-                                        * Referenced by: '<Root>/Delay'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 1000
-                                        * Referenced by: '<Root>/Gain'
-                                        */
-  real_T Constant2_Value;              /* Expression: 4
-                                        * Referenced by: '<Root>/Constant2'
                                         */
 };
 
@@ -138,9 +99,6 @@ extern P_controller_T controller_P;
 /* Block signals (default storage) */
 extern B_controller_T controller_B;
 
-/* Block states (default storage) */
-extern DW_controller_T controller_DW;
-
 /* Model entry point functions */
 extern void controller_initialize(void);
 extern void controller_step(void);
@@ -150,14 +108,6 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
-
-/*-
- * These blocks were eliminated from the model due to optimizations:
- *
- * Block '<Root>/Constant3' : Unused code path elimination
- * Block '<Root>/Gain1' : Unused code path elimination
- * Block '<Root>/Sum2' : Unused code path elimination
- */
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -174,6 +124,5 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'controller'
- * '<S1>'   : 'controller/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

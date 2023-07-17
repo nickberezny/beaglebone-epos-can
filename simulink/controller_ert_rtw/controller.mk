@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Mon Jul 17 10:10:04 2023
+## Generated on : Mon Jul 17 12:10:01 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
@@ -173,7 +173,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = coder_posix_time.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c MW_bbblue_init.c linuxinitialize.c
+SRCS = controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c MW_bbblue_init.c linuxinitialize.c
 
 MAIN_SRC = ert_main.c
 
@@ -183,7 +183,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = coder_posix_time.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o MW_bbblue_init.c.o linuxinitialize.c.o
+OBJS = controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o MW_bbblue_init.c.o linuxinitialize.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -412,10 +412,6 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 %.cpp.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-coder_posix_time.c.o : coder_posix_time.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 ert_main.c.o : ert_main.c

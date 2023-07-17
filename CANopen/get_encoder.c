@@ -8,16 +8,10 @@
 #include <math.h>
 #include <stdio.h>
 
-double get_encoder(int pdo_id)
+extern void get_encoder(int pdo_id, int size, double* pos)
 {
-	int32_t pos_left;
-	int32_t vel_left;
-	int32_t pos_right;
-	int32_t vel_right;
-	int32_t pos = 0;
 
-	vel_read(pdo_id, &pos_left, &vel_left, &pos_right, &vel_right, 10);
-	pos = pos_right;
+	vel_read(pdo_id, size, pos, 10);
 
-	return (double)pos;
+	return;
 }
