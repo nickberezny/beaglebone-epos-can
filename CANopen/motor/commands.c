@@ -10,7 +10,7 @@
 #include "socketcan/printd.h"
 #include "canopen/canopen.h"
 
-static int set_torque(int16_t set, uint16_t nodeid) {
+int set_torque(int16_t set, uint16_t nodeid) {
 	int err = 0;
 	const int16_t rpm = 100;//set;
 	Socketcan_t target_vel[2] = {
