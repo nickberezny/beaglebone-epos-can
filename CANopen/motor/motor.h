@@ -37,7 +37,7 @@ extern int motor_cfg_fd;
  * and configures the two motors
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_init(void);
+int motor_init(int id);
 
 
 /*! Closes the CAN connection */
@@ -48,7 +48,7 @@ void motor_close(void);
  * Turns the motors on
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_enable(void);
+int motor_enable(int id);
 
 
 /*!

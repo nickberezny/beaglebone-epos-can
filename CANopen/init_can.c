@@ -9,10 +9,10 @@
 #include <stdbool.h>
 
 
-void init_can(){
+void init_can(int id){
 
-	motor_init();
-	motor_enable();
+	motor_init(id);
+	motor_enable(id);
 
 	return;
 }
