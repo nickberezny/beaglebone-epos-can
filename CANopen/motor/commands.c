@@ -56,12 +56,12 @@ int sort_read(int32_t* pos, my_can_frame f, int * num_of_reads)
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[0] = enc;//motor_enc_to_mm(enc);
 			printf("motor read!\n");
-			*num_of_reads++;
+			*num_of_reads = *num_of_reads + 1;
 			break;
 		case(PDO_TX2_ID + 2):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[1] = enc;//motor_enc_to_mm(-enc);
-			*num_of_reads++;
+			*num_of_reads = *num_of_reads + 1;
 			break;
 		default:
 			break;
