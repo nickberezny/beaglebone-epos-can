@@ -10,7 +10,7 @@
 #include "socketcan/printd.h"
 #include "canopen/canopen.h"
 
-int set_torque(int16_t set, uint16_t nodeid) {
+int set_torque(int pdo_id, int16_t set, uint16_t nodeid) {
 	int err = 0;
 	const int16_t rpm = 100;//set;
 	Socketcan_t target_vel[2] = {
@@ -18,7 +18,7 @@ int set_torque(int16_t set, uint16_t nodeid) {
 		{2, Switch_On_And_Enable_Operation}
 	};
 
-	err = PDO_send(motor_pdo_fd, PDO_RX2_ID + nodeid, 2, target_vel);
+	err = PDO_send(pdo_id, PDO_RX2_ID + nodeid, 2, target_vel);
 	return err;
 }
 

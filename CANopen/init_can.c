@@ -9,11 +9,11 @@
 #include <stdbool.h>
 
 
-void init_can(int id){
+int init_can(int id){
 
 	motor_init(id);
 	motor_enable(id);
 
-	return;
+	return motor_pdo_fd;
 }
 

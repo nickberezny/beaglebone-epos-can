@@ -1,1 +1,1 @@
-void init_can(int id);
+int init_can(int id);
