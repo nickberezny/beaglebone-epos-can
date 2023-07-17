@@ -1,4 +1,3 @@
-
 CC = gcc
 CFLAGS = -std=gnu99 -fPIC -Wall -Werror -Wextra -Wno-unused -O2 -I .
 LDFLAGS = -std=gnu99 -Werror -L . -Wl,-rpath=.

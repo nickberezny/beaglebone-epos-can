@@ -192,26 +192,3 @@ int motor_setmode(enum Motor_mode mode) {
 }
 
 
-
-/********* Utils: *********/
-int motor_mmsec_to_rpm(int mm_per_sec) {
-	const double wheel_circumference = (2.0*MOTOR_WHEEL_RADIUS)*M_PI;
-	const double mm_per_rot = wheel_circumference/MOTOR_GEAR_RATIO;
-	int mm_per_min = 60*mm_per_sec;
-	int rpm = mm_per_min/mm_per_rot;  // [mm/min]/[mm/1] = [1/min]
-	return rpm;
-}
-
-int motor_rpm_to_mmsec(int rpm) {
-	const double wheel_circumference = (2.0*MOTOR_WHEEL_RADIUS)*M_PI;
-	const double mm_per_rot = wheel_circumference/MOTOR_GEAR_RATIO;
-	int mm_per_min = rpm*mm_per_rot;
-	return mm_per_min/60.0;
-}
-
-int motor_enc_to_mm(int enc) {
-	const double wheel_circumference = (2.0*MOTOR_WHEEL_RADIUS)*M_PI;
-	const double mm_per_rot = wheel_circumference/MOTOR_GEAR_RATIO;
-	int mm = enc*mm_per_rot;
-	return mm;
-}

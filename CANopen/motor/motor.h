@@ -10,14 +10,6 @@
 #define MOTOR_EPOS_R_ID 0x01
 
 
-/*** Robot specific ***/
-// One motor step converted to traveled distance [mm] (meassured)
-#define MOTOR_STEP_PER_MM        4
-#define MOTOR_WHEEL_RADIUS      32      /* [mm] */
-#define MOTOR_WHEELBASE_RADIUS 135      /* [mm] */
-#define MOTOR_GEAR_RATIO (18.0/1.0)
-
-
 /*** Tuning ***/
 #define MOTOR_MAX_SPEED     1200      /* [mm/sec]    */
 #define MOTOR_MAX_ACC        650      /* [mm/sec^2]  */
@@ -78,13 +70,5 @@ int motor_disable(void);
  */
 int motor_setmode(enum Motor_mode mode);
 
-
-/*
- * For internal use in the driver.
- * Converts [mm/sec] to [rpm] and [mm/sec^2] to [rpm/sec]
- */
-int motor_mmsec_to_rpm(int mm_per_sec);
-int motor_rpm_to_mmsec(int rpm);
-int motor_enc_to_mm(int enc);
 
 #endif // LIBMOTOR_H
