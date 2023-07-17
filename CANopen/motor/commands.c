@@ -63,4 +63,6 @@ int sort_read(int32_t* pos, my_can_frame f, int * num_of_reads)
 			break;
 	}
 
+	return 0;
+
 }
