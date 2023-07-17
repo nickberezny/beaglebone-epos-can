@@ -1,1 +1,0 @@
-void set_motor(int fd, double set_val);

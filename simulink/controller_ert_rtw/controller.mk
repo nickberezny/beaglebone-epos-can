@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Mon Jul 17 12:10:01 2023
+## Generated on : Mon Jul 17 13:38:00 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
