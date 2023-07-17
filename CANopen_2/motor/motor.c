@@ -27,7 +27,7 @@ static int motor_config_node(uint16_t node) {
 		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
 		return err;
 	}
-	err |= epos_Quickstop_Deceleration(node,10000);
+	err |= epos_Quickstop_Deceleration(node, 10000);
 	err |= epos_Profile_Acceleration(node, 5000);
 	err |= epos_Profile_Deceleration(node, 5000);
 	err |= epos_Motion_Profile_Type(node, trapezodial_profile);
@@ -42,26 +42,19 @@ static int motor_config_node(uint16_t node) {
 	err |= epos_Receive_PDO_n_Parameter(node, 1, PDO_RX1_ID + node);
 	err |= epos_Receive_PDO_n_Parameter(node, 2, PDO_RX2_ID + node);
 	err |= epos_Transmit_PDO_n_Parameter(node, 1, PDO_TX1_ID + node);
-	err |= epos_Transmit_PDO_n_Parameter(node, 2, PDO_TX2_ID + node);
+	//err |= epos_Transmit_PDO_n_Parameter(node, 2, PDO_TX2_ID + node);
 
 
 	/*** Communication, from pc to epos ***/
 
-	// PDO RX1 target speed (used in profile pos mode)
+	// PDO RX1 target torque 
 	num_PDOs = 2;
 	Epos_pdo_mapping target_pos[] = {
-		{0x607A, 0x00, 32},   // Target Possition
+		{0x6071, 0x00, 16},   // Target torque
 		{0x6040, 0x00, 16}    // Controlword
 	};
 	err |= epos_Receive_PDO_n_Mapping(node, 1, num_PDOs, target_pos);
 
-	// PDO RX2 targer velocity (used in profile vel mode)
-	num_PDOs = 2;
-	Epos_pdo_mapping target_vel[] = {
-		{0x6071, 0x00, 16},  // Target Velocity 0x60ff
-		{0x6040, 0x00, 16}   // Controlword
-	};
-	err |= epos_Receive_PDO_n_Mapping(node, 2, num_PDOs, target_vel);
 
 	// Disable the rest
 	err |= epos_Receive_PDO_n_Mapping(node, 3, 0, NULL);
@@ -71,21 +64,23 @@ static int motor_config_node(uint16_t node) {
 	/*** Communication, from epos to pc ***/
 
 	// PDO TX1 Statusword
+	/*
 	num_PDOs = 1;
 	Epos_pdo_mapping status[] = {
 		{0x6041, 0x00, 16}   // Statusword
 	};
 	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, status);
-
+	*/
 	// PDO TX2 Position and speed
 	num_PDOs = 2;
 	Epos_pdo_mapping enc[] = {
 		{0x6064, 0x00, 32},  // Position Actual value
 		{0x606C, 0x00, 32}   // Velocity Actual value
 	};
-	err |= epos_Transmit_PDO_n_Mapping(node, 2, num_PDOs, enc);
+	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, enc);
 
 	// Disable the rest
+	err |= epos_Transmit_PDO_n_Mapping(node, 2, 0, NULL);
 	err |= epos_Transmit_PDO_n_Mapping(node, 3, 0, NULL);
 	err |= epos_Transmit_PDO_n_Mapping(node, 4, 0, NULL);
 
@@ -98,12 +93,11 @@ int motor_init(void) {
 	int err = 0;
 
 	// Open two connections to the CAN-network
-	uint16_t pdo_masks[2] = {COB_MASK, COB_MASK};
-	uint16_t pdo_filters[2] = {
-		PDO_TX1_ID + MOTOR_EPOS_R_ID,
-		PDO_TX2_ID + MOTOR_EPOS_R_ID
+	uint16_t pdo_masks[1] = {COB_MASK};
+	uint16_t pdo_filters[1] = {
+		PDO_TX1_ID + MOTOR_EPOS_R_ID
 	};
-	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2);
+	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 1);
 
 	uint16_t cfg_masks[3] = {COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[3] = {
@@ -133,12 +127,12 @@ int motor_init(void) {
 	}
 
 	// Set the default mode
-	motor_setmode(Motor_mode_Torque);
+	motor_setmode(Motor_mode_Velocity);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
 
-	return 0;
+	return motor_pdo_fd;
 }
 
 

@@ -6,10 +6,17 @@
 #include <inttypes.h>
 #include <math.h>
 
-void set_motor(int fd, double set_val)
-{
-	printf("Set torque: %d\n", (int)set_val);
-	//PDO_send(fd, PDO_TX1_ID+MOTOR_EPOS_R_ID, 2, (int)set_val);
+#include<stdio.h>
 
+#include "socketcan/printd.h"
+#include "socketcan/socketcan.h"
+#include "canopen/canopen.h"
+
+
+
+void set_motor(double set_val)
+{
+	set_torque((int)set_val, MOTOR_EPOS_R_ID);
 	return;
 }
+

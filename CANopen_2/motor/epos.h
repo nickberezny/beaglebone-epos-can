@@ -56,17 +56,9 @@ int epos_Controlword(uint16_t node_id, enum Epos_ctrl ctrl);
 int epos_Position_Mode_Setting_Value(uint16_t node_id, int32_t value);
 
 enum Epos_mode {
-	Interpolated_Position_Mode = 7,
-	Homing_Mode = 6,
-	Profile_Velocity_Mode = 3,
-	Profile_Position_Mode = 1,
-	Position_Mode = -1,
+	Position_Mode = 8,
 	Velocity_Mode = 9,
-	Torque_Mode = 10,
-	Current_Mode = -3,
-	Diagnostic_Mode = -4,
-	Master_Encoder_Mode = -5,
-	Step_Direction_Mode = -6
+	Current_Mode = 10,
 };
 
 int epos_Modes_of_Operation(uint16_t node_id, enum Epos_mode mode);

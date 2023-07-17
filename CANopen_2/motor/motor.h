@@ -1,10 +1,9 @@
 #ifndef LIBMOTOR_H
 #define LIBMOTOR_H
 
-#include "pos.h"
-#include "vel.h"
 #include <inttypes.h>
 
+extern int motor_pdo_fd;
 
 /*** CAN-bus spesific ***/
 #define MOTOR_PC_ID     0x02
@@ -35,8 +34,9 @@
 enum Motor_mode {
 	Motor_mode_Velocity = 9,
 	Motor_mode_Torque = 10,
-	Motor_mode_Position = 1,
+	Motor_mode_Position = 8,
 };
+
 
 
 extern int motor_pdo_fd;
