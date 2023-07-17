@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.64
+ * Model version              : 4.67
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 11:11:49 2023
+ * C source code generated on : Mon Jul 17 11:20:30 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -355,9 +355,42 @@ void controller_step(void)
 {
   int32_T trueCount;
   boolean_T expl_temp;
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
+     *  Constant: '<Root>/Constant1'
+     */
+    controller_B.shi = floor(controller_P.Constant1_Value);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+    }
+
+    /* CCaller: '<Root>/C Caller5' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion2'
+     */
+    controller_B.CCaller5 = init_can(controller_B.shi < 0.0 ? -(int32_T)
+      (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi);
+  }
+
+  /* Saturate: '<Root>/Saturation' incorporates:
+   *  Constant: '<Root>/Constant6'
+   */
+  if (controller_P.Constant6_Value > controller_P.Saturation_UpperSat) {
+    controller_B.shi = controller_P.Saturation_UpperSat;
+  } else if (controller_P.Constant6_Value < controller_P.Saturation_LowerSat) {
+    controller_B.shi = controller_P.Saturation_LowerSat;
+  } else {
+    controller_B.shi = controller_P.Constant6_Value;
+  }
+
+  /* CCaller: '<Root>/C Caller3' incorporates:
+   *  Saturate: '<Root>/Saturation'
+   */
+  set_motor(controller_B.CCaller5, controller_B.shi);
 
   /* CCaller: '<Root>/C Caller1' */
-  controller_B.CCaller1 = get_encoder();
+  controller_B.CCaller1 = get_encoder(controller_B.CCaller5);
   if (controller_M->Timing.TaskCounters.TID[2] == 0) {
     /* ZeroOrderHold: '<Root>/Zero-Order Hold' */
     controller_B.ZeroOrderHold = controller_B.CCaller1;
@@ -434,42 +467,7 @@ void controller_step(void)
     print_input(controller_B.DataTypeConversion6, controller_B.shi < 0.0 ?
                 -(int32_T)(uint32_T)-controller_B.shi : (int32_T)(uint32_T)
                 controller_B.shi);
-  }
 
-  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
-     *  Constant: '<Root>/Constant1'
-     */
-    controller_B.shi = floor(controller_P.Constant1_Value);
-    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-      controller_B.shi = 0.0;
-    } else {
-      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-    }
-
-    /* CCaller: '<Root>/C Caller5' incorporates:
-     *  DataTypeConversion: '<Root>/Data Type Conversion2'
-     */
-    controller_B.CCaller5 = init_can(controller_B.shi < 0.0 ? -(int32_T)
-      (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi);
-  }
-
-  /* Saturate: '<Root>/Saturation' incorporates:
-   *  Constant: '<Root>/Constant6'
-   */
-  if (controller_P.Constant6_Value > controller_P.Saturation_UpperSat) {
-    controller_B.shi = controller_P.Saturation_UpperSat;
-  } else if (controller_P.Constant6_Value < controller_P.Saturation_LowerSat) {
-    controller_B.shi = controller_P.Saturation_LowerSat;
-  } else {
-    controller_B.shi = controller_P.Constant6_Value;
-  }
-
-  /* CCaller: '<Root>/C Caller3' incorporates:
-   *  Saturate: '<Root>/Saturation'
-   */
-  set_motor(controller_B.CCaller5, controller_B.shi);
-  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
     /* MATLAB Function: '<Root>/MATLAB Function' */
     controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
       &controller_B.shi, &controller_B.b_alo, &controller_B.d_ahi_k,

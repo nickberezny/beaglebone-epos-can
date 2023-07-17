@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.64
+ * Model version              : 4.67
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 11:11:49 2023
+ * C source code generated on : Mon Jul 17 11:20:30 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -70,9 +70,9 @@ typedef struct {
   real_T b_alo;
   real_T d_ahi_k;
   real_T Switch;                       /* '<Root>/Switch' */
+  int32_T CCaller5;                    /* '<Root>/C Caller5' */
   int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
   int32_T DataTypeConversion6;         /* '<Root>/Data Type Conversion6' */
-  int32_T CCaller5;                    /* '<Root>/C Caller5' */
 } B_controller_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -83,15 +83,6 @@ typedef struct {
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
-  real_T Delay1_InitialCondition;      /* Expression: 0
-                                        * Referenced by: '<Root>/Delay1'
-                                        */
-  real_T Constant4_Value;              /* Expression: 2
-                                        * Referenced by: '<Root>/Constant4'
-                                        */
-  real_T Constant5_Value;              /* Expression: 3
-                                        * Referenced by: '<Root>/Constant5'
-                                        */
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
@@ -103,6 +94,15 @@ struct P_controller_T_ {
                                         */
   real_T Saturation_LowerSat;          /* Expression: -10
                                         * Referenced by: '<Root>/Saturation'
+                                        */
+  real_T Delay1_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<Root>/Delay1'
+                                        */
+  real_T Constant4_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant4'
+                                        */
+  real_T Constant5_Value;              /* Expression: 3
+                                        * Referenced by: '<Root>/Constant5'
                                         */
   real_T Delay_InitialCondition;       /* Expression: 0
                                         * Referenced by: '<Root>/Delay'

@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 
-double get_encoder()
+double get_encoder(int pdo_id)
 {
 	int32_t pos_left;
 	int32_t vel_left;
@@ -16,7 +16,7 @@ double get_encoder()
 	int32_t vel_right;
 	int32_t pos = 0;
 
-	vel_read(&pos_left, &vel_left, &pos_right, &vel_right, 10);
+	vel_read(pdo_id, &pos_left, &vel_left, &pos_right, &vel_right, 10);
 	pos = pos_right;
 
 	return (double)pos;

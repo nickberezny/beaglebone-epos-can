@@ -15,7 +15,7 @@
 /* Function Definitions */
 const char_T *get_dll_checksum_2QQoibakTe6a6SBBH0nmIH(void)
 {
-    return "Mxu38rxHbrN7keSVZoBowH";
+    return "QOqGcgbGkTJdXTSRkHIVxE";
 }
 
 int32_T init_can_2QQoibakTe6a6SBBH0nmIH(int32_T id)
@@ -23,9 +23,9 @@ int32_T init_can_2QQoibakTe6a6SBBH0nmIH(int32_T id)
     return init_can(id);
 }
 
-real_T get_encoder_2QQoibakTe6a6SBBH0nmIH(void)
+real_T get_encoder_2QQoibakTe6a6SBBH0nmIH(int32_T pdo_id)
 {
-    return get_encoder();
+    return get_encoder(pdo_id);
 }
 
 void set_motor_2QQoibakTe6a6SBBH0nmIH(int32_T pdo_id, real_T set_val)
@@ -40,7 +40,7 @@ void print_input_2QQoibakTe6a6SBBH0nmIH(int32_T a, int32_T id)
 
 
 const uint8_T *get_checksum_source_info(int32_T *size) {
-    static const uint8_T data[132580] = {
+    static const uint8_T data[132585] = {
         0U, 1U, 73U, 77U, 0U, 0U, 0U, 0U, 14U, 0U, 0U, 0U, 136U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 17U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 1U, 0U, 4U, 0U, 77U, 67U, 79U, 83U, 
@@ -409,19 +409,19 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 
-220U, 20U, 163U, 206U, 24U, 142U, 38U, 65U, 136U, 147U, 73U, 238U, 24U, 142U, 38U, 65U, 
+141U, 15U, 61U, 241U, 24U, 142U, 38U, 65U, 136U, 147U, 73U, 238U, 24U, 142U, 38U, 65U, 
 91U, 165U, 68U, 109U, 19U, 142U, 38U, 65U, 127U, 166U, 35U, 238U, 24U, 142U, 38U, 65U, 
 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 55U, 64U, 
+9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 64U, 64U, 
 0U, 0U, 0U, 0U, 0U, 0U, 53U, 64U, 0U, 0U, 0U, 0U, 0U, 0U, 64U, 64U, 
 0U, 0U, 0U, 0U, 0U, 128U, 69U, 64U, 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 
-0U, 0U, 224U, 37U, 206U, 219U, 239U, 65U, 0U, 0U, 0U, 245U, 137U, 60U, 222U, 65U, 
-0U, 0U, 0U, 18U, 215U, 153U, 195U, 65U, 0U, 0U, 192U, 99U, 97U, 220U, 220U, 65U, 
+0U, 0U, 32U, 19U, 129U, 148U, 237U, 65U, 0U, 0U, 128U, 63U, 140U, 168U, 222U, 65U, 
+0U, 0U, 0U, 82U, 22U, 230U, 165U, 65U, 0U, 0U, 96U, 52U, 157U, 232U, 224U, 65U, 
 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 2U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
@@ -660,11 +660,11 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 14U, 0U, 0U, 0U, 56U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 206U, 171U, 137U, 207U, 24U, 142U, 38U, 65U, 
+9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 70U, 24U, 64U, 241U, 24U, 142U, 38U, 65U, 
 14U, 0U, 0U, 0U, 56U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 86U, 64U, 
+9U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 128U, 88U, 64U, 
 14U, 0U, 0U, 0U, 40U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
@@ -678,9 +678,9 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 14U, 0U, 0U, 0U, 80U, 0U, 0U, 0U, 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 6U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 4U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
-9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 192U, 50U, 117U, 42U, 224U, 65U, 
-0U, 0U, 0U, 68U, 80U, 79U, 192U, 65U, 0U, 0U, 192U, 72U, 23U, 178U, 209U, 65U, 
-0U, 0U, 0U, 47U, 234U, 13U, 211U, 65U, 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 
+9U, 0U, 0U, 0U, 32U, 0U, 0U, 0U, 0U, 0U, 64U, 14U, 229U, 204U, 237U, 65U, 
+0U, 0U, 160U, 43U, 197U, 218U, 227U, 65U, 0U, 0U, 0U, 182U, 175U, 213U, 202U, 65U, 
+0U, 0U, 96U, 150U, 109U, 2U, 230U, 65U, 14U, 0U, 0U, 0U, 24U, 14U, 0U, 0U, 
 6U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 2U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 
 5U, 0U, 0U, 0U, 8U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 1U, 0U, 0U, 0U, 
 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 5U, 0U, 4U, 0U, 21U, 0U, 0U, 0U, 
@@ -1825,7 +1825,7 @@ const uint8_T *get_checksum_source_info(int32_T *size) {
 1U, 0U, 0U, 0U, 5U, 0U, 0U, 0U, 77U, 67U, 79U, 83U, 0U, 0U, 0U, 0U, 
 14U, 0U, 0U, 0U, 0U, 0U, 0U, 0U
     };
-    *size = (int32_T)132580;
+    *size = (int32_T)132585;
     return data;
 }
 
