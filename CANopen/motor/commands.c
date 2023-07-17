@@ -8,6 +8,7 @@
 #include <math.h>
 
 #include "socketcan/printd.h"
+#include "socketcan/socketcan.h"
 #include "canopen/canopen.h"
 
 int set_torque(int pdo_id, int16_t set, uint16_t nodeid) {
