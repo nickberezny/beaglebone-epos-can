@@ -29,12 +29,10 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 	int num_of_reads = 0;
 	my_can_frame f;
 
-	pos = malloc(size*sizeof(int32_t));
-
 	while(num_of_reads < size)
 	{
 		err = PDO_read(pdo_id, &f, timeout);
-		sort_read(pos, f, int num_of_reads);
+		sort_read(pos, f, &num_of_reads);
 	}
 
 	if(err != 0) {
@@ -46,22 +44,21 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 }
 
 
-int sort_read(int32_t* pos, my_can_frame f, int num_of_reads)
+int sort_read(int32_t* pos, my_can_frame f, int * num_of_reads)
 {
 	uint32_t enc;
 	switch(f.id) {
 		case(PDO_TX2_ID + 1):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[0] = enc;//motor_enc_to_mm(enc);
-			num_of_reads++;
+			*num_of_reads++;
 			break;
 		case(PDO_TX2_ID + 2):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[1] = enc;//motor_enc_to_mm(-enc);
-			num_of_reads++
+			*num_of_reads++;
 			break;
 		default:
-			//printd(LOG_WARN, "motor/vel.c recived unkown PDO pkg 0x%x\n", f.id);
 			break;
 	}
 
