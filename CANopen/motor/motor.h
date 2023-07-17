@@ -1,8 +1,6 @@
 #ifndef LIBMOTOR_H
 #define LIBMOTOR_H
 
-#include "pos.h"
-#include "vel.h"
 #include <inttypes.h>
 
 
