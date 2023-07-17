@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.67
+ * Model version              : 4.69
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 11:20:30 2023
+ * C source code generated on : Mon Jul 17 11:36:44 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -355,22 +355,23 @@ void controller_step(void)
 {
   int32_T trueCount;
   boolean_T expl_temp;
-  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
-     *  Constant: '<Root>/Constant1'
-     */
-    controller_B.shi = floor(controller_P.Constant1_Value);
-    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-      controller_B.shi = 0.0;
-    } else {
-      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-    }
 
-    /* CCaller: '<Root>/C Caller5' incorporates:
-     *  DataTypeConversion: '<Root>/Data Type Conversion2'
-     */
-    controller_B.CCaller5 = init_can(controller_B.shi < 0.0 ? -(int32_T)
-      (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi);
+  /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
+   *  Constant: '<Root>/Constant1'
+   */
+  controller_B.shi = floor(controller_P.Constant1_Value);
+  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+    controller_B.shi = 0.0;
+  } else {
+    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+  }
+
+  /* DataTypeConversion: '<Root>/Data Type Conversion2' */
+  controller_B.DataTypeConversion2 = controller_B.shi < 0.0 ? -(int32_T)
+    (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi;
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+    /* CCaller: '<Root>/C Caller5' */
+    controller_B.CCaller5 = init_can(controller_B.DataTypeConversion2);
   }
 
   /* Saturate: '<Root>/Saturation' incorporates:
@@ -387,7 +388,8 @@ void controller_step(void)
   /* CCaller: '<Root>/C Caller3' incorporates:
    *  Saturate: '<Root>/Saturation'
    */
-  set_motor(controller_B.CCaller5, controller_B.shi);
+  set_motor(controller_B.CCaller5, controller_B.DataTypeConversion2,
+            controller_B.shi);
 
   /* CCaller: '<Root>/C Caller1' */
   controller_B.CCaller1 = get_encoder(controller_B.CCaller5);

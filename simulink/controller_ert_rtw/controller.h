@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.67
+ * Model version              : 4.69
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 11:20:30 2023
+ * C source code generated on : Mon Jul 17 11:36:44 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -70,6 +70,7 @@ typedef struct {
   real_T b_alo;
   real_T d_ahi_k;
   real_T Switch;                       /* '<Root>/Switch' */
+  int32_T DataTypeConversion2;         /* '<Root>/Data Type Conversion2' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
   int32_T DataTypeConversion5;         /* '<Root>/Data Type Conversion5' */
   int32_T DataTypeConversion6;         /* '<Root>/Data Type Conversion6' */

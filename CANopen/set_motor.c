@@ -15,9 +15,9 @@
 
 
 
-void set_motor(int pdo_id, double set_val)
+void set_motor(int pdo_id, int motor_id, double set_val)
 {
-	set_torque(pdo_id, (int)set_val, MOTOR_EPOS_R_ID);
+	set_torque(pdo_id, (int)set_val, motor_id);
 	return;
 }
 

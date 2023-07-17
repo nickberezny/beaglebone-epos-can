@@ -1,1 +1,1 @@
-void set_motor(int pdo_id, double set_val);
+void set_motor(int pdo_id, int motor_id, double set_val);
