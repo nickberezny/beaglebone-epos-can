@@ -34,7 +34,6 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 	{
 		err = PDO_read(pdo_id, &f, timeout);
 		sort_read(pos, f, &num_of_reads);
-		printf("num_of_reads %d\n", num_of_reads);
 	}
 
 	if(err != 0) {
@@ -49,13 +48,11 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 int sort_read(int32_t* pos, my_can_frame f, int * num_of_reads)
 {
 	uint32_t enc;
-	printf("f.id: %d\n", f.id);
 
 	switch(f.id) {
 		case(PDO_TX2_ID + 1):
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[0] = enc;//motor_enc_to_mm(enc);
-			printf("motor read!\n");
 			*num_of_reads = *num_of_reads + 1;
 			break;
 		case(PDO_TX2_ID + 2):
