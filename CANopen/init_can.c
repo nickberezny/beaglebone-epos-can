@@ -11,7 +11,7 @@
 
 int init_can(int id){
 
-	motor_init(id);
+	motor_init();
 	motor_enable(id);
 
 	return motor_pdo_fd;

@@ -94,22 +94,26 @@ static int motor_config_node(uint16_t node) {
 }
 
 
-int motor_init(int id) {
+int motor_init() {
 	int err = 0;
 
 	// Open two connections to the CAN-network
-	uint16_t pdo_masks[2] = {COB_MASK, COB_MASK};
-	uint16_t pdo_filters[2] = {
-		PDO_TX1_ID + id,
-		PDO_TX2_ID + id
+	uint16_t pdo_masks[4] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK};
+	uint16_t pdo_filters[4] = {
+		PDO_TX1_ID + 1,
+		PDO_TX2_ID + 1,
+		PDO_TX1_ID + 2,
+		PDO_TX2_ID + 2
 	};
 	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2);
 
-	uint16_t cfg_masks[3] = {COB_MASK, COB_MASK, COB_MASK};
-	uint16_t cfg_filters[3] = {
+	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK, COB_MASK};
+	uint16_t cfg_filters[5] = {
 		0x00,
-		NMT_TX + id,
-		SDO_TX + id
+		NMT_TX + 1,
+		SDO_TX + 1,
+		NMT_TX + 2,
+		SDO_TX + 2
 	};
 	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 3);
 
@@ -127,7 +131,12 @@ int motor_init(int id) {
 	}
 
 
-	err |= motor_config_node(id);
+	err |= motor_config_node(1);
+	if (err != 0) {
+		return MOTOR_ERROR;
+	}
+
+	err |= motor_config_node(2);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
