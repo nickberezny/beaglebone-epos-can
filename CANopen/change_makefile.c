@@ -17,7 +17,6 @@ int main()
     
     char buffer[BUFFER_SIZE];
     char newline[BUFFER_SIZE] = "TOOLCHAIN_LIBS = -lm -lm -lstdc++ -lsocketcan -lcanopen -lmotor \n";
-
     int line = 53;
     int count;
 

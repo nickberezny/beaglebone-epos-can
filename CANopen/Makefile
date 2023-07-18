@@ -24,9 +24,17 @@ MOTOR_LIB = libmotor.so
 
 
 ## Targets ##
+all:
+	echo "### removing old files..."
+	clean
+	echo "### building..."
+	build
+	echo "### moving files to matlab..."
+	move
+	echo "### changing controller.mk file toolchain libraries..."
+	change
 
-
-all: $(MOTOR_LIB)
+build: $(MOTOR_LIB)
 
 $(SOCKETCAN_LIB): $(SOCKETCAN_OBJ)
 	$(CC) $(SOCKETCAN_OBJ) $(LDFLAGS_SO)  -o $(SOCKETCAN_LIB)
@@ -45,6 +53,9 @@ clean:
 %.o: %.c $(wildcard *.h)
 	$(CC) -c $< $(CFLAGS) -o $@
 
+change:
+	sudo gcc change_makefile.c -o change_makefile
+	sudo ./change_makefile
 
 move:
 	sudo cp *.so /usr/lib/
