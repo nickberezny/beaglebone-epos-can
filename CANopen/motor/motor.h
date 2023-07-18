@@ -48,7 +48,7 @@ void motor_close(void);
  * Turns the motors on
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_enable(int id);
+int motor_enable();
 
 
 /*!

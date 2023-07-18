@@ -157,11 +157,13 @@ void motor_close(void) {
 }
 
 
-int motor_enable(int id) {
+int motor_enable() {
 	int err = 0;
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational); // switch_on_disabled -> switch_on_enabled
-	err |= epos_Controlword(id, Shutdown);
-	err |= epos_Controlword(id, Switch_On_And_Enable_Operation);
+	err |= epos_Controlword(1, Shutdown);
+	err |= epos_Controlword(1, Switch_On_And_Enable_Operation);
+	err |= epos_Controlword(2, Shutdown);
+	err |= epos_Controlword(2, Switch_On_And_Enable_Operation);
 
 	// Open PDO-communication
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Start_Node);
