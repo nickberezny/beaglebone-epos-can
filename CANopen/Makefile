@@ -24,15 +24,6 @@ MOTOR_LIB = libmotor.so
 
 
 ## Targets ##
-all:
-	echo "### removing old files..."
-	clean
-	echo "### building..."
-	build
-	echo "### moving files to matlab..."
-	move
-	echo "### changing controller.mk file toolchain libraries..."
-	change
 
 build: $(MOTOR_LIB)
 
@@ -65,3 +56,13 @@ move:
 	sudo cp -r socketcan ../../controller_ert_rtw/
 	sudo cp -r canopen ../../controller_ert_rtw/
 	sudo cp -r motor ../../controller_ert_rtw/
+
+all:
+	echo "### removing old files..."
+	clean
+	echo "### building..."
+	build
+	echo "### moving files to matlab..."
+	move
+	echo "### changing controller.mk file toolchain libraries..."
+	change
