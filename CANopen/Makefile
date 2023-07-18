@@ -57,12 +57,4 @@ move:
 	sudo cp -r canopen ../../controller_ert_rtw/
 	sudo cp -r motor ../../controller_ert_rtw/
 
-all:
-	echo "### removing old files..."
-	clean
-	echo "### building..."
-	build
-	echo "### moving files to matlab..."
-	move
-	echo "### changing controller.mk file toolchain libraries..."
-	change
+all: clean build move change
