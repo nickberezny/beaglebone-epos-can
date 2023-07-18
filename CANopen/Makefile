@@ -45,10 +45,13 @@ clean:
 	$(CC) -c $< $(CFLAGS) -o $@
 
 change:
+	echo "### changing controller.mk toolchain..."
 	sudo gcc change_makefile.c -o change_makefile
 	sudo ./change_makefile
 
+
 move:
+	echo "### moving files to controller folder..."
 	sudo cp *.so /usr/lib/
 	sudo cp init_can* ../../controller_ert_rtw/
 	sudo cp get_encoder* ../../controller_ert_rtw/
