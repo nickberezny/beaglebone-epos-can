@@ -25,6 +25,7 @@ MOTOR_LIB = libmotor.so
 
 ## Targets ##
 
+
 all: $(MOTOR_LIB)
 
 $(SOCKETCAN_LIB): $(SOCKETCAN_OBJ)

@@ -177,7 +177,8 @@ int motor_disable(void) {
 
 	// Stop PDO-communication
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
-	err |= epos_Controlword(MOTOR_EPOS_R_ID, Disable_Voltage);
+	err |= epos_Controlword(1, Disable_Voltage);
+	err |= epos_Controlword(2, Disable_Voltage);
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
@@ -189,7 +190,8 @@ int motor_halt(void) {
 
 	// Stop PDO-communication
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
-	err |= epos_Controlword(MOTOR_EPOS_R_ID, Quickstop);
+	err |= epos_Controlword(1, Quickstop);
+	err |= epos_Controlword(2, Quickstop);
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
@@ -198,7 +200,8 @@ int motor_halt(void) {
 
 int motor_setmode(enum Motor_mode mode) {
 	int err = 0;
-	err |= epos_Modes_of_Operation(MOTOR_EPOS_R_ID, (enum Epos_mode)mode);
+	err |= epos_Modes_of_Operation(1, (enum Epos_mode)mode);
+	err |= epos_Modes_of_Operation(2, (enum Epos_mode)mode);
 	return err;
 }
 

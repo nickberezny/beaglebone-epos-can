@@ -13,22 +13,13 @@ int main()
     /* File pointer to hold reference of input file */
     FILE * fPtr;
     FILE * fTemp;
-    char path[100] = "..path";
+    char path[100] = "../../controller_ert_rtw/controller.mk";
     
     char buffer[BUFFER_SIZE];
-    char newline[BUFFER_SIZE];
+    char newline[BUFFER_SIZE] = "TOOLCHAIN_LIBS = -lm -lm -lstdc++ -lsocketcan -lcanopen -lmotor \n"
+
     int line = 53;
     int count;
-
-
-
-
-    /* Remove extra new line character from stdin */
-    fflush(stdin);
-
-    printf("Replace '%d' line with: ", line);
-    fgets(newline, BUFFER_SIZE, stdin);
-
 
     /*  Open all required files */
     fPtr  = fopen(path, "r");
