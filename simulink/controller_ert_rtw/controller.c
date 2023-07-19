@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.79
+ * Model version              : 4.83
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 13:44:11 2023
+ * C source code generated on : Wed Jul 19 15:48:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -56,25 +56,24 @@ static void rate_scheduler(void)
 /* Model step function */
 void controller_step(void)
 {
-  real_T rtb_Saturation;
+  real_T rtb_CCaller1[2];
   real_T tmp;
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
-   *  Constant: '<Root>/Constant1'
-   */
-  tmp = floor(controller_P.Constant1_Value);
-  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-    tmp = 0.0;
-  } else {
-    tmp = fmod(tmp, 4.294967296E+9);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion2' */
-  controller_B.DataTypeConversion2 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-    (int32_T)(uint32_T)tmp;
   if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-    /* CCaller: '<Root>/C Caller5' */
-    controller_B.CCaller5 = init_can(controller_B.DataTypeConversion2);
+    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
+     *  Constant: '<Root>/Constant1'
+     */
+    tmp = floor(controller_P.Constant1_Value);
+    if (rtIsNaN(tmp) || rtIsInf(tmp)) {
+      tmp = 0.0;
+    } else {
+      tmp = fmod(tmp, 4.294967296E+9);
+    }
+
+    /* CCaller: '<Root>/C Caller5' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion2'
+     */
+    controller_B.CCaller5 = init_can(tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
+      (int32_T)(uint32_T)tmp);
   }
 
   /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
@@ -91,10 +90,10 @@ void controller_step(void)
    *  DataTypeConversion: '<Root>/Data Type Conversion7'
    */
   get_encoder(controller_B.CCaller5, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-              (int32_T)(uint32_T)tmp, &rtb_Saturation);
+              (int32_T)(uint32_T)tmp, &rtb_CCaller1[0]);
 
   /* DataTypeConversion: '<Root>/Data Type Conversion9' */
-  tmp = floor(rtb_Saturation);
+  tmp = floor(rtb_CCaller1[0]);
   if (rtIsNaN(tmp) || rtIsInf(tmp)) {
     tmp = 0.0;
   } else {
@@ -122,22 +121,35 @@ void controller_step(void)
                 (uint32_T)-tmp : (int32_T)(uint32_T)tmp);
   }
 
-  /* Saturate: '<Root>/Saturation' incorporates:
-   *  Constant: '<Root>/Constant6'
-   */
-  if (controller_P.Constant6_Value > controller_P.Saturation_UpperSat) {
-    rtb_Saturation = controller_P.Saturation_UpperSat;
-  } else if (controller_P.Constant6_Value < controller_P.Saturation_LowerSat) {
-    rtb_Saturation = controller_P.Saturation_LowerSat;
+  /* DataTypeConversion: '<Root>/Data Type Conversion10' */
+  tmp = floor(rtb_CCaller1[1]);
+  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
+    tmp = 0.0;
   } else {
-    rtb_Saturation = controller_P.Constant6_Value;
+    tmp = fmod(tmp, 4.294967296E+9);
   }
 
-  /* End of Saturate: '<Root>/Saturation' */
+  /* DataTypeConversion: '<Root>/Data Type Conversion10' */
+  controller_B.DataTypeConversion10 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
+    (int32_T)(uint32_T)tmp;
+  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion11' incorporates:
+     *  Constant: '<Root>/Constant9'
+     */
+    tmp = floor(controller_P.Constant9_Value);
+    if (rtIsNaN(tmp) || rtIsInf(tmp)) {
+      tmp = 0.0;
+    } else {
+      tmp = fmod(tmp, 4.294967296E+9);
+    }
 
-  /* CCaller: '<Root>/C Caller3' */
-  set_motor(controller_B.CCaller5, controller_B.DataTypeConversion2,
-            rtb_Saturation);
+    /* CCaller: '<Root>/C Caller8' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion11'
+     */
+    print_input(controller_B.DataTypeConversion10, tmp < 0.0 ? -(int32_T)
+                (uint32_T)-tmp : (int32_T)(uint32_T)tmp);
+  }
+
   rate_scheduler();
 }
 

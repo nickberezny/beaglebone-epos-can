@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.79
+ * Model version              : 4.83
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 17 13:44:11 2023
+ * C source code generated on : Wed Jul 19 15:48:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -50,9 +50,9 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  int32_T DataTypeConversion2;         /* '<Root>/Data Type Conversion2' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
   int32_T DataTypeConversion9;         /* '<Root>/Data Type Conversion9' */
+  int32_T DataTypeConversion10;        /* '<Root>/Data Type Conversion10' */
 } B_controller_T;
 
 /* Parameters (default storage) */
@@ -60,20 +60,14 @@ struct P_controller_T_ {
   real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
-  real_T Constant7_Value;              /* Expression: 1
+  real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<Root>/Constant7'
                                         */
   real_T Constant8_Value;              /* Expression: 2
                                         * Referenced by: '<Root>/Constant8'
                                         */
-  real_T Constant6_Value;              /* Expression: 5
-                                        * Referenced by: '<Root>/Constant6'
-                                        */
-  real_T Saturation_UpperSat;          /* Expression: 10
-                                        * Referenced by: '<Root>/Saturation'
-                                        */
-  real_T Saturation_LowerSat;          /* Expression: -10
-                                        * Referenced by: '<Root>/Saturation'
+  real_T Constant9_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant9'
                                         */
 };
 
@@ -108,6 +102,13 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<Root>/Constant6' : Unused code path elimination
+ * Block '<Root>/Saturation' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly
