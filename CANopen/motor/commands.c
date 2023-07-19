@@ -23,7 +23,7 @@ int set_torque(int pdo_id, int16_t set, uint16_t nodeid) {
 	return err;
 }
 
-int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
+int vel_read(int pdo_id, int size, double* pos, int timeout) {
 
 	int err = 0;
 	int status = 0;
@@ -46,7 +46,7 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 }
 
 
-int sort_read(int32_t* pos, my_can_frame f, int * num_of_reads)
+int sort_read(double* pos, my_can_frame f, int * num_of_reads)
 {
 	uint32_t enc;
 
