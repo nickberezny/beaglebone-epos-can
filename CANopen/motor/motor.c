@@ -105,7 +105,7 @@ int motor_init() {
 		PDO_TX1_ID + 2,
 		PDO_TX2_ID + 2
 	};
-	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2);
+	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 4);
 
 	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[5] = {
@@ -115,7 +115,7 @@ int motor_init() {
 		NMT_TX + 2,
 		SDO_TX + 2
 	};
-	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 3);
+	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 5);
 
 	// Check that we connected OK
 	if (motor_pdo_fd == -1 || motor_cfg_fd == -1) {
