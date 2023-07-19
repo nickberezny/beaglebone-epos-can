@@ -32,7 +32,7 @@ int vel_read(int pdo_id, int size, int32_t* pos, int timeout) {
 
 	while(num_of_reads < size)
 	{
-		printf("f.id %d\n", f.id);
+		printf("f.id %d, num reads %d\n", f.id, num_of_reads);
 		err = PDO_read(pdo_id, &f, timeout);
 		sort_read(pos, f, &num_of_reads);
 	}
