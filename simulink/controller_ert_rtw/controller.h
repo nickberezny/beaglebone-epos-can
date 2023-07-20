@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.87
+ * Model version              : 4.91
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 09:55:21 2023
+ * C source code generated on : Thu Jul 20 10:06:38 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -58,9 +58,36 @@
 
 /* Block signals (default storage) */
 typedef struct {
+  real_T CCaller1[2];                  /* '<Root>/C Caller1' */
+  creal_T d_data;
+  creal_T b_c;
+  creal_T t;
+  creal_T c_s;
+  creal_T d_ahi;
+  creal_T c;
+  creal_T t_m;
+  creal_T da;
+  creal_T t_c;
   real_T Saturation;                   /* '<Root>/Saturation' */
+  real_T y;                            /* '<Root>/MATLAB Function' */
+  real_T c_tm_mon;
+  real_T c_tm_year;
+  real_T second;
+  real_T fracSecs;
+  real_T check;
+  real_T shi;
+  real_T b_alo;
+  real_T d_ahi_k;
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
 } B_controller_T;
+
+/* Block states (default storage) for system '<Root>' */
+typedef struct {
+  real_T Delay_DSTATE;                 /* '<Root>/Delay' */
+  struct {
+    void *LoggedData;
+  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+} DW_controller_T;
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
@@ -94,6 +121,15 @@ struct P_controller_T_ {
   real_T Saturation_LowerSat;          /* Expression: -100
                                         * Referenced by: '<Root>/Saturation'
                                         */
+  real_T Delay_InitialCondition;       /* Expression: 0
+                                        * Referenced by: '<Root>/Delay'
+                                        */
+  real_T Gain_Gain;                    /* Expression: 1000
+                                        * Referenced by: '<Root>/Gain'
+                                        */
+  real_T Constant2_Value;              /* Expression: 4
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
 };
 
 /* Real-time Model Data Structure */
@@ -113,12 +149,12 @@ struct tag_RTM_controller_T {
     uint32_T clockTick1;
     uint32_T clockTickH1;
     struct {
-      uint32_T TID[4];
+      uint32_T TID[3];
     } TaskCounters;
 
     SimTimeStep simTimeStep;
     time_T *t;
-    time_T tArray[4];
+    time_T tArray[3];
   } Timing;
 };
 
@@ -127,6 +163,9 @@ extern P_controller_T controller_P;
 
 /* Block signals (default storage) */
 extern B_controller_T controller_B;
+
+/* Block states (default storage) */
+extern DW_controller_T controller_DW;
 
 /* Model entry point functions */
 extern void controller_initialize(void);
@@ -153,5 +192,6 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'controller'
+ * '<S1>'   : 'controller/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

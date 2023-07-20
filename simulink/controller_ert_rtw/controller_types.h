@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.87
+ * Model version              : 4.91
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 09:55:21 2023
+ * C source code generated on : Thu Jul 20 10:06:38 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,6 +20,9 @@
 
 #ifndef RTW_HEADER_controller_types_h_
 #define RTW_HEADER_controller_types_h_
+
+/* Custom Type definition for MATLAB Function: '<Root>/MATLAB Function' */
+#include "coder_posix_time.h"
 
 /* Parameters (default storage) */
 typedef struct P_controller_T_ P_controller_T;
