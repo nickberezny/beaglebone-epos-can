@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.95
+ * Model version              : 4.97
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 12:03:16 2023
+ * C source code generated on : Thu Jul 20 15:36:39 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -356,21 +356,11 @@ void controller_step(void)
   int32_T rtb_DataTypeConversion12;
   boolean_T expl_temp;
   if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-    /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
+    /* CCaller: '<Root>/C Caller5' incorporates:
      *  Constant: '<Root>/Constant1'
      */
-    controller_B.shi = floor(controller_P.Constant1_Value);
-    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-      controller_B.shi = 0.0;
-    } else {
-      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-    }
-
-    /* CCaller: '<Root>/C Caller5' incorporates:
-     *  DataTypeConversion: '<Root>/Data Type Conversion2'
-     */
-    controller_B.CCaller5 = init_can(controller_B.shi < 0.0 ? -(int32_T)
-      (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi);
+    controller_B.CCaller5 = init_can(controller_P.Constant1_Value,
+      controller_P.Constant1_Value);
   }
 
   if (controller_M->Timing.TaskCounters.TID[2] == 0) {

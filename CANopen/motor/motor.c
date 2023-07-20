@@ -129,12 +129,12 @@ int motor_init(int32_t maxSpeed, int32_t maxAccel) {
 	}
 
 
-	err |= motor_config_node(1);
+	err |= motor_config_node(1,maxSpeed,maxAccel);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
 
-	err |= motor_config_node(2);
+	err |= motor_config_node(2,maxSpeed,maxAccel);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
