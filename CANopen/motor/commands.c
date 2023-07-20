@@ -28,13 +28,14 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 	int err = 0;
 	int status = 0;
 	int num_of_reads = 0;
+	int num_of_breaks = 0;
 	my_can_frame f;
 
-	while(num_of_reads < size)
+	while(num_of_reads < size || num_of_breaks < size)
 	{
 		printf("f.id %d, num reads %d\n", f.id, num_of_reads);
 		err = PDO_read(pdo_id, &f, timeout);
-		sort_read(pos, f, &num_of_reads);
+		sort_read(pos, f, &num_of_reads, &num_of_breaks);
 	}
 
 	if(err != 0) {
@@ -46,7 +47,7 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 }
 
 
-int sort_read(double* pos, my_can_frame f, int * num_of_reads)
+int sort_read(double* pos, my_can_frame f, int * num_of_reads, int * num_of_breaks)
 {
 	uint32_t enc;
 
@@ -64,6 +65,7 @@ int sort_read(double* pos, my_can_frame f, int * num_of_reads)
 			printf("Node 2: %d\n", enc);
 			break;
 		default:
+			*num_of_breaks = *num_of_breaks + 1;
 			break;
 	}
 
