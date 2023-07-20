@@ -45,9 +45,13 @@ clean:
 	$(CC) -c $< $(CFLAGS) -o $@
 
 change:
-	echo "### changing controller.mk toolchain..."
 	sudo gcc change_makefile.c -o change_makefile
 	sudo ./change_makefile
+
+set_can:
+	sudo ip link set down can0
+	sudo ip link set can0 type can bitrate 20000
+	sudo ip link set up can0
 
 
 move:

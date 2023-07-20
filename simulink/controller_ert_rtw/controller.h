@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.83
+ * Model version              : 4.86
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 19 15:48:11 2023
+ * C source code generated on : Thu Jul 20 09:46:01 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -42,6 +42,14 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
+#ifndef rtmGetT
+#define rtmGetT(rtm)                   (rtmGetTPtr((rtm))[0])
+#endif
+
+#ifndef rtmGetTPtr
+#define rtmGetTPtr(rtm)                ((rtm)->Timing.t)
+#endif
+
 /* user code (top of header file) */
 #include "init_can.h"
 #include "get_encoder.h"
@@ -50,6 +58,7 @@
 
 /* Block signals (default storage) */
 typedef struct {
+  real_T Saturation;                   /* '<Root>/Saturation' */
   int32_T CCaller5;                    /* '<Root>/C Caller5' */
   int32_T DataTypeConversion9;         /* '<Root>/Data Type Conversion9' */
   int32_T DataTypeConversion10;        /* '<Root>/Data Type Conversion10' */
@@ -69,11 +78,30 @@ struct P_controller_T_ {
   real_T Constant9_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant9'
                                         */
+  real_T Constant10_Value;             /* Expression: 2
+                                        * Referenced by: '<Root>/Constant10'
+                                        */
+  real_T Step_Time;                    /* Expression: 10
+                                        * Referenced by: '<Root>/Step'
+                                        */
+  real_T Step_Y0;                      /* Expression: 75
+                                        * Referenced by: '<Root>/Step'
+                                        */
+  real_T Step_YFinal;                  /* Expression: 0
+                                        * Referenced by: '<Root>/Step'
+                                        */
+  real_T Saturation_UpperSat;          /* Expression: 100
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
+  real_T Saturation_LowerSat;          /* Expression: -100
+                                        * Referenced by: '<Root>/Saturation'
+                                        */
 };
 
 /* Real-time Model Data Structure */
 struct tag_RTM_controller_T {
   const char_T *errorStatus;
+  RTWSolverInfo solverInfo;
 
   /*
    * Timing:
@@ -81,9 +109,18 @@ struct tag_RTM_controller_T {
    * the timing information for the model.
    */
   struct {
+    uint32_T clockTick0;
+    uint32_T clockTickH0;
+    time_T stepSize0;
+    uint32_T clockTick1;
+    uint32_T clockTickH1;
     struct {
-      uint32_T TID[3];
+      uint32_T TID[4];
     } TaskCounters;
+
+    SimTimeStep simTimeStep;
+    time_T *t;
+    time_T tArray[4];
   } Timing;
 };
 
@@ -102,13 +139,6 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
-
-/*-
- * These blocks were eliminated from the model due to optimizations:
- *
- * Block '<Root>/Constant6' : Unused code path elimination
- * Block '<Root>/Saturation' : Unused code path elimination
- */
 
 /*-
  * The generated code includes comments that allow you to trace directly
