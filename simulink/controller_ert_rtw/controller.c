@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.86
+ * Model version              : 4.87
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 09:46:01 2023
+ * C source code generated on : Thu Jul 20 09:55:21 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -59,53 +59,51 @@ void controller_step(void)
 {
   real_T rtb_CCaller1[2];
   real_T tmp;
+  real_T tmp_0;
   int32_T rtb_DataTypeConversion12;
   if (controller_M->Timing.TaskCounters.TID[3] == 0) {
     /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
      *  Constant: '<Root>/Constant1'
      */
-    tmp = floor(controller_P.Constant1_Value);
-    if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-      tmp = 0.0;
+    tmp_0 = floor(controller_P.Constant1_Value);
+    if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
+      tmp_0 = 0.0;
     } else {
-      tmp = fmod(tmp, 4.294967296E+9);
+      tmp_0 = fmod(tmp_0, 4.294967296E+9);
     }
 
     /* CCaller: '<Root>/C Caller5' incorporates:
      *  DataTypeConversion: '<Root>/Data Type Conversion2'
      */
-    controller_B.CCaller5 = init_can(tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-      (int32_T)(uint32_T)tmp);
+    controller_B.CCaller5 = init_can(tmp_0 < 0.0 ? -(int32_T)(uint32_T)-tmp_0 :
+      (int32_T)(uint32_T)tmp_0);
   }
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
-   *  Constant: '<Root>/Constant7'
-   */
-  tmp = floor(controller_P.Constant7_Value);
-  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-    tmp = 0.0;
-  } else {
-    tmp = fmod(tmp, 4.294967296E+9);
-  }
-
-  /* CCaller: '<Root>/C Caller1' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion7'
-   */
-  get_encoder(controller_B.CCaller5, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-              (int32_T)(uint32_T)tmp, &rtb_CCaller1[0]);
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion9' */
-  tmp = floor(rtb_CCaller1[0]);
-  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-    tmp = 0.0;
-  } else {
-    tmp = fmod(tmp, 4.294967296E+9);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion9' */
-  controller_B.DataTypeConversion9 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-    (int32_T)(uint32_T)tmp;
   if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
+     *  Constant: '<Root>/Constant7'
+     */
+    tmp_0 = floor(controller_P.Constant7_Value);
+    if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
+      tmp_0 = 0.0;
+    } else {
+      tmp_0 = fmod(tmp_0, 4.294967296E+9);
+    }
+
+    /* CCaller: '<Root>/C Caller1' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion7'
+     */
+    get_encoder(controller_B.CCaller5, tmp_0 < 0.0 ? -(int32_T)(uint32_T)-tmp_0 :
+                (int32_T)(uint32_T)tmp_0, &rtb_CCaller1[0]);
+
+    /* DataTypeConversion: '<Root>/Data Type Conversion9' */
+    tmp_0 = floor(rtb_CCaller1[0]);
+    if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
+      tmp_0 = 0.0;
+    } else {
+      tmp_0 = fmod(tmp_0, 4.294967296E+9);
+    }
+
     /* DataTypeConversion: '<Root>/Data Type Conversion8' incorporates:
      *  Constant: '<Root>/Constant8'
      */
@@ -116,27 +114,22 @@ void controller_step(void)
       tmp = fmod(tmp, 4.294967296E+9);
     }
 
-    rtb_DataTypeConversion12 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp : (int32_T)
-      (uint32_T)tmp;
+    /* CCaller: '<Root>/C Caller2' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion8'
+     *  DataTypeConversion: '<Root>/Data Type Conversion9'
+     */
+    print_input(tmp_0 < 0.0 ? -(int32_T)(uint32_T)-tmp_0 : (int32_T)(uint32_T)
+                tmp_0, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp : (int32_T)(uint32_T)
+                tmp);
 
-    /* End of DataTypeConversion: '<Root>/Data Type Conversion8' */
+    /* DataTypeConversion: '<Root>/Data Type Conversion10' */
+    tmp_0 = floor(rtb_CCaller1[1]);
+    if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
+      tmp_0 = 0.0;
+    } else {
+      tmp_0 = fmod(tmp_0, 4.294967296E+9);
+    }
 
-    /* CCaller: '<Root>/C Caller2' */
-    print_input(controller_B.DataTypeConversion9, rtb_DataTypeConversion12);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion10' */
-  tmp = floor(rtb_CCaller1[1]);
-  if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-    tmp = 0.0;
-  } else {
-    tmp = fmod(tmp, 4.294967296E+9);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion10' */
-  controller_B.DataTypeConversion10 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-    (int32_T)(uint32_T)tmp;
-  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
     /* DataTypeConversion: '<Root>/Data Type Conversion11' incorporates:
      *  Constant: '<Root>/Constant9'
      */
@@ -148,23 +141,25 @@ void controller_step(void)
     }
 
     /* CCaller: '<Root>/C Caller8' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion10'
      *  DataTypeConversion: '<Root>/Data Type Conversion11'
      */
-    print_input(controller_B.DataTypeConversion10, tmp < 0.0 ? -(int32_T)
-                (uint32_T)-tmp : (int32_T)(uint32_T)tmp);
+    print_input(tmp_0 < 0.0 ? -(int32_T)(uint32_T)-tmp_0 : (int32_T)(uint32_T)
+                tmp_0, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp : (int32_T)(uint32_T)
+                tmp);
 
     /* DataTypeConversion: '<Root>/Data Type Conversion12' incorporates:
      *  Constant: '<Root>/Constant10'
      */
-    tmp = floor(controller_P.Constant10_Value);
-    if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-      tmp = 0.0;
+    tmp_0 = floor(controller_P.Constant10_Value);
+    if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
+      tmp_0 = 0.0;
     } else {
-      tmp = fmod(tmp, 4.294967296E+9);
+      tmp_0 = fmod(tmp_0, 4.294967296E+9);
     }
 
-    rtb_DataTypeConversion12 = tmp < 0.0 ? -(int32_T)(uint32_T)-tmp : (int32_T)
-      (uint32_T)tmp;
+    rtb_DataTypeConversion12 = tmp_0 < 0.0 ? -(int32_T)(uint32_T)-tmp_0 :
+      (int32_T)(uint32_T)tmp_0;
 
     /* End of DataTypeConversion: '<Root>/Data Type Conversion12' */
   }
