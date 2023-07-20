@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.91
+ * Model version              : 4.92
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 10:06:38 2023
+ * C source code generated on : Thu Jul 20 11:56:24 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -385,60 +385,6 @@ void controller_step(void)
               (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
               &controller_B.CCaller1[0]);
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion9' */
-  controller_B.shi = floor(controller_B.CCaller1[0]);
-  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-    controller_B.shi = 0.0;
-  } else {
-    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion8' incorporates:
-   *  Constant: '<Root>/Constant8'
-   */
-  controller_B.b_alo = floor(controller_P.Constant8_Value);
-  if (rtIsNaN(controller_B.b_alo) || rtIsInf(controller_B.b_alo)) {
-    controller_B.b_alo = 0.0;
-  } else {
-    controller_B.b_alo = fmod(controller_B.b_alo, 4.294967296E+9);
-  }
-
-  /* CCaller: '<Root>/C Caller2' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion8'
-   *  DataTypeConversion: '<Root>/Data Type Conversion9'
-   */
-  print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi :
-              (int32_T)(uint32_T)controller_B.shi, controller_B.b_alo < 0.0 ?
-              -(int32_T)(uint32_T)-controller_B.b_alo : (int32_T)(uint32_T)
-              controller_B.b_alo);
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion10' */
-  controller_B.shi = floor(controller_B.CCaller1[1]);
-  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-    controller_B.shi = 0.0;
-  } else {
-    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-  }
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion11' incorporates:
-   *  Constant: '<Root>/Constant9'
-   */
-  controller_B.b_alo = floor(controller_P.Constant9_Value);
-  if (rtIsNaN(controller_B.b_alo) || rtIsInf(controller_B.b_alo)) {
-    controller_B.b_alo = 0.0;
-  } else {
-    controller_B.b_alo = fmod(controller_B.b_alo, 4.294967296E+9);
-  }
-
-  /* CCaller: '<Root>/C Caller8' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion10'
-   *  DataTypeConversion: '<Root>/Data Type Conversion11'
-   */
-  print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi :
-              (int32_T)(uint32_T)controller_B.shi, controller_B.b_alo < 0.0 ?
-              -(int32_T)(uint32_T)-controller_B.b_alo : (int32_T)(uint32_T)
-              controller_B.b_alo);
-
   /* Step: '<Root>/Step' */
   if (controller_M->Timing.t[0] < controller_P.Step_Time) {
     controller_B.Saturation = controller_P.Step_Y0;
@@ -614,11 +560,11 @@ void controller_step(void)
    *  Delay: '<Root>/Delay'
    *  Sum: '<Root>/Sum'
    */
-  controller_B.d_ahi_k = (controller_B.y - controller_DW.Delay_DSTATE) *
+  controller_B.b_alo = (controller_B.y - controller_DW.Delay_DSTATE) *
     controller_P.Gain_Gain;
 
   /* DataTypeConversion: '<Root>/Data Type Conversion' */
-  controller_B.shi = floor(controller_B.d_ahi_k);
+  controller_B.shi = floor(controller_B.b_alo);
   if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
     controller_B.shi = 0.0;
   } else {
@@ -628,11 +574,11 @@ void controller_step(void)
   /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
    *  Constant: '<Root>/Constant2'
    */
-  controller_B.b_alo = floor(controller_P.Constant2_Value);
-  if (rtIsNaN(controller_B.b_alo) || rtIsInf(controller_B.b_alo)) {
-    controller_B.b_alo = 0.0;
+  controller_B.d_ahi_k = floor(controller_P.Constant2_Value);
+  if (rtIsNaN(controller_B.d_ahi_k) || rtIsInf(controller_B.d_ahi_k)) {
+    controller_B.d_ahi_k = 0.0;
   } else {
-    controller_B.b_alo = fmod(controller_B.b_alo, 4.294967296E+9);
+    controller_B.d_ahi_k = fmod(controller_B.d_ahi_k, 4.294967296E+9);
   }
 
   /* CCaller: '<Root>/C Caller4' incorporates:
@@ -640,9 +586,9 @@ void controller_step(void)
    *  DataTypeConversion: '<Root>/Data Type Conversion1'
    */
   print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi :
-              (int32_T)(uint32_T)controller_B.shi, controller_B.b_alo < 0.0 ?
-              -(int32_T)(uint32_T)-controller_B.b_alo : (int32_T)(uint32_T)
-              controller_B.b_alo);
+              (int32_T)(uint32_T)controller_B.shi, controller_B.d_ahi_k < 0.0 ?
+              -(int32_T)(uint32_T)-controller_B.d_ahi_k : (int32_T)(uint32_T)
+              controller_B.d_ahi_k);
 
   /* Update for Delay: '<Root>/Delay' */
   controller_DW.Delay_DSTATE = controller_B.y;
