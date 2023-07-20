@@ -9,9 +9,9 @@
 #include <stdbool.h>
 
 
-int init_can(int id){
+int init_can(double maxSpeed, double maxAccel){
 
-	motor_init();
+	motor_init((int)maxSpeed, (int)maxAccel);
 	motor_enable();
 
 	return motor_pdo_fd;

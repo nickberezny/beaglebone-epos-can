@@ -96,6 +96,9 @@ int epos_Profile_Deceleration(uint16_t node_id, uint32_t value);
 /** Motor [rpm/s] Default 10000 */
 int epos_Quickstop_Deceleration(uint16_t node_id, uint32_t value);
 
+int epos_Maximal_Velocity(uint16_t node_id, uint32_t value);
+
+int epos_Maximal_Accel(uint16_t node_id, uint32_t value);
 
 enum Epos_Profile_Type {
 	trapezodial_profile = 0,

@@ -1,4 +1,4 @@
-int init_can(int id)
+int init_can(double maxSpeed, double maxAccel)
 {
 	//dummy function to be replaced on beaglebone
 	return 0;

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.92
+ * Model version              : 4.95
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 11:56:24 2023
+ * C source code generated on : Thu Jul 20 12:03:16 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -80,8 +80,13 @@ static void rate_scheduler(void)
    * counter is reset when it reaches its limit (zero means run).
    */
   (controller_M->Timing.TaskCounters.TID[2])++;
-  if ((controller_M->Timing.TaskCounters.TID[2]) > 999999) {/* Sample time: [10000.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[2]) > 9) {/* Sample time: [0.01s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[2] = 0;
+  }
+
+  (controller_M->Timing.TaskCounters.TID[3])++;
+  if ((controller_M->Timing.TaskCounters.TID[3]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
+    controller_M->Timing.TaskCounters.TID[3] = 0;
   }
 }
 
@@ -348,9 +353,9 @@ real_T rt_roundd_snf(real_T u)
 /* Model step function */
 void controller_step(void)
 {
-  int32_T trueCount;
+  int32_T rtb_DataTypeConversion12;
   boolean_T expl_temp;
-  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
     /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
      *  Constant: '<Root>/Constant1'
      */
@@ -368,22 +373,39 @@ void controller_step(void)
       (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi);
   }
 
-  /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
-   *  Constant: '<Root>/Constant7'
-   */
-  controller_B.shi = floor(controller_P.Constant7_Value);
-  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-    controller_B.shi = 0.0;
-  } else {
-    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-  }
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+    /* DataTypeConversion: '<Root>/Data Type Conversion7' incorporates:
+     *  Constant: '<Root>/Constant7'
+     */
+    controller_B.shi = floor(controller_P.Constant7_Value);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+    }
 
-  /* CCaller: '<Root>/C Caller1' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion7'
-   */
-  get_encoder(controller_B.CCaller5, controller_B.shi < 0.0 ? -(int32_T)
-              (uint32_T)-controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
-              &controller_B.CCaller1[0]);
+    /* CCaller: '<Root>/C Caller1' incorporates:
+     *  DataTypeConversion: '<Root>/Data Type Conversion7'
+     */
+    get_encoder(controller_B.CCaller5, controller_B.shi < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
+                controller_B.shi, &controller_B.CCaller1[0]);
+
+    /* DataTypeConversion: '<Root>/Data Type Conversion12' incorporates:
+     *  Constant: '<Root>/Constant10'
+     */
+    controller_B.shi = floor(controller_P.Constant10_Value);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+    }
+
+    rtb_DataTypeConversion12 = controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
+      -controller_B.shi : (int32_T)(uint32_T)controller_B.shi;
+
+    /* End of DataTypeConversion: '<Root>/Data Type Conversion12' */
+  }
 
   /* Step: '<Root>/Step' */
   if (controller_M->Timing.t[0] < controller_P.Step_Time) {
@@ -404,23 +426,11 @@ void controller_step(void)
   }
 
   /* End of Saturate: '<Root>/Saturation' */
-
-  /* DataTypeConversion: '<Root>/Data Type Conversion12' incorporates:
-   *  Constant: '<Root>/Constant10'
-   */
-  controller_B.shi = floor(controller_P.Constant10_Value);
-  if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-    controller_B.shi = 0.0;
-  } else {
-    controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+    /* CCaller: '<Root>/C Caller3' */
+    set_motor(controller_B.CCaller5, rtb_DataTypeConversion12,
+              controller_B.Saturation);
   }
-
-  /* CCaller: '<Root>/C Caller3' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion12'
-   */
-  set_motor(controller_B.CCaller5, controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
-            -controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
-            controller_B.Saturation);
 
   /* MATLAB Function: '<Root>/MATLAB Function' */
   controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
@@ -501,12 +511,12 @@ void controller_step(void)
   controller_B.shi = controller_B.b_c.re * 1000.0;
   controller_B.b_alo = (controller_B.t.re * 1000.0 - controller_B.shi) +
     controller_B.t.im * 1000.0;
-  trueCount = 0;
+  rtb_DataTypeConversion12 = 0;
   if (rtIsNaN(controller_B.b_alo)) {
-    trueCount = 1;
+    rtb_DataTypeConversion12 = 1;
   }
 
-  if (trueCount - 1 >= 0) {
+  if (rtb_DataTypeConversion12 - 1 >= 0) {
     controller_B.b_alo = 0.0;
   }
 
@@ -540,9 +550,10 @@ void controller_step(void)
   controller_B.b_c = controller_minus(controller_B.d_data, controller_B.t);
   controller_B.shi = controller_B.t.re + controller_B.t.im;
   if ((controller_B.shi >= 0.0) && (controller_B.shi <= 2.147483647E+9)) {
-    trueCount = (int32_T)rt_roundd_snf(controller_B.shi);
-    trueCount -= 3600 * div_s32(trueCount, 3600);
-    controller_B.shi = trueCount - 60 * div_s32(trueCount, 60);
+    rtb_DataTypeConversion12 = (int32_T)rt_roundd_snf(controller_B.shi);
+    rtb_DataTypeConversion12 -= 3600 * div_s32(rtb_DataTypeConversion12, 3600);
+    controller_B.shi = rtb_DataTypeConversion12 - 60 * div_s32
+      (rtb_DataTypeConversion12, 60);
   } else {
     controller_B.shi -= floor((controller_B.shi - floor(controller_B.shi /
       3600.0) * 3600.0) / 60.0) * 60.0;
@@ -611,9 +622,9 @@ void controller_step(void)
     controller_M->Timing.stepSize0 * 4294967296.0;
 
   {
-    /* Update absolute timer for sample time: [0.01s, 0.0s] */
+    /* Update absolute timer for sample time: [0.001s, 0.0s] */
     /* The "clockTick1" counts the number of times the code of this task has
-     * been executed. The resolution of this integer timer is 0.01, which is the step size
+     * been executed. The resolution of this integer timer is 0.001, which is the step size
      * of the task. Size of "clockTick1" ensures timer will not overflow during the
      * application lifespan selected.
      * Timer of this task consists of two 32 bit unsigned integers.
@@ -656,7 +667,7 @@ void controller_initialize(void)
   rtsiSetSimTimeStep(&controller_M->solverInfo, MAJOR_TIME_STEP);
   rtsiSetSolverName(&controller_M->solverInfo,"FixedStepDiscrete");
   rtmSetTPtr(controller_M, &controller_M->Timing.tArray[0]);
-  controller_M->Timing.stepSize0 = 0.01;
+  controller_M->Timing.stepSize0 = 0.001;
 
   /* block I/O */
   (void) memset(((void *) &controller_B), 0,

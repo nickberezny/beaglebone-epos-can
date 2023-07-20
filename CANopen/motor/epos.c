@@ -230,6 +230,30 @@ int epos_Maximal_Profile_Velocity(uint16_t node_id, uint32_t value) {
 	return SDO_write(motor_cfg_fd, &d);
 }
 
+int epos_Maximal_Velocity(uint16_t node_id, uint32_t value) {
+	SDO_data d;
+	d.nodeid = node_id;
+	d.index = 0x6080;
+	d.subindex = 0x00;
+	d.data.size = 4;
+	d.data.data = value;
+
+	return SDO_write(motor_cfg_fd, &d);
+}
+
+int epos_Maximal_Accel(uint16_t node_id, uint32_t value) {
+	SDO_data d;
+	d.nodeid = node_id;
+	d.index = 0x60C5;
+	d.subindex = 0x00;
+	d.data.size = 4;
+	d.data.data = value;
+
+	return SDO_write(motor_cfg_fd, &d);
+}
+
+
+
 
 int epos_Profile_Velocity(uint16_t node_id, uint32_t value) {
 	SDO_data d;

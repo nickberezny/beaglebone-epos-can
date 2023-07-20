@@ -1,1 +1,1 @@
-int init_can(int id);
+int init_can(double maxSpeed, double maxAccel);

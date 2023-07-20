@@ -37,8 +37,7 @@ extern int motor_cfg_fd;
  * and configures the two motors
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_init();
-
+int motor_init(int32_t maxSpeed, int32_t maxAccel);
 
 /*! Closes the CAN connection */
 void motor_close(void);

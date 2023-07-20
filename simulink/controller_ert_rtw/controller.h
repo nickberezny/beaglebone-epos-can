@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.92
+ * Model version              : 4.95
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 11:56:24 2023
+ * C source code generated on : Thu Jul 20 12:03:16 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -118,7 +118,7 @@ struct P_controller_T_ {
   real_T Delay_InitialCondition;       /* Expression: 0
                                         * Referenced by: '<Root>/Delay'
                                         */
-  real_T Gain_Gain;                    /* Expression: 1000
+  real_T Gain_Gain;                    /* Expression: 100000
                                         * Referenced by: '<Root>/Gain'
                                         */
   real_T Constant2_Value;              /* Expression: 4
@@ -143,12 +143,12 @@ struct tag_RTM_controller_T {
     uint32_T clockTick1;
     uint32_T clockTickH1;
     struct {
-      uint32_T TID[3];
+      uint32_T TID[4];
     } TaskCounters;
 
     SimTimeStep simTimeStep;
     time_T *t;
-    time_T tArray[3];
+    time_T tArray[4];
   } Timing;
 };
 

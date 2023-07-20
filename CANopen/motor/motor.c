@@ -17,21 +17,19 @@ int motor_pdo_fd = -1; //!< Process CAN-connection.
 int motor_cfg_fd = -1; //!< Configuration CAN-connection.
 
 
-static int motor_config_node(uint16_t node) {
+static int motor_config_node(uint16_t node, int32_t maxSpeed, int32_t maxAccel) {
 	int err = 0;
 	int num_PDOs;
 
 	// Set Configuration parameters
-	err |= epos_Maximal_Profile_Velocity(node, 5000);
+	err |= epos_Maximal_Velocity(node, maxSpeed);
 	if( err != 0 ) {
 		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
 		return err;
 	}
-	err |= epos_Quickstop_Deceleration(node,10000);
-	err |= epos_Profile_Acceleration(node, 5000);
-	err |= epos_Profile_Deceleration(node, 5000);
-	err |= epos_Motion_Profile_Type(node, trapezodial_profile);
-	//err |= epos_Miscellaneous_Configuration(node, Meassure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time);
+
+	err |= epos_Maximal_Accel(node, maxAccel);
+
 	if(err != 0) {
 		printd(LOG_FATAL, "Motor: error configuring node %d.\n", node);
 		return err;
@@ -94,7 +92,7 @@ static int motor_config_node(uint16_t node) {
 }
 
 
-int motor_init() {
+int motor_init(int32_t maxSpeed, int32_t maxAccel) {
 	int err = 0;
 
 	// Open two connections to the CAN-network
