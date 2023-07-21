@@ -17,7 +17,7 @@ void print_data(double *data, int size)
 		fprintf(fptr, " %f,", data[i]);
 	}
 
-	fprintf(fprt, "\n");
+	fprintf(fptr, "\n");
 	
 	
 	return;
