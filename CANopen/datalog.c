@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "datalog.h"
 
-FILE *fptr;
+
 
 void init_datalog()
 {
-
+	FILE *fptr;
   	fptr = fopen("test_datalog.txt","w");
   	printf("fopen!\n");
 	return;
