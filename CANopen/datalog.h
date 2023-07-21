@@ -3,5 +3,3 @@
 
 void init_datalog();
 void print_data();
-
-extern FILE *fptr;
