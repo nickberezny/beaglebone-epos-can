@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.189
+ * Model version              : 4.193
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 15:36:32 2023
+ * C source code generated on : Fri Jul 21 16:06:12 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,7 +22,6 @@
 #define RTW_HEADER_controller_h_
 #ifndef controller_COMMON_INCLUDES_
 #define controller_COMMON_INCLUDES_
-#include <stdio.h>
 #include "rtwtypes.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
@@ -30,6 +29,7 @@
 #endif                                 /* controller_COMMON_INCLUDES_ */
 
 #include "controller_types.h"
+#include <stdio.h>
 #include "rtGetInf.h"
 #include <string.h>
 #include "rt_nonfinite.h"
@@ -51,6 +51,7 @@
 #include "set_motor.h"
 #include "print_input.h"
 #include "stop_motor.h"
+#include "datalog.h"
 
 /* Zero-crossing (trigger) state for system '<Root>/Home1' */
 typedef struct {
@@ -65,10 +66,7 @@ typedef struct {
 /* Block signals (default storage) */
 typedef struct {
   real_T CCaller1[2];                  /* '<S12>/C Caller1' */
-  FILE* b_NULL;
   FILE* filestar;
-  FILE* filestar_m;
-  FILE* filestar_c;
   real_T d;
   int32_T CCaller5[2];                 /* '<S11>/C Caller5' */
 } B_controller_T;
@@ -84,12 +82,9 @@ typedef struct {
   int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1;                       /* '<Root>/Data Store Memory1' */
   boolean_T LS2;                       /* '<Root>/Data Store Memory3' */
-  boolean_T eml_autoflush[20];         /* '<S11>/MATLAB Function1' */
   boolean_T objisempty;                /* '<Root>/Digital Read1' */
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
-  FILE* eml_openfiles[20];             /* '<S11>/MATLAB Function' */
-  FILE* eml_openfiles_o[20];           /* '<S11>/MATLAB Function1' */
-  FILE* eml_openfiles_c[20];           /* '<S12>/MATLAB Function' */
+  FILE* eml_openfiles[20];             /* '<S12>/MATLAB Function' */
 } DW_controller_T;
 
 /* Zero-crossing (trigger) state */
@@ -245,7 +240,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[3];
+      uint32_T TID[4];
     } TaskCounters;
   } Timing;
 };
@@ -284,8 +279,8 @@ extern volatile boolean_T runModel;
  * Block '<S20>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S24>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S28>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S34>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S35>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S32>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S33>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -332,11 +327,9 @@ extern volatile boolean_T runModel;
  * '<S27>'  : 'controller/Home4/Subsystem'
  * '<S28>'  : 'controller/Home4/Subsystem1'
  * '<S29>'  : 'controller/Initialize/Compare To Constant'
- * '<S30>'  : 'controller/Initialize/MATLAB Function'
- * '<S31>'  : 'controller/Initialize/MATLAB Function1'
- * '<S32>'  : 'controller/Initialize/Subsystem'
- * '<S33>'  : 'controller/Main Control/MATLAB Function'
- * '<S34>'  : 'controller/Main Control/Subsystem1'
- * '<S35>'  : 'controller/Main Control/Subsystem2'
+ * '<S30>'  : 'controller/Initialize/Subsystem'
+ * '<S31>'  : 'controller/Main Control/MATLAB Function'
+ * '<S32>'  : 'controller/Main Control/Subsystem1'
+ * '<S33>'  : 'controller/Main Control/Subsystem2'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */
