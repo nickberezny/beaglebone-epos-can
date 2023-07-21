@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Thu Jul 20 15:36:44 2023
+## Generated on : Fri Jul 21 11:19:24 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
@@ -160,10 +160,10 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ## DEFINES
 ###########################################################################
 
-DEFINES_ = -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
+DEFINES_ = -D_roboticscape_in_use_ -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
-DEFINES_OPTS = -DTID01EQ=1
+DEFINES_OPTS = -DTID01EQ=0
 DEFINES_SKIPFORSIL = -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DSTACK_SIZE=64 -DRT
 DEFINES_STANDARD = -DMODEL=controller -DNUMST=4 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
@@ -173,7 +173,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = coder_posix_time.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c MW_bbblue_init.c linuxinitialize.c
+SRCS = MW_digitalIO.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c stop_motor.c MW_bbblue_init.c linuxinitialize.c
 
 MAIN_SRC = ert_main.c
 
@@ -183,7 +183,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = coder_posix_time.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o MW_bbblue_init.c.o linuxinitialize.c.o
+OBJS = MW_digitalIO.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o stop_motor.c.o MW_bbblue_init.c.o linuxinitialize.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -233,33 +233,37 @@ CPPFLAGS += $(CPPFLAGS_SKIPFORSIL) $(CPPFLAGS_BASIC)
 # C++ Linker
 #---------------
 
+CPP_LDFLAGS_ = -lroboticscape
 CPP_LDFLAGS_SKIPFORSIL =  
 
-CPP_LDFLAGS += $(CPP_LDFLAGS_SKIPFORSIL)
+CPP_LDFLAGS += $(CPP_LDFLAGS_) $(CPP_LDFLAGS_SKIPFORSIL)
 
 #------------------------------
 # C++ Shared Library Linker
 #------------------------------
 
+CPP_SHAREDLIB_LDFLAGS_ = -lroboticscape
 CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL =  
 
-CPP_SHAREDLIB_LDFLAGS += $(CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL)
+CPP_SHAREDLIB_LDFLAGS += $(CPP_SHAREDLIB_LDFLAGS_) $(CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL)
 
 #-----------
 # Linker
 #-----------
 
+LDFLAGS_ = -lroboticscape
 LDFLAGS_SKIPFORSIL =  
 
-LDFLAGS += $(LDFLAGS_SKIPFORSIL)
+LDFLAGS += $(LDFLAGS_) $(LDFLAGS_SKIPFORSIL)
 
 #--------------------------
 # Shared Library Linker
 #--------------------------
 
+SHAREDLIB_LDFLAGS_ = -lroboticscape
 SHAREDLIB_LDFLAGS_SKIPFORSIL =  
 
-SHAREDLIB_LDFLAGS += $(SHAREDLIB_LDFLAGS_SKIPFORSIL)
+SHAREDLIB_LDFLAGS += $(SHAREDLIB_LDFLAGS_) $(SHAREDLIB_LDFLAGS_SKIPFORSIL)
 
 ###########################################################################
 ## INLINED COMMANDS
@@ -414,7 +418,19 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-coder_posix_time.c.o : coder_posix_time.c
+%.c.o : %.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+%.s.o : %.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
+
+
+%.cpp.o : %.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+MW_digitalIO.c.o : MW_digitalIO.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -455,6 +471,10 @@ get_encoder.c.o : get_encoder.c
 
 
 print_input.c.o : print_input.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+stop_motor.c.o : stop_motor.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

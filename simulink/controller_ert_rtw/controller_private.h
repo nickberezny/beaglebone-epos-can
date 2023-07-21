@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.97
+ * Model version              : 4.125
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 15:36:39 2023
+ * C source code generated on : Fri Jul 21 11:19:09 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,23 +22,6 @@
 #define RTW_HEADER_controller_private_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
+#include "zero_crossing_types.h"
 #include "controller_types.h"
-#include "controller.h"
-
-/* Private macros used by the generated code to access rtModel */
-#ifndef rtmIsMajorTimeStep
-#define rtmIsMajorTimeStep(rtm)        (((rtm)->Timing.simTimeStep) == MAJOR_TIME_STEP)
-#endif
-
-#ifndef rtmIsMinorTimeStep
-#define rtmIsMinorTimeStep(rtm)        (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
-#endif
-
-#ifndef rtmSetTPtr
-#define rtmSetTPtr(rtm, val)           ((rtm)->Timing.t = (val))
-#endif
-
-extern real_T rt_roundd_snf(real_T u);
-extern int32_T div_s32(int32_T numerator, int32_T denominator);
-
 #endif                                 /* RTW_HEADER_controller_private_h_ */

@@ -45,7 +45,6 @@ clean:
 	$(CC) -c $< $(CFLAGS) -o $@
 
 change:
-	sudo gcc change_makefile.c -o change_makefile
 	sudo ./change_makefile
 
 set_can:
@@ -60,8 +59,9 @@ move:
 	sudo cp init_can* ../../controller_ert_rtw/
 	sudo cp get_encoder* ../../controller_ert_rtw/
 	sudo cp set_motor* ../../controller_ert_rtw/
+	sudo cp stop_motor* ../../controller_ert_rtw/
 	sudo cp -r socketcan ../../controller_ert_rtw/
 	sudo cp -r canopen ../../controller_ert_rtw/
 	sudo cp -r motor ../../controller_ert_rtw/
 
-all: clean build move change
+all: clean build move change set_can

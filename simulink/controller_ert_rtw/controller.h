@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.97
+ * Model version              : 4.125
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Jul 20 15:36:39 2023
+ * C source code generated on : Fri Jul 21 11:19:09 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,6 +25,7 @@
 #include "rtwtypes.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
+#include "MW_digitalIO.h"
 #endif                                 /* controller_COMMON_INCLUDES_ */
 
 #include "controller_types.h"
@@ -32,6 +33,7 @@
 #include <string.h>
 #include "rt_nonfinite.h"
 #include <stddef.h>
+#include "zero_crossing_types.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -42,94 +44,91 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
-#ifndef rtmGetT
-#define rtmGetT(rtm)                   (rtmGetTPtr((rtm))[0])
-#endif
-
-#ifndef rtmGetTPtr
-#define rtmGetTPtr(rtm)                ((rtm)->Timing.t)
-#endif
-
 /* user code (top of header file) */
 #include "init_can.h"
 #include "get_encoder.h"
 #include "set_motor.h"
 #include "print_input.h"
-
-/* Block signals (default storage) */
-typedef struct {
-  real_T CCaller1[2];                  /* '<Root>/C Caller1' */
-  creal_T d_data;
-  creal_T b_c;
-  creal_T t;
-  creal_T c_s;
-  creal_T d_ahi;
-  creal_T c;
-  creal_T t_m;
-  creal_T da;
-  creal_T t_c;
-  real_T Saturation;                   /* '<Root>/Saturation' */
-  real_T y;                            /* '<Root>/MATLAB Function' */
-  real_T c_tm_mon;
-  real_T c_tm_year;
-  real_T second;
-  real_T fracSecs;
-  real_T check;
-  real_T shi;
-  real_T b_alo;
-  real_T d_ahi_k;
-  int32_T CCaller5;                    /* '<Root>/C Caller5' */
-} B_controller_T;
+#include "stop_motor.h"
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  real_T Delay_DSTATE;                 /* '<Root>/Delay' */
-  struct {
-    void *LoggedData;
-  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+  beagleboneblue_bbblueDigitalR_T obj; /* '<Root>/Digital Read' */
+  real_T state;                        /* '<Root>/Data Store Memory' */
+  real_T enc1;                         /* '<Root>/Data Store Memory2' */
+  real_T pos_h;                        /* '<Root>/Data Store Memory3' */
+  real_T enc2;                         /* '<Root>/Data Store Memory5' */
+  int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
+  boolean_T LS1;                       /* '<Root>/Data Store Memory1' */
+  boolean_T objisempty;                /* '<Root>/Digital Read' */
 } DW_controller_T;
+
+/* Zero-crossing (trigger) state */
+typedef struct {
+  ZCSigState StopMotor_Trig_ZCE;       /* '<S3>/Stop Motor' */
+} PrevZCX_controller_T;
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
+  real_T CompareToConstant1_const;   /* Mask Parameter: CompareToConstant1_const
+                                      * Referenced by: '<S1>/Constant'
+                                      */
+  real_T CompareToConstant2_const;   /* Mask Parameter: CompareToConstant2_const
+                                      * Referenced by: '<S2>/Constant'
+                                      */
+  int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
+                                       * Referenced by: '<S9>/Constant'
+                                       */
+  boolean_T CompareToConstant_const_b;
+                                    /* Mask Parameter: CompareToConstant_const_b
+                                     * Referenced by: '<S5>/Constant'
+                                     */
+  real_T DigitalRead_SampleTime;       /* Expression: 0.1
+                                        * Referenced by: '<Root>/Digital Read'
+                                        */
+  real_T Constant_Value;               /* Expression: 1
+                                        * Referenced by: '<S3>/Constant'
+                                        */
+  real_T Constant_Value_d;             /* Expression: 1
+                                        * Referenced by: '<S4>/Constant'
+                                        */
   real_T Constant1_Value;              /* Expression: 5000
-                                        * Referenced by: '<Root>/Constant1'
+                                        * Referenced by: '<S4>/Constant1'
                                         */
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<Root>/Constant7'
                                         */
-  real_T Constant10_Value;             /* Expression: 2
-                                        * Referenced by: '<Root>/Constant10'
+  real_T Constant_Value_c;             /* Expression: 2
+                                        * Referenced by: '<Root>/Constant'
                                         */
-  real_T Step_Time;                    /* Expression: 10
-                                        * Referenced by: '<Root>/Step'
+  real_T Constant1_Value_i;            /* Expression: 75
+                                        * Referenced by: '<Root>/Constant1'
                                         */
-  real_T Step_Y0;                      /* Expression: 75
-                                        * Referenced by: '<Root>/Step'
+  real_T DataStoreMemory_InitialValue; /* Expression: 0
+                                        * Referenced by: '<Root>/Data Store Memory'
                                         */
-  real_T Step_YFinal;                  /* Expression: 0
-                                        * Referenced by: '<Root>/Step'
+  real_T DataStoreMemory2_InitialValue;/* Expression: 0
+                                        * Referenced by: '<Root>/Data Store Memory2'
                                         */
-  real_T Saturation_UpperSat;          /* Expression: 100
-                                        * Referenced by: '<Root>/Saturation'
+  real_T DataStoreMemory3_InitialValue;/* Expression: 0
+                                        * Referenced by: '<Root>/Data Store Memory3'
                                         */
-  real_T Saturation_LowerSat;          /* Expression: -100
-                                        * Referenced by: '<Root>/Saturation'
+  real_T DataStoreMemory5_InitialValue;/* Expression: 0
+                                        * Referenced by: '<Root>/Data Store Memory5'
                                         */
-  real_T Delay_InitialCondition;       /* Expression: 0
-                                        * Referenced by: '<Root>/Delay'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 100000
-                                        * Referenced by: '<Root>/Gain'
-                                        */
-  real_T Constant2_Value;              /* Expression: 4
-                                        * Referenced by: '<Root>/Constant2'
-                                        */
+  int32_T DataStoreMemory4_InitialValue;
+                            /* Computed Parameter: DataStoreMemory4_InitialValue
+                             * Referenced by: '<Root>/Data Store Memory4'
+                             */
+  boolean_T DataStoreMemory1_InitialValue;
+                            /* Computed Parameter: DataStoreMemory1_InitialValue
+                             * Referenced by: '<Root>/Data Store Memory1'
+                             */
 };
 
 /* Real-time Model Data Structure */
 struct tag_RTM_controller_T {
   const char_T *errorStatus;
-  RTWSolverInfo solverInfo;
 
   /*
    * Timing:
@@ -137,29 +136,20 @@ struct tag_RTM_controller_T {
    * the timing information for the model.
    */
   struct {
-    uint32_T clockTick0;
-    uint32_T clockTickH0;
-    time_T stepSize0;
-    uint32_T clockTick1;
-    uint32_T clockTickH1;
     struct {
       uint32_T TID[4];
     } TaskCounters;
-
-    SimTimeStep simTimeStep;
-    time_T *t;
-    time_T tArray[4];
   } Timing;
 };
 
 /* Block parameters (default storage) */
 extern P_controller_T controller_P;
 
-/* Block signals (default storage) */
-extern B_controller_T controller_B;
-
 /* Block states (default storage) */
 extern DW_controller_T controller_DW;
+
+/* Zero-crossing (trigger) state */
+extern PrevZCX_controller_T controller_PrevZCX;
 
 /* Model entry point functions */
 extern void controller_initialize(void);
@@ -170,6 +160,12 @@ extern void controller_terminate(void);
 extern RT_MODEL_controller_T *const controller_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S8>/Data Type Conversion' : Eliminate redundant data type conversion
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -186,6 +182,15 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'controller'
- * '<S1>'   : 'controller/MATLAB Function'
+ * '<S1>'   : 'controller/Compare To Constant1'
+ * '<S2>'   : 'controller/Compare To Constant2'
+ * '<S3>'   : 'controller/Home1'
+ * '<S4>'   : 'controller/Initialize'
+ * '<S5>'   : 'controller/Home1/Compare To Constant'
+ * '<S6>'   : 'controller/Home1/Stop Motor'
+ * '<S7>'   : 'controller/Home1/Subsystem'
+ * '<S8>'   : 'controller/Home1/Subsystem1'
+ * '<S9>'   : 'controller/Initialize/Compare To Constant'
+ * '<S10>'  : 'controller/Initialize/Subsystem'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

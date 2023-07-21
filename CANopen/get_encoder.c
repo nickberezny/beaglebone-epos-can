@@ -11,6 +11,9 @@
 extern void get_encoder(int pdo_id, int size, double* pos)
 {
 
+	for(int i = 0; i < size; i++)
+		pos[i] = 0.0;
+
 	vel_read(pdo_id, size, pos, 10);
 
 	return;
