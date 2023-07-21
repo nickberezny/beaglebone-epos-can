@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.125
+ * Model version              : 4.130
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 11:19:09 2023
+ * C source code generated on : Fri Jul 21 11:54:49 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -32,13 +32,18 @@ P_controller_T controller_P = {
    */
   0.0,
 
+  /* Mask Parameter: CompareToConstant3_const
+   * Referenced by: '<S3>/Constant'
+   */
+  2.0,
+
   /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S9>/Constant'
+   * Referenced by: '<S12>/Constant'
    */
   0,
 
   /* Mask Parameter: CompareToConstant_const_b
-   * Referenced by: '<S5>/Constant'
+   * Referenced by: '<S7>/Constant'
    */
   true,
 
@@ -47,25 +52,35 @@ P_controller_T controller_P = {
    */
   0.1,
 
-  /* Expression: 1
-   * Referenced by: '<S3>/Constant'
+  /* Expression: 2
+   * Referenced by: '<S4>/Constant'
    */
-  1.0,
+  2.0,
+
+  /* Expression: 2
+   * Referenced by: '<S5>/Constant'
+   */
+  2.0,
+
+  /* Expression: 0
+   * Referenced by: '<S10>/Switch'
+   */
+  0.0,
 
   /* Expression: 1
-   * Referenced by: '<S4>/Constant'
+   * Referenced by: '<S6>/Constant'
    */
   1.0,
 
   /* Expression: 5000
-   * Referenced by: '<S4>/Constant1'
+   * Referenced by: '<S6>/Constant1'
    */
   5000.0,
 
-  /* Expression: 2
-   * Referenced by: '<Root>/Constant7'
+  /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory5'
    */
-  2.0,
+  0.0,
 
   /* Expression: 2
    * Referenced by: '<Root>/Constant'
@@ -76,6 +91,16 @@ P_controller_T controller_P = {
    * Referenced by: '<Root>/Constant1'
    */
   75.0,
+
+  /* Expression: 2
+   * Referenced by: '<Root>/Constant2'
+   */
+  2.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant3'
+   */
+  0.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory'
@@ -89,11 +114,6 @@ P_controller_T controller_P = {
 
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory3'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Data Store Memory5'
    */
   0.0,
 

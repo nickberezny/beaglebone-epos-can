@@ -17,8 +17,7 @@
 
 void stop_motor()
 {
-	epos_Controlword(1, Quickstop);
-	epos_Controlword(2, Quickstop);
+	motor_halt()
 	return;
 }
 
