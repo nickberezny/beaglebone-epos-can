@@ -7,6 +7,7 @@ FILE *fptr;
 void init_datalog()
 {
   	fptr = fopen("test_datalog.txt","w");
+  	printf("fopen\n");
 	return;
 }
 
@@ -18,7 +19,7 @@ void print_data(double *data, int size)
 	}
 
 	fprintf(fptr, "\n");
-	
+	printf("fprint %f\n", data[0]);
 	
 	return;
 }
