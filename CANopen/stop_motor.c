@@ -17,7 +17,7 @@
 
 void stop_motor(int cfg_fd)
 {
-	motor_halt(cfg_fd)
+	motor_halt(cfg_fd);
 	return;
 }
 
