@@ -14,7 +14,7 @@ void init_datalog()
 
 void print_data()
 {
-	frpintf(fptr, "test test test!!!\n");
+	fprintf(fptr, "test test test!!!\n");
 	printf("fprint!\n");
 	fclose(fptr);
 	return;
