@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.130
+ * Model version              : 4.135
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 11:54:49 2023
+ * C source code generated on : Fri Jul 21 12:08:35 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -50,8 +50,13 @@ static void rate_scheduler(void)
   }
 
   (controller_M->Timing.TaskCounters.TID[2])++;
-  if ((controller_M->Timing.TaskCounters.TID[2]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[2]) > 999999) {/* Sample time: [1000.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[2] = 0;
+  }
+
+  (controller_M->Timing.TaskCounters.TID[3])++;
+  if ((controller_M->Timing.TaskCounters.TID[3]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
+    controller_M->Timing.TaskCounters.TID[3] = 0;
   }
 }
 
@@ -59,7 +64,8 @@ static void rate_scheduler(void)
 void controller_step(void)
 {
   real_T tmp;
-  int32_T rtb_CCaller5;
+  int32_T rtb_CCaller5[2];
+  boolean_T rtb_Compare_a;
   if (controller_M->Timing.TaskCounters.TID[1] == 0) {
     /* MATLABSystem: '<Root>/Digital Read' */
     if (controller_DW.obj.SampleTime != controller_P.DigitalRead_SampleTime) {
@@ -121,7 +127,7 @@ void controller_step(void)
     /* End of Outputs for SubSystem: '<Root>/Home1' */
   }
 
-  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+  if (controller_M->Timing.TaskCounters.TID[3] == 0) {
     /* Outputs for Enabled SubSystem: '<Root>/Initialize' incorporates:
      *  EnablePort: '<S6>/Enable'
      */
@@ -133,31 +139,36 @@ void controller_step(void)
       /* CCaller: '<S6>/C Caller5' incorporates:
        *  Constant: '<S6>/Constant1'
        */
-      rtb_CCaller5 = init_can(controller_P.Constant1_Value,
-        controller_P.Constant1_Value);
+      init_can(controller_P.Constant1_Value, controller_P.Constant1_Value,
+               &rtb_CCaller5[0]);
+
+      /* DataStoreWrite: '<S6>/Data Store Write' */
+      controller_DW.cfg_id = rtb_CCaller5[0];
 
       /* DataStoreWrite: '<S6>/Data Store Write2' */
-      controller_DW.pdo_id = rtb_CCaller5;
+      controller_DW.pdo_id = rtb_CCaller5[1];
 
-      /* Switch: '<S13>/Switch' incorporates:
-       *  Constant: '<S12>/Constant'
-       *  RelationalOperator: '<S12>/Compare'
+      /* RelationalOperator: '<S11>/Compare' incorporates:
+       *  Constant: '<S11>/Constant'
        */
-      if (rtb_CCaller5 != controller_P.CompareToConstant_const) {
-        /* DataStoreWrite: '<S13>/Data Store Write' incorporates:
+      rtb_Compare_a = (rtb_CCaller5[1] != controller_P.CompareToConstant_const);
+
+      /* Switch: '<S12>/Switch' */
+      if (rtb_Compare_a) {
+        /* DataStoreWrite: '<S12>/Data Store Write' incorporates:
          *  Constant: '<S6>/Constant'
          */
         controller_DW.state = controller_P.Constant_Value_d;
       }
 
-      /* End of Switch: '<S13>/Switch' */
+      /* End of Switch: '<S12>/Switch' */
     }
 
     /* End of RelationalOperator: '<S2>/Compare' */
     /* End of Outputs for SubSystem: '<Root>/Initialize' */
   }
 
-  if (controller_M->Timing.TaskCounters.TID[1] == 0) {
+  if (controller_M->Timing.TaskCounters.TID[2] == 0) {
     /* Outputs for Enabled SubSystem: '<Root>/Home2' incorporates:
      *  EnablePort: '<S5>/Enable'
      */
@@ -176,23 +187,10 @@ void controller_step(void)
 
       /* End of Switch: '<S10>/Switch' */
 
-      /* DataTypeConversion: '<S11>/Data Type Conversion1' incorporates:
-       *  Constant: '<Root>/Constant2'
+      /* CCaller: '<S5>/C Caller4' incorporates:
+       *  DataStoreRead: '<S5>/Data Store Read'
        */
-      tmp = floor(controller_P.Constant2_Value);
-      if (rtIsNaN(tmp) || rtIsInf(tmp)) {
-        tmp = 0.0;
-      } else {
-        tmp = fmod(tmp, 4.294967296E+9);
-      }
-
-      /* CCaller: '<S11>/C Caller3' incorporates:
-       *  Constant: '<Root>/Constant3'
-       *  DataStoreRead: '<S11>/Data Store Read2'
-       *  DataTypeConversion: '<S11>/Data Type Conversion1'
-       */
-      set_motor(controller_DW.pdo_id, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
-                (int32_T)(uint32_T)tmp, controller_P.Constant3_Value);
+      stop_motor(controller_DW.cfg_id);
     }
 
     /* End of RelationalOperator: '<S3>/Compare' */
@@ -247,6 +245,9 @@ void controller_initialize(void)
 
     /* Start for DataStoreMemory: '<Root>/Data Store Memory4' */
     controller_DW.pdo_id = controller_P.DataStoreMemory4_InitialValue;
+
+    /* Start for DataStoreMemory: '<Root>/Data Store Memory6' */
+    controller_DW.cfg_id = controller_P.DataStoreMemory6_InitialValue;
   }
 }
 

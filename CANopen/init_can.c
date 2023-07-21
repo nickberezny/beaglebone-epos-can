@@ -9,11 +9,11 @@
 #include <stdbool.h>
 
 
-int init_can(double maxSpeed, double maxAccel){
+extern void init_can(double maxSpeed, double maxAccel, int* fds){
 
-	motor_init((int)maxSpeed, (int)maxAccel);
+	motor_init((int)maxSpeed, (int)maxAccel, fds);
 	motor_enable();
 
-	return motor_pdo_fd;
+	return;
 }
 

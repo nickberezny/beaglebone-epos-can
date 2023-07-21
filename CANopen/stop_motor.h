@@ -1,1 +1,1 @@
-void stop_motor();
+void stop_motor(int cfg_fd);

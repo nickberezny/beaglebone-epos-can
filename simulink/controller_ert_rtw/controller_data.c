@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.130
+ * Model version              : 4.135
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 11:54:49 2023
+ * C source code generated on : Fri Jul 21 12:08:35 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -38,7 +38,7 @@ P_controller_T controller_P = {
   2.0,
 
   /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S12>/Constant'
+   * Referenced by: '<S11>/Constant'
    */
   0,
 
@@ -92,16 +92,6 @@ P_controller_T controller_P = {
    */
   75.0,
 
-  /* Expression: 2
-   * Referenced by: '<Root>/Constant2'
-   */
-  2.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant3'
-   */
-  0.0,
-
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory'
    */
@@ -119,6 +109,11 @@ P_controller_T controller_P = {
 
   /* Computed Parameter: DataStoreMemory4_InitialValue
    * Referenced by: '<Root>/Data Store Memory4'
+   */
+  0,
+
+  /* Computed Parameter: DataStoreMemory6_InitialValue
+   * Referenced by: '<Root>/Data Store Memory6'
    */
   0,
 

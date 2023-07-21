@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.130
+ * Model version              : 4.135
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 11:54:49 2023
+ * C source code generated on : Fri Jul 21 12:08:35 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -58,6 +58,7 @@ typedef struct {
   real_T enc1;                         /* '<Root>/Data Store Memory2' */
   real_T pos_h;                        /* '<Root>/Data Store Memory3' */
   int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
+  int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1;                       /* '<Root>/Data Store Memory1' */
   boolean_T objisempty;                /* '<Root>/Digital Read' */
 } DW_controller_T;
@@ -74,7 +75,7 @@ struct P_controller_T_ {
                                       * Referenced by: '<S3>/Constant'
                                       */
   int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
-                                       * Referenced by: '<S12>/Constant'
+                                       * Referenced by: '<S11>/Constant'
                                        */
   boolean_T CompareToConstant_const_b;
                                     /* Mask Parameter: CompareToConstant_const_b
@@ -107,12 +108,6 @@ struct P_controller_T_ {
   real_T Constant1_Value_i;            /* Expression: 75
                                         * Referenced by: '<Root>/Constant1'
                                         */
-  real_T Constant2_Value;              /* Expression: 2
-                                        * Referenced by: '<Root>/Constant2'
-                                        */
-  real_T Constant3_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant3'
-                                        */
   real_T DataStoreMemory_InitialValue; /* Expression: 0
                                         * Referenced by: '<Root>/Data Store Memory'
                                         */
@@ -125,6 +120,10 @@ struct P_controller_T_ {
   int32_T DataStoreMemory4_InitialValue;
                             /* Computed Parameter: DataStoreMemory4_InitialValue
                              * Referenced by: '<Root>/Data Store Memory4'
+                             */
+  int32_T DataStoreMemory6_InitialValue;
+                            /* Computed Parameter: DataStoreMemory6_InitialValue
+                             * Referenced by: '<Root>/Data Store Memory6'
                              */
   boolean_T DataStoreMemory1_InitialValue;
                             /* Computed Parameter: DataStoreMemory1_InitialValue
@@ -143,7 +142,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[3];
+      uint32_T TID[4];
     } TaskCounters;
   } Timing;
 };
@@ -167,8 +166,9 @@ extern volatile boolean_T runModel;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
+ * Block '<Root>/Constant2' : Unused code path elimination
+ * Block '<Root>/Constant3' : Unused code path elimination
  * Block '<S9>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S11>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -196,8 +196,7 @@ extern volatile boolean_T runModel;
  * '<S8>'   : 'controller/Home1/Subsystem'
  * '<S9>'   : 'controller/Home1/Subsystem1'
  * '<S10>'  : 'controller/Home2/Subsystem'
- * '<S11>'  : 'controller/Home2/Subsystem1'
- * '<S12>'  : 'controller/Initialize/Compare To Constant'
- * '<S13>'  : 'controller/Initialize/Subsystem'
+ * '<S11>'  : 'controller/Initialize/Compare To Constant'
+ * '<S12>'  : 'controller/Initialize/Subsystem'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

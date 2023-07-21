@@ -92,7 +92,7 @@ static int motor_config_node(uint16_t node, int32_t maxSpeed, int32_t maxAccel) 
 }
 
 
-int motor_init(int32_t maxSpeed, int32_t maxAccel) {
+int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	int err = 0;
 
 	// Open two connections to the CAN-network
@@ -145,6 +145,9 @@ int motor_init(int32_t maxSpeed, int32_t maxAccel) {
 		return MOTOR_ERROR;
 	}
 
+	fds[0] = motor_cfg_fd;
+	fds[1] = motor_pdo_fd;
+
 	return 0;
 }
 
@@ -183,14 +186,14 @@ int motor_disable(void) {
 }
 
 
-int motor_halt(void) {
+int motor_halt(int cfg_fd) {
 	int err = 0;
 
 	// Stop PDO-communication
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
 	err |= epos_Controlword(1, Quickstop);
 	err |= epos_Controlword(2, Quickstop);
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
 }

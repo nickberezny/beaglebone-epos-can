@@ -15,9 +15,9 @@
 
 
 
-void stop_motor()
+void stop_motor(int cfg_fd)
 {
-	motor_halt()
+	motor_halt(cfg_fd)
 	return;
 }
 

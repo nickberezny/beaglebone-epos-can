@@ -1,1 +1,1 @@
-int init_can(double maxSpeed, double maxAccel);
+extern void init_can(double maxSpeed, double maxAccel, int* fds);
