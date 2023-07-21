@@ -195,18 +195,6 @@ int motor_halt(void) {
 	return err;
 }
 
-int motor_halt(void) {
-	int err = 0;
-
-	// Stop PDO-communication
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
-	err |= epos_Controlword(1, Quickstop);
-	err |= epos_Controlword(2, Quickstop);
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
-
-	return err;
-}
-
 
 int motor_setmode(enum Motor_mode mode) {
 	int err = 0;
