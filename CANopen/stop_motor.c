@@ -17,6 +17,7 @@
 
 void stop_motor(int cfg_fd)
 {
+	printf("test pdo: %d\n", motor_cfg_fd);
 	motor_halt(cfg_fd);
 	sleep(0.5);
 	motor_enable();

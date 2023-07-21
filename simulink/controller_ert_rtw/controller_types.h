@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.173
+ * Model version              : 4.189
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 15:01:27 2023
+ * C source code generated on : Fri Jul 21 15:36:32 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,6 +45,15 @@ struct tag_1EBWQ6hhKs9Y37qjpZj8aH
 typedef struct tag_1EBWQ6hhKs9Y37qjpZj8aH beagleboneblue_bbblueDigitalR_T;
 
 #endif                             /* typedef_beagleboneblue_bbblueDigitalR_T */
+
+/* Custom Type definition for MATLAB Function: '<S12>/MATLAB Function' */
+#include <stdio.h>
+
+/* Parameters for system: '<Root>/Home1' */
+typedef struct P_Home1_controller_T_ P_Home1_controller_T;
+
+/* Parameters for system: '<Root>/Home2' */
+typedef struct P_Home2_controller_T_ P_Home2_controller_T;
 
 /* Parameters (default storage) */
 typedef struct P_controller_T_ P_controller_T;

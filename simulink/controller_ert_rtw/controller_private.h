@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.173
+ * Model version              : 4.189
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 15:01:27 2023
+ * C source code generated on : Fri Jul 21 15:36:32 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,5 +23,16 @@
 #include "rtwtypes.h"
 #include "multiword_types.h"
 #include "zero_crossing_types.h"
+#include "controller.h"
 #include "controller_types.h"
+
+extern void controller_Home1(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
+  rtu_homing_torque, const boolean_T *rtd_LS1, const int32_T *rtd_cfg_id, const
+  int32_T *rtd_pdo_id, real_T *rtd_state, P_Home1_controller_T *localP,
+  ZCE_Home1_controller_T *localZCE);
+extern void controller_Home2(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
+  rtu_homing_torque, const boolean_T *rtd_LS2, const int32_T *rtd_cfg_id, real_T
+  *rtd_enc1, const int32_T *rtd_pdo_id, real_T *rtd_state, P_Home2_controller_T *
+  localP, ZCE_Home2_controller_T *localZCE);
+
 #endif                                 /* RTW_HEADER_controller_private_h_ */
