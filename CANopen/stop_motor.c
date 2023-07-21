@@ -18,6 +18,8 @@
 void stop_motor(int cfg_fd)
 {
 	motor_halt(cfg_fd);
+	sleep(0.5);
+	motor_enable();
 	return;
 }
 

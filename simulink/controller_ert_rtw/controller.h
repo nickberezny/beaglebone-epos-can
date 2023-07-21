@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.135
+ * Model version              : 4.173
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 12:08:35 2023
+ * C source code generated on : Fri Jul 21 15:01:27 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -33,6 +33,7 @@
 #include <string.h>
 #include "rt_nonfinite.h"
 #include <stddef.h>
+#include "zero_crossing_types.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -52,46 +53,68 @@
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  beagleboneblue_bbblueDigitalR_T obj; /* '<Root>/Digital Read' */
+  beagleboneblue_bbblueDigitalR_T obj; /* '<Root>/Digital Read1' */
+  beagleboneblue_bbblueDigitalR_T obj_b;/* '<Root>/Digital Read' */
   real_T enc2;                         /* '<Root>/Data Store Memory5' */
   real_T state;                        /* '<Root>/Data Store Memory' */
   real_T enc1;                         /* '<Root>/Data Store Memory2' */
-  real_T pos_h;                        /* '<Root>/Data Store Memory3' */
   int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
   int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1;                       /* '<Root>/Data Store Memory1' */
-  boolean_T objisempty;                /* '<Root>/Digital Read' */
+  boolean_T LS2;                       /* '<Root>/Data Store Memory3' */
+  boolean_T objisempty;                /* '<Root>/Digital Read1' */
+  boolean_T objisempty_g;              /* '<Root>/Digital Read' */
+  boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
 } DW_controller_T;
+
+/* Zero-crossing (trigger) state */
+typedef struct {
+  ZCSigState StopMotor_Trig_ZCE;       /* '<S5>/Stop Motor' */
+  ZCSigState StopMotor_Trig_ZCE_p;     /* '<S4>/Stop Motor' */
+} PrevZCX_controller_T;
 
 /* Parameters (default storage) */
 struct P_controller_T_ {
-  real_T CompareToConstant1_const;   /* Mask Parameter: CompareToConstant1_const
-                                      * Referenced by: '<S1>/Constant'
-                                      */
   real_T CompareToConstant2_const;   /* Mask Parameter: CompareToConstant2_const
                                       * Referenced by: '<S2>/Constant'
+                                      */
+  real_T CompareToConstant1_const;   /* Mask Parameter: CompareToConstant1_const
+                                      * Referenced by: '<S1>/Constant'
                                       */
   real_T CompareToConstant3_const;   /* Mask Parameter: CompareToConstant3_const
                                       * Referenced by: '<S3>/Constant'
                                       */
   int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
-                                       * Referenced by: '<S11>/Constant'
+                                       * Referenced by: '<S15>/Constant'
                                        */
   boolean_T CompareToConstant_const_b;
                                     /* Mask Parameter: CompareToConstant_const_b
                                      * Referenced by: '<S7>/Constant'
                                      */
+  boolean_T CompareToConstant_const_f;
+                                    /* Mask Parameter: CompareToConstant_const_f
+                                     * Referenced by: '<S11>/Constant'
+                                     */
   real_T DigitalRead_SampleTime;       /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read'
+                                        */
+  real_T DigitalRead1_SampleTime;      /* Expression: 0.1
+                                        * Referenced by: '<Root>/Digital Read1'
                                         */
   real_T Constant_Value;               /* Expression: 2
                                         * Referenced by: '<S4>/Constant'
                                         */
-  real_T Constant_Value_h;             /* Expression: 2
+  real_T Constant2_Value;              /* Expression: 4
+                                        * Referenced by: '<S4>/Constant2'
+                                        */
+  real_T Constant7_Value;              /* Expression: 2
+                                        * Referenced by: '<S12>/Constant7'
+                                        */
+  real_T Constant_Value_i;             /* Expression: 3
                                         * Referenced by: '<S5>/Constant'
                                         */
-  real_T Switch_Threshold;             /* Expression: 0
-                                        * Referenced by: '<S10>/Switch'
+  real_T Constant2_Value_c;            /* Expression: 4
+                                        * Referenced by: '<S5>/Constant2'
                                         */
   real_T Constant_Value_d;             /* Expression: 1
                                         * Referenced by: '<S6>/Constant'
@@ -99,8 +122,20 @@ struct P_controller_T_ {
   real_T Constant1_Value;              /* Expression: 5000
                                         * Referenced by: '<S6>/Constant1'
                                         */
+  real_T Constant2_Value_l;            /* Expression: 1
+                                        * Referenced by: '<S6>/Constant2'
+                                        */
+  real_T Constant3_Value;              /* Expression: 2
+                                        * Referenced by: '<S6>/Constant3'
+                                        */
   real_T DataStoreMemory5_InitialValue;/* Expression: 0
                                         * Referenced by: '<Root>/Data Store Memory5'
+                                        */
+  real_T Constant5_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant5'
+                                        */
+  real_T Constant4_Value;              /* Expression: 5
+                                        * Referenced by: '<Root>/Constant4'
                                         */
   real_T Constant_Value_c;             /* Expression: 2
                                         * Referenced by: '<Root>/Constant'
@@ -108,14 +143,17 @@ struct P_controller_T_ {
   real_T Constant1_Value_i;            /* Expression: 75
                                         * Referenced by: '<Root>/Constant1'
                                         */
+  real_T Constant2_Value_m;            /* Expression: 2
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
+  real_T Constant3_Value_j;            /* Expression: -75
+                                        * Referenced by: '<Root>/Constant3'
+                                        */
   real_T DataStoreMemory_InitialValue; /* Expression: 0
                                         * Referenced by: '<Root>/Data Store Memory'
                                         */
   real_T DataStoreMemory2_InitialValue;/* Expression: 0
                                         * Referenced by: '<Root>/Data Store Memory2'
-                                        */
-  real_T DataStoreMemory3_InitialValue;/* Expression: 0
-                                        * Referenced by: '<Root>/Data Store Memory3'
                                         */
   int32_T DataStoreMemory4_InitialValue;
                             /* Computed Parameter: DataStoreMemory4_InitialValue
@@ -128,6 +166,10 @@ struct P_controller_T_ {
   boolean_T DataStoreMemory1_InitialValue;
                             /* Computed Parameter: DataStoreMemory1_InitialValue
                              * Referenced by: '<Root>/Data Store Memory1'
+                             */
+  boolean_T DataStoreMemory3_InitialValue;
+                            /* Computed Parameter: DataStoreMemory3_InitialValue
+                             * Referenced by: '<Root>/Data Store Memory3'
                              */
 };
 
@@ -142,7 +184,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[4];
+      uint32_T TID[3];
     } TaskCounters;
   } Timing;
 };
@@ -152,6 +194,9 @@ extern P_controller_T controller_P;
 
 /* Block states (default storage) */
 extern DW_controller_T controller_DW;
+
+/* Zero-crossing (trigger) state */
+extern PrevZCX_controller_T controller_PrevZCX;
 
 /* Model entry point functions */
 extern void controller_initialize(void);
@@ -166,9 +211,8 @@ extern volatile boolean_T runModel;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<Root>/Constant2' : Unused code path elimination
- * Block '<Root>/Constant3' : Unused code path elimination
- * Block '<S9>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S10>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S14>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -193,10 +237,14 @@ extern volatile boolean_T runModel;
  * '<S5>'   : 'controller/Home2'
  * '<S6>'   : 'controller/Initialize'
  * '<S7>'   : 'controller/Home1/Compare To Constant'
- * '<S8>'   : 'controller/Home1/Subsystem'
- * '<S9>'   : 'controller/Home1/Subsystem1'
- * '<S10>'  : 'controller/Home2/Subsystem'
- * '<S11>'  : 'controller/Initialize/Compare To Constant'
- * '<S12>'  : 'controller/Initialize/Subsystem'
+ * '<S8>'   : 'controller/Home1/Stop Motor'
+ * '<S9>'   : 'controller/Home1/Subsystem'
+ * '<S10>'  : 'controller/Home1/Subsystem1'
+ * '<S11>'  : 'controller/Home2/Compare To Constant'
+ * '<S12>'  : 'controller/Home2/Stop Motor'
+ * '<S13>'  : 'controller/Home2/Subsystem'
+ * '<S14>'  : 'controller/Home2/Subsystem1'
+ * '<S15>'  : 'controller/Initialize/Compare To Constant'
+ * '<S16>'  : 'controller/Initialize/Subsystem'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

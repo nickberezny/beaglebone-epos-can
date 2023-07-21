@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.135
+ * Model version              : 4.173
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 12:08:35 2023
+ * C source code generated on : Fri Jul 21 15:01:27 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,7 +23,7 @@
 #include "rtwtypes.h"
 #include "MW_SVD.h"
 
-/* Custom Type definition for MATLABSystem: '<Root>/Digital Read' */
+/* Custom Type definition for MATLABSystem: '<Root>/Digital Read1' */
 #include "MW_SVD.h"
 #ifndef struct_tag_1EBWQ6hhKs9Y37qjpZj8aH
 #define struct_tag_1EBWQ6hhKs9Y37qjpZj8aH
