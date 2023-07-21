@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.193
+ * Model version              : 4.196
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 16:06:12 2023
+ * C source code generated on : Fri Jul 21 16:47:09 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -53,21 +53,20 @@
 #include "stop_motor.h"
 #include "datalog.h"
 
-/* Zero-crossing (trigger) state for system '<Root>/Home1' */
+/* Zero-crossing (trigger) state for system '<S7>/Stop Motor' */
 typedef struct {
   ZCSigState StopMotor_Trig_ZCE_p;     /* '<S7>/Stop Motor' */
-} ZCE_Home1_controller_T;
+} ZCE_StopMotor_controller_T;
 
-/* Zero-crossing (trigger) state for system '<Root>/Home2' */
+/* Zero-crossing (trigger) state for system '<S8>/Stop Motor' */
 typedef struct {
   ZCSigState StopMotor_Trig_ZCE;       /* '<S8>/Stop Motor' */
-} ZCE_Home2_controller_T;
+} ZCE_StopMotor_controller_a_T;
 
 /* Block signals (default storage) */
 typedef struct {
   real_T CCaller1[2];                  /* '<S12>/C Caller1' */
-  FILE* filestar;
-  real_T d;
+  real_T TmpSignalConversionAtCCalle[2];
   int32_T CCaller5[2];                 /* '<S11>/C Caller5' */
 } B_controller_T;
 
@@ -85,42 +84,21 @@ typedef struct {
   boolean_T objisempty;                /* '<Root>/Digital Read1' */
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
   FILE* eml_openfiles[20];             /* '<S12>/MATLAB Function' */
+  boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
 } DW_controller_T;
 
 /* Zero-crossing (trigger) state */
 typedef struct {
-  ZCE_Home2_controller_T Home4;        /* '<Root>/Home4' */
-  ZCE_Home1_controller_T Home3;        /* '<Root>/Home3' */
-  ZCE_Home2_controller_T Home2;        /* '<Root>/Home2' */
-  ZCE_Home1_controller_T Home1;        /* '<Root>/Home1' */
+  ZCE_StopMotor_controller_a_T StopMotor_p0;/* '<S10>/Stop Motor' */
+  ZCE_StopMotor_controller_T StopMotor_d;/* '<S9>/Stop Motor' */
+  ZCE_StopMotor_controller_a_T StopMotor_p;/* '<S8>/Stop Motor' */
+  ZCE_StopMotor_controller_T StopMotor;/* '<S7>/Stop Motor' */
 } PrevZCX_controller_T;
 
-/* Parameters for system: '<Root>/Home1' */
-struct P_Home1_controller_T_ {
-  boolean_T CompareToConstant_const;  /* Mask Parameter: CompareToConstant_const
-                                       * Referenced by: '<S13>/Constant'
-                                       */
-  real_T Constant_Value;               /* Expression: 2
-                                        * Referenced by: '<S7>/Constant'
-                                        */
-  real_T Constant2_Value;              /* Expression: 4
-                                        * Referenced by: '<S7>/Constant2'
-                                        */
-};
-
-/* Parameters for system: '<Root>/Home2' */
-struct P_Home2_controller_T_ {
-  boolean_T CompareToConstant_const;  /* Mask Parameter: CompareToConstant_const
-                                       * Referenced by: '<S17>/Constant'
-                                       */
+/* Parameters for system: '<S8>/Stop Motor' */
+struct P_StopMotor_controller_a_T_ {
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<S18>/Constant7'
-                                        */
-  real_T Constant_Value;               /* Expression: 3
-                                        * Referenced by: '<S8>/Constant'
-                                        */
-  real_T Constant2_Value;              /* Expression: 4
-                                        * Referenced by: '<S8>/Constant2'
                                         */
 };
 
@@ -147,28 +125,77 @@ struct P_controller_T_ {
   int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
                                        * Referenced by: '<S29>/Constant'
                                        */
+  boolean_T CompareToConstant_const_b;
+                                    /* Mask Parameter: CompareToConstant_const_b
+                                     * Referenced by: '<S13>/Constant'
+                                     */
+  boolean_T CompareToConstant_const_f;
+                                    /* Mask Parameter: CompareToConstant_const_f
+                                     * Referenced by: '<S17>/Constant'
+                                     */
+  boolean_T CompareToConstant_const_n;
+                                    /* Mask Parameter: CompareToConstant_const_n
+                                     * Referenced by: '<S21>/Constant'
+                                     */
+  boolean_T CompareToConstant_const_m;
+                                    /* Mask Parameter: CompareToConstant_const_m
+                                     * Referenced by: '<S25>/Constant'
+                                     */
   real_T DigitalRead_SampleTime;       /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read'
                                         */
   real_T DigitalRead1_SampleTime;      /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read1'
                                         */
-  real_T Constant_Value;               /* Expression: 1
-                                        * Referenced by: '<S11>/Constant'
+  real_T Constant_Value;               /* Expression: 2
+                                        * Referenced by: '<S7>/Constant'
                                         */
-  real_T Constant1_Value;              /* Expression: 5000
-                                        * Referenced by: '<S11>/Constant1'
-                                        */
-  real_T Constant2_Value;              /* Expression: 1
-                                        * Referenced by: '<S11>/Constant2'
+  real_T Constant2_Value;              /* Expression: 4
+                                        * Referenced by: '<S7>/Constant2'
                                         */
   real_T Constant3_Value;              /* Expression: 2
+                                        * Referenced by: '<S7>/Constant3'
+                                        */
+  real_T Constant4_Value;              /* Expression: 3.45
+                                        * Referenced by: '<S7>/Constant4'
+                                        */
+  real_T Constant1_Value;              /* Expression: 2
+                                        * Referenced by: '<S7>/Constant1'
+                                        */
+  real_T Constant_Value_i;             /* Expression: 3
+                                        * Referenced by: '<S8>/Constant'
+                                        */
+  real_T Constant2_Value_c;            /* Expression: 4
+                                        * Referenced by: '<S8>/Constant2'
+                                        */
+  real_T Constant_Value_o;             /* Expression: 2
+                                        * Referenced by: '<S9>/Constant'
+                                        */
+  real_T Constant2_Value_b;            /* Expression: 4
+                                        * Referenced by: '<S9>/Constant2'
+                                        */
+  real_T Constant_Value_a;             /* Expression: 3
+                                        * Referenced by: '<S10>/Constant'
+                                        */
+  real_T Constant2_Value_f;            /* Expression: 4
+                                        * Referenced by: '<S10>/Constant2'
+                                        */
+  real_T Constant_Value_d;             /* Expression: 1
+                                        * Referenced by: '<S11>/Constant'
+                                        */
+  real_T Constant1_Value_f;            /* Expression: 5000
+                                        * Referenced by: '<S11>/Constant1'
+                                        */
+  real_T Constant2_Value_l;            /* Expression: 1
+                                        * Referenced by: '<S11>/Constant2'
+                                        */
+  real_T Constant3_Value_m;            /* Expression: 2
                                         * Referenced by: '<S11>/Constant3'
                                         */
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<S12>/Constant7'
                                         */
-  real_T Constant_Value_i;             /* Expression: 1
+  real_T Constant_Value_iy;            /* Expression: 1
                                         * Referenced by: '<S12>/Constant'
                                         */
   real_T Constant1_Value_m;            /* Expression: 2
@@ -223,10 +250,8 @@ struct P_controller_T_ {
                             /* Computed Parameter: DataStoreMemory3_InitialValue
                              * Referenced by: '<Root>/Data Store Memory3'
                              */
-  P_Home2_controller_T Home4;          /* '<Root>/Home4' */
-  P_Home1_controller_T Home3;          /* '<Root>/Home3' */
-  P_Home2_controller_T Home2;          /* '<Root>/Home2' */
-  P_Home1_controller_T Home1;          /* '<Root>/Home1' */
+  P_StopMotor_controller_a_T StopMotor_p0;/* '<S10>/Stop Motor' */
+  P_StopMotor_controller_a_T StopMotor_p;/* '<S8>/Stop Motor' */
 };
 
 /* Real-time Model Data Structure */

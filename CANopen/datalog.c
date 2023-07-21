@@ -6,17 +6,25 @@ FILE *fptr;
 
 void init_datalog()
 {
-	printf("fopen!\n");
   	fptr = fopen("test_datalog.txt","w");
-  	printf("fopen!\n");
 	return;
 }
 
-void print_data()
+void print_data(double *data, int size)
 {
-	printf("fprint!\n");
-	fprintf(fptr, "test test test!!!\n");
-	printf("fprint!\n");
+	for(int i = 0; i < size; i++)
+	{
+		fprintf(fptr, " %f,", data[i]);
+	}
+
+	fprintf(fprt, "\n");
+	
+	
+	return;
+}
+
+void close_datalog()
+{
 	fclose(fptr);
 	return;
 }

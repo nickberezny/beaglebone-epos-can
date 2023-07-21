@@ -21,7 +21,8 @@ DLL_EXPORT_CC extern void set_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T pdo_id, int32
 DLL_EXPORT_CC extern void print_input_VNPl3mEYQpVz7Yn1O8oOTH(int32_T a, int32_T id);
 DLL_EXPORT_CC extern void stop_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T cfg_fd);
 DLL_EXPORT_CC extern void init_datalog_VNPl3mEYQpVz7Yn1O8oOTH(void);
-DLL_EXPORT_CC extern void print_data_VNPl3mEYQpVz7Yn1O8oOTH(void);
+DLL_EXPORT_CC extern void print_data_VNPl3mEYQpVz7Yn1O8oOTH(real_T *data, int32_T size);
+DLL_EXPORT_CC extern void close_datalog_VNPl3mEYQpVz7Yn1O8oOTH(void);
 
 /* Function Definitions */
 DLL_EXPORT_CC const uint8_T *get_checksum_source_info(int32_T *size);

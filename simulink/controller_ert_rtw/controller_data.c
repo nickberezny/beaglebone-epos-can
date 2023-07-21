@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.193
+ * Model version              : 4.196
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 16:06:12 2023
+ * C source code generated on : Fri Jul 21 16:47:09 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -57,6 +57,26 @@ P_controller_T controller_P = {
    */
   0,
 
+  /* Mask Parameter: CompareToConstant_const_b
+   * Referenced by: '<S13>/Constant'
+   */
+  true,
+
+  /* Mask Parameter: CompareToConstant_const_f
+   * Referenced by: '<S17>/Constant'
+   */
+  true,
+
+  /* Mask Parameter: CompareToConstant_const_n
+   * Referenced by: '<S21>/Constant'
+   */
+  true,
+
+  /* Mask Parameter: CompareToConstant_const_m
+   * Referenced by: '<S25>/Constant'
+   */
+  true,
+
   /* Expression: 0.1
    * Referenced by: '<Root>/Digital Read'
    */
@@ -66,6 +86,61 @@ P_controller_T controller_P = {
    * Referenced by: '<Root>/Digital Read1'
    */
   0.1,
+
+  /* Expression: 2
+   * Referenced by: '<S7>/Constant'
+   */
+  2.0,
+
+  /* Expression: 4
+   * Referenced by: '<S7>/Constant2'
+   */
+  4.0,
+
+  /* Expression: 2
+   * Referenced by: '<S7>/Constant3'
+   */
+  2.0,
+
+  /* Expression: 3.45
+   * Referenced by: '<S7>/Constant4'
+   */
+  3.45,
+
+  /* Expression: 2
+   * Referenced by: '<S7>/Constant1'
+   */
+  2.0,
+
+  /* Expression: 3
+   * Referenced by: '<S8>/Constant'
+   */
+  3.0,
+
+  /* Expression: 4
+   * Referenced by: '<S8>/Constant2'
+   */
+  4.0,
+
+  /* Expression: 2
+   * Referenced by: '<S9>/Constant'
+   */
+  2.0,
+
+  /* Expression: 4
+   * Referenced by: '<S9>/Constant2'
+   */
+  4.0,
+
+  /* Expression: 3
+   * Referenced by: '<S10>/Constant'
+   */
+  3.0,
+
+  /* Expression: 4
+   * Referenced by: '<S10>/Constant2'
+   */
+  4.0,
 
   /* Expression: 1
    * Referenced by: '<S11>/Constant'
@@ -177,95 +252,23 @@ P_controller_T controller_P = {
    */
   false,
 
-  /* Start of '<Root>/Home4' */
+  /* Start of '<S10>/Stop Motor' */
   {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S25>/Constant'
-     */
-    true,
-
     /* Expression: 2
      * Referenced by: '<S26>/Constant7'
      */
-    2.0,
-
-    /* Expression: 3
-     * Referenced by: '<S10>/Constant'
-     */
-    3.0,
-
-    /* Expression: 4
-     * Referenced by: '<S10>/Constant2'
-     */
-    4.0
+    2.0
   }
   ,
 
-  /* End of '<Root>/Home4' */
+  /* End of '<S10>/Stop Motor' */
 
-  /* Start of '<Root>/Home3' */
+  /* Start of '<S8>/Stop Motor' */
   {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S21>/Constant'
-     */
-    true,
-
-    /* Expression: 2
-     * Referenced by: '<S9>/Constant'
-     */
-    2.0,
-
-    /* Expression: 4
-     * Referenced by: '<S9>/Constant2'
-     */
-    4.0
-  }
-  ,
-
-  /* End of '<Root>/Home3' */
-
-  /* Start of '<Root>/Home2' */
-  {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S17>/Constant'
-     */
-    true,
-
     /* Expression: 2
      * Referenced by: '<S18>/Constant7'
      */
-    2.0,
-
-    /* Expression: 3
-     * Referenced by: '<S8>/Constant'
-     */
-    3.0,
-
-    /* Expression: 4
-     * Referenced by: '<S8>/Constant2'
-     */
-    4.0
+    2.0
   }
-  ,
-
-  /* End of '<Root>/Home2' */
-
-  /* Start of '<Root>/Home1' */
-  {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S13>/Constant'
-     */
-    true,
-
-    /* Expression: 2
-     * Referenced by: '<S7>/Constant'
-     */
-    2.0,
-
-    /* Expression: 4
-     * Referenced by: '<S7>/Constant2'
-     */
-    4.0
-  }
-  /* End of '<Root>/Home1' */
+  /* End of '<S8>/Stop Motor' */
 };

@@ -9,9 +9,13 @@ void init_datalog()
 	return;
 }
 
-void print_data()
+void print_data(double *data, int size)
 {
 
 	return;
 }
 
+void close_datalog()
+{
+	return;
+}
