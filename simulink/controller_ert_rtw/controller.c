@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.200
+ * Model version              : 4.204
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 24 09:55:24 2023
+ * C source code generated on : Mon Jul 24 10:02:17 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -130,7 +130,7 @@ void controller_Home1(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
     /* DataTypeConversion: '<S7>/Data Type Conversion' incorporates:
      *  Constant: '<S7>/Constant2'
      */
-    tmp_0 = floor(localP->Constant2_Value);
+    tmp_0 = floor(localP->Constant2_Value_k);
     if (rtIsNaN(tmp_0) || rtIsInf(tmp_0)) {
       tmp_0 = 0.0;
     } else {
@@ -168,8 +168,21 @@ void controller_Home1(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
       /* DataStoreRead: '<S14>/Data Store Read1' */
       rtb_DataStoreRead1_b = *rtd_cfg_id;
 
-      /* CCaller: '<S14>/C Caller4' */
-      stop_motor(rtb_DataStoreRead1_b);
+      /* DataTypeConversion: '<S14>/Data Type Conversion' incorporates:
+       *  Constant: '<S14>/Constant2'
+       */
+      rtb_Switch_c = floor(localP->Constant2_Value);
+      if (rtIsNaN(rtb_Switch_c) || rtIsInf(rtb_Switch_c)) {
+        rtb_Switch_c = 0.0;
+      } else {
+        rtb_Switch_c = fmod(rtb_Switch_c, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S14>/C Caller4' incorporates:
+       *  DataTypeConversion: '<S14>/Data Type Conversion'
+       */
+      stop_motor(rtb_DataStoreRead1_b, rtb_Switch_c < 0.0 ? -(int32_T)(uint32_T)
+                 -rtb_Switch_c : (int32_T)(uint32_T)rtb_Switch_c);
     }
 
     localZCE->StopMotor_Trig_ZCE_p = rtb_DataStoreRead_d3;
@@ -191,14 +204,14 @@ void controller_StopMotor(boolean_T rtu_Trigger, const int32_T *rtd_cfg_id,
 {
   real_T rtb_CCaller1_j[2];
   real_T tmp;
-  int32_T rtb_DataStoreRead2_j;
+  int32_T rtb_DataTypeConversion_m;
 
   /* Outputs for Triggered SubSystem: '<S8>/Stop Motor' incorporates:
    *  TriggerPort: '<S18>/Trigger'
    */
   if (rtu_Trigger && (localZCE->StopMotor_Trig_ZCE != POS_ZCSIG)) {
     /* DataStoreRead: '<S18>/Data Store Read2' */
-    rtb_DataStoreRead2_j = *rtd_pdo_id;
+    rtb_DataTypeConversion_m = *rtd_pdo_id;
 
     /* DataTypeConversion: '<S18>/Data Type Conversion7' incorporates:
      *  Constant: '<S18>/Constant7'
@@ -213,17 +226,30 @@ void controller_StopMotor(boolean_T rtu_Trigger, const int32_T *rtd_cfg_id,
     /* CCaller: '<S18>/C Caller1' incorporates:
      *  DataTypeConversion: '<S18>/Data Type Conversion7'
      */
-    get_encoder(rtb_DataStoreRead2_j, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
+    get_encoder(rtb_DataTypeConversion_m, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
                 (int32_T)(uint32_T)tmp, &rtb_CCaller1_j[0]);
 
     /* DataStoreWrite: '<S18>/Data Store Write1' */
     *rtd_enc1 = rtb_CCaller1_j[0];
 
     /* DataStoreRead: '<S18>/Data Store Read1' */
-    rtb_DataStoreRead2_j = *rtd_cfg_id;
+    rtb_DataTypeConversion_m = *rtd_cfg_id;
 
-    /* CCaller: '<S18>/C Caller4' */
-    stop_motor(rtb_DataStoreRead2_j);
+    /* DataTypeConversion: '<S18>/Data Type Conversion' incorporates:
+     *  Constant: '<S18>/Constant2'
+     */
+    tmp = floor(localP->Constant2_Value);
+    if (rtIsNaN(tmp) || rtIsInf(tmp)) {
+      tmp = 0.0;
+    } else {
+      tmp = fmod(tmp, 4.294967296E+9);
+    }
+
+    /* CCaller: '<S18>/C Caller4' incorporates:
+     *  DataTypeConversion: '<S18>/Data Type Conversion'
+     */
+    stop_motor(rtb_DataTypeConversion_m, tmp < 0.0 ? -(int32_T)(uint32_T)-tmp :
+               (int32_T)(uint32_T)tmp);
   }
 
   localZCE->StopMotor_Trig_ZCE = rtu_Trigger;

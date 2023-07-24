@@ -35,7 +35,7 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 	{
 		//printf("f.id %d, num reads %d\n", f.id, num_of_breaks);
 		err = PDO_read(pdo_id, &f, timeout);
-		sort_read(pos, f, &num_of_reads, &num_of_breaks);
+		sort_read(size, pos, f, &num_of_reads, &num_of_breaks);
 	}
 
 	if(err != 0) {
@@ -47,15 +47,27 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 }
 
 
-int sort_read(double* pos, my_can_frame f, int * num_of_reads, int * num_of_breaks)
+int sort_read(int size, double* pos, my_can_frame f, int * num_of_reads, int * num_of_breaks)
 {
 	uint32_t enc;
 
+	for(int i = 0; i < size; i++)
+	{
+		if(f.id == PDO_TX2_ID + i+1)
+		{
+			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
+			pos[i] = (double)enc;
+			*num_of_reads = *num_of_reads + 1;
+			return 0;
+		}
+	}
+
+	*num_of_breaks = *num_of_breaks + 1;
+	return 0;
+/*
 	switch(f.id) {
 		case(PDO_TX2_ID + 1):
-			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
-			pos[0] = (double)enc;//motor_enc_to_mm(enc);
-			*num_of_reads = *num_of_reads + 1;
+			
 			//printf("Node 1: %d\n", enc);
 			break;
 		case(PDO_TX2_ID + 2):
@@ -68,7 +80,7 @@ int sort_read(double* pos, my_can_frame f, int * num_of_reads, int * num_of_brea
 			*num_of_breaks = *num_of_breaks + 1;
 			break;
 	}
-
-	return 0;
+*/
+	
 
 }

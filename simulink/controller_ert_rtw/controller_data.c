@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.200
+ * Model version              : 4.204
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 24 09:55:24 2023
+ * C source code generated on : Mon Jul 24 10:02:17 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -227,6 +227,11 @@ P_controller_T controller_P = {
     /* Expression: 2
      * Referenced by: '<S26>/Constant7'
      */
+    2.0,
+
+    /* Expression: 2
+     * Referenced by: '<S26>/Constant2'
+     */
     2.0
   }
   ,
@@ -239,6 +244,11 @@ P_controller_T controller_P = {
      * Referenced by: '<S21>/Constant'
      */
     true,
+
+    /* Expression: 2
+     * Referenced by: '<S22>/Constant2'
+     */
+    2.0,
 
     /* Expression: 2
      * Referenced by: '<S9>/Constant'
@@ -259,6 +269,11 @@ P_controller_T controller_P = {
     /* Expression: 2
      * Referenced by: '<S18>/Constant7'
      */
+    2.0,
+
+    /* Expression: 2
+     * Referenced by: '<S18>/Constant2'
+     */
     2.0
   }
   ,
@@ -271,6 +286,11 @@ P_controller_T controller_P = {
      * Referenced by: '<S13>/Constant'
      */
     true,
+
+    /* Expression: 2
+     * Referenced by: '<S14>/Constant2'
+     */
+    2.0,
 
     /* Expression: 2
      * Referenced by: '<S7>/Constant'

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.200
+ * Model version              : 4.204
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 24 09:55:24 2023
+ * C source code generated on : Mon Jul 24 10:02:17 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -107,10 +107,13 @@ struct P_Home1_controller_T_ {
   boolean_T CompareToConstant_const;  /* Mask Parameter: CompareToConstant_const
                                        * Referenced by: '<S13>/Constant'
                                        */
+  real_T Constant2_Value;              /* Expression: 2
+                                        * Referenced by: '<S14>/Constant2'
+                                        */
   real_T Constant_Value;               /* Expression: 2
                                         * Referenced by: '<S7>/Constant'
                                         */
-  real_T Constant2_Value;              /* Expression: 4
+  real_T Constant2_Value_k;            /* Expression: 4
                                         * Referenced by: '<S7>/Constant2'
                                         */
 };
@@ -119,6 +122,9 @@ struct P_Home1_controller_T_ {
 struct P_StopMotor_controller_T_ {
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<S18>/Constant7'
+                                        */
+  real_T Constant2_Value;              /* Expression: 2
+                                        * Referenced by: '<S18>/Constant2'
                                         */
 };
 

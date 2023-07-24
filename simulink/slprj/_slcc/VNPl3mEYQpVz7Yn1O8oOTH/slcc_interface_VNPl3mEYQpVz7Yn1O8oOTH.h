@@ -19,7 +19,7 @@ DLL_EXPORT_CC extern void init_can_VNPl3mEYQpVz7Yn1O8oOTH(int32_T num_motors, re
 DLL_EXPORT_CC extern void get_encoder_VNPl3mEYQpVz7Yn1O8oOTH(int32_T pdo_id, int32_T size, real_T *pos);
 DLL_EXPORT_CC extern void set_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T pdo_id, int32_T motor_id, real_T set_val);
 DLL_EXPORT_CC extern void print_input_VNPl3mEYQpVz7Yn1O8oOTH(int32_T a, int32_T id);
-DLL_EXPORT_CC extern void stop_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T cfg_fd);
+DLL_EXPORT_CC extern void stop_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T cfg_fd, int32_T num_motors);
 DLL_EXPORT_CC extern void init_datalog_VNPl3mEYQpVz7Yn1O8oOTH(void);
 DLL_EXPORT_CC extern void print_data_VNPl3mEYQpVz7Yn1O8oOTH(real_T *data, int32_T size);
 DLL_EXPORT_CC extern void close_datalog_VNPl3mEYQpVz7Yn1O8oOTH(void);
