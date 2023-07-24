@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.198
+ * Model version              : 4.200
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 17:05:11 2023
+ * C source code generated on : Mon Jul 24 09:55:24 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -29,7 +29,6 @@
 #endif                                 /* controller_COMMON_INCLUDES_ */
 
 #include "controller_types.h"
-#include <stdio.h>
 #include "rtGetInf.h"
 #include <string.h>
 #include "rt_nonfinite.h"
@@ -61,24 +60,21 @@
 #include "stop_motor.h"
 #include "datalog.h"
 
-/* Zero-crossing (trigger) state for system '<S7>/Stop Motor' */
+/* Zero-crossing (trigger) state for system '<Root>/Home1' */
 typedef struct {
   ZCSigState StopMotor_Trig_ZCE_p;     /* '<S7>/Stop Motor' */
-} ZCE_StopMotor_controller_T;
+} ZCE_Home1_controller_T;
 
 /* Zero-crossing (trigger) state for system '<S8>/Stop Motor' */
 typedef struct {
   ZCSigState StopMotor_Trig_ZCE;       /* '<S8>/Stop Motor' */
-} ZCE_StopMotor_controller_a_T;
+} ZCE_StopMotor_controller_T;
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T TmpSignalConversionAtCCalle[2];
   real_T CCaller1[2];                  /* '<S12>/C Caller1' */
-  real_T Clock;                        /* '<S7>/Clock' */
-  real_T d;
-  int32_T CCaller5[2];                 /* '<S11>/C Caller5' */
-  boolean_T Compare;                   /* '<S1>/Compare' */
+  real_T Clock;                        /* '<S12>/Clock' */
+  boolean_T Compare;                   /* '<S4>/Compare' */
 } B_controller_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -94,21 +90,33 @@ typedef struct {
   boolean_T LS2;                       /* '<Root>/Data Store Memory3' */
   boolean_T objisempty;                /* '<Root>/Digital Read1' */
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
-  FILE* eml_openfiles[20];             /* '<S12>/MATLAB Function' */
+  boolean_T MainControl_MODE;          /* '<Root>/Main Control' */
   boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
-  boolean_T Home1_MODE;                /* '<Root>/Home1' */
 } DW_controller_T;
 
 /* Zero-crossing (trigger) state */
 typedef struct {
-  ZCE_StopMotor_controller_a_T StopMotor_p0;/* '<S10>/Stop Motor' */
-  ZCE_StopMotor_controller_T StopMotor_d;/* '<S9>/Stop Motor' */
-  ZCE_StopMotor_controller_a_T StopMotor_p;/* '<S8>/Stop Motor' */
-  ZCE_StopMotor_controller_T StopMotor;/* '<S7>/Stop Motor' */
+  ZCE_StopMotor_controller_T StopMotor_p;/* '<S10>/Stop Motor' */
+  ZCE_Home1_controller_T Home3;        /* '<Root>/Home3' */
+  ZCE_StopMotor_controller_T StopMotor;/* '<S8>/Stop Motor' */
+  ZCE_Home1_controller_T Home1;        /* '<Root>/Home1' */
 } PrevZCX_controller_T;
 
+/* Parameters for system: '<Root>/Home1' */
+struct P_Home1_controller_T_ {
+  boolean_T CompareToConstant_const;  /* Mask Parameter: CompareToConstant_const
+                                       * Referenced by: '<S13>/Constant'
+                                       */
+  real_T Constant_Value;               /* Expression: 2
+                                        * Referenced by: '<S7>/Constant'
+                                        */
+  real_T Constant2_Value;              /* Expression: 4
+                                        * Referenced by: '<S7>/Constant2'
+                                        */
+};
+
 /* Parameters for system: '<S8>/Stop Motor' */
-struct P_StopMotor_controller_a_T_ {
+struct P_StopMotor_controller_T_ {
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<S18>/Constant7'
                                         */
@@ -137,17 +145,9 @@ struct P_controller_T_ {
   int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
                                        * Referenced by: '<S29>/Constant'
                                        */
-  boolean_T CompareToConstant_const_b;
-                                    /* Mask Parameter: CompareToConstant_const_b
-                                     * Referenced by: '<S13>/Constant'
-                                     */
   boolean_T CompareToConstant_const_f;
                                     /* Mask Parameter: CompareToConstant_const_f
                                      * Referenced by: '<S17>/Constant'
-                                     */
-  boolean_T CompareToConstant_const_n;
-                                    /* Mask Parameter: CompareToConstant_const_n
-                                     * Referenced by: '<S21>/Constant'
                                      */
   boolean_T CompareToConstant_const_m;
                                     /* Mask Parameter: CompareToConstant_const_m
@@ -159,29 +159,11 @@ struct P_controller_T_ {
   real_T DigitalRead1_SampleTime;      /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read1'
                                         */
-  real_T Constant_Value;               /* Expression: 2
-                                        * Referenced by: '<S7>/Constant'
-                                        */
-  real_T Constant2_Value;              /* Expression: 4
-                                        * Referenced by: '<S7>/Constant2'
-                                        */
-  real_T Constant4_Value;              /* Expression: 3.45
-                                        * Referenced by: '<S7>/Constant4'
-                                        */
-  real_T Constant1_Value;              /* Expression: 2
-                                        * Referenced by: '<S7>/Constant1'
-                                        */
-  real_T Constant_Value_i;             /* Expression: 3
+  real_T Constant_Value;               /* Expression: 3
                                         * Referenced by: '<S8>/Constant'
                                         */
-  real_T Constant2_Value_c;            /* Expression: 4
+  real_T Constant2_Value;              /* Expression: 4
                                         * Referenced by: '<S8>/Constant2'
-                                        */
-  real_T Constant_Value_o;             /* Expression: 2
-                                        * Referenced by: '<S9>/Constant'
-                                        */
-  real_T Constant2_Value_b;            /* Expression: 4
-                                        * Referenced by: '<S9>/Constant2'
                                         */
   real_T Constant_Value_a;             /* Expression: 3
                                         * Referenced by: '<S10>/Constant'
@@ -192,7 +174,10 @@ struct P_controller_T_ {
   real_T Constant_Value_d;             /* Expression: 1
                                         * Referenced by: '<S11>/Constant'
                                         */
-  real_T Constant1_Value_f;            /* Expression: 5000
+  real_T Constant4_Value;              /* Expression: 2
+                                        * Referenced by: '<S11>/Constant4'
+                                        */
+  real_T Constant1_Value;              /* Expression: 5000
                                         * Referenced by: '<S11>/Constant1'
                                         */
   real_T Constant2_Value_l;            /* Expression: 1
@@ -204,7 +189,13 @@ struct P_controller_T_ {
   real_T Constant7_Value;              /* Expression: 2
                                         * Referenced by: '<S12>/Constant7'
                                         */
-  real_T Constant_Value_iy;            /* Expression: 1
+  real_T Constant4_Value_p;            /* Expression: 3.45
+                                        * Referenced by: '<S12>/Constant4'
+                                        */
+  real_T Constant2_Value_i;            /* Expression: 2
+                                        * Referenced by: '<S12>/Constant2'
+                                        */
+  real_T Constant_Value_i;             /* Expression: 1
                                         * Referenced by: '<S12>/Constant'
                                         */
   real_T Constant1_Value_m;            /* Expression: 2
@@ -259,8 +250,10 @@ struct P_controller_T_ {
                             /* Computed Parameter: DataStoreMemory3_InitialValue
                              * Referenced by: '<Root>/Data Store Memory3'
                              */
-  P_StopMotor_controller_a_T StopMotor_p0;/* '<S10>/Stop Motor' */
-  P_StopMotor_controller_a_T StopMotor_p;/* '<S8>/Stop Motor' */
+  P_StopMotor_controller_T StopMotor_p;/* '<S10>/Stop Motor' */
+  P_Home1_controller_T Home3;          /* '<Root>/Home3' */
+  P_StopMotor_controller_T StopMotor;  /* '<S8>/Stop Motor' */
+  P_Home1_controller_T Home1;          /* '<Root>/Home1' */
 };
 
 /* Real-time Model Data Structure */
@@ -323,8 +316,8 @@ extern volatile boolean_T runModel;
  * Block '<S20>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S24>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S28>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S31>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S32>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S33>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -372,8 +365,7 @@ extern volatile boolean_T runModel;
  * '<S28>'  : 'controller/Home4/Subsystem1'
  * '<S29>'  : 'controller/Initialize/Compare To Constant'
  * '<S30>'  : 'controller/Initialize/Subsystem'
- * '<S31>'  : 'controller/Main Control/MATLAB Function'
- * '<S32>'  : 'controller/Main Control/Subsystem1'
- * '<S33>'  : 'controller/Main Control/Subsystem2'
+ * '<S31>'  : 'controller/Main Control/Subsystem1'
+ * '<S32>'  : 'controller/Main Control/Subsystem2'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

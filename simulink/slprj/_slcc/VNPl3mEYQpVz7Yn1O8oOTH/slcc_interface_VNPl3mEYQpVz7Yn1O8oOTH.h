@@ -15,7 +15,7 @@ extern "C" {
 /* Function Declarations */
 DLL_EXPORT_CC extern void get_fptr_addr_VNPl3mEYQpVz7Yn1O8oOTH(struct _iobuf ***varAddr);
 DLL_EXPORT_CC extern const char_T *get_dll_checksum_VNPl3mEYQpVz7Yn1O8oOTH(void);
-DLL_EXPORT_CC extern void init_can_VNPl3mEYQpVz7Yn1O8oOTH(real_T maxSpeed, real_T maxAccel, int32_T *fds);
+DLL_EXPORT_CC extern void init_can_VNPl3mEYQpVz7Yn1O8oOTH(int32_T num_motors, real_T maxSpeed, real_T maxAccel, int32_T *fds);
 DLL_EXPORT_CC extern void get_encoder_VNPl3mEYQpVz7Yn1O8oOTH(int32_T pdo_id, int32_T size, real_T *pos);
 DLL_EXPORT_CC extern void set_motor_VNPl3mEYQpVz7Yn1O8oOTH(int32_T pdo_id, int32_T motor_id, real_T set_val);
 DLL_EXPORT_CC extern void print_input_VNPl3mEYQpVz7Yn1O8oOTH(int32_T a, int32_T id);
