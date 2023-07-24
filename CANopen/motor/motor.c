@@ -100,7 +100,7 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	uint16_t pdo_masks[2*num_motors];
 	uint16_t pdo_filters[2*num_motors];
 
-	for(int i = 0; i < 2*num_motor; i +=2 )
+	for(int i = 0; i < 2*num_motors; i +=2 )
 	{
 		pdo_masks[i] =  COB_MASK;
 		pdo_masks[i+1] = COB_MASK;
@@ -126,7 +126,7 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	cfg_masks[0] = COB_MASK;
 	cfg_filters[0] = 0x00;
 
-	for(int i = 0; i < 2*num_motor+1; i +=2 )
+	for(int i = 0; i < 2*num_motors+1; i +=2 )
 	{
 		pdo_masks[i+1] =  COB_MASK;
 		pdo_masks[i+2] = COB_MASK;
