@@ -92,10 +92,23 @@ static int motor_config_node(uint16_t node, int32_t maxSpeed, int32_t maxAccel) 
 }
 
 
-int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds) {
+int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	int err = 0;
 
 	// Open two connections to the CAN-network
+
+	uint16_t pdo_masks[2*num_motors];
+	uint16_t pdo_filters[2*num_motors];
+
+	for(int i = 0; i < 2*num_motor; i +=2 )
+	{
+		pdo_masks[i] =  COB_MASK;
+		pdo_masks[i+1] = COB_MASK;
+		pdo_filters[i] = PDO_TX1_ID + (i/2 + 1);
+		pdo_filters[i+1] = PDO_TX2_ID + (i/2 + 1);
+	}
+
+/*
 	uint16_t pdo_masks[4] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK};
 	uint16_t pdo_filters[4] = {
 		PDO_TX1_ID + 1,
@@ -103,8 +116,25 @@ int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds) {
 		PDO_TX1_ID + 2,
 		PDO_TX2_ID + 2
 	};
-	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 4);
+	*/
 
+	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2*num_motors);
+
+	uint16_t cfg_masks[2*num_motors + 1];
+	uint16_t cfg_filters[2*num_motors + 1];
+
+	cfg_masks[0] = COB_MASK;
+	cfg_filters[0] = 0x00;
+
+	for(int i = 0; i < 2*num_motor+1; i +=2 )
+	{
+		pdo_masks[i+1] =  COB_MASK;
+		pdo_masks[i+2] = COB_MASK;
+		pdo_filters[i+1] = PDO_TX1_ID + (i/2 + 1);
+		pdo_filters[i+2] = PDO_TX2_ID + (i/2 + 1);
+	}
+
+	/*
 	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[5] = {
 		0x00,
@@ -113,14 +143,13 @@ int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds) {
 		NMT_TX + 2,
 		SDO_TX + 2
 	};
-	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 5);
+	*/
+	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 2*num_motors + 1);
 
 	// Check that we connected OK
 	if (motor_pdo_fd == -1 || motor_cfg_fd == -1) {
 		return MOTOR_ERROR;
 	}
-
-	printf("fd: %d\n",motor_pdo_fd);
 
 	// Configure each node
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
@@ -128,19 +157,17 @@ int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds) {
 		return MOTOR_ERROR;
 	}
 
-
-	err |= motor_config_node(1,maxSpeed,maxAccel);
-	if (err != 0) {
-		return MOTOR_ERROR;
+	for(int i = 0; i < num_motors; i++)
+	{
+		err |= motor_config_node(i+1,maxSpeed,maxAccel);
+		if (err != 0) {
+			return MOTOR_ERROR;
+		}
 	}
-
-	err |= motor_config_node(2,maxSpeed,maxAccel);
-	if (err != 0) {
-		return MOTOR_ERROR;
-	}
+	
 
 	// Set the default mode
-	motor_setmode(Motor_mode_Torque);
+	motor_setmode(Motor_mode_Torque, num_motors);
 	if (err != 0) {
 		return MOTOR_ERROR;
 	}
@@ -158,13 +185,16 @@ void motor_close(void) {
 }
 
 
-int motor_enable() {
+int motor_enable(int num_motors) {
 	int err = 0;
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational); // switch_on_disabled -> switch_on_enabled
-	err |= epos_Controlword(1, Shutdown);
-	err |= epos_Controlword(1, Switch_On_And_Enable_Operation);
-	err |= epos_Controlword(2, Shutdown);
-	err |= epos_Controlword(2, Switch_On_And_Enable_Operation);
+	for(int i = 0; i < num_motors; i++)
+	{
+		err |= epos_Controlword(i, Shutdown);
+		err |= epos_Controlword(i, Switch_On_And_Enable_Operation);
+	}
+	
+
 
 	// Open PDO-communication
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Start_Node);
@@ -186,23 +216,29 @@ int motor_disable(void) {
 }
 
 
-int motor_halt(int cfg_fd) {
+int motor_halt(int cfg_fd, int num_motors) {
 	int err = 0;
 
 	// Stop PDO-communication
 	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
-	err |= epos_Controlword(1, Quickstop);
-	err |= epos_Controlword(2, Quickstop);
+	for(int i = 0; i < num_motors; i ++)
+	{
+		err |= epos_Controlword(i, Quickstop);
+	}
+	
 	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
 }
 
 
-int motor_setmode(enum Motor_mode mode) {
+int motor_setmode(enum Motor_mode mode, int num_motors) {
 	int err = 0;
-	err |= epos_Modes_of_Operation(1, (enum Epos_mode)mode);
-	err |= epos_Modes_of_Operation(2, (enum Epos_mode)mode);
+	for(int i = 0; i<num_motors; i++)
+	{
+		err |= epos_Modes_of_Operation(i, (enum Epos_mode)mode);
+	}
+
 	return err;
 }
 

@@ -37,7 +37,7 @@ extern int motor_cfg_fd;
  * and configures the two motors
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_init(int32_t maxSpeed, int32_t maxAccel, int* fds);
+int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds);
 
 /*! Closes the CAN connection */
 void motor_close(void);
@@ -47,14 +47,14 @@ void motor_close(void);
  * Turns the motors on
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_enable();
+int motor_enable(int num_motors);
 
 
 /*!
  * Stops the motors as quickly as possible, and holds them there.
  * Run motor_enable() to re-enable the controller.
  */
-int motor_halt(int cfg_fd);
+int motor_halt(int cfg_fd, int num_motors);
 
 
 /*!
@@ -67,7 +67,7 @@ int motor_disable(void);
  * Sets the opperation mode (Velocity or Position)
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_setmode(enum Motor_mode mode);
+int motor_setmode(enum Motor_mode mode, int num_motors);
 
 
 #endif // LIBMOTOR_H

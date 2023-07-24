@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.196
+ * Model version              : 4.198
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Jul 21 16:47:09 2023
+ * C source code generated on : Fri Jul 21 17:05:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,6 +45,14 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
+#ifndef rtmGetT
+#define rtmGetT(rtm)                   (rtmGetTPtr((rtm))[0])
+#endif
+
+#ifndef rtmGetTPtr
+#define rtmGetTPtr(rtm)                ((rtm)->Timing.t)
+#endif
+
 /* user code (top of header file) */
 #include "init_can.h"
 #include "get_encoder.h"
@@ -65,9 +73,12 @@ typedef struct {
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T CCaller1[2];                  /* '<S12>/C Caller1' */
   real_T TmpSignalConversionAtCCalle[2];
+  real_T CCaller1[2];                  /* '<S12>/C Caller1' */
+  real_T Clock;                        /* '<S7>/Clock' */
+  real_T d;
   int32_T CCaller5[2];                 /* '<S11>/C Caller5' */
+  boolean_T Compare;                   /* '<S1>/Compare' */
 } B_controller_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -85,6 +96,7 @@ typedef struct {
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
   FILE* eml_openfiles[20];             /* '<S12>/MATLAB Function' */
   boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
+  boolean_T Home1_MODE;                /* '<Root>/Home1' */
 } DW_controller_T;
 
 /* Zero-crossing (trigger) state */
@@ -153,9 +165,6 @@ struct P_controller_T_ {
   real_T Constant2_Value;              /* Expression: 4
                                         * Referenced by: '<S7>/Constant2'
                                         */
-  real_T Constant3_Value;              /* Expression: 2
-                                        * Referenced by: '<S7>/Constant3'
-                                        */
   real_T Constant4_Value;              /* Expression: 3.45
                                         * Referenced by: '<S7>/Constant4'
                                         */
@@ -189,7 +198,7 @@ struct P_controller_T_ {
   real_T Constant2_Value_l;            /* Expression: 1
                                         * Referenced by: '<S11>/Constant2'
                                         */
-  real_T Constant3_Value_m;            /* Expression: 2
+  real_T Constant3_Value;              /* Expression: 2
                                         * Referenced by: '<S11>/Constant3'
                                         */
   real_T Constant7_Value;              /* Expression: 2
@@ -257,6 +266,7 @@ struct P_controller_T_ {
 /* Real-time Model Data Structure */
 struct tag_RTM_controller_T {
   const char_T *errorStatus;
+  RTWSolverInfo solverInfo;
 
   /*
    * Timing:
@@ -264,9 +274,18 @@ struct tag_RTM_controller_T {
    * the timing information for the model.
    */
   struct {
+    uint32_T clockTick0;
+    uint32_T clockTickH0;
+    time_T stepSize0;
+    uint32_T clockTick1;
+    uint32_T clockTickH1;
     struct {
-      uint32_T TID[4];
+      uint32_T TID[5];
     } TaskCounters;
+
+    SimTimeStep simTimeStep;
+    time_T *t;
+    time_T tArray[5];
   } Timing;
 };
 
