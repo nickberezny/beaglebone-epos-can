@@ -190,8 +190,8 @@ int motor_enable(int num_motors) {
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational); // switch_on_disabled -> switch_on_enabled
 	for(int i = 0; i < num_motors; i++)
 	{
-		err |= epos_Controlword(i, Shutdown);
-		err |= epos_Controlword(i, Switch_On_And_Enable_Operation);
+		err |= epos_Controlword(i+1, Shutdown);
+		err |= epos_Controlword(i+1, Switch_On_And_Enable_Operation);
 	}
 	
 
@@ -223,7 +223,7 @@ int motor_halt(int cfg_fd, int num_motors) {
 	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
 	for(int i = 0; i < num_motors; i ++)
 	{
-		err |= epos_Controlword(i, Quickstop);
+		err |= epos_Controlword(i+1, Quickstop);
 	}
 	
 	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
@@ -236,7 +236,7 @@ int motor_setmode(enum Motor_mode mode, int num_motors) {
 	int err = 0;
 	for(int i = 0; i<num_motors; i++)
 	{
-		err |= epos_Modes_of_Operation(i, (enum Epos_mode)mode);
+		err |= epos_Modes_of_Operation(i+1, (enum Epos_mode)mode);
 	}
 
 	return err;
