@@ -15,12 +15,12 @@
 
 
 
-void stop_motor(int cfg_fd)
+void stop_motor(int cfg_fd, int num_motors)
 {
 	printf("test pdo: %d\n", motor_cfg_fd);
-	motor_halt(cfg_fd);
+	motor_halt(cfg_fd,num_motors);
 	sleep(0.5);
-	motor_enable();
+	motor_enable(num_motors);
 	return;
 }
 
