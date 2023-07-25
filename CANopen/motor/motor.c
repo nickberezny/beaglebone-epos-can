@@ -203,13 +203,15 @@ int motor_enable(int num_motors) {
 }
 
 
-int motor_disable(void) {
+int motor_disable(int num_motors) {
 	int err = 0;
 
 	// Stop PDO-communication
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
-	err |= epos_Controlword(1, Disable_Voltage);
-	err |= epos_Controlword(2, Disable_Voltage);
+	for(int i = 0; i < num_motors; i++)
+	{
+		err |= epos_Controlword(i+1, Disable_Voltage);
+	}
 	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;

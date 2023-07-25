@@ -61,7 +61,7 @@ int motor_halt(int cfg_fd, int num_motors);
  * Turns the motors off (no power).
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_disable(void);
+int motor_disable(int num_motors);
 
 /*!
  * Sets the opperation mode (Velocity or Position)

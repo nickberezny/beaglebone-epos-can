@@ -24,3 +24,10 @@ void stop_motor(int cfg_fd, int num_motors)
 	return;
 }
 
+void e_stop(int cfg_fd, int num_motors)
+{
+	stop_motor(cfg_fd, num_motors);
+	motor_disable(num_motors);
+	return;
+}
+
