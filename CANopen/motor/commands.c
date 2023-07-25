@@ -31,7 +31,7 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 	int num_of_breaks = 0;
 	my_can_frame f;
 
-	while(num_of_reads < size && num_of_breaks < size)
+	while(num_of_reads < size && num_of_breaks < size + 1)
 	{
 		//printf("f.id %d, num reads %d\n", f.id, num_of_breaks);
 		err = PDO_read(pdo_id, &f, timeout);
