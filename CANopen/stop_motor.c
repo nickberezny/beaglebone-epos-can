@@ -18,7 +18,7 @@
 void stop_motor(int cfg_fd, int num_motors)
 {
 	printf("test pdo: %d\n", motor_cfg_fd);
-	printf("halted? %d\n" motor_halt(cfg_fd,num_motors));
+	printf("halted? %d\n", motor_halt(cfg_fd,num_motors));
 	printf("enabled? %d\n",motor_enable(cfg_fd,num_motors));
 	return;
 }
