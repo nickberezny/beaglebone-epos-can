@@ -9,7 +9,7 @@
  *
  * Model version              : 4.246
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Tue Jul 25 10:06:33 2023
+ * C source code generated on : Tue Jul 25 10:15:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -532,11 +532,12 @@ void controller_step(void)
    *  Constant: '<Root>/Constant12'
    */
   controller_DW.GR2 = controller_P.Constant12_Value;
-
-  /* DataStoreWrite: '<Root>/Data Store Write11' incorporates:
-   *  Constant: '<Root>/Constant13'
-   */
-  controller_DW.state = controller_P.Constant13_Value;
+  if (controller_M->Timing.TaskCounters.TID[5] == 0) {
+    /* DataStoreWrite: '<Root>/Data Store Write11' incorporates:
+     *  Constant: '<Root>/Constant13'
+     */
+    controller_DW.state = controller_P.Constant13_Value;
+  }
 
   /* DataStoreWrite: '<Root>/Data Store Write2' incorporates:
    *  Constant: '<Root>/Constant4'
