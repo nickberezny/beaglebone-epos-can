@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.246
+ * Model version              : 4.269
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Tue Jul 25 10:15:11 2023
+ * C source code generated on : Tue Jul 25 15:18:52 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -46,9 +46,13 @@ extern void controller_AnalogInput_Start(DW_AnalogInput_controller_T *localDW,
 extern void controller_AnalogInput(B_AnalogInput_controller_T *localB,
   DW_AnalogInput_controller_T *localDW, P_AnalogInput_controller_T *localP);
 extern void controller_Home1(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
-  rtu_homing_torque, const uint8_T *rtd_LS1_R, const int32_T *rtd_cfg_id, const
-  real_T *rtd_num_motors, const int32_T *rtd_pdo_id, real_T *rtd_state,
-  P_Home1_controller_T *localP, ZCE_Home1_controller_T *localZCE);
+  rtu_homing_torque, const uint8_T *rtd_LS1_R, const int32_T *rtd_pdo_id, real_T
+  *rtd_state, P_Home1_controller_T *localP);
+extern void controller_StopMotor_Init(B_StopMotor_controller_T *localB,
+  P_StopMotor_controller_T *localP);
+extern void controller_StopMotor(boolean_T rtu_Trigger, const int32_T
+  *rtd_pdo_id, B_StopMotor_controller_T *localB, P_StopMotor_controller_T
+  *localP, ZCE_StopMotor_controller_T *localZCE);
 extern void controller_AnalogInput_Term(DW_AnalogInput_controller_T *localDW);
 
 #endif                                 /* RTW_HEADER_controller_private_h_ */

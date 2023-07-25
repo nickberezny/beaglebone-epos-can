@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.246
+ * Model version              : 4.269
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Tue Jul 25 10:15:11 2023
+ * C source code generated on : Tue Jul 25 15:18:52 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -112,6 +112,9 @@ typedef struct P_AnalogInput_controller_T_ P_AnalogInput_controller_T;
 
 /* Parameters for system: '<Root>/Home1' */
 typedef struct P_Home1_controller_T_ P_Home1_controller_T;
+
+/* Parameters for system: '<S12>/Stop Motor' */
+typedef struct P_StopMotor_controller_T_ P_StopMotor_controller_T;
 
 /* Parameters (default storage) */
 typedef struct P_controller_T_ P_controller_T;
