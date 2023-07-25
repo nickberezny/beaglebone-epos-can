@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Fri Jul 21 17:05:15 2023
+## Generated on : Tue Jul 25 10:06:38 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
@@ -165,7 +165,7 @@ DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DONESTEPFCN=1 -DTE
 DEFINES_CUSTOM = 
 DEFINES_OPTS = -DTID01EQ=1
 DEFINES_SKIPFORSIL = -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DSTACK_SIZE=64 -DRT
-DEFINES_STANDARD = -DMODEL=controller -DNUMST=5 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=controller -DNUMST=6 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD)
 
@@ -173,7 +173,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = MW_digitalIO.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c stop_motor.c datalog.c MW_bbblue_init.c linuxinitialize.c
+SRCS = coder_posix_time.c MW_digitalIO.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c stop_motor.c datalog.c MW_bbblue_init.c linuxinitialize.c
 
 MAIN_SRC = ert_main.c
 
@@ -183,7 +183,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = MW_digitalIO.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o stop_motor.c.o datalog.c.o MW_bbblue_init.c.o linuxinitialize.c.o
+OBJS = coder_posix_time.c.o MW_digitalIO.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o stop_motor.c.o datalog.c.o MW_bbblue_init.c.o linuxinitialize.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -428,6 +428,10 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 %.cpp.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+coder_posix_time.c.o : coder_posix_time.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 MW_digitalIO.c.o : MW_digitalIO.c

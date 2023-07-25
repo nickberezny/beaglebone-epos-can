@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.204
+ * Model version              : 4.246
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Jul 24 10:02:17 2023
+ * C source code generated on : Tue Jul 25 10:06:33 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,8 +22,47 @@
 #define RTW_HEADER_controller_types_h_
 #include "rtwtypes.h"
 #include "MW_SVD.h"
+#ifndef struct_tag_q4re843yYTsFSUEoF6hnJH
+#define struct_tag_q4re843yYTsFSUEoF6hnJH
 
-/* Custom Type definition for MATLABSystem: '<Root>/Digital Read1' */
+struct tag_q4re843yYTsFSUEoF6hnJH
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T SampleTime;
+};
+
+#endif                                 /* struct_tag_q4re843yYTsFSUEoF6hnJH */
+
+#ifndef typedef_beagleboneblue_bbblueADC_cont_T
+#define typedef_beagleboneblue_bbblueADC_cont_T
+
+typedef struct tag_q4re843yYTsFSUEoF6hnJH beagleboneblue_bbblueADC_cont_T;
+
+#endif                             /* typedef_beagleboneblue_bbblueADC_cont_T */
+
+#ifndef struct_tag_iXzQ7EANXGiUsqKDQTF8rH
+#define struct_tag_iXzQ7EANXGiUsqKDQTF8rH
+
+struct tag_iXzQ7EANXGiUsqKDQTF8rH
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T SampleTime;
+};
+
+#endif                                 /* struct_tag_iXzQ7EANXGiUsqKDQTF8rH */
+
+#ifndef typedef_beagleboneblue_bbblueButton_c_T
+#define typedef_beagleboneblue_bbblueButton_c_T
+
+typedef struct tag_iXzQ7EANXGiUsqKDQTF8rH beagleboneblue_bbblueButton_c_T;
+
+#endif                             /* typedef_beagleboneblue_bbblueButton_c_T */
+
+/* Custom Type definition for MATLABSystem: '<Root>/Digital Read3' */
 #include "MW_SVD.h"
 #ifndef struct_tag_1EBWQ6hhKs9Y37qjpZj8aH
 #define struct_tag_1EBWQ6hhKs9Y37qjpZj8aH
@@ -46,11 +85,33 @@ typedef struct tag_1EBWQ6hhKs9Y37qjpZj8aH beagleboneblue_bbblueDigitalR_T;
 
 #endif                             /* typedef_beagleboneblue_bbblueDigitalR_T */
 
+#ifndef struct_tag_fYOEcv5C5Uqf6zenXgF1HG
+#define struct_tag_fYOEcv5C5Uqf6zenXgF1HG
+
+struct tag_fYOEcv5C5Uqf6zenXgF1HG
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+};
+
+#endif                                 /* struct_tag_fYOEcv5C5Uqf6zenXgF1HG */
+
+#ifndef typedef_beagleboneblue_bbblueLED_cont_T
+#define typedef_beagleboneblue_bbblueLED_cont_T
+
+typedef struct tag_fYOEcv5C5Uqf6zenXgF1HG beagleboneblue_bbblueLED_cont_T;
+
+#endif                             /* typedef_beagleboneblue_bbblueLED_cont_T */
+
+/* Custom Type definition for MATLAB Function: '<S15>/MATLAB Function' */
+#include "coder_posix_time.h"
+
+/* Parameters for system: '<Root>/Analog Input' */
+typedef struct P_AnalogInput_controller_T_ P_AnalogInput_controller_T;
+
 /* Parameters for system: '<Root>/Home1' */
 typedef struct P_Home1_controller_T_ P_Home1_controller_T;
-
-/* Parameters for system: '<S8>/Stop Motor' */
-typedef struct P_StopMotor_controller_T_ P_StopMotor_controller_T;
 
 /* Parameters (default storage) */
 typedef struct P_controller_T_ P_controller_T;
