@@ -20,14 +20,14 @@ void stop_motor(int cfg_fd, int num_motors)
 	printf("test pdo: %d\n", motor_cfg_fd);
 	motor_halt(cfg_fd,num_motors);
 	sleep(0.5);
-	motor_enable(num_motors);
+	motor_enable(cfg_fd,num_motors);
 	return;
 }
 
 void e_stop(int cfg_fd, int num_motors)
 {
 	stop_motor(cfg_fd, num_motors);
-	motor_disable(num_motors);
+	motor_disable(cfg_fd,num_motors);
 	return;
 }
 

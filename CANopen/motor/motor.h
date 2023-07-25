@@ -47,7 +47,7 @@ void motor_close(void);
  * Turns the motors on
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_enable(int num_motors);
+int motor_enable(int cfg_fd, int num_motors);
 
 
 /*!
@@ -61,7 +61,7 @@ int motor_halt(int cfg_fd, int num_motors);
  * Turns the motors off (no power).
  * \return 0 on success, MOTOR_ERROR (-1) on error
  */
-int motor_disable(int num_motors);
+int motor_disable(int cfg_fd, int num_motors);
 
 /*!
  * Sets the opperation mode (Velocity or Position)

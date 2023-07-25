@@ -185,9 +185,9 @@ void motor_close(void) {
 }
 
 
-int motor_enable(int num_motors) {
+int motor_enable(int cfg_fd, int num_motors) {
 	int err = 0;
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational); // switch_on_disabled -> switch_on_enabled
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational); // switch_on_disabled -> switch_on_enabled
 	for(int i = 0; i < num_motors; i++)
 	{
 		err |= epos_Controlword(i+1, Shutdown);
@@ -197,22 +197,22 @@ int motor_enable(int num_motors) {
 
 
 	// Open PDO-communication
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Start_Node);
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Start_Node);
 
 	return err;
 }
 
 
-int motor_disable(int num_motors) {
+int motor_disable(int cfg_fd, int num_motors) {
 	int err = 0;
 
 	// Stop PDO-communication
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
 	for(int i = 0; i < num_motors; i++)
 	{
 		err |= epos_Controlword(i+1, Disable_Voltage);
 	}
-	err |= NMT_change_state(motor_cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
+	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
 }
