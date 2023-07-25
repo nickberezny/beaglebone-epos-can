@@ -212,7 +212,7 @@ int motor_disable(int cfg_fd, int num_motors) {
 	{
 		err |= epos_Controlword(i+1, Disable_Voltage);
 	}
-	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
+	//err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
 }
@@ -228,7 +228,7 @@ int motor_halt(int cfg_fd, int num_motors) {
 		err |= epos_Controlword(i+1, Quickstop);
 	}
 	
-	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
+	//err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Stop_Node);
 
 	return err;
 }
