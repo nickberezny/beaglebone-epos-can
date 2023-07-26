@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.271
+ * Model version              : 4.272
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 13:21:24 2023
+ * C source code generated on : Wed Jul 26 14:42:42 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -413,12 +413,12 @@ struct tag_RTM_controller_T {
     uint32_T clockTick1;
     uint32_T clockTickH1;
     struct {
-      uint32_T TID[5];
+      uint32_T TID[6];
     } TaskCounters;
 
     SimTimeStep simTimeStep;
     time_T *t;
-    time_T tArray[5];
+    time_T tArray[6];
   } Timing;
 };
 

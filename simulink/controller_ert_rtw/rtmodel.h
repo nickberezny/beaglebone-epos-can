@@ -4,7 +4,7 @@
  * Code generation for Simulink model "controller".
  *
  * Simulink Coder version                : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 13:21:24 2023
+ * C source code generated on : Wed Jul 26 14:42:42 2023
  *
  * Note that the generated code is not dependent on this header file.
  * The file is used in cojuction with the automatic build procedure.

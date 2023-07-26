@@ -38,14 +38,14 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 		sort_read(size, pos, f, &num_of_reads, &num_of_breaks);
 		if(num_of_breaks == size+1) printf("read failed!\n");
 
-		printf("f.id:%d\n",f.id);
+		//printf("f.id:%d\n",f.id);
 	}
 
 	if(err != 0) {
 		return err;
 	}
 
-	printf("Pos: %f %f\n", pos[0], pos[1]);
+	//printf("Pos: %f %f\n", pos[0], pos[1]);
 
 
 	return 0;
