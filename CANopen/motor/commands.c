@@ -56,7 +56,7 @@ int sort_read(int size, double* pos, my_can_frame f, int * num_of_reads, int * n
 
 	for(int i = 0; i < size; i++)
 	{
-		if(f.id == PDO_TX2_ID + i+1)
+		if(f.id == PDO_TX1_ID + i+1)
 		{
 			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
 			pos[i] = (double)enc;
