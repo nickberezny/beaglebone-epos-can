@@ -77,10 +77,9 @@ static int motor_config_node(uint16_t node, int32_t maxSpeed, int32_t maxAccel) 
 	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, status);
 	*/
 	// PDO TX2 Position and speed
-	num_PDOs = 2;
+	num_PDOs = 1;
 	Epos_pdo_mapping enc[] = {
 		{0x6064, 0x00, 32},  // Position Actual value
-		{0x606C, 0x00, 32}   // Velocity Actual value
 	};
 	err |= epos_Transmit_PDO_n_Mapping(node, 1, num_PDOs, enc);
 
