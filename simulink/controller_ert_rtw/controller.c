@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.272
+ * Model version              : 4.280
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 14:42:42 2023
+ * C source code generated on : Wed Jul 26 16:27:24 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -578,7 +578,7 @@ void controller_step(void)
   /* DataStoreWrite: '<Root>/Data Store Write7' incorporates:
    *  Constant: '<Root>/Constant5'
    */
-  controller_DW.max_speed = controller_P.Constant5_Value_i;
+  controller_DW.max_speed = controller_P.Constant5_Value;
 
   /* DataStoreWrite: '<Root>/Data Store Write8' incorporates:
    *  Constant: '<Root>/Constant6'
@@ -632,12 +632,12 @@ void controller_step(void)
     /* DataTypeConversion: '<Root>/Data Type Conversion' incorporates:
      *  Constant: '<Root>/Constant14'
      */
-    controller_B.DataStoreRead7 = floor(controller_P.Constant14_Value);
-    if (rtIsNaN(controller_B.DataStoreRead7) || rtIsInf
-        (controller_B.DataStoreRead7)) {
-      controller_B.DataStoreRead7 = 0.0;
+    controller_B.DataStoreRead8 = floor(controller_P.Constant14_Value);
+    if (rtIsNaN(controller_B.DataStoreRead8) || rtIsInf
+        (controller_B.DataStoreRead8)) {
+      controller_B.DataStoreRead8 = 0.0;
     } else {
-      controller_B.DataStoreRead7 = fmod(controller_B.DataStoreRead7,
+      controller_B.DataStoreRead8 = fmod(controller_B.DataStoreRead8,
         4.294967296E+9);
     }
 
@@ -646,9 +646,9 @@ void controller_step(void)
      *  DataTypeConversion: '<Root>/Data Type Conversion1'
      */
     print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi :
-                (int32_T)(uint32_T)controller_B.shi, controller_B.DataStoreRead7
-                < 0.0 ? -(int32_T)(uint32_T)-controller_B.DataStoreRead7 :
-                (int32_T)(uint32_T)controller_B.DataStoreRead7);
+                (int32_T)(uint32_T)controller_B.shi, controller_B.DataStoreRead8
+                < 0.0 ? -(int32_T)(uint32_T)-controller_B.DataStoreRead8 :
+                (int32_T)(uint32_T)controller_B.DataStoreRead8);
 
     /* Outputs for Enabled SubSystem: '<Root>/Initialize' incorporates:
      *  EnablePort: '<S14>/Enable'
@@ -745,7 +745,7 @@ void controller_step(void)
      *  Constant: '<Root>/Constant3'
      */
     controller_Home1(rtb_Compare_b, controller_P.Constant2_Value_m,
-                     controller_P.Constant3_Value_j, &controller_DW.LS1_R,
+                     controller_P.Constant3_Value, &controller_DW.LS1_R,
                      &controller_DW.pdo_id, &controller_DW.state,
                      &controller_P.Home2);
 
@@ -753,10 +753,10 @@ void controller_step(void)
   }
 
   /* DataStoreRead: '<Root>/Data Store Read7' */
-  controller_B.DataStoreRead7 = controller_DW.q01;
+  controller_B.DataStoreRead1_c = controller_DW.q01;
 
   /* DataStoreRead: '<Root>/Data Store Read8' */
-  controller_B.DataStoreRead1_c = controller_DW.q02;
+  controller_B.DataStoreRead8 = controller_DW.q02;
 
   /* RelationalOperator: '<S4>/Compare' incorporates:
    *  Constant: '<S4>/Constant'
@@ -770,19 +770,19 @@ void controller_step(void)
    */
   controller_DW.MainControl_MODE = controller_B.Compare;
   if (controller_DW.MainControl_MODE) {
-    /* Switch: '<S34>/Switch' incorporates:
+    /* Switch: '<S35>/Switch' incorporates:
      *  Constant: '<S32>/Constant'
      *  DataStoreRead: '<S15>/Data Store Read3'
      *  RelationalOperator: '<S32>/Compare'
      */
     if (controller_DW.LS1_R == controller_P.CompareToConstant_const_g) {
-      /* DataStoreWrite: '<S34>/Data Store Write' incorporates:
+      /* DataStoreWrite: '<S35>/Data Store Write' incorporates:
        *  Constant: '<S15>/Constant4'
        */
       controller_DW.state = controller_P.Constant4_Value;
     }
 
-    /* End of Switch: '<S34>/Switch' */
+    /* End of Switch: '<S35>/Switch' */
 
     /* MATLAB Function: '<S15>/MATLAB Function' */
     controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
@@ -934,11 +934,43 @@ void controller_step(void)
                 (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
                 controller_B.shi, &controller_B.CCaller1[0]);
 
-    /* Sum: '<S15>/Sum' */
-    controller_B.DataStoreRead7 = controller_B.CCaller1[0] -
-      controller_B.DataStoreRead7;
-    controller_B.DataStoreRead1_c = controller_B.CCaller1[1] -
+    /* Sum: '<S15>/Sum' incorporates:
+     *  Product: '<S15>/Divide'
+     */
+    controller_B.Switch[0] = controller_B.CCaller1[0] -
       controller_B.DataStoreRead1_c;
+    controller_B.Switch[1] = controller_B.CCaller1[1] -
+      controller_B.DataStoreRead8;
+
+    /* RelationalOperator: '<S33>/Compare' incorporates:
+     *  Constant: '<S33>/Constant'
+     */
+    controller_B.Compare_e[0] = (controller_B.CCaller1[0] !=
+      controller_P.Constant_Value_p);
+    controller_B.Compare_e[1] = (controller_B.CCaller1[1] !=
+      controller_P.Constant_Value_p);
+
+    /* Delay: '<S15>/Delay' */
+    controller_B.Delay[0] = controller_DW.Delay_DSTATE[0];
+
+    /* Switch: '<S15>/Switch' */
+    if (!controller_B.Compare_e[0]) {
+      /* Switch: '<S15>/Switch' incorporates:
+       *  Product: '<S15>/Divide'
+       */
+      controller_B.Switch[0] = controller_B.Delay[0];
+    }
+
+    /* Delay: '<S15>/Delay' */
+    controller_B.Delay[1] = controller_DW.Delay_DSTATE[1];
+
+    /* Switch: '<S15>/Switch' */
+    if (!controller_B.Compare_e[1]) {
+      /* Switch: '<S15>/Switch' incorporates:
+       *  Product: '<S15>/Divide'
+       */
+      controller_B.Switch[1] = controller_B.Delay[1];
+    }
 
     /* Gain: '<S15>/Gain2' incorporates:
      *  DataStoreRead: '<S15>/Data Store Read1'
@@ -947,10 +979,10 @@ void controller_step(void)
      *  Gain: '<S15>/Gain1'
      *  Product: '<S15>/Divide'
      */
-    controller_B.Gain2[0] = controller_B.DataStoreRead7 /
-      (controller_P.Gain_Gain * controller_DW.GR1) * controller_P.Gain2_Gain;
-    controller_B.Gain2[1] = controller_B.DataStoreRead1_c /
-      (controller_P.Gain1_Gain * controller_DW.GR2) * controller_P.Gain2_Gain;
+    controller_B.Gain2[0] = controller_B.Switch[0] / (controller_P.Gain_Gain *
+      controller_DW.GR1) * controller_P.Gain2_Gain;
+    controller_B.Gain2[1] = controller_B.Switch[1] / (controller_P.Gain1_Gain *
+      controller_DW.GR2) * controller_P.Gain2_Gain;
 
     /* SignalConversion generated from: '<S15>/C Caller4' incorporates:
      *  MATLAB Function: '<S15>/MATLAB Function'
@@ -975,8 +1007,13 @@ void controller_step(void)
     print_data(&controller_B.TmpSignalConversionAtCCalle[0], controller_B.shi <
                0.0 ? -(int32_T)(uint32_T)-controller_B.shi : (int32_T)(uint32_T)
                controller_B.shi);
+
+    /* Sin: '<S15>/Sine Wave' */
+    controller_B.SineWave = sin(controller_P.SineWave_Freq *
+      controller_M->Timing.t[0] + controller_P.SineWave_Phase) *
+      controller_P.SineWave_Amp + controller_P.SineWave_Bias;
     if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-      /* DataTypeConversion: '<S35>/Data Type Conversion1' incorporates:
+      /* DataTypeConversion: '<S36>/Data Type Conversion1' incorporates:
        *  Constant: '<S15>/Constant'
        */
       controller_B.shi = floor(controller_P.Constant_Value_i);
@@ -986,16 +1023,15 @@ void controller_step(void)
         controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
       }
 
-      /* CCaller: '<S35>/C Caller3' incorporates:
-       *  Constant: '<S15>/Constant3'
-       *  DataStoreRead: '<S35>/Data Store Read2'
-       *  DataTypeConversion: '<S35>/Data Type Conversion1'
+      /* CCaller: '<S36>/C Caller3' incorporates:
+       *  DataStoreRead: '<S36>/Data Store Read2'
+       *  DataTypeConversion: '<S36>/Data Type Conversion1'
        */
       set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
                 (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_P.Constant3_Value);
+                controller_B.shi, controller_B.SineWave);
 
-      /* DataTypeConversion: '<S36>/Data Type Conversion1' incorporates:
+      /* DataTypeConversion: '<S37>/Data Type Conversion1' incorporates:
        *  Constant: '<S15>/Constant1'
        */
       controller_B.shi = floor(controller_P.Constant1_Value_m);
@@ -1005,14 +1041,13 @@ void controller_step(void)
         controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
       }
 
-      /* CCaller: '<S36>/C Caller3' incorporates:
-       *  Constant: '<S15>/Constant5'
-       *  DataStoreRead: '<S36>/Data Store Read2'
-       *  DataTypeConversion: '<S36>/Data Type Conversion1'
+      /* CCaller: '<S37>/C Caller3' incorporates:
+       *  DataStoreRead: '<S37>/Data Store Read2'
+       *  DataTypeConversion: '<S37>/Data Type Conversion1'
        */
       set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
                 (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_P.Constant5_Value);
+                controller_B.shi, controller_B.SineWave);
     }
   }
 
@@ -1172,6 +1207,17 @@ void controller_step(void)
 
     /* End of MATLABSystem: '<Root>/Digital Read1' */
   }
+
+  /* Update for Enabled SubSystem: '<Root>/Main Control' incorporates:
+   *  EnablePort: '<S15>/Enable'
+   */
+  if (controller_DW.MainControl_MODE) {
+    /* Update for Delay: '<S15>/Delay' */
+    controller_DW.Delay_DSTATE[0] = controller_B.Switch[0];
+    controller_DW.Delay_DSTATE[1] = controller_B.Switch[1];
+  }
+
+  /* End of Update for SubSystem: '<Root>/Main Control' */
 
   /* Update absolute time for base rate */
   /* The "clockTick0" counts the number of times the code of this task has
@@ -1377,6 +1423,13 @@ void controller_initialize(void)
   controller_PrevZCX.ExitControl_Trig_ZCE = POS_ZCSIG;
   controller_PrevZCX.StopMotor_p.StopMotor_Trig_ZCE = POS_ZCSIG;
   controller_PrevZCX.StopMotor.StopMotor_Trig_ZCE = POS_ZCSIG;
+
+  /* SystemInitialize for Enabled SubSystem: '<Root>/Main Control' */
+  /* InitializeConditions for Delay: '<S15>/Delay' */
+  controller_DW.Delay_DSTATE[0] = controller_P.Delay_InitialCondition;
+  controller_DW.Delay_DSTATE[1] = controller_P.Delay_InitialCondition;
+
+  /* End of SystemInitialize for SubSystem: '<Root>/Main Control' */
 
   /* SystemInitialize for Enabled SubSystem: '<Root>/Home3' */
   /* SystemInitialize for Triggered SubSystem: '<S12>/Stop Motor' */

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.272
+ * Model version              : 4.280
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 14:42:42 2023
+ * C source code generated on : Wed Jul 26 16:27:24 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -86,6 +86,8 @@ typedef struct {
 typedef struct {
   real_T TmpSignalConversionAtCCalle[3];
   real_T CCaller1[2];                  /* '<S15>/C Caller1' */
+  real_T Delay[2];                     /* '<S15>/Delay' */
+  real_T Switch[2];                    /* '<S15>/Switch' */
   real_T Gain2[2];                     /* '<S15>/Gain2' */
   creal_T d_data;
   creal_T b_c;
@@ -96,6 +98,7 @@ typedef struct {
   creal_T t_m;
   creal_T da;
   creal_T t_c;
+  real_T SineWave;                     /* '<S15>/Sine Wave' */
   real_T c_tm_mon;
   real_T c_tm_year;
   real_T second;
@@ -105,13 +108,14 @@ typedef struct {
   real_T b_alo;
   real_T d_ahi_k;
   real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
-  real_T DataStoreRead7;               /* '<Root>/Data Store Read7' */
+  real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
   real_T alo;
   real_T b;
   real_T alo_c;
   real_T alo_b;
   int32_T CCaller5[2];                 /* '<S14>/C Caller5' */
   boolean_T Compare;                   /* '<S4>/Compare' */
+  boolean_T Compare_e[2];              /* '<S33>/Compare' */
   B_StopMotor_controller_T StopMotor_p;/* '<S13>/Stop Motor' */
   B_StopMotor_controller_T StopMotor;  /* '<S12>/Stop Motor' */
   B_AnalogInput_controller_T AnalogInput1;/* '<Root>/Analog Input' */
@@ -127,6 +131,7 @@ typedef struct {
   beagleboneblue_bbblueDigitalR_T obj_a;/* '<Root>/Digital Read1' */
   beagleboneblue_bbblueDigitalR_T obj_b;/* '<Root>/Digital Read' */
   beagleboneblue_bbblueLED_cont_T obj_n;/* '<S8>/LED' */
+  real_T Delay_DSTATE[2];              /* '<S15>/Delay' */
   real_T state;                        /* '<Root>/Data Store Memory' */
   real_T F1;                           /* '<Root>/Data Store Memory10' */
   real_T F2;                           /* '<Root>/Data Store Memory11' */
@@ -265,6 +270,12 @@ struct P_controller_T_ {
   real_T Constant4_Value;              /* Expression: 6
                                         * Referenced by: '<S15>/Constant4'
                                         */
+  real_T Constant_Value_p;             /* Expression: 0
+                                        * Referenced by: '<S33>/Constant'
+                                        */
+  real_T Delay_InitialCondition;       /* Expression: 0
+                                        * Referenced by: '<S15>/Delay'
+                                        */
   real_T Gain_Gain;                    /* Expression: 4*1024
                                         * Referenced by: '<S15>/Gain'
                                         */
@@ -280,14 +291,20 @@ struct P_controller_T_ {
   real_T Constant_Value_i;             /* Expression: 1
                                         * Referenced by: '<S15>/Constant'
                                         */
-  real_T Constant3_Value;              /* Expression: 50
-                                        * Referenced by: '<S15>/Constant3'
+  real_T SineWave_Amp;                 /* Expression: 2
+                                        * Referenced by: '<S15>/Sine Wave'
+                                        */
+  real_T SineWave_Bias;                /* Expression: 50
+                                        * Referenced by: '<S15>/Sine Wave'
+                                        */
+  real_T SineWave_Freq;                /* Expression: 1
+                                        * Referenced by: '<S15>/Sine Wave'
+                                        */
+  real_T SineWave_Phase;               /* Expression: 0
+                                        * Referenced by: '<S15>/Sine Wave'
                                         */
   real_T Constant1_Value_m;            /* Expression: 2
                                         * Referenced by: '<S15>/Constant1'
-                                        */
-  real_T Constant5_Value;              /* Expression: 50
-                                        * Referenced by: '<S15>/Constant5'
                                         */
   real_T Constant12_Value;             /* Expression: 353
                                         * Referenced by: '<Root>/Constant12'
@@ -298,7 +315,7 @@ struct P_controller_T_ {
   real_T Constant4_Value_g;            /* Expression: 2
                                         * Referenced by: '<Root>/Constant4'
                                         */
-  real_T Constant5_Value_i;            /* Expression: 5000
+  real_T Constant5_Value;              /* Expression: 5000
                                         * Referenced by: '<Root>/Constant5'
                                         */
   real_T Constant6_Value;              /* Expression: 5000
@@ -319,7 +336,7 @@ struct P_controller_T_ {
   real_T Constant2_Value_m;            /* Expression: 2
                                         * Referenced by: '<Root>/Constant2'
                                         */
-  real_T Constant3_Value_j;            /* Expression: 0
+  real_T Constant3_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant3'
                                         */
   real_T Constant8_Value;              /* Expression: 1
@@ -452,8 +469,8 @@ extern volatile boolean_T runModel;
  * Block '<S21>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S25>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S29>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S35>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S36>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S37>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -503,9 +520,10 @@ extern volatile boolean_T runModel;
  * '<S30>'  : 'controller/Initialize/Compare To Constant'
  * '<S31>'  : 'controller/Initialize/Subsystem'
  * '<S32>'  : 'controller/Main Control/Compare To Constant'
- * '<S33>'  : 'controller/Main Control/MATLAB Function'
- * '<S34>'  : 'controller/Main Control/Subsystem'
- * '<S35>'  : 'controller/Main Control/Subsystem1'
- * '<S36>'  : 'controller/Main Control/Subsystem2'
+ * '<S33>'  : 'controller/Main Control/Compare To Zero'
+ * '<S34>'  : 'controller/Main Control/MATLAB Function'
+ * '<S35>'  : 'controller/Main Control/Subsystem'
+ * '<S36>'  : 'controller/Main Control/Subsystem1'
+ * '<S37>'  : 'controller/Main Control/Subsystem2'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

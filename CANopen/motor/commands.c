@@ -45,7 +45,7 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 		return err;
 	}
 
-	//printf("Pos: %f %f\n", pos[0], pos[1]);
+	printf("Pos: %f %f\n", pos[0], pos[1]);
 
 
 	return 0;
@@ -69,23 +69,5 @@ int sort_read(int size, double* pos, my_can_frame f, int * num_of_reads, int * n
 
 	*num_of_breaks = *num_of_breaks + 1;
 	return 0;
-/*
-	switch(f.id) {
-		case(PDO_TX2_ID + 1):
-			
-			//printf("Node 1: %d\n", enc);
-			break;
-		case(PDO_TX2_ID + 2):
-			enc = ((uint32_t)f.data[0]<<0) | ((uint32_t)f.data[1]<<8) | ((uint32_t)f.data[2]<<16) | ((uint32_t)f.data[3]<<24);
-			pos[1] = (double)enc;//motor_enc_to_mm(-enc);
-			*num_of_reads = *num_of_reads + 1;
-			//printf("Node 2: %d\n", enc);
-			break;
-		default:
-			*num_of_breaks = *num_of_breaks + 1;
-			break;
-	}
-*/
-	
 
 }
