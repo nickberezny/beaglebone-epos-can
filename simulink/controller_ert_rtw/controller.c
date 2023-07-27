@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.280
+ * Model version              : 4.281
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 16:27:24 2023
+ * C source code generated on : Wed Jul 26 23:19:04 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -1012,43 +1012,42 @@ void controller_step(void)
     controller_B.SineWave = sin(controller_P.SineWave_Freq *
       controller_M->Timing.t[0] + controller_P.SineWave_Phase) *
       controller_P.SineWave_Amp + controller_P.SineWave_Bias;
-    if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-      /* DataTypeConversion: '<S36>/Data Type Conversion1' incorporates:
-       *  Constant: '<S15>/Constant'
-       */
-      controller_B.shi = floor(controller_P.Constant_Value_i);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
-      } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-      }
 
-      /* CCaller: '<S36>/C Caller3' incorporates:
-       *  DataStoreRead: '<S36>/Data Store Read2'
-       *  DataTypeConversion: '<S36>/Data Type Conversion1'
-       */
-      set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_B.SineWave);
-
-      /* DataTypeConversion: '<S37>/Data Type Conversion1' incorporates:
-       *  Constant: '<S15>/Constant1'
-       */
-      controller_B.shi = floor(controller_P.Constant1_Value_m);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
-      } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-      }
-
-      /* CCaller: '<S37>/C Caller3' incorporates:
-       *  DataStoreRead: '<S37>/Data Store Read2'
-       *  DataTypeConversion: '<S37>/Data Type Conversion1'
-       */
-      set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_B.SineWave);
+    /* DataTypeConversion: '<S36>/Data Type Conversion1' incorporates:
+     *  Constant: '<S15>/Constant'
+     */
+    controller_B.shi = floor(controller_P.Constant_Value_i);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
     }
+
+    /* CCaller: '<S36>/C Caller3' incorporates:
+     *  DataStoreRead: '<S36>/Data Store Read2'
+     *  DataTypeConversion: '<S36>/Data Type Conversion1'
+     */
+    set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
+              -controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
+              controller_B.SineWave);
+
+    /* DataTypeConversion: '<S37>/Data Type Conversion1' incorporates:
+     *  Constant: '<S15>/Constant1'
+     */
+    controller_B.shi = floor(controller_P.Constant1_Value_m);
+    if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
+      controller_B.shi = 0.0;
+    } else {
+      controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+    }
+
+    /* CCaller: '<S37>/C Caller3' incorporates:
+     *  DataStoreRead: '<S37>/Data Store Read2'
+     *  DataTypeConversion: '<S37>/Data Type Conversion1'
+     */
+    set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
+              -controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
+              controller_B.SineWave);
   }
 
   /* End of Outputs for SubSystem: '<Root>/Main Control' */
