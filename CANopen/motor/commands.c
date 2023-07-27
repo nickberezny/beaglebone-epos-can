@@ -41,12 +41,14 @@ int vel_read(int pdo_id, int size, double* pos, int timeout) {
 		//printf("f.id:%d\n",f.id);
 	}
 
+	printf("Pos: %f %f\n", pos[0], pos[1]);
+
+
 	if(err != 0) {
 		return err;
 	}
 
-	printf("Pos: %f %f\n", pos[0], pos[1]);
-
+	
 
 	return 0;
 }
