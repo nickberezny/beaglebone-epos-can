@@ -15,11 +15,15 @@
 
 
 
-void stop_motor(int cfg_fd, int num_motors)
+void stop_motor(int pdo_fd, int num_motors)
 {
-	printf("test pdo: %d\n", motor_cfg_fd);
-	printf("halted? %d\n", motor_halt(cfg_fd,num_motors));
-	printf("enabled? %d\n",motor_enable(cfg_fd,num_motors));
+	for(int i = 0; i <num_motors; i++)
+	{
+		set_torque(pdo_id, 0, i+1)
+	}
+	
+	//printf("halted? %d\n", motor_halt(cfg_fd,num_motors));
+	//printf("enabled? %d\n",motor_enable(cfg_fd,num_motors));
 	return;
 }
 
