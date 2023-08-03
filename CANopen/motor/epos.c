@@ -1,5 +1,6 @@
 #include "motor.h"
 #include "epos.h"
+#include<stdio.h>
 
 #include "canopen/canopen.h"
 
