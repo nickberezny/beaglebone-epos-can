@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.281
+ * Model version              : 4.285
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 23:19:04 2023
+ * C source code generated on : Thu Aug  3 09:37:29 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -41,26 +41,6 @@ struct tag_q4re843yYTsFSUEoF6hnJH
 typedef struct tag_q4re843yYTsFSUEoF6hnJH beagleboneblue_bbblueADC_cont_T;
 
 #endif                             /* typedef_beagleboneblue_bbblueADC_cont_T */
-
-#ifndef struct_tag_iXzQ7EANXGiUsqKDQTF8rH
-#define struct_tag_iXzQ7EANXGiUsqKDQTF8rH
-
-struct tag_iXzQ7EANXGiUsqKDQTF8rH
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  real_T SampleTime;
-};
-
-#endif                                 /* struct_tag_iXzQ7EANXGiUsqKDQTF8rH */
-
-#ifndef typedef_beagleboneblue_bbblueButton_c_T
-#define typedef_beagleboneblue_bbblueButton_c_T
-
-typedef struct tag_iXzQ7EANXGiUsqKDQTF8rH beagleboneblue_bbblueButton_c_T;
-
-#endif                             /* typedef_beagleboneblue_bbblueButton_c_T */
 
 /* Custom Type definition for MATLABSystem: '<Root>/Digital Read3' */
 #include "MW_SVD.h"
@@ -109,9 +89,6 @@ typedef struct tag_fYOEcv5C5Uqf6zenXgF1HG beagleboneblue_bbblueLED_cont_T;
 
 /* Parameters for system: '<Root>/Analog Input' */
 typedef struct P_AnalogInput_controller_T_ P_AnalogInput_controller_T;
-
-/* Parameters for system: '<Root>/Home1' */
-typedef struct P_Home1_controller_T_ P_Home1_controller_T;
 
 /* Parameters for system: '<S12>/Stop Motor' */
 typedef struct P_StopMotor_controller_T_ P_StopMotor_controller_T;

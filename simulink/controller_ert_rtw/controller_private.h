@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.281
+ * Model version              : 4.285
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 23:19:04 2023
+ * C source code generated on : Thu Aug  3 09:37:29 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,9 +45,6 @@ extern void controller_AnalogInput_Start(DW_AnalogInput_controller_T *localDW,
   P_AnalogInput_controller_T *localP);
 extern void controller_AnalogInput(B_AnalogInput_controller_T *localB,
   DW_AnalogInput_controller_T *localDW, P_AnalogInput_controller_T *localP);
-extern void controller_Home1(boolean_T rtu_Enable, real_T rtu_motor_id, real_T
-  rtu_homing_torque, const uint8_T *rtd_LS1_R, const int32_T *rtd_pdo_id, real_T
-  *rtd_state, P_Home1_controller_T *localP);
 extern void controller_StopMotor_Init(B_StopMotor_controller_T *localB,
   P_StopMotor_controller_T *localP);
 extern void controller_StopMotor(boolean_T rtu_Trigger, const int32_T

@@ -132,6 +132,7 @@ int epos_Controlword(uint16_t node_id, enum Epos_ctrl ctrl) {
 	d.subindex = 0x00;
 	d.data.size = 2;
 	d.data.data = ctrl;
+	printf("cfg controlworld: %d\n", motor_cfg_fd);
 
 	return SDO_write(motor_cfg_fd, &d);
 }

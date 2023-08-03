@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.281
+ * Model version              : 4.285
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Jul 26 23:19:04 2023
+ * C source code generated on : Thu Aug  3 09:37:29 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -58,34 +58,34 @@ P_controller_T controller_P = {
   6.0,
 
   /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S30>/Constant'
+   * Referenced by: '<S31>/Constant'
    */
   0,
 
-  /* Mask Parameter: CompareToConstant_const_n
-   * Referenced by: '<S22>/Constant'
+  /* Mask Parameter: CompareToConstant_const_b
+   * Referenced by: '<S16>/Constant'
    */
-  1U,
+  true,
+
+  /* Mask Parameter: CompareToConstant_const_f
+   * Referenced by: '<S20>/Constant'
+   */
+  true,
+
+  /* Mask Parameter: CompareToConstant_const_n
+   * Referenced by: '<S23>/Constant'
+   */
+  true,
 
   /* Mask Parameter: CompareToConstant_const_m
-   * Referenced by: '<S26>/Constant'
+   * Referenced by: '<S27>/Constant'
    */
-  1U,
+  true,
 
   /* Mask Parameter: CompareToConstant_const_g
-   * Referenced by: '<S32>/Constant'
+   * Referenced by: '<S33>/Constant'
    */
-  1U,
-
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Button'
-   */
-  0.1,
-
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Button1'
-   */
-  0.1,
+  true,
 
   /* Expression: 0.1
    * Referenced by: '<Root>/Digital Read'
@@ -117,6 +117,16 @@ P_controller_T controller_P = {
    */
   0.0,
 
+  /* Expression: 2
+   * Referenced by: '<S10>/Constant'
+   */
+  2.0,
+
+  /* Expression: 4
+   * Referenced by: '<S11>/Constant'
+   */
+  4.0,
+
   /* Expression: 3
    * Referenced by: '<S12>/Constant'
    */
@@ -143,7 +153,7 @@ P_controller_T controller_P = {
   6.0,
 
   /* Expression: 0
-   * Referenced by: '<S33>/Constant'
+   * Referenced by: '<S34>/Constant'
    */
   0.0,
 
@@ -242,40 +252,40 @@ P_controller_T controller_P = {
    */
   1.0,
 
-  /* Expression: 0
+  /* Expression: 50
    * Referenced by: '<Root>/Constant1'
    */
-  0.0,
+  50.0,
 
   /* Expression: 2
    * Referenced by: '<Root>/Constant2'
    */
   2.0,
 
-  /* Expression: 0
+  /* Expression: 50
    * Referenced by: '<Root>/Constant3'
    */
-  0.0,
+  50.0,
 
   /* Expression: 1
    * Referenced by: '<Root>/Constant8'
    */
   1.0,
 
-  /* Expression: 0
+  /* Expression: -50
    * Referenced by: '<Root>/Constant9'
    */
-  0.0,
+  -50.0,
 
   /* Expression: 2
    * Referenced by: '<Root>/Constant10'
    */
   2.0,
 
-  /* Expression: 0
+  /* Expression: -50
    * Referenced by: '<Root>/Constant11'
    */
-  0.0,
+  -50.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory'
@@ -337,8 +347,18 @@ P_controller_T controller_P = {
    */
   0,
 
+  /* Computed Parameter: DataStoreMemory1_InitialValue
+   * Referenced by: '<Root>/Data Store Memory1'
+   */
+  false,
+
   /* Computed Parameter: DataStoreMemory3_InitialValue
    * Referenced by: '<Root>/Data Store Memory3'
+   */
+  false,
+
+  /* Computed Parameter: DataStoreMemory8_InitialValue
+   * Referenced by: '<Root>/Data Store Memory8'
    */
   false,
 
@@ -347,25 +367,15 @@ P_controller_T controller_P = {
    */
   false,
 
-  /* Computed Parameter: DataStoreMemory1_InitialValue
-   * Referenced by: '<Root>/Data Store Memory1'
-   */
-  0U,
-
-  /* Computed Parameter: DataStoreMemory8_InitialValue
-   * Referenced by: '<Root>/Data Store Memory8'
-   */
-  0U,
-
   /* Start of '<S13>/Stop Motor' */
   {
     /* Computed Parameter: enc_Y0
-     * Referenced by: '<S27>/enc'
+     * Referenced by: '<S28>/enc'
      */
     0.0,
 
     /* Expression: 2
-     * Referenced by: '<S27>/Constant7'
+     * Referenced by: '<S28>/Constant7'
      */
     2.0
   }
@@ -376,50 +386,18 @@ P_controller_T controller_P = {
   /* Start of '<S12>/Stop Motor' */
   {
     /* Computed Parameter: enc_Y0
-     * Referenced by: '<S23>/enc'
+     * Referenced by: '<S24>/enc'
      */
     0.0,
 
     /* Expression: 2
-     * Referenced by: '<S23>/Constant7'
+     * Referenced by: '<S24>/Constant7'
      */
     2.0
   }
   ,
 
   /* End of '<S12>/Stop Motor' */
-
-  /* Start of '<Root>/Home2' */
-  {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S19>/Constant'
-     */
-    1U,
-
-    /* Expression: 4
-     * Referenced by: '<S11>/Constant'
-     */
-    4.0
-  }
-  ,
-
-  /* End of '<Root>/Home2' */
-
-  /* Start of '<Root>/Home1' */
-  {
-    /* Mask Parameter: CompareToConstant_const
-     * Referenced by: '<S16>/Constant'
-     */
-    1U,
-
-    /* Expression: 2
-     * Referenced by: '<S10>/Constant'
-     */
-    2.0
-  }
-  ,
-
-  /* End of '<Root>/Home1' */
 
   /* Start of '<Root>/Analog Input1' */
   {
