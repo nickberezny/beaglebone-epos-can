@@ -40,7 +40,7 @@ enum Epos_ctrl {
 	Switch_On = 0x07,
 	Switch_On_And_Enable_Operation = 0x0f,
 	Disable_Voltage = 0x00,
-	Quickstop = 0x0b,
+	Quickstop = 0x02,
 	Disable_Operation = 0x07,
 	Enable_Operation = 0x0f,
 };
