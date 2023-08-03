@@ -223,7 +223,7 @@ int motor_halt(int cfg_fd, int num_motors) {
 	int err = 0;
 
 	// Stop PDO-communication
-	err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
+	//err |= NMT_change_state(cfg_fd, CANOPEN_BROADCAST_ID, NMT_Enter_PreOperational);
 	for(int i = 0; i < num_motors; i ++)
 	{
 		err |= epos_Controlword(i+1, Quickstop);
