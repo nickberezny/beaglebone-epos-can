@@ -1,9 +1,10 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 
-void print_input(int a, int id)
+void print_input(int a, int id, int debug)
 {
-	printf("print input from matlab id: %d, data: %d\n",id, a);
+	if(debug) printf("id: %d, value: %d\n",id, a);
 	return;
 }
 

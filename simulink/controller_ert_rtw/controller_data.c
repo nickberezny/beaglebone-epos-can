@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.286
+ * Model version              : 4.290
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Aug  3 10:59:50 2023
+ * C source code generated on : Thu Aug  3 11:14:03 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -58,32 +58,22 @@ P_controller_T controller_P = {
   6.0,
 
   /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S31>/Constant'
+   * Referenced by: '<S32>/Constant'
    */
   0,
 
-  /* Mask Parameter: CompareToConstant_const_b
-   * Referenced by: '<S16>/Constant'
-   */
-  true,
-
-  /* Mask Parameter: CompareToConstant_const_f
-   * Referenced by: '<S20>/Constant'
-   */
-  true,
-
   /* Mask Parameter: CompareToConstant_const_n
-   * Referenced by: '<S23>/Constant'
+   * Referenced by: '<S24>/Constant'
    */
   true,
 
   /* Mask Parameter: CompareToConstant_const_m
-   * Referenced by: '<S27>/Constant'
+   * Referenced by: '<S28>/Constant'
    */
   true,
 
   /* Mask Parameter: CompareToConstant_const_g
-   * Referenced by: '<S33>/Constant'
+   * Referenced by: '<S34>/Constant'
    */
   true,
 
@@ -117,16 +107,6 @@ P_controller_T controller_P = {
    */
   0.0,
 
-  /* Expression: 2
-   * Referenced by: '<S10>/Constant'
-   */
-  2.0,
-
-  /* Expression: 4
-   * Referenced by: '<S11>/Constant'
-   */
-  4.0,
-
   /* Expression: 3
    * Referenced by: '<S12>/Constant'
    */
@@ -153,7 +133,7 @@ P_controller_T controller_P = {
   6.0,
 
   /* Expression: 0
-   * Referenced by: '<S34>/Constant'
+   * Referenced by: '<S35>/Constant'
    */
   0.0,
 
@@ -370,12 +350,12 @@ P_controller_T controller_P = {
   /* Start of '<S13>/Stop Motor' */
   {
     /* Computed Parameter: enc_Y0
-     * Referenced by: '<S28>/enc'
+     * Referenced by: '<S29>/enc'
      */
     0.0,
 
     /* Expression: 2
-     * Referenced by: '<S28>/Constant7'
+     * Referenced by: '<S29>/Constant7'
      */
     2.0
   }
@@ -386,18 +366,50 @@ P_controller_T controller_P = {
   /* Start of '<S12>/Stop Motor' */
   {
     /* Computed Parameter: enc_Y0
-     * Referenced by: '<S24>/enc'
+     * Referenced by: '<S25>/enc'
      */
     0.0,
 
     /* Expression: 2
-     * Referenced by: '<S24>/Constant7'
+     * Referenced by: '<S25>/Constant7'
      */
     2.0
   }
   ,
 
   /* End of '<S12>/Stop Motor' */
+
+  /* Start of '<Root>/Home2' */
+  {
+    /* Mask Parameter: CompareToConstant_const
+     * Referenced by: '<S20>/Constant'
+     */
+    true,
+
+    /* Expression: 4
+     * Referenced by: '<S11>/Constant'
+     */
+    4.0
+  }
+  ,
+
+  /* End of '<Root>/Home2' */
+
+  /* Start of '<Root>/Home1' */
+  {
+    /* Mask Parameter: CompareToConstant_const
+     * Referenced by: '<S16>/Constant'
+     */
+    true,
+
+    /* Expression: 2
+     * Referenced by: '<S10>/Constant'
+     */
+    2.0
+  }
+  ,
+
+  /* End of '<Root>/Home1' */
 
   /* Start of '<Root>/Analog Input1' */
   {
