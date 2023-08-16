@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.318
+ * Model version              : 4.326
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Aug 16 15:04:38 2023
+ * C source code generated on : Wed Aug 16 16:41:44 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,23 +45,15 @@ extern void controller_AnalogInput_Start(DW_AnalogInput_controller_T *localDW,
   P_AnalogInput_controller_T *localP);
 extern void controller_AnalogInput(B_AnalogInput_controller_T *localB,
   DW_AnalogInput_controller_T *localDW, P_AnalogInput_controller_T *localP);
-extern void controller_Home1_Init(DW_Home1_controller_T *localDW,
-  P_Home1_controller_T *localP);
-extern void controller_Home1_Start(DW_Home1_controller_T *localDW);
-extern void controller_Home1_Disable(DW_Home1_controller_T *localDW);
-extern void controller_Home1_Update(RT_MODEL_controller_T * const controller_M,
-  B_Home1_controller_T *localB, DW_Home1_controller_T *localDW);
-extern void controller_Home1(RT_MODEL_controller_T * const controller_M,
-  boolean_T rtu_Enable, real_T rtu_motor_id, real_T rtu_home_speed, boolean_T
-  rtu_LS1, const real_T *rtd_GR1, const real_T *rtd_GR2, const real_T
-  *rtd_num_motors, const int32_T *rtd_pdo_id, real_T *rtd_state,
-  B_Home1_controller_T *localB, DW_Home1_controller_T *localDW,
-  P_Home1_controller_T *localP, ZCE_Home1_controller_T *localZCE);
-extern void controller_StopMotor1_Init(B_StopMotor1_controller_T *localB,
-  P_StopMotor1_controller_T *localP);
 extern void controller_StopMotor1(boolean_T rtu_Trigger, const real_T
-  *rtd_num_motors, const int32_T *rtd_pdo_id, B_StopMotor1_controller_T *localB,
-  P_StopMotor1_controller_T *localP, ZCE_StopMotor1_controller_T *localZCE);
+  *rtd_num_motors, const int32_T *rtd_pdo_id, ZCE_StopMotor1_controller_T
+  *localZCE);
+extern void controller_StopMotor1_m_Init(B_StopMotor1_controller_h_T *localB,
+  P_StopMotor1_controller_h_T *localP);
+extern void controller_StopMotor1_g(boolean_T rtu_Trigger, const real_T
+  *rtd_num_motors, const int32_T *rtd_pdo_id, B_StopMotor1_controller_h_T
+  *localB, P_StopMotor1_controller_h_T *localP, ZCE_StopMotor1_controller_f_T
+  *localZCE);
 extern void controller_AnalogInput_Term(DW_AnalogInput_controller_T *localDW);
 
 #endif                                 /* RTW_HEADER_controller_private_h_ */
