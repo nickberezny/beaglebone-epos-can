@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.326
+ * Model version              : 4.338
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Aug 16 16:41:44 2023
+ * C source code generated on : Wed Aug 16 17:23:43 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,15 +45,6 @@ extern void controller_AnalogInput_Start(DW_AnalogInput_controller_T *localDW,
   P_AnalogInput_controller_T *localP);
 extern void controller_AnalogInput(B_AnalogInput_controller_T *localB,
   DW_AnalogInput_controller_T *localDW, P_AnalogInput_controller_T *localP);
-extern void controller_StopMotor1(boolean_T rtu_Trigger, const real_T
-  *rtd_num_motors, const int32_T *rtd_pdo_id, ZCE_StopMotor1_controller_T
-  *localZCE);
-extern void controller_StopMotor1_m_Init(B_StopMotor1_controller_h_T *localB,
-  P_StopMotor1_controller_h_T *localP);
-extern void controller_StopMotor1_g(boolean_T rtu_Trigger, const real_T
-  *rtd_num_motors, const int32_T *rtd_pdo_id, B_StopMotor1_controller_h_T
-  *localB, P_StopMotor1_controller_h_T *localP, ZCE_StopMotor1_controller_f_T
-  *localZCE);
 extern void controller_AnalogInput_Term(DW_AnalogInput_controller_T *localDW);
 
 #endif                                 /* RTW_HEADER_controller_private_h_ */
