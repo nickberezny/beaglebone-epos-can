@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdio.h>
 
-void print_input(int a, int id, int debug)
+void print_input(double a, int id, int debug)
 {
-	if(debug) printf("id: %d, value: %d\n",id, a);
+	if(debug) printf("id: %d, value: %f\n",id, a);
 	return;
 }
 

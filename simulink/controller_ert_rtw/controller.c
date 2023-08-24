@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.338
+ * Model version              : 4.413
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Aug 16 17:23:43 2023
+ * C source code generated on : Thu Aug 24 12:17:01 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -21,9 +21,9 @@
 #include "controller.h"
 #include "rtwtypes.h"
 #include "controller_private.h"
-#include "controller_types.h"
 #include <math.h>
 #include "rt_nonfinite.h"
+#include "controller_types.h"
 #include "coder_posix_time.h"
 #include "zero_crossing_types.h"
 #include <string.h>
@@ -85,28 +85,23 @@ static void rate_scheduler(void)
    * counter is reset when it reaches its limit (zero means run).
    */
   (controller_M->Timing.TaskCounters.TID[2])++;
-  if ((controller_M->Timing.TaskCounters.TID[2]) > 9) {/* Sample time: [0.01s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[2]) > 99) {/* Sample time: [0.1s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[2] = 0;
   }
 
   (controller_M->Timing.TaskCounters.TID[3])++;
-  if ((controller_M->Timing.TaskCounters.TID[3]) > 99) {/* Sample time: [0.1s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[3]) > 999) {/* Sample time: [1.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[3] = 0;
   }
 
   (controller_M->Timing.TaskCounters.TID[4])++;
-  if ((controller_M->Timing.TaskCounters.TID[4]) > 999) {/* Sample time: [1.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[4]) > 99999) {/* Sample time: [100.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[4] = 0;
   }
 
   (controller_M->Timing.TaskCounters.TID[5])++;
-  if ((controller_M->Timing.TaskCounters.TID[5]) > 99999) {/* Sample time: [100.0s, 0.0s] */
+  if ((controller_M->Timing.TaskCounters.TID[5]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
     controller_M->Timing.TaskCounters.TID[5] = 0;
-  }
-
-  (controller_M->Timing.TaskCounters.TID[6])++;
-  if ((controller_M->Timing.TaskCounters.TID[6]) > 9999999) {/* Sample time: [10000.0s, 0.0s] */
-    controller_M->Timing.TaskCounters.TID[6] = 0;
   }
 }
 
@@ -150,7 +145,49 @@ void controller_AnalogInput_Term(DW_AnalogInput_controller_T *localDW)
   /* End of Terminate for MATLABSystem: '<Root>/Analog Input' */
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/*
+ * Output and update for trigger system:
+ *    '<S7>/Stop Motor1'
+ *    '<S8>/Stop Motor1'
+ */
+void controller_StopMotor1(boolean_T rtu_Trigger, const real_T *rtd_num_motors,
+  const int32_T *rtd_pdo_id, ZCE_StopMotor1_controller_T *localZCE)
+{
+  real_T rtb_DataStoreRead7_b;
+  int32_T rtb_DataStoreRead1_l;
+
+  /* Outputs for Triggered SubSystem: '<S7>/Stop Motor1' incorporates:
+   *  TriggerPort: '<S13>/Trigger'
+   */
+  if (rtu_Trigger && (localZCE->StopMotor1_Trig_ZCE != POS_ZCSIG)) {
+    /* DataStoreRead: '<S13>/Data Store Read1' */
+    rtb_DataStoreRead1_l = *rtd_pdo_id;
+
+    /* DataStoreRead: '<S13>/Data Store Read7' */
+    rtb_DataStoreRead7_b = *rtd_num_motors;
+
+    /* DataTypeConversion: '<S13>/Data Type Conversion' */
+    rtb_DataStoreRead7_b = floor(rtb_DataStoreRead7_b);
+    if (rtIsNaN(rtb_DataStoreRead7_b) || rtIsInf(rtb_DataStoreRead7_b)) {
+      rtb_DataStoreRead7_b = 0.0;
+    } else {
+      rtb_DataStoreRead7_b = fmod(rtb_DataStoreRead7_b, 4.294967296E+9);
+    }
+
+    /* CCaller: '<S13>/C Caller4' incorporates:
+     *  DataTypeConversion: '<S13>/Data Type Conversion'
+     */
+    stop_motor(rtb_DataStoreRead1_l, rtb_DataStoreRead7_b < 0.0 ? -(int32_T)
+               (uint32_T)-rtb_DataStoreRead7_b : (int32_T)(uint32_T)
+               rtb_DataStoreRead7_b);
+  }
+
+  localZCE->StopMotor1_Trig_ZCE = rtu_Trigger;
+
+  /* End of Outputs for SubSystem: '<S7>/Stop Motor1' */
+}
+
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static void controller_getLocalTime(real_T *t_tm_nsec, real_T *t_tm_sec, real_T *
   t_tm_min, real_T *t_tm_hour, real_T *t_tm_mday, real_T *t_tm_mon, real_T
   *t_tm_year, boolean_T *t_tm_isdst)
@@ -167,7 +204,7 @@ static void controller_getLocalTime(real_T *t_tm_nsec, real_T *t_tm_sec, real_T 
   *t_tm_isdst = (origStructTm.tm_isdst != 0);
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_split(real_T b_a)
 {
   creal_T aout;
@@ -191,7 +228,7 @@ static creal_T controller_split(real_T b_a)
   return aout;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_two_prod(real_T b_a)
 {
   creal_T c;
@@ -215,32 +252,31 @@ static creal_T controller_two_prod(real_T b_a)
   return c;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_times(const creal_T b_a)
 {
   creal_T c;
   real_T ahi;
-  real_T alo;
   c = controller_two_prod(b_a.re);
   controller_B.b = b_a.im * 8.64E+7;
-  alo = c.im;
+  controller_B.alo_k = c.im;
   ahi = c.re;
   if (controller_B.b != 0.0) {
-    alo = c.im + controller_B.b;
-    ahi = c.re + alo;
-    alo -= ahi - c.re;
+    controller_B.alo_k = c.im + controller_B.b;
+    ahi = c.re + controller_B.alo_k;
+    controller_B.alo_k -= ahi - c.re;
   }
 
-  if (rtIsNaN(alo)) {
-    alo = 0.0;
+  if (rtIsNaN(controller_B.alo_k)) {
+    controller_B.alo_k = 0.0;
   }
 
   c.re = ahi;
-  c.im = alo;
+  c.im = controller_B.alo_k;
   return c;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_two_sum(real_T b_a, real_T b)
 {
   creal_T c;
@@ -264,44 +300,43 @@ static creal_T controller_two_sum(real_T b_a, real_T b)
   return c;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_plus(const creal_T b_a, real_T b)
 {
   creal_T c;
   real_T ahi;
-  real_T alo;
   real_T b_ahi;
   c = controller_two_sum(b_a.re, b);
   controller_B.t_c = controller_two_sum(b_a.im, 0.0);
-  alo = c.im;
+  controller_B.alo_c = c.im;
   ahi = c.re;
   if (controller_B.t_c.re != 0.0) {
-    alo = c.im + controller_B.t_c.re;
-    ahi = c.re + alo;
-    alo -= ahi - c.re;
+    controller_B.alo_c = c.im + controller_B.t_c.re;
+    ahi = c.re + controller_B.alo_c;
+    controller_B.alo_c -= ahi - c.re;
   }
 
-  if (rtIsNaN(alo)) {
-    alo = 0.0;
+  if (rtIsNaN(controller_B.alo_c)) {
+    controller_B.alo_c = 0.0;
   }
 
   b_ahi = ahi;
   if (controller_B.t_c.im != 0.0) {
-    alo += controller_B.t_c.im;
-    b_ahi = ahi + alo;
-    alo -= b_ahi - ahi;
+    controller_B.alo_c += controller_B.t_c.im;
+    b_ahi = ahi + controller_B.alo_c;
+    controller_B.alo_c -= b_ahi - ahi;
   }
 
-  if (rtIsNaN(alo)) {
-    alo = 0.0;
+  if (rtIsNaN(controller_B.alo_c)) {
+    controller_B.alo_c = 0.0;
   }
 
   c.re = b_ahi;
-  c.im = alo;
+  c.im = controller_B.alo_c;
   return c;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_two_diff(real_T b_a, real_T b)
 {
   creal_T c;
@@ -325,7 +360,7 @@ static creal_T controller_two_diff(real_T b_a, real_T b)
   return c;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_floor(const creal_T b_a)
 {
   creal_T b;
@@ -354,40 +389,39 @@ static creal_T controller_floor(const creal_T b_a)
   return b;
 }
 
-/* Function for MATLAB Function: '<S11>/MATLAB Function' */
+/* Function for MATLAB Function: '<S10>/MATLAB Function' */
 static creal_T controller_minus(const creal_T b_a, const creal_T b)
 {
   creal_T cout;
   real_T ahi;
-  real_T alo;
   real_T b_ahi;
   controller_B.c = controller_two_diff(b_a.re, b.re);
   controller_B.t_m = controller_two_diff(b_a.im, b.im);
-  alo = controller_B.c.im;
+  controller_B.alo = controller_B.c.im;
   ahi = controller_B.c.re;
   if (controller_B.t_m.re != 0.0) {
-    alo = controller_B.c.im + controller_B.t_m.re;
-    ahi = controller_B.c.re + alo;
-    alo -= ahi - controller_B.c.re;
+    controller_B.alo = controller_B.c.im + controller_B.t_m.re;
+    ahi = controller_B.c.re + controller_B.alo;
+    controller_B.alo -= ahi - controller_B.c.re;
   }
 
-  if (rtIsNaN(alo)) {
-    alo = 0.0;
+  if (rtIsNaN(controller_B.alo)) {
+    controller_B.alo = 0.0;
   }
 
   b_ahi = ahi;
   if (controller_B.t_m.im != 0.0) {
-    alo += controller_B.t_m.im;
-    b_ahi = ahi + alo;
-    alo -= b_ahi - ahi;
+    controller_B.alo += controller_B.t_m.im;
+    b_ahi = ahi + controller_B.alo;
+    controller_B.alo -= b_ahi - ahi;
   }
 
-  if (rtIsNaN(alo)) {
-    alo = 0.0;
+  if (rtIsNaN(controller_B.alo)) {
+    controller_B.alo = 0.0;
   }
 
   cout.re = b_ahi;
-  cout.im = alo;
+  cout.im = controller_B.alo;
   return cout;
 }
 
@@ -412,13 +446,16 @@ real_T rt_roundd_snf(real_T u)
 /* Model step function */
 void controller_step(void)
 {
+  /* local block i/o variables */
+  boolean_T rtb_Compare_m;
+  boolean_T rtb_Compare_i;
+
   {
-    real_T (*lastU)[2];
-    int32_T rtb_DataStoreRead2_m;
-    int32_T rtb_DataTypeConversion1_b;
-    boolean_T rtb_Compare_a;
-    boolean_T rtb_Compare_e_idx_1;
-    if (controller_M->Timing.TaskCounters.TID[3] == 0) {
+    real_T *lastU;
+    int32_T trueCount;
+    boolean_T rtb_Compare_n1;
+    boolean_T rtb_IsNaN1;
+    if (controller_M->Timing.TaskCounters.TID[2] == 0) {
       controller_AnalogInput(&controller_B.AnalogInput,
         &controller_DW.AnalogInput, &controller_P.AnalogInput);
 
@@ -435,7 +472,7 @@ void controller_step(void)
      *  Constant: '<Root>/Constant12'
      */
     controller_DW.GR2 = controller_P.Constant12_Value;
-    if (controller_M->Timing.TaskCounters.TID[6] == 0) {
+    if (controller_M->Timing.TaskCounters.TID[5] == 0) {
       /* DataStoreWrite: '<Root>/Data Store Write11' incorporates:
        *  Constant: '<Root>/Constant13'
        */
@@ -460,13 +497,13 @@ void controller_step(void)
     /* DataStoreWrite: '<Root>/Data Store Write8' incorporates:
      *  Constant: '<Root>/Constant6'
      */
-    controller_DW.max_accel = controller_P.Constant6_Value;
+    controller_DW.max_accel = controller_P.Constant6_Value_n;
 
     /* DataStoreWrite: '<Root>/Data Store Write9' incorporates:
      *  Constant: '<Root>/Constant7'
      */
-    controller_DW.GR1 = controller_P.Constant7_Value_p;
-    if (controller_M->Timing.TaskCounters.TID[3] == 0) {
+    controller_DW.GR1 = controller_P.Constant7_Value;
+    if (controller_M->Timing.TaskCounters.TID[2] == 0) {
       /* MATLABSystem: '<Root>/Digital Read' */
       if (controller_DW.obj_b.SampleTime != controller_P.DigitalRead_SampleTime)
       {
@@ -516,57 +553,45 @@ void controller_step(void)
         (controller_DW.obj.MW_DIGITALIO_HANDLE);
     }
 
-    if (controller_M->Timing.TaskCounters.TID[4] == 0) {
+    if (controller_M->Timing.TaskCounters.TID[3] == 0) {
       /* DataStoreRead: '<Root>/Data Store Read1' */
       controller_B.DataStoreRead1_c = controller_DW.state;
-
-      /* DataTypeConversion: '<Root>/Data Type Conversion1' incorporates:
-       *  DataStoreRead: '<Root>/Data Store Read1'
-       */
-      controller_B.shi = floor(controller_DW.state);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
-      } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-      }
 
       /* DataTypeConversion: '<Root>/Data Type Conversion' incorporates:
        *  Constant: '<Root>/Constant14'
        */
-      controller_B.DataStoreRead8 = floor(controller_P.Constant14_Value_c);
-      if (rtIsNaN(controller_B.DataStoreRead8) || rtIsInf
-          (controller_B.DataStoreRead8)) {
-        controller_B.DataStoreRead8 = 0.0;
+      controller_B.Sum6 = floor(controller_P.Constant14_Value_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
       } else {
-        controller_B.DataStoreRead8 = fmod(controller_B.DataStoreRead8,
-          4.294967296E+9);
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
       }
 
       /* DataTypeConversion: '<Root>/Data Type Conversion2' incorporates:
        *  DataStoreRead: '<Root>/Data Store Read9'
        */
-      controller_B.b_alo = floor(controller_DW.debug);
-      if (rtIsNaN(controller_B.b_alo) || rtIsInf(controller_B.b_alo)) {
-        controller_B.b_alo = 0.0;
+      controller_B.DataStoreRead7 = floor(controller_DW.debug);
+      if (rtIsNaN(controller_B.DataStoreRead7) || rtIsInf
+          (controller_B.DataStoreRead7)) {
+        controller_B.DataStoreRead7 = 0.0;
       } else {
-        controller_B.b_alo = fmod(controller_B.b_alo, 4.294967296E+9);
+        controller_B.DataStoreRead7 = fmod(controller_B.DataStoreRead7,
+          4.294967296E+9);
       }
 
       /* CCaller: '<Root>/C Caller3' incorporates:
+       *  DataStoreRead: '<Root>/Data Store Read1'
        *  DataTypeConversion: '<Root>/Data Type Conversion'
-       *  DataTypeConversion: '<Root>/Data Type Conversion1'
        *  DataTypeConversion: '<Root>/Data Type Conversion2'
        */
-      print_input(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)-controller_B.shi
-                  : (int32_T)(uint32_T)controller_B.shi,
-                  controller_B.DataStoreRead8 < 0.0 ? -(int32_T)(uint32_T)
-                  -controller_B.DataStoreRead8 : (int32_T)(uint32_T)
-                  controller_B.DataStoreRead8, controller_B.b_alo < 0.0 ?
-                  -(int32_T)(uint32_T)-controller_B.b_alo : (int32_T)(uint32_T)
-                  controller_B.b_alo);
+      print_input(controller_DW.state, controller_B.Sum6 < 0.0 ? -(int32_T)
+                  (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6, controller_B.DataStoreRead7 < 0.0 ?
+                  -(int32_T)(uint32_T)-controller_B.DataStoreRead7 : (int32_T)
+                  (uint32_T)controller_B.DataStoreRead7);
 
       /* Outputs for Enabled SubSystem: '<Root>/Initialize' incorporates:
-       *  EnablePort: '<S10>/Enable'
+       *  EnablePort: '<S9>/Enable'
        */
       /* RelationalOperator: '<S2>/Compare' incorporates:
        *  Constant: '<S2>/Constant'
@@ -574,51 +599,51 @@ void controller_step(void)
       if (controller_B.DataStoreRead1_c == controller_P.CompareToConstant2_const)
       {
         controller_DW.Initialize_MODE = true;
-        if (controller_M->Timing.TaskCounters.TID[6] == 0) {
-          /* DataTypeConversion: '<S10>/Data Type Conversion2' incorporates:
-           *  DataStoreRead: '<S10>/Data Store Read7'
+        if (controller_M->Timing.TaskCounters.TID[5] == 0) {
+          /* DataTypeConversion: '<S9>/Data Type Conversion2' incorporates:
+           *  DataStoreRead: '<S9>/Data Store Read7'
            */
-          controller_B.shi = floor(controller_DW.num_motors);
-          if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-            controller_B.shi = 0.0;
+          controller_B.Sum6 = floor(controller_DW.num_motors);
+          if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+            controller_B.Sum6 = 0.0;
           } else {
-            controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+            controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
           }
 
-          /* CCaller: '<S10>/C Caller5' incorporates:
-           *  Constant: '<S10>/Constant1'
-           *  DataTypeConversion: '<S10>/Data Type Conversion2'
+          /* CCaller: '<S9>/C Caller5' incorporates:
+           *  Constant: '<S9>/Constant1'
+           *  DataTypeConversion: '<S9>/Data Type Conversion2'
            */
-          init_can(controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
-                   -controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
-                   controller_P.Constant1_Value_fu,
-                   controller_P.Constant1_Value_fu, &controller_B.CCaller5[0]);
+          init_can(controller_B.Sum6 < 0.0 ? -(int32_T)(uint32_T)
+                   -controller_B.Sum6 : (int32_T)(uint32_T)controller_B.Sum6,
+                   controller_P.Constant1_Value_f,
+                   controller_P.Constant1_Value_f, &controller_B.CCaller5[0]);
 
-          /* DataStoreWrite: '<S10>/Data Store Write' */
+          /* DataStoreWrite: '<S9>/Data Store Write' */
           controller_DW.cfg_id = controller_B.CCaller5[0];
 
-          /* DataStoreWrite: '<S10>/Data Store Write2' */
+          /* DataStoreWrite: '<S9>/Data Store Write2' */
           controller_DW.pdo_id = controller_B.CCaller5[1];
 
-          /* RelationalOperator: '<S22>/Compare' incorporates:
-           *  Constant: '<S22>/Constant'
+          /* RelationalOperator: '<S21>/Compare' incorporates:
+           *  Constant: '<S21>/Constant'
            */
-          rtb_Compare_a = (controller_B.CCaller5[1] !=
-                           controller_P.CompareToConstant_const);
+          rtb_Compare_n1 = (controller_B.CCaller5[1] !=
+                            controller_P.CompareToConstant_const);
 
-          /* Switch: '<S23>/Switch' */
-          if (rtb_Compare_a) {
-            /* DataStoreWrite: '<S23>/Data Store Write' incorporates:
-             *  Constant: '<S10>/Constant'
+          /* Switch: '<S22>/Switch' */
+          if (rtb_Compare_n1) {
+            /* DataStoreWrite: '<S22>/Data Store Write' incorporates:
+             *  Constant: '<S9>/Constant'
              */
             controller_DW.state = controller_P.Constant_Value_d;
           }
 
-          /* End of Switch: '<S23>/Switch' */
+          /* End of Switch: '<S22>/Switch' */
         }
 
-        if (controller_M->Timing.TaskCounters.TID[5] == 0) {
-          /* CCaller: '<S10>/C Caller3' */
+        if (controller_M->Timing.TaskCounters.TID[4] == 0) {
+          /* CCaller: '<S9>/C Caller3' */
           init_datalog();
         }
       } else {
@@ -629,6 +654,9 @@ void controller_step(void)
       /* End of Outputs for SubSystem: '<Root>/Initialize' */
     }
 
+    /* DataStoreRead: '<Root>/Data Store Read10' */
+    rtb_Compare_n1 = controller_DW.LS1_R;
+
     /* RelationalOperator: '<S1>/Compare' incorporates:
      *  Constant: '<S1>/Constant'
      *  DataStoreRead: '<Root>/Data Store Read'
@@ -637,131 +665,181 @@ void controller_step(void)
       controller_P.CompareToConstant1_const);
 
     /* Outputs for Enabled SubSystem: '<Root>/Home1' incorporates:
-     *  EnablePort: '<S8>/Enable'
+     *  EnablePort: '<S7>/Enable'
      */
     controller_DW.Home1_MODE = controller_B.Compare;
     if (controller_DW.Home1_MODE) {
+      /* DataStoreRead: '<S7>/Data Store Read7' */
+      controller_B.DataStoreRead1_c = controller_DW.num_motors;
+
+      /* DataTypeConversion: '<S7>/Data Type Conversion7' */
+      controller_B.Sum6 = floor(controller_B.DataStoreRead1_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S7>/C Caller1' incorporates:
+       *  DataStoreRead: '<S7>/Data Store Read2'
+       *  DataTypeConversion: '<S7>/Data Type Conversion7'
+       */
+      get_encoder(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                  (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6, &controller_B.DataStoreRead1_c);
+
+      /* DataStoreWrite: '<S7>/Data Store Write' */
+      controller_DW.q01 = controller_B.DataStoreRead1_c;
+
+      /* RelationalOperator: '<S11>/Compare' incorporates:
+       *  Constant: '<S11>/Constant'
+       */
+      rtb_Compare_i = (rtb_Compare_n1 == controller_P.CompareToConstant1_const_j);
+
+      /* Switch: '<S15>/Switch' */
+      if (rtb_Compare_i) {
+        /* DataStoreWrite: '<S15>/Data Store Write' incorporates:
+         *  Constant: '<S7>/Constant1'
+         */
+        controller_DW.state = controller_P.Constant1_Value;
+      }
+
+      /* End of Switch: '<S15>/Switch' */
+
       /* RelationalOperator: '<S12>/Compare' incorporates:
        *  Constant: '<S12>/Constant'
-       *  DataStoreRead: '<Root>/Data Store Read10'
        */
-      rtb_Compare_a = (controller_DW.LS1_L ==
-                       controller_P.CompareToConstant1_const_j);
+      rtb_Compare_n1 = (controller_B.DataStoreRead1_c !=
+                        controller_P.Constant_Value);
 
-      /* Switch: '<S16>/Switch' */
-      if (rtb_Compare_a) {
-        /* DataStoreWrite: '<S16>/Data Store Write' incorporates:
-         *  Constant: '<S8>/Constant1'
-         */
-        controller_DW.state = controller_P.Constant1_Value_f;
-      }
-
-      /* End of Switch: '<S16>/Switch' */
-      if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-        /* DataStoreRead: '<S15>/Data Store Read2' */
-        rtb_DataTypeConversion1_b = controller_DW.pdo_id;
-
-        /* DataTypeConversion: '<S15>/Data Type Conversion1' incorporates:
-         *  Constant: '<Root>/Constant'
-         */
-        controller_B.shi = floor(controller_P.Constant_Value_c);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-        }
-
-        rtb_DataStoreRead2_m = controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
-          -controller_B.shi : (int32_T)(uint32_T)controller_B.shi;
-
-        /* End of DataTypeConversion: '<S15>/Data Type Conversion1' */
-
-        /* CCaller: '<S15>/C Caller3' incorporates:
-         *  Constant: '<S8>/Constant2'
-         *  DataStoreRead: '<S15>/Data Store Read2'
-         */
-        set_motor(controller_DW.pdo_id, rtb_DataStoreRead2_m,
-                  controller_P.Constant2_Value);
-      }
-
-      /* Outputs for Triggered SubSystem: '<S8>/Stop Motor1' incorporates:
-       *  TriggerPort: '<S14>/Trigger'
-       */
-      if (rtb_Compare_a && (controller_PrevZCX.StopMotor1_Trig_ZCE_f !=
-                            POS_ZCSIG)) {
-        /* DataTypeConversion: '<S14>/Data Type Conversion' incorporates:
-         *  DataStoreRead: '<S14>/Data Store Read7'
-         */
-        controller_B.shi = floor(controller_DW.num_motors);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-        }
-
-        /* CCaller: '<S14>/C Caller4' incorporates:
-         *  DataStoreRead: '<S14>/Data Store Read1'
-         *  DataTypeConversion: '<S14>/Data Type Conversion'
-         */
-        stop_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                   (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                   controller_B.shi);
-      }
-
-      controller_PrevZCX.StopMotor1_Trig_ZCE_f = rtb_Compare_a;
-
-      /* End of Outputs for SubSystem: '<S8>/Stop Motor1' */
-
-      /* DataTypeConversion: '<S8>/Data Type Conversion7' incorporates:
-       *  DataStoreRead: '<S8>/Data Store Read7'
-       */
-      controller_B.shi = floor(controller_DW.num_motors);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
+      /* Switch: '<S7>/Switch' */
+      if (rtb_Compare_n1) {
+        /* Switch: '<S7>/Switch' */
+        controller_B.Switch_g = controller_B.DataStoreRead1_c;
       } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+        /* Switch: '<S7>/Switch' incorporates:
+         *  Delay: '<S7>/Delay'
+         */
+        controller_B.Switch_g = controller_DW.Delay_DSTATE_n;
       }
 
-      /* CCaller: '<S8>/C Caller1' incorporates:
-       *  DataStoreRead: '<S8>/Data Store Read2'
-       *  DataTypeConversion: '<S8>/Data Type Conversion7'
+      /* End of Switch: '<S7>/Switch' */
+
+      /* Gain: '<S7>/Gain2' incorporates:
+       *  DataStoreRead: '<S7>/Data Store Read1'
+       *  Gain: '<S7>/Gain'
+       *  Product: '<S7>/Divide'
        */
-      get_encoder(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                  (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                  controller_B.shi, &controller_B.CCaller1_k[0]);
-      if (controller_M->Timing.TaskCounters.TID[2] == 0) {
-        /* DataTypeConversion: '<S8>/Data Type Conversion' incorporates:
-         *  Constant: '<S8>/Constant14'
-         */
-        controller_B.shi = floor(controller_P.Constant14_Value);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+      controller_B.Gain2_o = controller_B.Switch_g / (controller_P.Gain_Gain *
+        controller_DW.GR1) * controller_P.Gain2_Gain;
+
+      /* Derivative: '<S7>/Derivative' */
+      controller_B.Sum6 = controller_M->Timing.t[0];
+      if ((controller_DW.TimeStampA_f >= controller_B.Sum6) &&
+          (controller_DW.TimeStampB_o >= controller_B.Sum6)) {
+        /* Derivative: '<S7>/Derivative' */
+        controller_B.Derivative_e = 0.0;
+      } else {
+        controller_B.DataStoreRead1_c = controller_DW.TimeStampA_f;
+        lastU = &controller_DW.LastUAtTimeA_e;
+        if (controller_DW.TimeStampA_f < controller_DW.TimeStampB_o) {
+          if (controller_DW.TimeStampB_o < controller_B.Sum6) {
+            controller_B.DataStoreRead1_c = controller_DW.TimeStampB_o;
+            lastU = &controller_DW.LastUAtTimeB_h;
+          }
+        } else if (controller_DW.TimeStampA_f >= controller_B.Sum6) {
+          controller_B.DataStoreRead1_c = controller_DW.TimeStampB_o;
+          lastU = &controller_DW.LastUAtTimeB_h;
         }
 
-        /* DataTypeConversion: '<S8>/Data Type Conversion2' incorporates:
-         *  DataStoreRead: '<S8>/Data Store Read9'
-         */
-        controller_B.DataStoreRead8 = floor(controller_DW.debug);
-        if (rtIsNaN(controller_B.DataStoreRead8) || rtIsInf
-            (controller_B.DataStoreRead8)) {
-          controller_B.DataStoreRead8 = 0.0;
-        } else {
-          controller_B.DataStoreRead8 = fmod(controller_B.DataStoreRead8,
-            4.294967296E+9);
-        }
-
-        /* CCaller: '<S8>/C Caller3' incorporates:
-         *  DataTypeConversion: '<S8>/Data Type Conversion'
-         *  DataTypeConversion: '<S8>/Data Type Conversion2'
-         */
-        print_input(0, controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
-                    -controller_B.shi : (int32_T)(uint32_T)controller_B.shi,
-                    controller_B.DataStoreRead8 < 0.0 ? -(int32_T)(uint32_T)
-                    -controller_B.DataStoreRead8 : (int32_T)(uint32_T)
-                    controller_B.DataStoreRead8);
+        /* Derivative: '<S7>/Derivative' */
+        controller_B.Derivative_e = (controller_B.Gain2_o - *lastU) /
+          (controller_B.Sum6 - controller_B.DataStoreRead1_c);
       }
+
+      /* End of Derivative: '<S7>/Derivative' */
+
+      /* DataTypeConversion: '<S7>/Data Type Conversion' incorporates:
+       *  Constant: '<S7>/Constant14'
+       */
+      controller_B.Sum6 = floor(controller_P.Constant14_Value);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* DataTypeConversion: '<S7>/Data Type Conversion2' incorporates:
+       *  DataStoreRead: '<S7>/Data Store Read9'
+       */
+      controller_B.DataStoreRead7 = floor(controller_DW.debug);
+      if (rtIsNaN(controller_B.DataStoreRead7) || rtIsInf
+          (controller_B.DataStoreRead7)) {
+        controller_B.DataStoreRead7 = 0.0;
+      } else {
+        controller_B.DataStoreRead7 = fmod(controller_B.DataStoreRead7,
+          4.294967296E+9);
+      }
+
+      /* CCaller: '<S7>/C Caller3' incorporates:
+       *  DataTypeConversion: '<S7>/Data Type Conversion'
+       *  DataTypeConversion: '<S7>/Data Type Conversion2'
+       */
+      print_input(controller_B.Derivative_e, controller_B.Sum6 < 0.0 ? -(int32_T)
+                  (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6, controller_B.DataStoreRead7 < 0.0 ?
+                  -(int32_T)(uint32_T)-controller_B.DataStoreRead7 : (int32_T)
+                  (uint32_T)controller_B.DataStoreRead7);
+
+      /* Sum: '<S7>/Sum2' incorporates:
+       *  Constant: '<Root>/Constant1'
+       *  Constant: '<S7>/Constant'
+       *  Gain: '<S7>/Gain3'
+       *  Sum: '<S7>/Sum1'
+       */
+      controller_B.Saturation_d = (controller_P.Constant1_Value_i -
+        controller_B.Derivative_e) * controller_P.Gain3_Gain -
+        controller_P.Constant_Value_e;
+
+      /* Saturate: '<S7>/Saturation' */
+      if (controller_B.Saturation_d > controller_P.Saturation_UpperSat) {
+        /* Sum: '<S7>/Sum2' incorporates:
+         *  Saturate: '<S7>/Saturation'
+         */
+        controller_B.Saturation_d = controller_P.Saturation_UpperSat;
+      } else if (controller_B.Saturation_d < controller_P.Saturation_LowerSat) {
+        /* Sum: '<S7>/Sum2' incorporates:
+         *  Saturate: '<S7>/Saturation'
+         */
+        controller_B.Saturation_d = controller_P.Saturation_LowerSat;
+      }
+
+      /* End of Saturate: '<S7>/Saturation' */
+
+      /* DataTypeConversion: '<S14>/Data Type Conversion1' incorporates:
+       *  Constant: '<Root>/Constant'
+       */
+      controller_B.Sum6 = floor(controller_P.Constant_Value_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S14>/C Caller3' incorporates:
+       *  DataStoreRead: '<S14>/Data Store Read2'
+       *  DataTypeConversion: '<S14>/Data Type Conversion1'
+       */
+      set_motor(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                controller_B.Sum6, controller_B.Saturation_d);
+
+      /* Outputs for Triggered SubSystem: '<S7>/Stop Motor1' */
+      controller_StopMotor1(rtb_Compare_i, &controller_DW.num_motors,
+                            &controller_DW.pdo_id,
+                            &controller_PrevZCX.StopMotor1);
+
+      /* End of Outputs for SubSystem: '<S7>/Stop Motor1' */
     }
 
     /* End of Outputs for SubSystem: '<Root>/Home1' */
@@ -770,226 +848,197 @@ void controller_step(void)
      *  Constant: '<S3>/Constant'
      *  DataStoreRead: '<Root>/Data Store Read3'
      */
-    controller_B.Compare_p = (controller_DW.state ==
+    controller_B.Compare_m = (controller_DW.state ==
       controller_P.CompareToConstant3_const);
 
     /* Outputs for Enabled SubSystem: '<Root>/Home2' incorporates:
-     *  EnablePort: '<S9>/Enable'
+     *  EnablePort: '<S8>/Enable'
      */
-    controller_DW.Home2_MODE = controller_B.Compare_p;
+    controller_DW.Home2_MODE = controller_B.Compare_m;
     if (controller_DW.Home2_MODE) {
-      /* RelationalOperator: '<S17>/Compare' incorporates:
-       *  Constant: '<S17>/Constant'
+      /* RelationalOperator: '<S16>/Compare' incorporates:
+       *  Constant: '<S16>/Constant'
        *  DataStoreRead: '<Root>/Data Store Read4'
        */
-      rtb_Compare_a = (controller_DW.LS1_R ==
-                       controller_P.CompareToConstant1_const_p);
+      rtb_Compare_m = (controller_DW.LS1_L ==
+                       controller_P.CompareToConstant1_const_k);
 
-      /* Outputs for Triggered SubSystem: '<S9>/Stop Motor1' incorporates:
-       *  TriggerPort: '<S19>/Trigger'
+      /* Switch: '<S20>/Switch' incorporates:
+       *  Constant: '<S8>/Constant1'
+       *  DataStoreRead: '<S20>/Data Store Read'
        */
-      if (rtb_Compare_a && (controller_PrevZCX.StopMotor1_Trig_ZCE != POS_ZCSIG))
-      {
-        /* DataTypeConversion: '<S19>/Data Type Conversion7' incorporates:
-         *  Constant: '<S19>/Constant7'
-         */
-        controller_B.shi = floor(controller_P.Constant7_Value);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-        }
-
-        /* CCaller: '<S19>/C Caller1' incorporates:
-         *  DataStoreRead: '<S19>/Data Store Read2'
-         *  DataTypeConversion: '<S19>/Data Type Conversion7'
-         */
-        get_encoder(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                    (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                    controller_B.shi, &controller_B.CCaller1_o[0]);
-
-        /* DataTypeConversion: '<S19>/Data Type Conversion' incorporates:
-         *  DataStoreRead: '<S19>/Data Store Read7'
-         */
-        controller_B.shi = floor(controller_DW.num_motors);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-        }
-
-        /* CCaller: '<S19>/C Caller4' incorporates:
-         *  DataStoreRead: '<S19>/Data Store Read1'
-         *  DataTypeConversion: '<S19>/Data Type Conversion'
-         */
-        stop_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                   (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                   controller_B.shi);
-      }
-
-      controller_PrevZCX.StopMotor1_Trig_ZCE = rtb_Compare_a;
-
-      /* End of Outputs for SubSystem: '<S9>/Stop Motor1' */
-
-      /* DataStoreWrite: '<S9>/Data Store Write' */
-      controller_DW.q01 = controller_B.CCaller1_o[0];
-
-      /* Switch: '<S21>/Switch' */
-      if (rtb_Compare_a) {
-        /* DataStoreWrite: '<S21>/Data Store Write' incorporates:
-         *  Constant: '<S9>/Constant1'
-         */
-        controller_DW.state = controller_P.Constant1_Value_i;
-      }
-
-      /* End of Switch: '<S21>/Switch' */
-      if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-        /* DataStoreRead: '<S20>/Data Store Read2' */
-        rtb_DataStoreRead2_m = controller_DW.pdo_id;
-
-        /* DataTypeConversion: '<S20>/Data Type Conversion1' incorporates:
-         *  Constant: '<Root>/Constant2'
-         */
-        controller_B.shi = floor(controller_P.Constant2_Value_h);
-        if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-          controller_B.shi = 0.0;
-        } else {
-          controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-        }
-
-        rtb_DataTypeConversion1_b = controller_B.shi < 0.0 ? -(int32_T)(uint32_T)
-          -controller_B.shi : (int32_T)(uint32_T)controller_B.shi;
-
-        /* End of DataTypeConversion: '<S20>/Data Type Conversion1' */
-      }
-
-      /* DataTypeConversion: '<S9>/Data Type Conversion7' incorporates:
-       *  DataStoreRead: '<S9>/Data Store Read7'
-       */
-      controller_B.shi = floor(controller_DW.num_motors);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
+      if (rtb_Compare_m) {
+        controller_B.DataStoreRead1_c = controller_P.Constant1_Value_a;
       } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+        controller_B.DataStoreRead1_c = controller_DW.state;
       }
 
-      /* CCaller: '<S9>/C Caller1' incorporates:
-       *  DataStoreRead: '<S9>/Data Store Read2'
-       *  DataTypeConversion: '<S9>/Data Type Conversion7'
-       */
-      get_encoder(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                  (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                  controller_B.shi, &controller_B.CCaller1_o_c[0]);
+      /* End of Switch: '<S20>/Switch' */
 
-      /* RelationalOperator: '<S18>/Compare' incorporates:
-       *  Constant: '<S18>/Constant'
-       */
-      rtb_Compare_a = (controller_B.CCaller1_o_c[0] !=
-                       controller_P.Constant_Value_e);
-      rtb_Compare_e_idx_1 = (controller_B.CCaller1_o_c[1] !=
-        controller_P.Constant_Value_e);
+      /* DataStoreWrite: '<S20>/Data Store Write' */
+      controller_DW.state = controller_B.DataStoreRead1_c;
 
-      /* Switch: '<S9>/Switch' */
-      if (rtb_Compare_a) {
-        /* Switch: '<S9>/Switch' */
-        controller_B.Switch_f[0] = controller_B.CCaller1_o_c[0];
+      /* DataStoreRead: '<S8>/Data Store Read7' */
+      controller_B.DataStoreRead1_c = controller_DW.num_motors;
+
+      /* DataTypeConversion: '<S8>/Data Type Conversion7' */
+      controller_B.Sum6 = floor(controller_B.DataStoreRead1_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
       } else {
-        /* Switch: '<S9>/Switch' incorporates:
-         *  Delay: '<S9>/Delay'
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S8>/C Caller1' incorporates:
+       *  DataStoreRead: '<S8>/Data Store Read2'
+       *  DataTypeConversion: '<S8>/Data Type Conversion7'
+       */
+      get_encoder(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                  (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6, &controller_B.DataStoreRead1_c);
+
+      /* RelationalOperator: '<S17>/Compare' incorporates:
+       *  Constant: '<S17>/Constant'
+       */
+      rtb_Compare_n1 = (controller_B.DataStoreRead1_c !=
+                        controller_P.Constant_Value_f);
+
+      /* Switch: '<S8>/Switch' */
+      if (rtb_Compare_n1) {
+        /* Switch: '<S8>/Switch' */
+        controller_B.Switch = controller_B.DataStoreRead1_c;
+      } else {
+        /* Switch: '<S8>/Switch' incorporates:
+         *  Delay: '<S8>/Delay'
          */
-        controller_B.Switch_f[0] = controller_DW.Delay_DSTATE_h[0];
+        controller_B.Switch = controller_DW.Delay_DSTATE;
       }
 
-      if (rtb_Compare_e_idx_1) {
-        /* Switch: '<S9>/Switch' */
-        controller_B.Switch_f[1] = controller_B.CCaller1_o_c[1];
-      } else {
-        /* Switch: '<S9>/Switch' incorporates:
-         *  Delay: '<S9>/Delay'
-         */
-        controller_B.Switch_f[1] = controller_DW.Delay_DSTATE_h[1];
-      }
+      /* End of Switch: '<S8>/Switch' */
 
-      /* End of Switch: '<S9>/Switch' */
-
-      /* Gain: '<S9>/Gain2' incorporates:
-       *  DataStoreRead: '<S9>/Data Store Read1'
-       *  DataStoreRead: '<S9>/Data Store Read8'
-       *  Gain: '<S9>/Gain'
-       *  Gain: '<S9>/Gain1'
-       *  Product: '<S9>/Divide'
+      /* Gain: '<S8>/Gain2' incorporates:
+       *  DataStoreRead: '<S8>/Data Store Read1'
+       *  Gain: '<S8>/Gain'
+       *  Product: '<S8>/Divide'
        */
-      controller_B.Gain2_p[0] = controller_B.Switch_f[0] /
-        (controller_P.Gain_Gain * controller_DW.GR1) * controller_P.Gain2_Gain;
-      controller_B.Gain2_p[1] = controller_B.Switch_f[1] /
-        (controller_P.Gain1_Gain * controller_DW.GR2) * controller_P.Gain2_Gain;
+      controller_B.Gain2 = controller_B.Switch / (controller_P.Gain_Gain_o *
+        controller_DW.GR1) * controller_P.Gain2_Gain_p;
 
-      /* Derivative: '<S9>/Derivative' */
-      controller_B.shi = controller_M->Timing.t[0];
-      if ((controller_DW.TimeStampA >= controller_B.shi) &&
-          (controller_DW.TimeStampB >= controller_B.shi)) {
-        controller_B.CCaller1_k[0] = 0.0;
-        controller_B.CCaller1_k[1] = 0.0;
+      /* Derivative: '<S8>/Derivative' */
+      controller_B.Sum6 = controller_M->Timing.t[0];
+      if ((controller_DW.TimeStampA_gc >= controller_B.Sum6) &&
+          (controller_DW.TimeStampB_h >= controller_B.Sum6)) {
+        /* Derivative: '<S8>/Derivative' */
+        controller_B.Derivative = 0.0;
       } else {
-        controller_B.DataStoreRead1_c = controller_DW.TimeStampA;
-        lastU = &controller_DW.LastUAtTimeA;
-        if (controller_DW.TimeStampA < controller_DW.TimeStampB) {
-          if (controller_DW.TimeStampB < controller_B.shi) {
-            controller_B.DataStoreRead1_c = controller_DW.TimeStampB;
-            lastU = &controller_DW.LastUAtTimeB;
+        controller_B.DataStoreRead1_c = controller_DW.TimeStampA_gc;
+        lastU = &controller_DW.LastUAtTimeA_f;
+        if (controller_DW.TimeStampA_gc < controller_DW.TimeStampB_h) {
+          if (controller_DW.TimeStampB_h < controller_B.Sum6) {
+            controller_B.DataStoreRead1_c = controller_DW.TimeStampB_h;
+            lastU = &controller_DW.LastUAtTimeB_c;
           }
-        } else if (controller_DW.TimeStampA >= controller_B.shi) {
-          controller_B.DataStoreRead1_c = controller_DW.TimeStampB;
-          lastU = &controller_DW.LastUAtTimeB;
+        } else if (controller_DW.TimeStampA_gc >= controller_B.Sum6) {
+          controller_B.DataStoreRead1_c = controller_DW.TimeStampB_h;
+          lastU = &controller_DW.LastUAtTimeB_c;
         }
 
-        controller_B.DataStoreRead8 = controller_B.shi -
-          controller_B.DataStoreRead1_c;
-        controller_B.DataStoreRead1_c = (controller_B.Gain2_p[0] - (*lastU)[0]) /
-          controller_B.DataStoreRead8;
-        controller_B.DataStoreRead8 = (controller_B.Gain2_p[1] - (*lastU)[1]) /
-          controller_B.DataStoreRead8;
-        controller_B.CCaller1_k[0] = controller_B.DataStoreRead1_c;
-        controller_B.CCaller1_k[1] = controller_B.DataStoreRead8;
+        /* Derivative: '<S8>/Derivative' */
+        controller_B.Derivative = (controller_B.Gain2 - *lastU) /
+          (controller_B.Sum6 - controller_B.DataStoreRead1_c);
       }
 
-      /* End of Derivative: '<S9>/Derivative' */
+      /* End of Derivative: '<S8>/Derivative' */
 
-      /* Gain: '<S9>/Gain3' incorporates:
-       *  Constant: '<Root>/Constant3'
-       *  Sum: '<S9>/Sum1'
+      /* DataStoreRead: '<S8>/Data Store Read9' */
+      controller_B.DataStoreRead1_c = controller_DW.debug;
+
+      /* DataTypeConversion: '<S8>/Data Type Conversion2' */
+      controller_B.Sum6 = floor(controller_B.DataStoreRead1_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* DataTypeConversion: '<S8>/Data Type Conversion' incorporates:
+       *  Constant: '<S8>/Constant14'
        */
-      controller_B.Saturation = (controller_B.CCaller1_k[0] -
-        controller_P.Constant3_Value) * controller_P.Gain3_Gain;
-
-      /* Saturate: '<S9>/Saturation' */
-      if (controller_B.Saturation > controller_P.Saturation_UpperSat) {
-        /* Gain: '<S9>/Gain3' incorporates:
-         *  Saturate: '<S9>/Saturation'
-         */
-        controller_B.Saturation = controller_P.Saturation_UpperSat;
-      } else if (controller_B.Saturation < controller_P.Saturation_LowerSat) {
-        /* Gain: '<S9>/Gain3' incorporates:
-         *  Saturate: '<S9>/Saturation'
-         */
-        controller_B.Saturation = controller_P.Saturation_LowerSat;
+      controller_B.DataStoreRead7 = floor(controller_P.Constant14_Value_m);
+      if (rtIsNaN(controller_B.DataStoreRead7) || rtIsInf
+          (controller_B.DataStoreRead7)) {
+        controller_B.DataStoreRead7 = 0.0;
+      } else {
+        controller_B.DataStoreRead7 = fmod(controller_B.DataStoreRead7,
+          4.294967296E+9);
       }
 
-      /* End of Saturate: '<S9>/Saturation' */
-      if (controller_M->Timing.TaskCounters.TID[3] == 0) {
-        /* CCaller: '<S20>/C Caller3' */
-        set_motor(rtb_DataStoreRead2_m, rtb_DataTypeConversion1_b,
-                  controller_B.Saturation);
+      /* CCaller: '<S8>/C Caller3' incorporates:
+       *  DataTypeConversion: '<S8>/Data Type Conversion'
+       *  DataTypeConversion: '<S8>/Data Type Conversion2'
+       */
+      print_input(controller_B.Derivative, controller_B.DataStoreRead7 < 0.0 ?
+                  -(int32_T)(uint32_T)-controller_B.DataStoreRead7 : (int32_T)
+                  (uint32_T)controller_B.DataStoreRead7, controller_B.Sum6 < 0.0
+                  ? -(int32_T)(uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6);
+
+      /* Sum: '<S8>/Sum2' incorporates:
+       *  Constant: '<Root>/Constant3'
+       *  Constant: '<S8>/Constant'
+       *  Gain: '<S8>/Gain3'
+       *  Sum: '<S8>/Sum1'
+       */
+      controller_B.Saturation_b = (controller_P.Constant3_Value_c -
+        controller_B.Derivative) * controller_P.Gain3_Gain_n -
+        controller_P.Constant_Value_b;
+
+      /* Saturate: '<S8>/Saturation' */
+      if (controller_B.Saturation_b > controller_P.Saturation_UpperSat_n) {
+        /* Sum: '<S8>/Sum2' incorporates:
+         *  Saturate: '<S8>/Saturation'
+         */
+        controller_B.Saturation_b = controller_P.Saturation_UpperSat_n;
+      } else if (controller_B.Saturation_b < controller_P.Saturation_LowerSat_h)
+      {
+        /* Sum: '<S8>/Sum2' incorporates:
+         *  Saturate: '<S8>/Saturation'
+         */
+        controller_B.Saturation_b = controller_P.Saturation_LowerSat_h;
       }
+
+      /* End of Saturate: '<S8>/Saturation' */
+
+      /* DataTypeConversion: '<S19>/Data Type Conversion1' incorporates:
+       *  Constant: '<Root>/Constant2'
+       */
+      controller_B.Sum6 = floor(controller_P.Constant2_Value_k);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S19>/C Caller3' incorporates:
+       *  DataStoreRead: '<S19>/Data Store Read2'
+       *  DataTypeConversion: '<S19>/Data Type Conversion1'
+       */
+      set_motor(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                controller_B.Sum6, controller_B.Saturation_b);
+
+      /* Outputs for Triggered SubSystem: '<S8>/Stop Motor1' */
+      controller_StopMotor1(rtb_Compare_m, &controller_DW.num_motors,
+                            &controller_DW.pdo_id,
+                            &controller_PrevZCX.StopMotor1_n);
+
+      /* End of Outputs for SubSystem: '<S8>/Stop Motor1' */
     }
 
     /* End of Outputs for SubSystem: '<Root>/Home2' */
 
     /* DataStoreRead: '<Root>/Data Store Read7' */
-    controller_B.DataStoreRead1_c = controller_DW.q01;
-
-    /* DataStoreRead: '<Root>/Data Store Read8' */
-    controller_B.DataStoreRead8 = controller_DW.q02;
+    controller_B.DataStoreRead7 = controller_DW.q01;
 
     /* RelationalOperator: '<S4>/Compare' incorporates:
      *  Constant: '<S4>/Constant'
@@ -999,32 +1048,135 @@ void controller_step(void)
       controller_P.CompareToConstant4_const);
 
     /* Outputs for Enabled SubSystem: '<Root>/Main Control' incorporates:
-     *  EnablePort: '<S11>/Enable'
+     *  EnablePort: '<S10>/Enable'
      */
     controller_DW.MainControl_MODE = controller_B.Compare_j;
     if (controller_DW.MainControl_MODE) {
       /* Switch: '<S27>/Switch' incorporates:
-       *  Constant: '<S24>/Constant'
-       *  DataStoreRead: '<S11>/Data Store Read3'
-       *  RelationalOperator: '<S24>/Compare'
+       *  Constant: '<S10>/Constant4'
+       *  Constant: '<S23>/Constant'
+       *  DataStoreRead: '<S10>/Data Store Read3'
+       *  DataStoreRead: '<S27>/Data Store Read'
+       *  RelationalOperator: '<S23>/Compare'
        */
       if (controller_DW.LS1_R == controller_P.CompareToConstant_const_g) {
-        /* DataStoreWrite: '<S27>/Data Store Write' incorporates:
-         *  Constant: '<S11>/Constant4'
-         */
-        controller_DW.state = controller_P.Constant4_Value;
+        controller_B.DataStoreRead1_c = controller_P.Constant4_Value;
+      } else {
+        controller_B.DataStoreRead1_c = controller_DW.state;
       }
 
       /* End of Switch: '<S27>/Switch' */
 
-      /* MATLAB Function: '<S11>/MATLAB Function' */
+      /* DataStoreWrite: '<S27>/Data Store Write' */
+      controller_DW.state = controller_B.DataStoreRead1_c;
+
+      /* DataStoreRead: '<S10>/Data Store Read10' */
+      controller_B.DataStoreRead1_c = controller_DW.num_motors;
+
+      /* DataTypeConversion: '<S10>/Data Type Conversion11' */
+      controller_B.Sum6 = floor(controller_B.DataStoreRead1_c);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
+      } else {
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+      }
+
+      /* CCaller: '<S10>/C Caller6' incorporates:
+       *  DataStoreRead: '<S10>/Data Store Read8'
+       *  DataTypeConversion: '<S10>/Data Type Conversion11'
+       */
+      get_encoder(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                  (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                  controller_B.Sum6, &controller_B.CCaller6);
+
+      /* RelationalOperator: '<S24>/Compare' incorporates:
+       *  Constant: '<S24>/Constant'
+       */
+      rtb_Compare_n1 = (controller_B.CCaller6 != controller_P.Constant_Value_fw);
+
+      /* RelationalOperator: '<S10>/IsNaN1' */
+      rtb_IsNaN1 = rtIsNaN(controller_B.CCaller6);
+
+      /* Logic: '<S10>/Logical Operator3' incorporates:
+       *  Logic: '<S10>/Logical Operator2'
+       */
+      controller_B.LogicalOperator3 = (rtb_Compare_n1 && (!rtb_IsNaN1));
+
+      /* Delay: '<S10>/Delay1' */
+      controller_B.Delay1 = controller_DW.Delay1_DSTATE;
+
+      /* Switch: '<S10>/Switch2' */
+      if (controller_B.LogicalOperator3) {
+        /* Sum: '<S10>/Sum6' */
+        controller_B.Sum6 = controller_B.CCaller6 - controller_B.DataStoreRead7;
+
+        /* Switch: '<S10>/Switch2' incorporates:
+         *  Constant: '<S10>/Constant6'
+         *  Constant: '<S25>/Constant'
+         *  Product: '<S10>/Divide2'
+         *  RelationalOperator: '<S25>/Compare'
+         *  Sum: '<S10>/Sum7'
+         */
+        controller_B.Switch2 = (real_T)(controller_B.Sum6 <
+          controller_P.Constant_Value_a) * controller_P.Constant6_Value +
+          controller_B.Sum6;
+      } else {
+        /* Switch: '<S10>/Switch2' */
+        controller_B.Switch2 = controller_B.Delay1;
+      }
+
+      /* End of Switch: '<S10>/Switch2' */
+
+      /* Gain: '<S10>/Gain3' incorporates:
+       *  DataStoreRead: '<S10>/Data Store Read6'
+       *  Gain: '<S10>/Gain1'
+       *  Product: '<S10>/Divide1'
+       */
+      controller_B.Gain3 = controller_B.Switch2 / (controller_P.Gain1_Gain *
+        controller_DW.GR1) * controller_P.Gain3_Gain_j;
+      if (controller_M->Timing.TaskCounters.TID[2] == 0) {
+        /* DataTypeConversion: '<S10>/Data Type Conversion' incorporates:
+         *  Constant: '<S10>/Constant14'
+         */
+        controller_B.Sum6 = floor(controller_P.Constant14_Value_g);
+        if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+          controller_B.Sum6 = 0.0;
+        } else {
+          controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
+        }
+
+        /* DataTypeConversion: '<S10>/Data Type Conversion3' incorporates:
+         *  DataStoreRead: '<S10>/Data Store Read9'
+         */
+        controller_B.DataStoreRead7 = floor(controller_DW.debug);
+        if (rtIsNaN(controller_B.DataStoreRead7) || rtIsInf
+            (controller_B.DataStoreRead7)) {
+          controller_B.DataStoreRead7 = 0.0;
+        } else {
+          controller_B.DataStoreRead7 = fmod(controller_B.DataStoreRead7,
+            4.294967296E+9);
+        }
+
+        /* CCaller: '<S10>/C Caller3' incorporates:
+         *  DataTypeConversion: '<S10>/Data Type Conversion'
+         *  DataTypeConversion: '<S10>/Data Type Conversion3'
+         */
+        print_input(controller_B.Gain3, controller_B.Sum6 < 0.0 ? -(int32_T)
+                    (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                    controller_B.Sum6, controller_B.DataStoreRead7 < 0.0 ?
+                    -(int32_T)(uint32_T)-controller_B.DataStoreRead7 : (int32_T)
+                    (uint32_T)controller_B.DataStoreRead7);
+      }
+
+      /* MATLAB Function: '<S10>/MATLAB Function' */
       controller_getLocalTime(&controller_B.fracSecs, &controller_B.second,
-        &controller_B.shi, &controller_B.b_alo, &controller_B.d_ahi_b,
-        &controller_B.c_tm_mon, &controller_B.c_tm_year, &rtb_Compare_a);
+        &controller_B.Sum6, &controller_B.DataStoreRead1_c,
+        &controller_B.DataStoreRead7, &controller_B.c_tm_mon,
+        &controller_B.c_tm_year, &rtb_Compare_n1);
       controller_B.fracSecs /= 1.0E+6;
       controller_B.check = (((((controller_B.c_tm_year + controller_B.c_tm_mon)
-        + controller_B.d_ahi_b) + controller_B.b_alo) + controller_B.shi) +
-                            controller_B.second) + controller_B.fracSecs;
+        + controller_B.DataStoreRead7) + controller_B.DataStoreRead1_c) +
+        controller_B.Sum6) + controller_B.second) + controller_B.fracSecs;
       if ((!rtIsInf(controller_B.check)) && (!rtIsNaN(controller_B.check))) {
         if ((controller_B.c_tm_mon < 1.0) || (controller_B.c_tm_mon > 12.0)) {
           controller_B.check = floor((controller_B.c_tm_mon - 1.0) / 12.0);
@@ -1050,12 +1202,14 @@ void controller_step(void)
         controller_B.d_data.re = ((((((365.0 * controller_B.c_tm_year + floor
           (controller_B.c_tm_year / 4.0)) - floor(controller_B.c_tm_year / 100.0))
           + floor(controller_B.c_tm_year / 400.0)) + floor((153.0 *
-          controller_B.c_tm_mon + 2.0) / 5.0)) + controller_B.d_ahi_b) + 60.0) -
-          719529.0;
+          controller_B.c_tm_mon + 2.0) / 5.0)) + controller_B.DataStoreRead7) +
+          60.0) - 719529.0;
         controller_B.d_data.im = 0.0;
-        controller_B.d_data = controller_plus(controller_plus(controller_plus
-          (controller_times(controller_B.d_data), (60.0 * controller_B.b_alo +
-          controller_B.shi) * 60000.0), controller_B.second * 1000.0),
+        controller_B.d_data = controller_plus(controller_times
+          (controller_B.d_data), (60.0 * controller_B.DataStoreRead1_c +
+          controller_B.Sum6) * 60000.0);
+        controller_B.d_data = controller_plus(controller_plus
+          (controller_B.d_data, controller_B.second * 1000.0),
           controller_B.fracSecs);
       } else {
         controller_B.d_data.re = controller_B.check;
@@ -1075,215 +1229,199 @@ void controller_step(void)
         - 0.0 * controller_B.t.im;
       controller_B.c_s.im = (controller_B.c_s.im + controller_B.d_data.im) -
         controller_B.t.im;
-      controller_B.shi = (controller_B.c_s.re + controller_B.c_s.im) / 8.64E+7;
-      controller_B.b_alo = 0.0;
-      controller_B.d_ahi_b = controller_B.b_c.re;
-      if (controller_B.shi != 0.0) {
-        controller_B.d_ahi_b = controller_B.b_c.re + controller_B.shi;
-        controller_B.b_alo = controller_B.shi - (controller_B.d_ahi_b -
-          controller_B.b_c.re);
+      controller_B.Sum6 = (controller_B.c_s.re + controller_B.c_s.im) / 8.64E+7;
+      controller_B.DataStoreRead1_c = 0.0;
+      controller_B.DataStoreRead7 = controller_B.b_c.re;
+      if (controller_B.Sum6 != 0.0) {
+        controller_B.DataStoreRead7 = controller_B.b_c.re + controller_B.Sum6;
+        controller_B.DataStoreRead1_c = controller_B.Sum6 -
+          (controller_B.DataStoreRead7 - controller_B.b_c.re);
       }
 
-      if (rtIsNaN(controller_B.b_alo)) {
-        controller_B.b_alo = 0.0;
+      if (rtIsNaN(controller_B.DataStoreRead1_c)) {
+        controller_B.DataStoreRead1_c = 0.0;
       }
 
-      controller_B.d_ahi.re = controller_B.d_ahi_b;
-      controller_B.d_ahi.im = controller_B.b_alo;
+      controller_B.d_ahi.re = controller_B.DataStoreRead7;
+      controller_B.d_ahi.im = controller_B.DataStoreRead1_c;
       controller_B.d_data = controller_minus(controller_B.d_data,
         controller_times(controller_floor(controller_B.d_ahi)));
       controller_B.b_c.re = controller_B.d_data.re / 1000.0;
       controller_B.t = controller_split(controller_B.b_c.re);
-      controller_B.shi = controller_B.b_c.re * 1000.0;
-      controller_B.b_alo = (controller_B.t.re * 1000.0 - controller_B.shi) +
-        controller_B.t.im * 1000.0;
-      rtb_DataTypeConversion1_b = 0;
-      if (rtIsNaN(controller_B.b_alo)) {
-        rtb_DataTypeConversion1_b = 1;
+      controller_B.Sum6 = controller_B.b_c.re * 1000.0;
+      controller_B.DataStoreRead1_c = (controller_B.t.re * 1000.0 -
+        controller_B.Sum6) + controller_B.t.im * 1000.0;
+      controller_B.DataStoreRead7 = controller_B.DataStoreRead1_c;
+      trueCount = 0;
+      if (rtIsNaN(controller_B.DataStoreRead1_c)) {
+        trueCount = 1;
       }
 
-      if (rtb_DataTypeConversion1_b - 1 >= 0) {
-        controller_B.b_alo = 0.0;
+      if (trueCount - 1 >= 0) {
+        controller_B.DataStoreRead7 = 0.0;
       }
 
       controller_B.c_s.re = 0.0;
       controller_B.c_s.im = 0.0;
-      if (controller_B.d_data.re != controller_B.shi) {
+      if (controller_B.d_data.re != controller_B.Sum6) {
         controller_B.c_s = controller_two_diff(controller_B.d_data.re,
-          controller_B.shi);
+          controller_B.Sum6);
       }
 
       controller_B.c_s.re = (0.0 * controller_B.d_data.im + controller_B.c_s.re)
-        - 0.0 * controller_B.b_alo;
+        - 0.0 * controller_B.DataStoreRead7;
       controller_B.c_s.im = (controller_B.c_s.im + controller_B.d_data.im) -
-        controller_B.b_alo;
-      controller_B.shi = (controller_B.c_s.re + controller_B.c_s.im) / 1000.0;
-      controller_B.b_alo = 0.0;
-      controller_B.d_ahi_b = controller_B.b_c.re;
-      if (controller_B.shi != 0.0) {
-        controller_B.d_ahi_b = controller_B.b_c.re + controller_B.shi;
-        controller_B.b_alo = controller_B.shi - (controller_B.d_ahi_b -
-          controller_B.b_c.re);
+        controller_B.DataStoreRead7;
+      controller_B.Sum6 = (controller_B.c_s.re + controller_B.c_s.im) / 1000.0;
+      controller_B.DataStoreRead1_c = 0.0;
+      controller_B.DataStoreRead7 = controller_B.b_c.re;
+      if (controller_B.Sum6 != 0.0) {
+        controller_B.DataStoreRead7 = controller_B.b_c.re + controller_B.Sum6;
+        controller_B.DataStoreRead1_c = controller_B.Sum6 -
+          (controller_B.DataStoreRead7 - controller_B.b_c.re);
       }
 
-      if (rtIsNaN(controller_B.b_alo)) {
-        controller_B.b_alo = 0.0;
+      if (rtIsNaN(controller_B.DataStoreRead1_c)) {
+        controller_B.DataStoreRead1_c = 0.0;
       }
 
-      controller_B.d_data.re = controller_B.d_ahi_b;
-      controller_B.d_data.im = controller_B.b_alo;
+      controller_B.d_data.re = controller_B.DataStoreRead7;
+      controller_B.d_data.im = controller_B.DataStoreRead1_c;
       controller_B.t = controller_floor(controller_B.d_data);
       controller_B.b_c = controller_minus(controller_B.d_data, controller_B.t);
-      controller_B.shi = controller_B.t.re + controller_B.t.im;
-      if ((controller_B.shi >= 0.0) && (controller_B.shi <= 2.147483647E+9)) {
-        rtb_DataTypeConversion1_b = (int32_T)rt_roundd_snf(controller_B.shi);
-        rtb_DataTypeConversion1_b -= 3600 * div_s32(rtb_DataTypeConversion1_b,
-          3600);
-        controller_B.shi = rtb_DataTypeConversion1_b - 60 * div_s32
-          (rtb_DataTypeConversion1_b, 60);
+      controller_B.Sum6 = controller_B.t.re + controller_B.t.im;
+      if ((controller_B.Sum6 >= 0.0) && (controller_B.Sum6 <= 2.147483647E+9)) {
+        trueCount = (int32_T)rt_roundd_snf(controller_B.Sum6);
+        trueCount -= 3600 * div_s32(trueCount, 3600);
+        controller_B.Sum6 = trueCount - 60 * div_s32(trueCount, 60);
       } else {
-        controller_B.shi -= floor((controller_B.shi - floor(controller_B.shi /
+        controller_B.Sum6 -= floor((controller_B.Sum6 - floor(controller_B.Sum6 /
           3600.0) * 3600.0) / 60.0) * 60.0;
       }
 
-      controller_B.b_alo = (controller_B.b_c.re + controller_B.b_c.im) +
-        controller_B.shi;
-      if (controller_B.b_alo == 60.0) {
-        controller_B.b_alo = 59.999999999999993;
+      controller_B.DataStoreRead7 = (controller_B.b_c.re + controller_B.b_c.im)
+        + controller_B.Sum6;
+      if (controller_B.DataStoreRead7 == 60.0) {
+        controller_B.DataStoreRead7 = 59.999999999999993;
       }
 
-      /* DataTypeConversion: '<S11>/Data Type Conversion7' incorporates:
-       *  DataStoreRead: '<S11>/Data Store Read7'
+      /* Derivative: '<S10>/Derivative1' incorporates:
+       *  Derivative: '<S10>/Derivative2'
        */
-      controller_B.shi = floor(controller_DW.num_motors);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
+      controller_B.Sum6 = controller_M->Timing.t[0];
+      if ((controller_DW.TimeStampA >= controller_B.Sum6) &&
+          (controller_DW.TimeStampB >= controller_B.Sum6)) {
+        /* Derivative: '<S10>/Derivative1' */
+        controller_B.Derivative1 = 0.0;
       } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+        controller_B.DataStoreRead1_c = controller_DW.TimeStampA;
+        lastU = &controller_DW.LastUAtTimeA;
+        if (controller_DW.TimeStampA < controller_DW.TimeStampB) {
+          if (controller_DW.TimeStampB < controller_B.Sum6) {
+            controller_B.DataStoreRead1_c = controller_DW.TimeStampB;
+            lastU = &controller_DW.LastUAtTimeB;
+          }
+        } else if (controller_DW.TimeStampA >= controller_B.Sum6) {
+          controller_B.DataStoreRead1_c = controller_DW.TimeStampB;
+          lastU = &controller_DW.LastUAtTimeB;
+        }
+
+        /* Derivative: '<S10>/Derivative1' */
+        controller_B.Derivative1 = (controller_B.Gain3 - *lastU) /
+          (controller_B.Sum6 - controller_B.DataStoreRead1_c);
       }
 
-      /* CCaller: '<S11>/C Caller1' incorporates:
-       *  DataStoreRead: '<S11>/Data Store Read2'
-       *  DataTypeConversion: '<S11>/Data Type Conversion7'
-       */
-      get_encoder(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                  (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                  controller_B.shi, &controller_B.CCaller1[0]);
+      /* End of Derivative: '<S10>/Derivative1' */
 
-      /* Sum: '<S11>/Sum' */
-      controller_B.CCaller1_k[0] = controller_B.CCaller1[0] -
-        controller_B.DataStoreRead1_c;
-      controller_B.CCaller1_k[1] = controller_B.CCaller1[1] -
-        controller_B.DataStoreRead8;
-
-      /* RelationalOperator: '<S25>/Compare' incorporates:
-       *  Constant: '<S25>/Constant'
-       */
-      controller_B.Compare_e[0] = (controller_B.CCaller1[0] !=
-        controller_P.Constant_Value_p);
-      controller_B.Compare_e[1] = (controller_B.CCaller1[1] !=
-        controller_P.Constant_Value_p);
-
-      /* Delay: '<S11>/Delay' */
-      controller_B.Delay[0] = controller_DW.Delay_DSTATE[0];
-      controller_B.Delay[1] = controller_DW.Delay_DSTATE[1];
-
-      /* Switch: '<S11>/Switch' */
-      if (controller_B.Compare_e[0]) {
-        /* Switch: '<S11>/Switch' */
-        controller_B.Switch[0] = controller_B.CCaller1_k[0];
+      /* Derivative: '<S10>/Derivative2' */
+      if ((controller_DW.TimeStampA_g >= controller_B.Sum6) &&
+          (controller_DW.TimeStampB_j >= controller_B.Sum6)) {
+        /* Derivative: '<S10>/Derivative2' */
+        controller_B.Derivative2 = 0.0;
       } else {
-        /* Switch: '<S11>/Switch' */
-        controller_B.Switch[0] = controller_B.Delay[0];
+        controller_B.DataStoreRead1_c = controller_DW.TimeStampA_g;
+        lastU = &controller_DW.LastUAtTimeA_o;
+        if (controller_DW.TimeStampA_g < controller_DW.TimeStampB_j) {
+          if (controller_DW.TimeStampB_j < controller_B.Sum6) {
+            controller_B.DataStoreRead1_c = controller_DW.TimeStampB_j;
+            lastU = &controller_DW.LastUAtTimeB_o;
+          }
+        } else if (controller_DW.TimeStampA_g >= controller_B.Sum6) {
+          controller_B.DataStoreRead1_c = controller_DW.TimeStampB_j;
+          lastU = &controller_DW.LastUAtTimeB_o;
+        }
+
+        /* Derivative: '<S10>/Derivative2' */
+        controller_B.Derivative2 = (controller_B.Derivative1 - *lastU) /
+          (controller_B.Sum6 - controller_B.DataStoreRead1_c);
       }
 
-      if (controller_B.Compare_e[1]) {
-        /* Switch: '<S11>/Switch' */
-        controller_B.Switch[1] = controller_B.CCaller1_k[1];
+      /* SignalConversion generated from: '<S10>/C Caller4' incorporates:
+       *  MATLAB Function: '<S10>/MATLAB Function'
+       */
+      controller_B.TmpSignalConversionAtCCalle[0] = controller_B.DataStoreRead7;
+      controller_B.TmpSignalConversionAtCCalle[1] = controller_B.Derivative1;
+      controller_B.TmpSignalConversionAtCCalle[2] = controller_B.Derivative2;
+
+      /* DataTypeConversion: '<S10>/Data Type Conversion2' incorporates:
+       *  Constant: '<S10>/Constant2'
+       */
+      controller_B.Sum6 = floor(controller_P.Constant2_Value);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
       } else {
-        /* Switch: '<S11>/Switch' */
-        controller_B.Switch[1] = controller_B.Delay[1];
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
       }
 
-      /* End of Switch: '<S11>/Switch' */
-
-      /* Gain: '<S11>/Gain2' incorporates:
-       *  DataStoreRead: '<S11>/Data Store Read1'
-       *  DataStoreRead: '<S11>/Data Store Read8'
-       *  Gain: '<S11>/Gain'
-       *  Gain: '<S11>/Gain1'
-       *  Product: '<S11>/Divide'
+      /* CCaller: '<S10>/C Caller4' incorporates:
+       *  DataTypeConversion: '<S10>/Data Type Conversion2'
        */
-      controller_B.Gain2[0] = controller_B.Switch[0] / (controller_P.Gain_Gain_m
-        * controller_DW.GR1) * controller_P.Gain2_Gain_b;
-      controller_B.Gain2[1] = controller_B.Switch[1] /
-        (controller_P.Gain1_Gain_g * controller_DW.GR2) *
-        controller_P.Gain2_Gain_b;
+      print_data(&controller_B.TmpSignalConversionAtCCalle[0], controller_B.Sum6
+                 < 0.0 ? -(int32_T)(uint32_T)-controller_B.Sum6 : (int32_T)
+                 (uint32_T)controller_B.Sum6);
 
-      /* SignalConversion generated from: '<S11>/C Caller4' incorporates:
-       *  MATLAB Function: '<S11>/MATLAB Function'
+      /* Sum: '<S10>/Sum1' incorporates:
+       *  Constant: '<S10>/Constant3'
+       *  Gain: '<S10>/Gain'
+       *  Gain: '<S10>/Gain2'
+       *  Sum: '<S10>/Sum'
        */
-      controller_B.TmpSignalConversionAtCCalle[0] = controller_B.b_alo;
-      controller_B.TmpSignalConversionAtCCalle[1] = controller_B.Gain2[0];
-      controller_B.TmpSignalConversionAtCCalle[2] = controller_B.Gain2[1];
+      controller_B.Saturation = (controller_P.Constant3_Value -
+        controller_B.Gain3) * controller_P.Gain_Gain_k -
+        controller_P.Gain2_Gain_m * controller_B.Derivative1;
 
-      /* DataTypeConversion: '<S11>/Data Type Conversion2' incorporates:
-       *  Constant: '<S11>/Constant2'
-       */
-      controller_B.shi = floor(controller_P.Constant2_Value_i);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
-      } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+      /* Saturate: '<S10>/Saturation' */
+      if (controller_B.Saturation > controller_P.Saturation_UpperSat_f) {
+        /* Sum: '<S10>/Sum1' incorporates:
+         *  Saturate: '<S10>/Saturation'
+         */
+        controller_B.Saturation = controller_P.Saturation_UpperSat_f;
+      } else if (controller_B.Saturation < controller_P.Saturation_LowerSat_l) {
+        /* Sum: '<S10>/Sum1' incorporates:
+         *  Saturate: '<S10>/Saturation'
+         */
+        controller_B.Saturation = controller_P.Saturation_LowerSat_l;
       }
 
-      /* CCaller: '<S11>/C Caller4' incorporates:
-       *  DataTypeConversion: '<S11>/Data Type Conversion2'
-       */
-      print_data(&controller_B.TmpSignalConversionAtCCalle[0], controller_B.shi <
-                 0.0 ? -(int32_T)(uint32_T)-controller_B.shi : (int32_T)
-                 (uint32_T)controller_B.shi);
-
-      /* Sin: '<S11>/Sine Wave' */
-      controller_B.SineWave = sin(controller_P.SineWave_Freq *
-        controller_M->Timing.t[0] + controller_P.SineWave_Phase) *
-        controller_P.SineWave_Amp + controller_P.SineWave_Bias;
+      /* End of Saturate: '<S10>/Saturation' */
 
       /* DataTypeConversion: '<S28>/Data Type Conversion1' incorporates:
-       *  Constant: '<S11>/Constant'
+       *  Constant: '<S10>/Constant'
        */
-      controller_B.shi = floor(controller_P.Constant_Value_i);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
+      controller_B.Sum6 = floor(controller_P.Constant_Value_i);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
       } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
       }
 
       /* CCaller: '<S28>/C Caller3' incorporates:
        *  DataStoreRead: '<S28>/Data Store Read2'
        *  DataTypeConversion: '<S28>/Data Type Conversion1'
        */
-      set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_B.SineWave);
-
-      /* DataTypeConversion: '<S29>/Data Type Conversion1' incorporates:
-       *  Constant: '<S11>/Constant1'
-       */
-      controller_B.shi = floor(controller_P.Constant1_Value_m);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
-      } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
-      }
-
-      /* CCaller: '<S29>/C Caller3' incorporates:
-       *  DataStoreRead: '<S29>/Data Store Read2'
-       *  DataTypeConversion: '<S29>/Data Type Conversion1'
-       */
-      set_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                controller_B.shi, controller_B.SineWave);
+      set_motor(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                controller_B.Sum6, controller_B.Saturation);
     }
 
     /* End of Outputs for SubSystem: '<Root>/Main Control' */
@@ -1292,53 +1430,110 @@ void controller_step(void)
      *  Constant: '<S5>/Constant'
      *  DataStoreRead: '<Root>/Data Store Read6'
      */
-    rtb_Compare_a = (controller_DW.state ==
-                     controller_P.CompareToConstant7_const);
+    rtb_Compare_n1 = (controller_DW.state ==
+                      controller_P.CompareToConstant7_const);
 
     /* Outputs for Triggered SubSystem: '<Root>/Exit Control' incorporates:
-     *  TriggerPort: '<S7>/Trigger'
+     *  TriggerPort: '<S6>/Trigger'
      */
-    if (rtb_Compare_a && (controller_PrevZCX.ExitControl_Trig_ZCE != POS_ZCSIG))
+    if (rtb_Compare_n1 && (controller_PrevZCX.ExitControl_Trig_ZCE != POS_ZCSIG))
     {
-      /* DataTypeConversion: '<S7>/Data Type Conversion' incorporates:
-       *  DataStoreRead: '<S7>/Data Store Read7'
+      /* DataTypeConversion: '<S6>/Data Type Conversion' incorporates:
+       *  DataStoreRead: '<S6>/Data Store Read7'
        */
-      controller_B.shi = floor(controller_DW.num_motors);
-      if (rtIsNaN(controller_B.shi) || rtIsInf(controller_B.shi)) {
-        controller_B.shi = 0.0;
+      controller_B.Sum6 = floor(controller_DW.num_motors);
+      if (rtIsNaN(controller_B.Sum6) || rtIsInf(controller_B.Sum6)) {
+        controller_B.Sum6 = 0.0;
       } else {
-        controller_B.shi = fmod(controller_B.shi, 4.294967296E+9);
+        controller_B.Sum6 = fmod(controller_B.Sum6, 4.294967296E+9);
       }
 
-      /* CCaller: '<S7>/C Caller1' incorporates:
-       *  DataStoreRead: '<S7>/Data Store Read1'
-       *  DataTypeConversion: '<S7>/Data Type Conversion'
+      /* CCaller: '<S6>/C Caller1' incorporates:
+       *  DataStoreRead: '<S6>/Data Store Read1'
+       *  DataTypeConversion: '<S6>/Data Type Conversion'
        */
-      stop_motor(controller_DW.pdo_id, controller_B.shi < 0.0 ? -(int32_T)
-                 (uint32_T)-controller_B.shi : (int32_T)(uint32_T)
-                 controller_B.shi);
+      stop_motor(controller_DW.pdo_id, controller_B.Sum6 < 0.0 ? -(int32_T)
+                 (uint32_T)-controller_B.Sum6 : (int32_T)(uint32_T)
+                 controller_B.Sum6);
 
-      /* CCaller: '<S7>/C Caller4' */
+      /* CCaller: '<S6>/C Caller4' */
       close_datalog();
     }
 
-    controller_PrevZCX.ExitControl_Trig_ZCE = rtb_Compare_a;
+    controller_PrevZCX.ExitControl_Trig_ZCE = rtb_Compare_n1;
 
     /* End of Outputs for SubSystem: '<Root>/Exit Control' */
   }
 
   {
-    real_T (*lastU)[2];
+    real_T *lastU;
+
+    /* Update for Enabled SubSystem: '<Root>/Home1' incorporates:
+     *  EnablePort: '<S7>/Enable'
+     */
+    if (controller_DW.Home1_MODE) {
+      /* Update for Delay: '<S7>/Delay' */
+      controller_DW.Delay_DSTATE_n = controller_B.Switch_g;
+
+      /* Update for Derivative: '<S7>/Derivative' */
+      if (controller_DW.TimeStampA_f == (rtInf)) {
+        controller_DW.TimeStampA_f = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_e;
+      } else if (controller_DW.TimeStampB_o == (rtInf)) {
+        controller_DW.TimeStampB_o = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_h;
+      } else if (controller_DW.TimeStampA_f < controller_DW.TimeStampB_o) {
+        controller_DW.TimeStampA_f = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_e;
+      } else {
+        controller_DW.TimeStampB_o = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_h;
+      }
+
+      *lastU = controller_B.Gain2_o;
+
+      /* End of Update for Derivative: '<S7>/Derivative' */
+    }
+
+    /* End of Update for SubSystem: '<Root>/Home1' */
 
     /* Update for Enabled SubSystem: '<Root>/Home2' incorporates:
-     *  EnablePort: '<S9>/Enable'
+     *  EnablePort: '<S8>/Enable'
      */
     if (controller_DW.Home2_MODE) {
-      /* Update for Delay: '<S9>/Delay' */
-      controller_DW.Delay_DSTATE_h[0] = controller_B.Switch_f[0];
-      controller_DW.Delay_DSTATE_h[1] = controller_B.Switch_f[1];
+      /* Update for Delay: '<S8>/Delay' */
+      controller_DW.Delay_DSTATE = controller_B.Switch;
 
-      /* Update for Derivative: '<S9>/Derivative' */
+      /* Update for Derivative: '<S8>/Derivative' */
+      if (controller_DW.TimeStampA_gc == (rtInf)) {
+        controller_DW.TimeStampA_gc = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_f;
+      } else if (controller_DW.TimeStampB_h == (rtInf)) {
+        controller_DW.TimeStampB_h = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_c;
+      } else if (controller_DW.TimeStampA_gc < controller_DW.TimeStampB_h) {
+        controller_DW.TimeStampA_gc = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_f;
+      } else {
+        controller_DW.TimeStampB_h = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_c;
+      }
+
+      *lastU = controller_B.Gain2;
+
+      /* End of Update for Derivative: '<S8>/Derivative' */
+    }
+
+    /* End of Update for SubSystem: '<Root>/Home2' */
+
+    /* Update for Enabled SubSystem: '<Root>/Main Control' incorporates:
+     *  EnablePort: '<S10>/Enable'
+     */
+    if (controller_DW.MainControl_MODE) {
+      /* Update for Delay: '<S10>/Delay1' */
+      controller_DW.Delay1_DSTATE = controller_B.Switch2;
+
+      /* Update for Derivative: '<S10>/Derivative1' */
       if (controller_DW.TimeStampA == (rtInf)) {
         controller_DW.TimeStampA = controller_M->Timing.t[0];
         lastU = &controller_DW.LastUAtTimeA;
@@ -1353,21 +1548,28 @@ void controller_step(void)
         lastU = &controller_DW.LastUAtTimeB;
       }
 
-      (*lastU)[0] = controller_B.Gain2_p[0];
-      (*lastU)[1] = controller_B.Gain2_p[1];
+      *lastU = controller_B.Gain3;
 
-      /* End of Update for Derivative: '<S9>/Derivative' */
-    }
+      /* End of Update for Derivative: '<S10>/Derivative1' */
 
-    /* End of Update for SubSystem: '<Root>/Home2' */
+      /* Update for Derivative: '<S10>/Derivative2' */
+      if (controller_DW.TimeStampA_g == (rtInf)) {
+        controller_DW.TimeStampA_g = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_o;
+      } else if (controller_DW.TimeStampB_j == (rtInf)) {
+        controller_DW.TimeStampB_j = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_o;
+      } else if (controller_DW.TimeStampA_g < controller_DW.TimeStampB_j) {
+        controller_DW.TimeStampA_g = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeA_o;
+      } else {
+        controller_DW.TimeStampB_j = controller_M->Timing.t[0];
+        lastU = &controller_DW.LastUAtTimeB_o;
+      }
 
-    /* Update for Enabled SubSystem: '<Root>/Main Control' incorporates:
-     *  EnablePort: '<S11>/Enable'
-     */
-    if (controller_DW.MainControl_MODE) {
-      /* Update for Delay: '<S11>/Delay' */
-      controller_DW.Delay_DSTATE[0] = controller_B.Switch[0];
-      controller_DW.Delay_DSTATE[1] = controller_B.Switch[1];
+      *lastU = controller_B.Derivative1;
+
+      /* End of Update for Derivative: '<S10>/Derivative2' */
     }
 
     /* End of Update for SubSystem: '<Root>/Main Control' */
@@ -1448,15 +1650,6 @@ void controller_initialize(void)
 
   {
     beagleboneblue_bbblueDigitalR_T *obj;
-
-    /* Start for Triggered SubSystem: '<Root>/E-stop' */
-    /* Start for MATLABSystem: '<S6>/LED' */
-    controller_DW.obj_n.matlabCodegenIsDeleted = false;
-    controller_DW.objisempty = true;
-    controller_DW.obj_n.isInitialized = 1;
-    controller_DW.obj_n.isSetupComplete = true;
-
-    /* End of Start for SubSystem: '<Root>/E-stop' */
     controller_AnalogInput_Start(&controller_DW.AnalogInput,
       &controller_P.AnalogInput);
     controller_AnalogInput_Start(&controller_DW.AnalogInput1,
@@ -1482,7 +1675,7 @@ void controller_initialize(void)
 
     /* Start for MATLABSystem: '<Root>/Digital Read2' */
     controller_DW.obj_l.matlabCodegenIsDeleted = false;
-    controller_DW.objisempty_f2 = true;
+    controller_DW.objisempty_f = true;
     controller_DW.obj_l.SampleTime = controller_P.DigitalRead2_SampleTime;
     obj = &controller_DW.obj_l;
     controller_DW.obj_l.isInitialized = 1;
@@ -1491,7 +1684,7 @@ void controller_initialize(void)
 
     /* Start for MATLABSystem: '<Root>/Digital Read3' */
     controller_DW.obj.matlabCodegenIsDeleted = false;
-    controller_DW.objisempty_f = true;
+    controller_DW.objisempty = true;
     controller_DW.obj.SampleTime = controller_P.DigitalRead3_SampleTime;
     obj = &controller_DW.obj;
     controller_DW.obj.isInitialized = 1;
@@ -1570,50 +1763,41 @@ void controller_initialize(void)
     controller_DW.LS2_L = controller_P.DataStoreMemory9_InitialValue;
   }
 
-  controller_PrevZCX.Estop_Trig_ZCE = UNINITIALIZED_ZCSIG;
   controller_PrevZCX.ExitControl_Trig_ZCE = POS_ZCSIG;
-  controller_PrevZCX.StopMotor1_Trig_ZCE_f = POS_ZCSIG;
-  controller_PrevZCX.StopMotor1_Trig_ZCE = POS_ZCSIG;
+  controller_PrevZCX.StopMotor1_n.StopMotor1_Trig_ZCE = POS_ZCSIG;
+  controller_PrevZCX.StopMotor1.StopMotor1_Trig_ZCE = POS_ZCSIG;
+
+  /* SystemInitialize for Enabled SubSystem: '<Root>/Home1' */
+  /* InitializeConditions for Delay: '<S7>/Delay' */
+  controller_DW.Delay_DSTATE_n = controller_P.Delay_InitialCondition;
+
+  /* InitializeConditions for Derivative: '<S7>/Derivative' */
+  controller_DW.TimeStampA_f = (rtInf);
+  controller_DW.TimeStampB_o = (rtInf);
+
+  /* End of SystemInitialize for SubSystem: '<Root>/Home1' */
 
   /* SystemInitialize for Enabled SubSystem: '<Root>/Home2' */
-  /* InitializeConditions for Derivative: '<S9>/Derivative' */
+  /* InitializeConditions for Delay: '<S8>/Delay' */
+  controller_DW.Delay_DSTATE = controller_P.Delay_InitialCondition_k;
+
+  /* InitializeConditions for Derivative: '<S8>/Derivative' */
+  controller_DW.TimeStampA_gc = (rtInf);
+  controller_DW.TimeStampB_h = (rtInf);
+
+  /* End of SystemInitialize for SubSystem: '<Root>/Home2' */
+
+  /* SystemInitialize for Enabled SubSystem: '<Root>/Main Control' */
+  /* InitializeConditions for Delay: '<S10>/Delay1' */
+  controller_DW.Delay1_DSTATE = controller_P.Delay1_InitialCondition;
+
+  /* InitializeConditions for Derivative: '<S10>/Derivative1' */
   controller_DW.TimeStampA = (rtInf);
   controller_DW.TimeStampB = (rtInf);
 
-  /* InitializeConditions for Delay: '<S9>/Delay' */
-  controller_DW.Delay_DSTATE_h[0] = controller_P.Delay_InitialCondition;
-
-  /* SystemInitialize for Triggered SubSystem: '<S9>/Stop Motor1' */
-  /* SystemInitialize for CCaller: '<S19>/C Caller1' incorporates:
-   *  Outport: '<S19>/enc'
-   */
-  controller_B.CCaller1_o[0] = controller_P.enc_Y0;
-
-  /* End of SystemInitialize for SubSystem: '<S9>/Stop Motor1' */
-  /* End of SystemInitialize for SubSystem: '<Root>/Home2' */
-
-  /* SystemInitialize for Enabled SubSystem: '<Root>/Main Control' */
-  /* InitializeConditions for Delay: '<S11>/Delay' */
-  controller_DW.Delay_DSTATE[0] = controller_P.Delay_InitialCondition_b;
-
-  /* End of SystemInitialize for SubSystem: '<Root>/Main Control' */
-
-  /* SystemInitialize for Enabled SubSystem: '<Root>/Home2' */
-  /* InitializeConditions for Delay: '<S9>/Delay' */
-  controller_DW.Delay_DSTATE_h[1] = controller_P.Delay_InitialCondition;
-
-  /* SystemInitialize for Triggered SubSystem: '<S9>/Stop Motor1' */
-  /* SystemInitialize for CCaller: '<S19>/C Caller1' incorporates:
-   *  Outport: '<S19>/enc'
-   */
-  controller_B.CCaller1_o[1] = controller_P.enc_Y0;
-
-  /* End of SystemInitialize for SubSystem: '<S9>/Stop Motor1' */
-  /* End of SystemInitialize for SubSystem: '<Root>/Home2' */
-
-  /* SystemInitialize for Enabled SubSystem: '<Root>/Main Control' */
-  /* InitializeConditions for Delay: '<S11>/Delay' */
-  controller_DW.Delay_DSTATE[1] = controller_P.Delay_InitialCondition_b;
+  /* InitializeConditions for Derivative: '<S10>/Derivative2' */
+  controller_DW.TimeStampA_g = (rtInf);
+  controller_DW.TimeStampB_j = (rtInf);
 
   /* End of SystemInitialize for SubSystem: '<Root>/Main Control' */
 }
@@ -1621,18 +1805,6 @@ void controller_initialize(void)
 /* Model terminate function */
 void controller_terminate(void)
 {
-  /* Terminate for Triggered SubSystem: '<Root>/E-stop' */
-  /* Terminate for MATLABSystem: '<S6>/LED' */
-  if (!controller_DW.obj_n.matlabCodegenIsDeleted) {
-    controller_DW.obj_n.matlabCodegenIsDeleted = true;
-    if ((controller_DW.obj_n.isInitialized == 1) &&
-        controller_DW.obj_n.isSetupComplete) {
-      rc_led_cleanup();
-    }
-  }
-
-  /* End of Terminate for MATLABSystem: '<S6>/LED' */
-  /* End of Terminate for SubSystem: '<Root>/E-stop' */
   controller_AnalogInput_Term(&controller_DW.AnalogInput);
   controller_AnalogInput_Term(&controller_DW.AnalogInput1);
 

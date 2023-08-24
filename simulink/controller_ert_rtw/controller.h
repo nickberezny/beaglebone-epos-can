@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.338
+ * Model version              : 4.413
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Aug 16 17:23:43 2023
+ * C source code generated on : Thu Aug 24 12:17:01 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -72,15 +72,14 @@ typedef struct {
   boolean_T objisempty;                /* '<Root>/Analog Input' */
 } DW_AnalogInput_controller_T;
 
+/* Zero-crossing (trigger) state for system '<S7>/Stop Motor1' */
+typedef struct {
+  ZCSigState StopMotor1_Trig_ZCE;      /* '<S7>/Stop Motor1' */
+} ZCE_StopMotor1_controller_T;
+
 /* Block signals (default storage) */
 typedef struct {
   real_T TmpSignalConversionAtCCalle[3];
-  real_T CCaller1[2];                  /* '<S11>/C Caller1' */
-  real_T Delay[2];                     /* '<S11>/Delay' */
-  real_T Switch[2];                    /* '<S11>/Switch' */
-  real_T Gain2[2];                     /* '<S11>/Gain2' */
-  real_T CCaller1_k[2];                /* '<S8>/C Caller1' */
-  real_T CCaller1_o_c[2];              /* '<S9>/C Caller1' */
   creal_T d_data;
   creal_T b_c;
   creal_T t;
@@ -90,27 +89,38 @@ typedef struct {
   creal_T t_m;
   creal_T da;
   creal_T t_c;
-  real_T SineWave;                     /* '<S11>/Sine Wave' */
-  real_T Switch_f[2];                  /* '<S9>/Switch' */
-  real_T Gain2_p[2];                   /* '<S9>/Gain2' */
-  real_T Saturation;                   /* '<S9>/Saturation' */
-  real_T CCaller1_o[2];                /* '<S19>/C Caller1' */
+  real_T CCaller6;                     /* '<S10>/C Caller6' */
+  real_T Delay1;                       /* '<S10>/Delay1' */
+  real_T Switch2;                      /* '<S10>/Switch2' */
+  real_T Gain3;                        /* '<S10>/Gain3' */
+  real_T Derivative1;                  /* '<S10>/Derivative1' */
+  real_T Derivative2;                  /* '<S10>/Derivative2' */
+  real_T Saturation;                   /* '<S10>/Saturation' */
+  real_T Switch;                       /* '<S8>/Switch' */
+  real_T Gain2;                        /* '<S8>/Gain2' */
+  real_T Derivative;                   /* '<S8>/Derivative' */
+  real_T Saturation_b;                 /* '<S8>/Saturation' */
+  real_T Switch_g;                     /* '<S7>/Switch' */
+  real_T Gain2_o;                      /* '<S7>/Gain2' */
+  real_T Derivative_e;                 /* '<S7>/Derivative' */
+  real_T Saturation_d;                 /* '<S7>/Saturation' */
   real_T c_tm_mon;
   real_T c_tm_year;
   real_T second;
   real_T fracSecs;
   real_T check;
-  real_T shi;
-  real_T b_alo;
-  real_T d_ahi_b;
   real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
-  real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
+  real_T DataStoreRead7;               /* '<Root>/Data Store Read7' */
+  real_T Sum6;                         /* '<S10>/Sum6' */
+  real_T alo;
   real_T b;
-  int32_T CCaller5[2];                 /* '<S10>/C Caller5' */
+  real_T alo_k;
+  real_T alo_c;
+  int32_T CCaller5[2];                 /* '<S9>/C Caller5' */
   boolean_T Compare;                   /* '<S1>/Compare' */
-  boolean_T Compare_p;                 /* '<S3>/Compare' */
+  boolean_T Compare_m;                 /* '<S3>/Compare' */
   boolean_T Compare_j;                 /* '<S4>/Compare' */
-  boolean_T Compare_e[2];              /* '<S25>/Compare' */
+  boolean_T LogicalOperator3;          /* '<S10>/Logical Operator3' */
   B_AnalogInput_controller_T AnalogInput1;/* '<Root>/Analog Input' */
   B_AnalogInput_controller_T AnalogInput;/* '<Root>/Analog Input' */
 } B_controller_T;
@@ -121,9 +131,9 @@ typedef struct {
   beagleboneblue_bbblueDigitalR_T obj_l;/* '<Root>/Digital Read2' */
   beagleboneblue_bbblueDigitalR_T obj_a;/* '<Root>/Digital Read1' */
   beagleboneblue_bbblueDigitalR_T obj_b;/* '<Root>/Digital Read' */
-  beagleboneblue_bbblueLED_cont_T obj_n;/* '<S6>/LED' */
-  real_T Delay_DSTATE[2];              /* '<S11>/Delay' */
-  real_T Delay_DSTATE_h[2];            /* '<S9>/Delay' */
+  real_T Delay1_DSTATE;                /* '<S10>/Delay1' */
+  real_T Delay_DSTATE;                 /* '<S8>/Delay' */
+  real_T Delay_DSTATE_n;               /* '<S7>/Delay' */
   real_T state;                        /* '<Root>/Data Store Memory' */
   real_T F1;                           /* '<Root>/Data Store Memory10' */
   real_T F2;                           /* '<Root>/Data Store Memory11' */
@@ -135,19 +145,30 @@ typedef struct {
   real_T q01;                          /* '<Root>/Data Store Memory2' */
   real_T q02;                          /* '<Root>/Data Store Memory5' */
   real_T num_motors;                   /* '<Root>/Data Store Memory7' */
-  real_T TimeStampA;                   /* '<S9>/Derivative' */
-  real_T LastUAtTimeA[2];              /* '<S9>/Derivative' */
-  real_T TimeStampB;                   /* '<S9>/Derivative' */
-  real_T LastUAtTimeB[2];              /* '<S9>/Derivative' */
+  real_T TimeStampA;                   /* '<S10>/Derivative1' */
+  real_T LastUAtTimeA;                 /* '<S10>/Derivative1' */
+  real_T TimeStampB;                   /* '<S10>/Derivative1' */
+  real_T LastUAtTimeB;                 /* '<S10>/Derivative1' */
+  real_T TimeStampA_g;                 /* '<S10>/Derivative2' */
+  real_T LastUAtTimeA_o;               /* '<S10>/Derivative2' */
+  real_T TimeStampB_j;                 /* '<S10>/Derivative2' */
+  real_T LastUAtTimeB_o;               /* '<S10>/Derivative2' */
+  real_T TimeStampA_gc;                /* '<S8>/Derivative' */
+  real_T LastUAtTimeA_f;               /* '<S8>/Derivative' */
+  real_T TimeStampB_h;                 /* '<S8>/Derivative' */
+  real_T LastUAtTimeB_c;               /* '<S8>/Derivative' */
+  real_T TimeStampA_f;                 /* '<S7>/Derivative' */
+  real_T LastUAtTimeA_e;               /* '<S7>/Derivative' */
+  real_T TimeStampB_o;                 /* '<S7>/Derivative' */
+  real_T LastUAtTimeB_h;               /* '<S7>/Derivative' */
   int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
   int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1_R;                     /* '<Root>/Data Store Memory1' */
   boolean_T LS2_R;                     /* '<Root>/Data Store Memory3' */
   boolean_T LS1_L;                     /* '<Root>/Data Store Memory8' */
   boolean_T LS2_L;                     /* '<Root>/Data Store Memory9' */
-  boolean_T objisempty;                /* '<S6>/LED' */
-  boolean_T objisempty_f;              /* '<Root>/Digital Read3' */
-  boolean_T objisempty_f2;             /* '<Root>/Digital Read2' */
+  boolean_T objisempty;                /* '<Root>/Digital Read3' */
+  boolean_T objisempty_f;              /* '<Root>/Digital Read2' */
   boolean_T objisempty_i;              /* '<Root>/Digital Read1' */
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
   boolean_T MainControl_MODE;          /* '<Root>/Main Control' */
@@ -160,10 +181,9 @@ typedef struct {
 
 /* Zero-crossing (trigger) state */
 typedef struct {
-  ZCSigState StopMotor1_Trig_ZCE;      /* '<S9>/Stop Motor1' */
-  ZCSigState StopMotor1_Trig_ZCE_f;    /* '<S8>/Stop Motor1' */
+  ZCE_StopMotor1_controller_T StopMotor1_n;/* '<S8>/Stop Motor1' */
+  ZCE_StopMotor1_controller_T StopMotor1;/* '<S7>/Stop Motor1' */
   ZCSigState ExitControl_Trig_ZCE;     /* '<Root>/Exit Control' */
-  ZCSigState Estop_Trig_ZCE;           /* '<Root>/E-stop' */
 } PrevZCX_controller_T;
 
 /* Parameters for system: '<Root>/Analog Input' */
@@ -191,19 +211,19 @@ struct P_controller_T_ {
                                       * Referenced by: '<S5>/Constant'
                                       */
   int32_T CompareToConstant_const;    /* Mask Parameter: CompareToConstant_const
-                                       * Referenced by: '<S22>/Constant'
+                                       * Referenced by: '<S21>/Constant'
                                        */
   boolean_T CompareToConstant1_const_j;
                                    /* Mask Parameter: CompareToConstant1_const_j
-                                    * Referenced by: '<S12>/Constant'
+                                    * Referenced by: '<S11>/Constant'
                                     */
-  boolean_T CompareToConstant1_const_p;
-                                   /* Mask Parameter: CompareToConstant1_const_p
-                                    * Referenced by: '<S17>/Constant'
+  boolean_T CompareToConstant1_const_k;
+                                   /* Mask Parameter: CompareToConstant1_const_k
+                                    * Referenced by: '<S16>/Constant'
                                     */
   boolean_T CompareToConstant_const_g;
                                     /* Mask Parameter: CompareToConstant_const_g
-                                     * Referenced by: '<S24>/Constant'
+                                     * Referenced by: '<S23>/Constant'
                                      */
   real_T DigitalRead_SampleTime;       /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read'
@@ -217,98 +237,116 @@ struct P_controller_T_ {
   real_T DigitalRead3_SampleTime;      /* Expression: 0.1
                                         * Referenced by: '<Root>/Digital Read3'
                                         */
-  real_T Constant_Value;               /* Expression: -1
-                                        * Referenced by: '<S6>/Constant'
+  real_T Constant1_Value;              /* Expression: 2
+                                        * Referenced by: '<S7>/Constant1'
                                         */
-  real_T Constant1_Value;              /* Expression: 0
-                                        * Referenced by: '<S6>/Constant1'
-                                        */
-  real_T Constant1_Value_f;            /* Expression: 2
-                                        * Referenced by: '<S8>/Constant1'
-                                        */
-  real_T Constant2_Value;              /* Expression: 200
-                                        * Referenced by: '<S8>/Constant2'
-                                        */
-  real_T Constant14_Value;             /* Expression: 2
-                                        * Referenced by: '<S8>/Constant14'
-                                        */
-  real_T enc_Y0;                       /* Computed Parameter: enc_Y0
-                                        * Referenced by: '<S19>/enc'
-                                        */
-  real_T Constant7_Value;              /* Expression: 2
-                                        * Referenced by: '<S19>/Constant7'
-                                        */
-  real_T Constant1_Value_i;            /* Expression: 3
-                                        * Referenced by: '<S9>/Constant1'
-                                        */
-  real_T Constant_Value_e;             /* Expression: 0
-                                        * Referenced by: '<S18>/Constant'
+  real_T Constant_Value;               /* Expression: 0
+                                        * Referenced by: '<S12>/Constant'
                                         */
   real_T Delay_InitialCondition;       /* Expression: 0
-                                        * Referenced by: '<S9>/Delay'
+                                        * Referenced by: '<S7>/Delay'
                                         */
   real_T Gain_Gain;                    /* Expression: 4*1024
-                                        * Referenced by: '<S9>/Gain'
-                                        */
-  real_T Gain1_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S9>/Gain1'
+                                        * Referenced by: '<S7>/Gain'
                                         */
   real_T Gain2_Gain;                   /* Expression: 2*pi
-                                        * Referenced by: '<S9>/Gain2'
+                                        * Referenced by: '<S7>/Gain2'
                                         */
-  real_T Gain3_Gain;                   /* Expression: 10
-                                        * Referenced by: '<S9>/Gain3'
+  real_T Constant14_Value;             /* Expression: 2
+                                        * Referenced by: '<S7>/Constant14'
                                         */
-  real_T Saturation_UpperSat;          /* Expression: 30
-                                        * Referenced by: '<S9>/Saturation'
+  real_T Constant_Value_e;             /* Expression: 120
+                                        * Referenced by: '<S7>/Constant'
                                         */
-  real_T Saturation_LowerSat;          /* Expression: -30
-                                        * Referenced by: '<S9>/Saturation'
+  real_T Gain3_Gain;                   /* Expression: 150
+                                        * Referenced by: '<S7>/Gain3'
+                                        */
+  real_T Saturation_UpperSat;          /* Expression: 350
+                                        * Referenced by: '<S7>/Saturation'
+                                        */
+  real_T Saturation_LowerSat;          /* Expression: -350
+                                        * Referenced by: '<S7>/Saturation'
+                                        */
+  real_T Constant1_Value_a;            /* Expression: 3
+                                        * Referenced by: '<S8>/Constant1'
+                                        */
+  real_T Constant_Value_f;             /* Expression: 0
+                                        * Referenced by: '<S17>/Constant'
+                                        */
+  real_T Delay_InitialCondition_k;     /* Expression: 0
+                                        * Referenced by: '<S8>/Delay'
+                                        */
+  real_T Gain_Gain_o;                  /* Expression: 4*1024
+                                        * Referenced by: '<S8>/Gain'
+                                        */
+  real_T Gain2_Gain_p;                 /* Expression: 2*pi
+                                        * Referenced by: '<S8>/Gain2'
+                                        */
+  real_T Constant14_Value_m;           /* Expression: 2
+                                        * Referenced by: '<S8>/Constant14'
+                                        */
+  real_T Constant_Value_b;             /* Expression: -120
+                                        * Referenced by: '<S8>/Constant'
+                                        */
+  real_T Gain3_Gain_n;                 /* Expression: 200
+                                        * Referenced by: '<S8>/Gain3'
+                                        */
+  real_T Saturation_UpperSat_n;        /* Expression: 350
+                                        * Referenced by: '<S8>/Saturation'
+                                        */
+  real_T Saturation_LowerSat_h;        /* Expression: -350
+                                        * Referenced by: '<S8>/Saturation'
                                         */
   real_T Constant_Value_d;             /* Expression: 1
-                                        * Referenced by: '<S10>/Constant'
+                                        * Referenced by: '<S9>/Constant'
                                         */
-  real_T Constant1_Value_fu;           /* Expression: 5000
-                                        * Referenced by: '<S10>/Constant1'
+  real_T Constant1_Value_f;            /* Expression: 5000
+                                        * Referenced by: '<S9>/Constant1'
                                         */
   real_T Constant4_Value;              /* Expression: 6
-                                        * Referenced by: '<S11>/Constant4'
+                                        * Referenced by: '<S10>/Constant4'
                                         */
-  real_T Constant_Value_p;             /* Expression: 0
+  real_T Constant_Value_fw;            /* Expression: 0
+                                        * Referenced by: '<S24>/Constant'
+                                        */
+  real_T Constant_Value_a;             /* Expression: 0
                                         * Referenced by: '<S25>/Constant'
                                         */
-  real_T Delay_InitialCondition_b;     /* Expression: 0
-                                        * Referenced by: '<S11>/Delay'
+  real_T Constant6_Value;              /* Expression: 4294967295
+                                        * Referenced by: '<S10>/Constant6'
                                         */
-  real_T Gain_Gain_m;                  /* Expression: 4*1024
-                                        * Referenced by: '<S11>/Gain'
+  real_T Delay1_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<S10>/Delay1'
                                         */
-  real_T Gain1_Gain_g;                 /* Expression: 4*1024
-                                        * Referenced by: '<S11>/Gain1'
+  real_T Gain1_Gain;                   /* Expression: 4*1024
+                                        * Referenced by: '<S10>/Gain1'
                                         */
-  real_T Gain2_Gain_b;                 /* Expression: 2*pi
-                                        * Referenced by: '<S11>/Gain2'
+  real_T Gain3_Gain_j;                 /* Expression: 2*pi
+                                        * Referenced by: '<S10>/Gain3'
                                         */
-  real_T Constant2_Value_i;            /* Expression: 3
-                                        * Referenced by: '<S11>/Constant2'
+  real_T Constant14_Value_g;           /* Expression: 2
+                                        * Referenced by: '<S10>/Constant14'
+                                        */
+  real_T Constant2_Value;              /* Expression: 3
+                                        * Referenced by: '<S10>/Constant2'
                                         */
   real_T Constant_Value_i;             /* Expression: 1
-                                        * Referenced by: '<S11>/Constant'
+                                        * Referenced by: '<S10>/Constant'
                                         */
-  real_T SineWave_Amp;                 /* Expression: 2
-                                        * Referenced by: '<S11>/Sine Wave'
+  real_T Constant3_Value;              /* Expression: 1.4
+                                        * Referenced by: '<S10>/Constant3'
                                         */
-  real_T SineWave_Bias;                /* Expression: 50
-                                        * Referenced by: '<S11>/Sine Wave'
+  real_T Gain_Gain_k;                  /* Expression: 500/1.4
+                                        * Referenced by: '<S10>/Gain'
                                         */
-  real_T SineWave_Freq;                /* Expression: 1
-                                        * Referenced by: '<S11>/Sine Wave'
+  real_T Gain2_Gain_m;                 /* Expression: 80*0.001
+                                        * Referenced by: '<S10>/Gain2'
                                         */
-  real_T SineWave_Phase;               /* Expression: 0
-                                        * Referenced by: '<S11>/Sine Wave'
+  real_T Saturation_UpperSat_f;        /* Expression: 400
+                                        * Referenced by: '<S10>/Saturation'
                                         */
-  real_T Constant1_Value_m;            /* Expression: 2
-                                        * Referenced by: '<S11>/Constant1'
+  real_T Saturation_LowerSat_l;        /* Expression: -400
+                                        * Referenced by: '<S10>/Saturation'
                                         */
   real_T Constant12_Value;             /* Expression: 353
                                         * Referenced by: '<Root>/Constant12'
@@ -325,10 +363,10 @@ struct P_controller_T_ {
   real_T Constant5_Value;              /* Expression: 5000
                                         * Referenced by: '<Root>/Constant5'
                                         */
-  real_T Constant6_Value;              /* Expression: 5000
+  real_T Constant6_Value_n;            /* Expression: 5000
                                         * Referenced by: '<Root>/Constant6'
                                         */
-  real_T Constant7_Value_p;            /* Expression: 257
+  real_T Constant7_Value;              /* Expression: 257
                                         * Referenced by: '<Root>/Constant7'
                                         */
   real_T Constant14_Value_c;           /* Expression: 1
@@ -337,10 +375,13 @@ struct P_controller_T_ {
   real_T Constant_Value_c;             /* Expression: 1
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant2_Value_h;            /* Expression: 1
+  real_T Constant1_Value_i;            /* Expression: -0.1
+                                        * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Constant2_Value_k;            /* Expression: 1
                                         * Referenced by: '<Root>/Constant2'
                                         */
-  real_T Constant3_Value;              /* Expression: -0.05
+  real_T Constant3_Value_c;            /* Expression: 0.1
                                         * Referenced by: '<Root>/Constant3'
                                         */
   real_T DataStoreMemory_InitialValue; /* Expression: 0
@@ -421,12 +462,12 @@ struct tag_RTM_controller_T {
     uint32_T clockTick1;
     uint32_T clockTickH1;
     struct {
-      uint32_T TID[7];
+      uint32_T TID[6];
     } TaskCounters;
 
     SimTimeStep simTimeStep;
     time_T *t;
-    time_T tArray[7];
+    time_T tArray[6];
   } Timing;
 };
 
@@ -455,25 +496,15 @@ extern volatile boolean_T runModel;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<Root>/Constant1' : Unused code path elimination
- * Block '<S13>/Compare' : Unused code path elimination
- * Block '<S13>/Constant' : Unused code path elimination
- * Block '<S8>/Delay' : Unused code path elimination
- * Block '<S8>/Derivative' : Unused code path elimination
- * Block '<S8>/Divide' : Unused code path elimination
- * Block '<S8>/Gain' : Unused code path elimination
+ * Block '<S7>/Gain1' : Unused code path elimination
  * Block '<S8>/Gain1' : Unused code path elimination
- * Block '<S8>/Gain2' : Unused code path elimination
- * Block '<S8>/Gain3' : Unused code path elimination
- * Block '<S8>/Saturation' : Unused code path elimination
- * Block '<S8>/Sum1' : Unused code path elimination
- * Block '<S8>/Switch' : Unused code path elimination
- * Block '<S11>/Derivative' : Unused code path elimination
+ * Block '<Root>/Data Type Conversion1' : Eliminate redundant data type conversion
+ * Block '<S7>/Data Type Conversion1' : Eliminate redundant data type conversion
+ * Block '<S14>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S8>/Data Type Conversion1' : Eliminate redundant data type conversion
- * Block '<S15>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S20>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S19>/Data Type Conversion' : Eliminate redundant data type conversion
+ * Block '<S10>/Data Type Conversion1' : Eliminate redundant data type conversion
  * Block '<S28>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S29>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -496,29 +527,28 @@ extern volatile boolean_T runModel;
  * '<S3>'   : 'controller/Compare To Constant3'
  * '<S4>'   : 'controller/Compare To Constant4'
  * '<S5>'   : 'controller/Compare To Constant7'
- * '<S6>'   : 'controller/E-stop'
- * '<S7>'   : 'controller/Exit Control'
- * '<S8>'   : 'controller/Home1'
- * '<S9>'   : 'controller/Home2'
- * '<S10>'  : 'controller/Initialize'
- * '<S11>'  : 'controller/Main Control'
- * '<S12>'  : 'controller/Home1/Compare To Constant1'
- * '<S13>'  : 'controller/Home1/Compare To Zero'
- * '<S14>'  : 'controller/Home1/Stop Motor1'
- * '<S15>'  : 'controller/Home1/Subsystem1'
- * '<S16>'  : 'controller/Home1/Subsystem2'
- * '<S17>'  : 'controller/Home2/Compare To Constant1'
- * '<S18>'  : 'controller/Home2/Compare To Zero'
- * '<S19>'  : 'controller/Home2/Stop Motor1'
- * '<S20>'  : 'controller/Home2/Subsystem1'
- * '<S21>'  : 'controller/Home2/Subsystem2'
- * '<S22>'  : 'controller/Initialize/Compare To Constant'
- * '<S23>'  : 'controller/Initialize/Subsystem'
- * '<S24>'  : 'controller/Main Control/Compare To Constant'
- * '<S25>'  : 'controller/Main Control/Compare To Zero'
+ * '<S6>'   : 'controller/Exit Control'
+ * '<S7>'   : 'controller/Home1'
+ * '<S8>'   : 'controller/Home2'
+ * '<S9>'   : 'controller/Initialize'
+ * '<S10>'  : 'controller/Main Control'
+ * '<S11>'  : 'controller/Home1/Compare To Constant1'
+ * '<S12>'  : 'controller/Home1/Compare To Zero'
+ * '<S13>'  : 'controller/Home1/Stop Motor1'
+ * '<S14>'  : 'controller/Home1/Subsystem1'
+ * '<S15>'  : 'controller/Home1/Subsystem2'
+ * '<S16>'  : 'controller/Home2/Compare To Constant1'
+ * '<S17>'  : 'controller/Home2/Compare To Zero'
+ * '<S18>'  : 'controller/Home2/Stop Motor1'
+ * '<S19>'  : 'controller/Home2/Subsystem1'
+ * '<S20>'  : 'controller/Home2/Subsystem2'
+ * '<S21>'  : 'controller/Initialize/Compare To Constant'
+ * '<S22>'  : 'controller/Initialize/Subsystem'
+ * '<S23>'  : 'controller/Main Control/Compare To Constant'
+ * '<S24>'  : 'controller/Main Control/Compare To Zero2'
+ * '<S25>'  : 'controller/Main Control/Compare To Zero4'
  * '<S26>'  : 'controller/Main Control/MATLAB Function'
  * '<S27>'  : 'controller/Main Control/Subsystem'
  * '<S28>'  : 'controller/Main Control/Subsystem1'
- * '<S29>'  : 'controller/Main Control/Subsystem2'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.338
+ * Model version              : 4.413
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Aug 16 17:23:43 2023
+ * C source code generated on : Thu Aug 24 12:17:01 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -65,26 +65,7 @@ typedef struct tag_1EBWQ6hhKs9Y37qjpZj8aH beagleboneblue_bbblueDigitalR_T;
 
 #endif                             /* typedef_beagleboneblue_bbblueDigitalR_T */
 
-#ifndef struct_tag_fYOEcv5C5Uqf6zenXgF1HG
-#define struct_tag_fYOEcv5C5Uqf6zenXgF1HG
-
-struct tag_fYOEcv5C5Uqf6zenXgF1HG
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-};
-
-#endif                                 /* struct_tag_fYOEcv5C5Uqf6zenXgF1HG */
-
-#ifndef typedef_beagleboneblue_bbblueLED_cont_T
-#define typedef_beagleboneblue_bbblueLED_cont_T
-
-typedef struct tag_fYOEcv5C5Uqf6zenXgF1HG beagleboneblue_bbblueLED_cont_T;
-
-#endif                             /* typedef_beagleboneblue_bbblueLED_cont_T */
-
-/* Custom Type definition for MATLAB Function: '<S11>/MATLAB Function' */
+/* Custom Type definition for MATLAB Function: '<S10>/MATLAB Function' */
 #include "coder_posix_time.h"
 
 /* Parameters for system: '<Root>/Analog Input' */
