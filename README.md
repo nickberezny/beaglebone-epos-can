@@ -2,10 +2,11 @@
 Provides functions for Maxon EPOS4 CAN drivers with Beaglebone Blue using Simulink Hardware ...
 
 #Steps
- Markup :	1. Edit the "Initialize" block parameters (number of motors, max speed, etc)
- 		2. Edit the "Main Control" to build controller based on encoder readings
-  		3. Build the  simulink model to the Beaglebone Blue
-   		4. 
+
+1. Edit the "Initialize" block parameters (number of motors, max speed, etc)
+2. Edit the "Main Control" to build controller based on encoder readings
+3. Build the  simulink model to the Beaglebone Blue
+4. 
 
 init_can: set number of motors, max speed, max acceleration
 set_motor: pdo id, motor id, set torque
