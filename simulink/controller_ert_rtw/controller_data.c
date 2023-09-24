@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.413
+ * Model version              : 4.521
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Thu Aug 24 12:17:01 2023
+ * C source code generated on : Sun Sep 24 16:18:25 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -52,6 +52,11 @@ P_controller_T controller_P = {
    */
   0,
 
+  /* Mask Parameter: WrapToZero_Threshold
+   * Referenced by: '<S33>/FixPt Switch'
+   */
+  65535U,
+
   /* Mask Parameter: CompareToConstant1_const_j
    * Referenced by: '<S11>/Constant'
    */
@@ -67,25 +72,25 @@ P_controller_T controller_P = {
    */
   true,
 
-  /* Expression: 0.1
+  /* Expression: 0.001
    * Referenced by: '<Root>/Digital Read'
    */
-  0.1,
+  0.001,
 
-  /* Expression: 0.1
+  /* Expression: 0.001
    * Referenced by: '<Root>/Digital Read1'
    */
-  0.1,
+  0.001,
 
-  /* Expression: 0.1
+  /* Expression: 0.001
    * Referenced by: '<Root>/Digital Read2'
    */
-  0.1,
+  0.001,
 
-  /* Expression: 0.1
+  /* Expression: 0.001
    * Referenced by: '<Root>/Digital Read3'
    */
-  0.1,
+  0.001,
 
   /* Expression: 2
    * Referenced by: '<S7>/Constant1'
@@ -102,40 +107,15 @@ P_controller_T controller_P = {
    */
   0.0,
 
-  /* Expression: 4*1024
-   * Referenced by: '<S7>/Gain'
+  /* Expression: 0
+   * Referenced by: '<S7>/Constant4'
    */
-  4096.0,
+  0.0,
 
-  /* Expression: 2*pi
-   * Referenced by: '<S7>/Gain2'
+  /* Expression: 3
+   * Referenced by: '<S7>/Constant2'
    */
-  6.2831853071795862,
-
-  /* Expression: 2
-   * Referenced by: '<S7>/Constant14'
-   */
-  2.0,
-
-  /* Expression: 120
-   * Referenced by: '<S7>/Constant'
-   */
-  120.0,
-
-  /* Expression: 150
-   * Referenced by: '<S7>/Gain3'
-   */
-  150.0,
-
-  /* Expression: 350
-   * Referenced by: '<S7>/Saturation'
-   */
-  350.0,
-
-  /* Expression: -350
-   * Referenced by: '<S7>/Saturation'
-   */
-  -350.0,
+  3.0,
 
   /* Expression: 3
    * Referenced by: '<S8>/Constant1'
@@ -152,40 +132,15 @@ P_controller_T controller_P = {
    */
   0.0,
 
-  /* Expression: 4*1024
-   * Referenced by: '<S8>/Gain'
+  /* Expression: 0
+   * Referenced by: '<S8>/Constant2'
    */
-  4096.0,
-
-  /* Expression: 2*pi
-   * Referenced by: '<S8>/Gain2'
-   */
-  6.2831853071795862,
+  0.0,
 
   /* Expression: 2
    * Referenced by: '<S8>/Constant14'
    */
   2.0,
-
-  /* Expression: -120
-   * Referenced by: '<S8>/Constant'
-   */
-  -120.0,
-
-  /* Expression: 200
-   * Referenced by: '<S8>/Gain3'
-   */
-  200.0,
-
-  /* Expression: 350
-   * Referenced by: '<S8>/Saturation'
-   */
-  350.0,
-
-  /* Expression: -350
-   * Referenced by: '<S8>/Saturation'
-   */
-  -350.0,
 
   /* Expression: 1
    * Referenced by: '<S9>/Constant'
@@ -203,19 +158,44 @@ P_controller_T controller_P = {
   6.0,
 
   /* Expression: 0
-   * Referenced by: '<S24>/Constant'
+   * Referenced by: '<S25>/Constant'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S25>/Constant'
+   * Referenced by: '<S10>/Delay2'
    */
   0.0,
+
+  /* Expression: 0.3
+   * Referenced by: '<S10>/Sine Wave1'
+   */
+  0.3,
+
+  /* Expression: 0.3
+   * Referenced by: '<S10>/Sine Wave1'
+   */
+  0.3,
+
+  /* Expression: 0.5
+   * Referenced by: '<S10>/Sine Wave1'
+   */
+  0.5,
+
+  /* Expression: -pi/2
+   * Referenced by: '<S10>/Sine Wave1'
+   */
+  -1.5707963267948966,
 
   /* Expression: 4294967295
    * Referenced by: '<S10>/Constant6'
    */
   4.294967295E+9,
+
+  /* Expression: -2000
+   * Referenced by: '<S10>/Constant8'
+   */
+  -2000.0,
 
   /* Expression: 0
    * Referenced by: '<S10>/Delay1'
@@ -227,40 +207,25 @@ P_controller_T controller_P = {
    */
   4096.0,
 
+  /* Expression: 4*1024
+   * Referenced by: '<S10>/Gain4'
+   */
+  4096.0,
+
   /* Expression: 2*pi
    * Referenced by: '<S10>/Gain3'
    */
   6.2831853071795862,
 
-  /* Expression: 2
-   * Referenced by: '<S10>/Constant14'
-   */
-  2.0,
-
-  /* Expression: 3
-   * Referenced by: '<S10>/Constant2'
-   */
-  3.0,
-
-  /* Expression: 1
-   * Referenced by: '<S10>/Constant'
-   */
-  1.0,
-
-  /* Expression: 1.4
-   * Referenced by: '<S10>/Constant3'
-   */
-  1.4,
-
-  /* Expression: 500/1.4
+  /* Expression: 100000/1.4
    * Referenced by: '<S10>/Gain'
    */
-  357.14285714285717,
+  71428.571428571435,
 
-  /* Expression: 80*0.001
+  /* Expression: 20000*0.001
    * Referenced by: '<S10>/Gain2'
    */
-  0.08,
+  20.0,
 
   /* Expression: 400
    * Referenced by: '<S10>/Saturation'
@@ -271,6 +236,51 @@ P_controller_T controller_P = {
    * Referenced by: '<S10>/Saturation'
    */
   -400.0,
+
+  /* Expression: 2
+   * Referenced by: '<S10>/Constant14'
+   */
+  2.0,
+
+  /* Expression: 1
+   * Referenced by: '<S10>/Constant'
+   */
+  1.0,
+
+  /* Expression: 2
+   * Referenced by: '<S10>/Constant5'
+   */
+  2.0,
+
+  /* Expression: 0.0
+   * Referenced by: '<S10>/Constant7'
+   */
+  0.0,
+
+  /* Expression: 500/1.4
+   * Referenced by: '<S10>/Gain5'
+   */
+  357.14285714285717,
+
+  /* Expression: 80*0.001
+   * Referenced by: '<S10>/Gain6'
+   */
+  0.08,
+
+  /* Expression: 400
+   * Referenced by: '<S10>/Saturation1'
+   */
+  400.0,
+
+  /* Expression: -400
+   * Referenced by: '<S10>/Saturation1'
+   */
+  -400.0,
+
+  /* Expression: 3
+   * Referenced by: '<S10>/Constant2'
+   */
+  3.0,
 
   /* Expression: 353
    * Referenced by: '<Root>/Constant12'
@@ -287,10 +297,10 @@ P_controller_T controller_P = {
    */
   1.0,
 
-  /* Expression: 1
+  /* Expression: 2
    * Referenced by: '<Root>/Constant4'
    */
-  1.0,
+  2.0,
 
   /* Expression: 5000
    * Referenced by: '<Root>/Constant5'
@@ -317,20 +327,10 @@ P_controller_T controller_P = {
    */
   1.0,
 
-  /* Expression: -0.1
-   * Referenced by: '<Root>/Constant1'
-   */
-  -0.1,
-
-  /* Expression: 1
+  /* Expression: 2
    * Referenced by: '<Root>/Constant2'
    */
-  1.0,
-
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Constant3'
-   */
-  0.1,
+  2.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory'
@@ -396,6 +396,26 @@ P_controller_T controller_P = {
    * Referenced by: '<Root>/Data Store Memory6'
    */
   0,
+
+  /* Computed Parameter: Constant_Value_o
+   * Referenced by: '<S33>/Constant'
+   */
+  0U,
+
+  /* Computed Parameter: Constant_Value_cv
+   * Referenced by: '<S24>/Constant'
+   */
+  0U,
+
+  /* Computed Parameter: Output_InitialCondition
+   * Referenced by: '<S26>/Output'
+   */
+  0U,
+
+  /* Computed Parameter: FixPtConstant_Value
+   * Referenced by: '<S32>/FixPt Constant'
+   */
+  1U,
 
   /* Computed Parameter: DataStoreMemory1_InitialValue
    * Referenced by: '<Root>/Data Store Memory1'

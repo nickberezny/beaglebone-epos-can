@@ -1,0 +1,47 @@
+CC     = "C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -w -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -nodeclspec  
+LDFLAGS = -s -dll -L"C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"c_mexapi_version.obj"\
+	"lccstub.obj"\
+	"controller_cgxe.obj"\
+	"m_ruThg8ilLzfH7h2KmGFzOE.obj"\
+	"controller_cgxe_registry.obj"\
+	"controller_cgxe.def"\
+	"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_slcc\93PxlelXaCo9MEus7lOweH\93PxlelXaCo9MEus7lOweH_cclib.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libut.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwcgxert.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwcgxeooprt.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwslexec_simbridge.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwslccrt.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwstringutil.lib"\
+	"C:\Program Files\MATLAB\R2022b\lib\win64\libmwipp.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libcovrt.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwsl_sfcn_cov_bridge.lib"\
+	"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwdsp_halidesim.lib"\
+
+INCLUDE_PATH= -I"C:\Program Files\MATLAB\R2022b\extern\include"  -I"C:\Program Files\MATLAB\R2022b\simulink\include"  -I"C:\Program Files\MATLAB\R2022b\rtw\c\src"  -I"C:\Users\ABL\documents\beaglebone-epos-can\simulink\slprj\_cgxe\controller\src"  -I"C:\Users\ABL\documents\beaglebone-epos-can\simulink"  -I"C:\Users\ABL\documents\beaglebone-epos-can\simulink\placeholders"  -I"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_cprj"  -I"C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\include64"  -I"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_cgxe\controller\src"  -I"C:\Users\ABL\Documents\beaglebone-epos-can\simulink"  -I"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_slcc\93PxlelXaCo9MEus7lOweH" 
+ 
+
+controller_cgxe.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o controller_cgxe.mexw64 @controller_cgxe.lmko
+c_mexapi_version.obj :	"C:\Program Files\MATLAB\R2022b\extern\version\c_mexapi_version.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\R2022b\extern\version\c_mexapi_version.c"
+lccstub.obj :	"C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\R2022b\sys\lcc64\lcc64\mex\lccstub.c"
+controller_cgxe.obj :	"controller_cgxe.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "controller_cgxe.c"
+m_ruThg8ilLzfH7h2KmGFzOE.obj :	"m_ruThg8ilLzfH7h2KmGFzOE.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "m_ruThg8ilLzfH7h2KmGFzOE.c"
+controller_cgxe_registry.obj :	"controller_cgxe_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "controller_cgxe_registry.c"
