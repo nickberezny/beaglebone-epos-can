@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.553
+ * Model version              : 4.599
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Sep 27 15:47:26 2023
+ * C source code generated on : Mon Oct  2 14:42:16 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -48,7 +48,7 @@ P_controller_T controller_P = {
   6.0,
 
   /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S21>/Constant'
+   * Referenced by: '<S27>/Constant'
    */
   0,
 
@@ -57,13 +57,13 @@ P_controller_T controller_P = {
    */
   true,
 
-  /* Mask Parameter: CompareToConstant1_const_k
-   * Referenced by: '<S16>/Constant'
+  /* Mask Parameter: CompareToConstant1_const_p
+   * Referenced by: '<S19>/Constant'
    */
   true,
 
   /* Mask Parameter: CompareToConstant_const_g
-   * Referenced by: '<S23>/Constant'
+   * Referenced by: '<S29>/Constant'
    */
   true,
 
@@ -92,30 +92,10 @@ P_controller_T controller_P = {
    */
   2.0,
 
-  /* Expression: 0
-   * Referenced by: '<S12>/Constant'
+  /* Expression: 0.001
+   * Referenced by: '<S16>/Constant1'
    */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S7>/Delay'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S7>/Constant4'
-   */
-  0.0,
-
-  /* Expression: 3
-   * Referenced by: '<S7>/Constant2'
-   */
-  3.0,
-
-  /* Expression: 3
-   * Referenced by: '<S8>/Constant1'
-   */
-  3.0,
+  0.001,
 
   /* Expression: 0
    * Referenced by: '<S17>/Constant'
@@ -123,19 +103,164 @@ P_controller_T controller_P = {
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S8>/Delay'
+   * Referenced by: '<S15>/Delay1'
+   */
+  0.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S15>/Gain1'
+   */
+  4096.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S15>/Gain4'
+   */
+  4096.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S15>/Gain3'
+   */
+  6.2831853071795862,
+
+  /* Expression: 0.0
+   * Referenced by: '<S15>/Delay'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S8>/Constant2'
+   * Referenced by: '<S16>/Unit Delay'
    */
   0.0,
 
+  /* Expression: -30
+   * Referenced by: '<S16>/Constant'
+   */
+  -30.0,
+
+  /* Expression: 1
+   * Referenced by: '<S16>/Constant2'
+   */
+  1.0,
+
   /* Expression: 2
-   * Referenced by: '<S8>/Constant14'
+   * Referenced by: '<S7>/Constant3'
    */
   2.0,
+
+  /* Expression: -0.02
+   * Referenced by: '<S7>/Constant4'
+   */
+  -0.02,
+
+  /* Expression: 300/0.02
+   * Referenced by: '<S7>/Gain'
+   */
+  15000.0,
+
+  /* Expression: 0.0
+   * Referenced by: '<S7>/Delay'
+   */
+  0.0,
+
+  /* Expression: 0.001*100/0.02
+   * Referenced by: '<S7>/Gain1'
+   */
+  5.0,
+
+  /* Expression: 3
+   * Referenced by: '<S7>/Constant5'
+   */
+  3.0,
+
+  /* Expression: 300
+   * Referenced by: '<S7>/Saturation'
+   */
+  300.0,
+
+  /* Expression: -300
+   * Referenced by: '<S7>/Saturation'
+   */
+  -300.0,
+
+  /* Expression: 3
+   * Referenced by: '<S8>/Constant1'
+   */
+  3.0,
+
+  /* Expression: 0.001
+   * Referenced by: '<S24>/Constant1'
+   */
+  0.001,
+
+  /* Expression: 0
+   * Referenced by: '<S25>/Constant'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S23>/Delay1'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S8>/Constant6'
+   */
+  0.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S23>/Gain1'
+   */
+  4096.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S23>/Gain4'
+   */
+  4096.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S23>/Gain3'
+   */
+  6.2831853071795862,
+
+  /* Expression: 0.0
+   * Referenced by: '<S23>/Delay'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S24>/Unit Delay'
+   */
+  0.0,
+
+  /* Expression: -30
+   * Referenced by: '<S24>/Constant'
+   */
+  -30.0,
+
+  /* Expression: 1
+   * Referenced by: '<S24>/Constant2'
+   */
+  1.0,
+
+  /* Expression: 2
+   * Referenced by: '<S8>/Constant3'
+   */
+  2.0,
+
+  /* Expression: -0.02
+   * Referenced by: '<S8>/Constant4'
+   */
+  -0.02,
+
+  /* Expression: 300/0.02
+   * Referenced by: '<S8>/Gain'
+   */
+  15000.0,
+
+  /* Expression: 3
+   * Referenced by: '<S8>/Constant5'
+   */
+  3.0,
 
   /* Expression: 1
    * Referenced by: '<S9>/Constant'
@@ -152,15 +277,60 @@ P_controller_T controller_P = {
    */
   6.0,
 
-  /* Expression: 0.001
-   * Referenced by: '<S28>/Constant1'
-   */
-  0.001,
-
   /* Expression: 0
-   * Referenced by: '<S24>/Constant'
+   * Referenced by: '<S37>/Constant'
    */
   0.0,
+
+  /* Expression: 4294967295
+   * Referenced by: '<S35>/Constant6'
+   */
+  4.294967295E+9,
+
+  /* Expression: -20000
+   * Referenced by: '<S35>/Constant8'
+   */
+  -20000.0,
+
+  /* Expression: 0
+   * Referenced by: '<S35>/Delay1'
+   */
+  0.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S35>/Gain1'
+   */
+  4096.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S35>/Gain4'
+   */
+  4096.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S35>/Gain3'
+   */
+  6.2831853071795862,
+
+  /* Expression: 8
+   * Referenced by: '<S10>/Constant2'
+   */
+  8.0,
+
+  /* Expression: 4
+   * Referenced by: '<S10>/Constant1'
+   */
+  4.0,
+
+  /* Expression: 3
+   * Referenced by: '<S10>/Constant9'
+   */
+  3.0,
+
+  /* Expression: 2
+   * Referenced by: '<S10>/Constant14'
+   */
+  2.0,
 
   /* Expression: 1
    * Referenced by: '<S10>/Constant'
@@ -168,124 +338,19 @@ P_controller_T controller_P = {
   1.0,
 
   /* Expression: 0
-   * Referenced by: '<S28>/Unit Delay'
+   * Referenced by: '<S10>/Constant3'
    */
   0.0,
-
-  /* Expression: -30
-   * Referenced by: '<S28>/Constant'
-   */
-  -30.0,
-
-  /* Expression: 1
-   * Referenced by: '<S28>/Constant2'
-   */
-  1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S28>/Unit Delay1'
-   */
-  0.0,
-
-  /* Expression: 0.3
-   * Referenced by: '<S10>/Sine Wave1'
-   */
-  0.3,
-
-  /* Expression: 0.3
-   * Referenced by: '<S10>/Sine Wave1'
-   */
-  0.3,
-
-  /* Expression: 1.5
-   * Referenced by: '<S10>/Sine Wave1'
-   */
-  1.5,
-
-  /* Expression: -pi/2
-   * Referenced by: '<S10>/Sine Wave1'
-   */
-  -1.5707963267948966,
-
-  /* Expression: 4294967295
-   * Referenced by: '<S10>/Constant6'
-   */
-  4.294967295E+9,
-
-  /* Expression: -2000
-   * Referenced by: '<S10>/Constant8'
-   */
-  -2000.0,
-
-  /* Expression: 0
-   * Referenced by: '<S10>/Delay1'
-   */
-  0.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S10>/Gain1'
-   */
-  4096.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S10>/Gain4'
-   */
-  4096.0,
-
-  /* Expression: 2*pi
-   * Referenced by: '<S10>/Gain3'
-   */
-  6.2831853071795862,
-
-  /* Expression: 5000/1.4
-   * Referenced by: '<S10>/Gain'
-   */
-  3571.4285714285716,
-
-  /* Expression: 200*0.001
-   * Referenced by: '<S10>/Gain2'
-   */
-  0.2,
-
-  /* Expression: 400
-   * Referenced by: '<S10>/Saturation'
-   */
-  400.0,
-
-  /* Expression: -400
-   * Referenced by: '<S10>/Saturation'
-   */
-  -400.0,
 
   /* Expression: 2
    * Referenced by: '<S10>/Constant5'
    */
   2.0,
 
-  /* Expression: 5000/1.4
-   * Referenced by: '<S10>/Gain5'
+  /* Expression: 0
+   * Referenced by: '<S10>/Constant6'
    */
-  3571.4285714285716,
-
-  /* Expression: 200*0.001
-   * Referenced by: '<S10>/Gain6'
-   */
-  0.2,
-
-  /* Expression: 400
-   * Referenced by: '<S10>/Saturation1'
-   */
-  400.0,
-
-  /* Expression: -400
-   * Referenced by: '<S10>/Saturation1'
-   */
-  -400.0,
-
-  /* Expression: 8
-   * Referenced by: '<S10>/Constant2'
-   */
-  8.0,
+  0.0,
 
   /* Expression: 353
    * Referenced by: '<Root>/Constant12'
