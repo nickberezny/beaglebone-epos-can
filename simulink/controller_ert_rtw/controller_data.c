@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.553
+ * Model version              : 4.571
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Sep 27 15:47:26 2023
+ * C source code generated on : Mon Oct  2 12:25:29 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -153,7 +153,7 @@ P_controller_T controller_P = {
   6.0,
 
   /* Expression: 0.001
-   * Referenced by: '<S28>/Constant1'
+   * Referenced by: '<S30>/Constant1'
    */
   0.001,
 
@@ -162,28 +162,113 @@ P_controller_T controller_P = {
    */
   0.0,
 
+  /* Expression: 4294967295
+   * Referenced by: '<S10>/Constant6'
+   */
+  4.294967295E+9,
+
+  /* Expression: -20000
+   * Referenced by: '<S10>/Constant8'
+   */
+  -20000.0,
+
+  /* Expression: 0
+   * Referenced by: '<S10>/Delay1'
+   */
+  0.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S10>/Gain1'
+   */
+  4096.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S10>/Gain4'
+   */
+  4096.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S10>/Gain3'
+   */
+  6.2831853071795862,
+
+  /* Expression: 4
+   * Referenced by: '<S10>/Constant1'
+   */
+  4.0,
+
+  /* Expression: 0.28
+   * Referenced by: '<S10>/l2'
+   */
+  0.28,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S25>/Constant'
+   */
+  6.2831853071795862,
+
+  /* Expression: pi*44/180
+   * Referenced by: '<S10>/Constant7'
+   */
+  0.767944870877505,
+
+  /* Expression: pi*98/180
+   * Referenced by: '<S10>/Constant10'
+   */
+  1.7104226669544429,
+
+  /* Expression: pi
+   * Referenced by: '<S25>/Constant1'
+   */
+  3.1415926535897931,
+
+  /* Expression: 0.37
+   * Referenced by: '<S10>/l1'
+   */
+  0.37,
+
+  /* Expression: 3
+   * Referenced by: '<S10>/Constant9'
+   */
+  3.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S26>/Constant'
+   */
+  6.2831853071795862,
+
+  /* Expression: pi
+   * Referenced by: '<S26>/Constant1'
+   */
+  3.1415926535897931,
+
+  /* Expression: 2
+   * Referenced by: '<S10>/Constant14'
+   */
+  2.0,
+
   /* Expression: 1
    * Referenced by: '<S10>/Constant'
    */
   1.0,
 
   /* Expression: 0
-   * Referenced by: '<S28>/Unit Delay'
+   * Referenced by: '<S30>/Unit Delay'
    */
   0.0,
 
   /* Expression: -30
-   * Referenced by: '<S28>/Constant'
+   * Referenced by: '<S30>/Constant'
    */
   -30.0,
 
   /* Expression: 1
-   * Referenced by: '<S28>/Constant2'
+   * Referenced by: '<S30>/Constant2'
    */
   1.0,
 
   /* Expression: 0
-   * Referenced by: '<S28>/Unit Delay1'
+   * Referenced by: '<S30>/Unit Delay1'
    */
   0.0,
 
@@ -206,36 +291,6 @@ P_controller_T controller_P = {
    * Referenced by: '<S10>/Sine Wave1'
    */
   -1.5707963267948966,
-
-  /* Expression: 4294967295
-   * Referenced by: '<S10>/Constant6'
-   */
-  4.294967295E+9,
-
-  /* Expression: -2000
-   * Referenced by: '<S10>/Constant8'
-   */
-  -2000.0,
-
-  /* Expression: 0
-   * Referenced by: '<S10>/Delay1'
-   */
-  0.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S10>/Gain1'
-   */
-  4096.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S10>/Gain4'
-   */
-  4096.0,
-
-  /* Expression: 2*pi
-   * Referenced by: '<S10>/Gain3'
-   */
-  6.2831853071795862,
 
   /* Expression: 5000/1.4
    * Referenced by: '<S10>/Gain'
