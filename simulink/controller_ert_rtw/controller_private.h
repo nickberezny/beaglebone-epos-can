@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.571
+ * Model version              : 4.599
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Oct  2 12:25:29 2023
+ * C source code generated on : Mon Oct  2 14:42:16 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -48,6 +48,7 @@ extern void controller_AnalogInput(B_AnalogInput_controller_T *localB,
 extern void controller_StopMotor1(boolean_T rtu_Trigger, const real_T
   *rtd_num_motors, const int32_T *rtd_pdo_id, ZCE_StopMotor1_controller_T
   *localZCE);
+extern void controller_MATLABFunction(B_MATLABFunction_controller_T *localB);
 extern void controller_AnalogInput_Term(DW_AnalogInput_controller_T *localDW);
 
 #endif                                 /* RTW_HEADER_controller_private_h_ */
