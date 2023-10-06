@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.599
+ * Model version              : 4.611
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon Oct  2 14:42:16 2023
+ * C source code generated on : Fri Oct  6 10:51:02 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -32,7 +32,6 @@
 #include "controller_types.h"
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
-#include "rtGetNaN.h"
 #include <string.h>
 #include <stddef.h>
 #include "zero_crossing_types.h"
@@ -103,30 +102,31 @@ typedef struct {
 /* Block signals (default storage) */
 typedef struct {
   real_T CCaller4[8];                  /* '<S10>/C Caller4' */
+  real_T Delay2[2];                    /* '<S35>/Delay2' */
   real_T CCaller6[2];                  /* '<S10>/C Caller6' */
   real_T Delay1[2];                    /* '<S35>/Delay1' */
   real_T Switch2[2];                   /* '<S35>/Switch2' */
   real_T Gain3[2];                     /* '<S35>/Gain3' */
   real_T Divide[2];                    /* '<S35>/Divide' */
-  real_T Divide1_e[2];                 /* '<S23>/Divide1' */
+  real_T Sum6_e[2];                    /* '<S23>/Sum6' */
   real_T TmpSignalConversionAtCCal_e[2];
-  real_T Gain1;                        /* '<S23>/Gain1' */
-  real_T Gain4;                        /* '<S23>/Gain4' */
-  real_T Divide_f[2];                  /* '<S23>/Divide' */
-  real_T Gain;                         /* '<S8>/Gain' */
-  real_T Divide_i[2];                  /* '<S15>/Divide' */
-  real_T Sum1;                         /* '<S7>/Sum1' */
+  real_T Switch;                       /* '<S36>/Switch' */
+  real_T Sum6;                         /* '<S10>/Sum6' */
+  real_T Saturation;                   /* '<S10>/Saturation' */
+  real_T Saturation1;                  /* '<S10>/Saturation1' */
   real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
-  real_T DataStoreRead10;              /* '<S10>/Data Store Read10' */
-  real_T DataStoreRead7_j;             /* '<S6>/Data Store Read7' */
-  real_T rtb_Switch2_idx_0;
-  real_T rtb_Switch2_idx_1;
-  real_T rtb_Gain3_idx_0;
-  real_T rtb_Gain3_idx_1;
+  real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
   real_T d;
+  real_T Sum1_b;                       /* '<S36>/Sum1' */
   int32_T CCaller5[2];                 /* '<S9>/C Caller5' */
   boolean_T Compare;                   /* '<S4>/Compare' */
   boolean_T LogicalOperator3[2];       /* '<S35>/Logical Operator3' */
+  boolean_T Compare_ai;                /* '<S27>/Compare' */
+  boolean_T rtb_Compare_a_idx_1;
+  boolean_T rtb_IsNaN1_n_idx_0;
+  boolean_T rtb_IsNaN1_n_idx_1;
+  boolean_T Compare_kz;                /* '<S19>/Compare' */
+  boolean_T Compare_i;                 /* '<S11>/Compare' */
   B_MATLABFunction_controller_T sf_MATLABFunction_e;/* '<S36>/MATLAB Function' */
   B_MATLABFunction_controller_T sf_MATLABFunction_l;/* '<S24>/MATLAB Function' */
   B_MATLABFunction_controller_T sf_MATLABFunction;/* '<S16>/MATLAB Function' */
@@ -140,14 +140,12 @@ typedef struct {
   beagleboneblue_bbblueDigitalR_T obj_l;/* '<Root>/Digital Read2' */
   beagleboneblue_bbblueDigitalR_T obj_a;/* '<Root>/Digital Read1' */
   beagleboneblue_bbblueDigitalR_T obj_b;/* '<Root>/Digital Read' */
+  real_T Delay2_DSTATE[2];             /* '<S35>/Delay2' */
   real_T Delay1_DSTATE[2];             /* '<S35>/Delay1' */
+  real_T UnitDelay_DSTATE;             /* '<S36>/Unit Delay' */
+  real_T UnitDelay1_DSTATE;            /* '<S36>/Unit Delay1' */
   real_T Delay1_DSTATE_i[2];           /* '<S23>/Delay1' */
-  real_T Delay_DSTATE[2];              /* '<S23>/Delay' */
-  real_T UnitDelay_DSTATE;             /* '<S24>/Unit Delay' */
   real_T Delay1_DSTATE_e[2];           /* '<S15>/Delay1' */
-  real_T Delay_DSTATE_f[2];            /* '<S15>/Delay' */
-  real_T UnitDelay_DSTATE_f;           /* '<S16>/Unit Delay' */
-  real_T Delay_DSTATE_e;               /* '<S7>/Delay' */
   real_T state;                        /* '<Root>/Data Store Memory' */
   real_T F1;                           /* '<Root>/Data Store Memory10' */
   real_T F2;                           /* '<Root>/Data Store Memory11' */
@@ -159,6 +157,10 @@ typedef struct {
   real_T q01;                          /* '<Root>/Data Store Memory2' */
   real_T q02;                          /* '<Root>/Data Store Memory5' */
   real_T num_motors;                   /* '<Root>/Data Store Memory7' */
+  real_T TimeStampA;                   /* '<S10>/Derivative' */
+  real_T LastUAtTimeA;                 /* '<S10>/Derivative' */
+  real_T TimeStampB;                   /* '<S10>/Derivative' */
+  real_T LastUAtTimeB;                 /* '<S10>/Derivative' */
   int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
   int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1_R;                     /* '<Root>/Data Store Memory1' */
@@ -171,7 +173,6 @@ typedef struct {
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
   boolean_T MainControl_MODE;          /* '<Root>/Main Control' */
   boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
-  boolean_T Home2_MODE;                /* '<Root>/Home2' */
   boolean_T Home1_MODE;                /* '<Root>/Home1' */
   DW_AnalogInput_controller_T AnalogInput1;/* '<Root>/Analog Input' */
   DW_AnalogInput_controller_T AnalogInput;/* '<Root>/Analog Input' */
@@ -238,65 +239,23 @@ struct P_controller_T_ {
   real_T Constant1_Value;              /* Expression: 2
                                         * Referenced by: '<S7>/Constant1'
                                         */
-  real_T Constant1_Value_k;            /* Expression: 0.001
-                                        * Referenced by: '<S16>/Constant1'
-                                        */
   real_T Constant_Value;               /* Expression: 0
                                         * Referenced by: '<S17>/Constant'
                                         */
   real_T Delay1_InitialCondition;      /* Expression: 0
                                         * Referenced by: '<S15>/Delay1'
                                         */
-  real_T Gain1_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S15>/Gain1'
-                                        */
-  real_T Gain4_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S15>/Gain4'
-                                        */
-  real_T Gain3_Gain;                   /* Expression: 2*pi
-                                        * Referenced by: '<S15>/Gain3'
-                                        */
-  real_T Delay_InitialCondition;       /* Expression: 0.0
-                                        * Referenced by: '<S15>/Delay'
-                                        */
-  real_T UnitDelay_InitialCondition;   /* Expression: 0
-                                        * Referenced by: '<S16>/Unit Delay'
-                                        */
-  real_T Constant_Value_g;             /* Expression: -30
-                                        * Referenced by: '<S16>/Constant'
-                                        */
-  real_T Constant2_Value;              /* Expression: 1
-                                        * Referenced by: '<S16>/Constant2'
+  real_T Constant4_Value;              /* Expression: 0
+                                        * Referenced by: '<S7>/Constant4'
                                         */
   real_T Constant3_Value;              /* Expression: 2
                                         * Referenced by: '<S7>/Constant3'
                                         */
-  real_T Constant4_Value;              /* Expression: -0.02
-                                        * Referenced by: '<S7>/Constant4'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 300/0.02
-                                        * Referenced by: '<S7>/Gain'
-                                        */
-  real_T Delay_InitialCondition_d;     /* Expression: 0.0
-                                        * Referenced by: '<S7>/Delay'
-                                        */
-  real_T Gain1_Gain_g;                 /* Expression: 0.001*100/0.02
-                                        * Referenced by: '<S7>/Gain1'
-                                        */
   real_T Constant5_Value;              /* Expression: 3
                                         * Referenced by: '<S7>/Constant5'
                                         */
-  real_T Saturation_UpperSat;          /* Expression: 300
-                                        * Referenced by: '<S7>/Saturation'
-                                        */
-  real_T Saturation_LowerSat;          /* Expression: -300
-                                        * Referenced by: '<S7>/Saturation'
-                                        */
   real_T Constant1_Value_g;            /* Expression: 3
                                         * Referenced by: '<S8>/Constant1'
-                                        */
-  real_T Constant1_Value_e;            /* Expression: 0.001
-                                        * Referenced by: '<S24>/Constant1'
                                         */
   real_T Constant_Value_b;             /* Expression: 0
                                         * Referenced by: '<S25>/Constant'
@@ -307,39 +266,6 @@ struct P_controller_T_ {
   real_T Constant6_Value;              /* Expression: 0
                                         * Referenced by: '<S8>/Constant6'
                                         */
-  real_T Gain1_Gain_gn;                /* Expression: 4*1024
-                                        * Referenced by: '<S23>/Gain1'
-                                        */
-  real_T Gain4_Gain_o;                 /* Expression: 4*1024
-                                        * Referenced by: '<S23>/Gain4'
-                                        */
-  real_T Gain3_Gain_a;                 /* Expression: 2*pi
-                                        * Referenced by: '<S23>/Gain3'
-                                        */
-  real_T Delay_InitialCondition_f;     /* Expression: 0.0
-                                        * Referenced by: '<S23>/Delay'
-                                        */
-  real_T UnitDelay_InitialCondition_m; /* Expression: 0
-                                        * Referenced by: '<S24>/Unit Delay'
-                                        */
-  real_T Constant_Value_gh;            /* Expression: -30
-                                        * Referenced by: '<S24>/Constant'
-                                        */
-  real_T Constant2_Value_e;            /* Expression: 1
-                                        * Referenced by: '<S24>/Constant2'
-                                        */
-  real_T Constant3_Value_a;            /* Expression: 2
-                                        * Referenced by: '<S8>/Constant3'
-                                        */
-  real_T Constant4_Value_p;            /* Expression: -0.02
-                                        * Referenced by: '<S8>/Constant4'
-                                        */
-  real_T Gain_Gain_f;                  /* Expression: 300/0.02
-                                        * Referenced by: '<S8>/Gain'
-                                        */
-  real_T Constant5_Value_i;            /* Expression: 3
-                                        * Referenced by: '<S8>/Constant5'
-                                        */
   real_T Constant_Value_d;             /* Expression: 1
                                         * Referenced by: '<S9>/Constant'
                                         */
@@ -349,8 +275,14 @@ struct P_controller_T_ {
   real_T Constant4_Value_l;            /* Expression: 6
                                         * Referenced by: '<S10>/Constant4'
                                         */
+  real_T Constant1_Value_j;            /* Expression: 0.001
+                                        * Referenced by: '<S36>/Constant1'
+                                        */
   real_T Constant_Value_f;             /* Expression: 0
                                         * Referenced by: '<S37>/Constant'
+                                        */
+  real_T Delay2_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<S35>/Delay2'
                                         */
   real_T Constant6_Value_c;            /* Expression: 4294967295
                                         * Referenced by: '<S35>/Constant6'
@@ -361,17 +293,23 @@ struct P_controller_T_ {
   real_T Delay1_InitialCondition_k;    /* Expression: 0
                                         * Referenced by: '<S35>/Delay1'
                                         */
-  real_T Gain1_Gain_e;                 /* Expression: 4*1024
+  real_T Gain1_Gain;                   /* Expression: 4*1024
                                         * Referenced by: '<S35>/Gain1'
                                         */
-  real_T Gain4_Gain_g;                 /* Expression: 4*1024
+  real_T Gain4_Gain;                   /* Expression: 4*1024
                                         * Referenced by: '<S35>/Gain4'
                                         */
-  real_T Gain3_Gain_j;                 /* Expression: 2*pi
+  real_T Gain3_Gain;                   /* Expression: 2*pi
                                         * Referenced by: '<S35>/Gain3'
                                         */
-  real_T Constant2_Value_i;            /* Expression: 8
-                                        * Referenced by: '<S10>/Constant2'
+  real_T UnitDelay_InitialCondition;   /* Expression: 0
+                                        * Referenced by: '<S36>/Unit Delay'
+                                        */
+  real_T Constant_Value_m;             /* Expression: -30
+                                        * Referenced by: '<S36>/Constant'
+                                        */
+  real_T Constant2_Value;              /* Expression: 1
+                                        * Referenced by: '<S36>/Constant2'
                                         */
   real_T Constant1_Value_fp;           /* Expression: 4
                                         * Referenced by: '<S10>/Constant1'
@@ -385,14 +323,50 @@ struct P_controller_T_ {
   real_T Constant_Value_i;             /* Expression: 1
                                         * Referenced by: '<S10>/Constant'
                                         */
-  real_T Constant3_Value_c;            /* Expression: 0
-                                        * Referenced by: '<S10>/Constant3'
+  real_T UnitDelay1_InitialCondition;  /* Expression: 0
+                                        * Referenced by: '<S36>/Unit Delay1'
+                                        */
+  real_T SineWave1_Amp;                /* Expression: 0.3
+                                        * Referenced by: '<S10>/Sine Wave1'
+                                        */
+  real_T SineWave1_Bias;               /* Expression: 0.28
+                                        * Referenced by: '<S10>/Sine Wave1'
+                                        */
+  real_T SineWave1_Freq;               /* Expression: 0.5
+                                        * Referenced by: '<S10>/Sine Wave1'
+                                        */
+  real_T SineWave1_Phase;              /* Expression: -pi/2
+                                        * Referenced by: '<S10>/Sine Wave1'
+                                        */
+  real_T Gain_Gain;                    /* Expression: 5000/1.4
+                                        * Referenced by: '<S10>/Gain'
+                                        */
+  real_T Gain2_Gain;                   /* Expression: 200
+                                        * Referenced by: '<S10>/Gain2'
+                                        */
+  real_T Saturation_UpperSat;          /* Expression: 400
+                                        * Referenced by: '<S10>/Saturation'
+                                        */
+  real_T Saturation_LowerSat;          /* Expression: -400
+                                        * Referenced by: '<S10>/Saturation'
                                         */
   real_T Constant5_Value_j;            /* Expression: 2
                                         * Referenced by: '<S10>/Constant5'
                                         */
-  real_T Constant6_Value_f;            /* Expression: 0
-                                        * Referenced by: '<S10>/Constant6'
+  real_T Gain5_Gain;                   /* Expression: 5000/1.4
+                                        * Referenced by: '<S10>/Gain5'
+                                        */
+  real_T Gain6_Gain;                   /* Expression: 200
+                                        * Referenced by: '<S10>/Gain6'
+                                        */
+  real_T Saturation1_UpperSat;         /* Expression: 400
+                                        * Referenced by: '<S10>/Saturation1'
+                                        */
+  real_T Saturation1_LowerSat;         /* Expression: -400
+                                        * Referenced by: '<S10>/Saturation1'
+                                        */
+  real_T Constant2_Value_i;            /* Expression: 8
+                                        * Referenced by: '<S10>/Constant2'
                                         */
   real_T Constant12_Value;             /* Expression: 353
                                         * Referenced by: '<Root>/Constant12'
@@ -406,7 +380,7 @@ struct P_controller_T_ {
   real_T Constant4_Value_g;            /* Expression: 2
                                         * Referenced by: '<Root>/Constant4'
                                         */
-  real_T Constant5_Value_ih;           /* Expression: 5000
+  real_T Constant5_Value_i;            /* Expression: 5000
                                         * Referenced by: '<Root>/Constant5'
                                         */
   real_T Constant6_Value_n;            /* Expression: 5000
@@ -536,19 +510,44 @@ extern volatile boolean_T runModel;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
+ * Block '<S15>/Delay' : Unused code path elimination
+ * Block '<S15>/Divide' : Unused code path elimination
+ * Block '<S15>/Divide1' : Unused code path elimination
+ * Block '<S15>/Gain1' : Unused code path elimination
+ * Block '<S15>/Gain3' : Unused code path elimination
+ * Block '<S15>/Gain4' : Unused code path elimination
+ * Block '<S15>/Sum' : Unused code path elimination
+ * Block '<S16>/Constant' : Unused code path elimination
+ * Block '<S16>/Constant1' : Unused code path elimination
+ * Block '<S16>/Constant2' : Unused code path elimination
+ * Block '<S16>/Logical Operator' : Unused code path elimination
+ * Block '<S16>/Relational Operator' : Unused code path elimination
+ * Block '<S16>/Relational Operator1' : Unused code path elimination
+ * Block '<S16>/Sum' : Unused code path elimination
  * Block '<S16>/Sum1' : Unused code path elimination
+ * Block '<S16>/Switch' : Unused code path elimination
+ * Block '<S16>/Unit Delay' : Unused code path elimination
  * Block '<S16>/Unit Delay1' : Unused code path elimination
- * Block '<S8>/Saturation' : Unused code path elimination
+ * Block '<S23>/Delay' : Unused code path elimination
+ * Block '<S23>/Divide' : Unused code path elimination
+ * Block '<S23>/Divide1' : Unused code path elimination
+ * Block '<S23>/Gain1' : Unused code path elimination
+ * Block '<S23>/Gain3' : Unused code path elimination
+ * Block '<S23>/Gain4' : Unused code path elimination
+ * Block '<S23>/Sum' : Unused code path elimination
+ * Block '<S24>/Constant' : Unused code path elimination
+ * Block '<S24>/Constant1' : Unused code path elimination
+ * Block '<S24>/Constant2' : Unused code path elimination
+ * Block '<S24>/Logical Operator' : Unused code path elimination
+ * Block '<S24>/Relational Operator' : Unused code path elimination
+ * Block '<S24>/Relational Operator1' : Unused code path elimination
+ * Block '<S24>/Sum' : Unused code path elimination
  * Block '<S24>/Sum1' : Unused code path elimination
+ * Block '<S24>/Switch' : Unused code path elimination
+ * Block '<S24>/Unit Delay' : Unused code path elimination
  * Block '<S24>/Unit Delay1' : Unused code path elimination
  * Block '<S10>/Constant10' : Unused code path elimination
  * Block '<S10>/Constant7' : Unused code path elimination
- * Block '<S10>/Data Type Conversion10' : Unused code path elimination
- * Block '<S10>/Derivative' : Unused code path elimination
- * Block '<S10>/Gain' : Unused code path elimination
- * Block '<S10>/Gain2' : Unused code path elimination
- * Block '<S10>/Gain5' : Unused code path elimination
- * Block '<S10>/Gain6' : Unused code path elimination
  * Block '<S30>/Add' : Unused code path elimination
  * Block '<S30>/Add1' : Unused code path elimination
  * Block '<S30>/Add2' : Unused code path elimination
@@ -567,37 +566,18 @@ extern volatile boolean_T runModel;
  * Block '<S31>/Product1' : Unused code path elimination
  * Block '<S31>/Trigonometric Function' : Unused code path elimination
  * Block '<S31>/Trigonometric Function1' : Unused code path elimination
- * Block '<S10>/Saturation' : Unused code path elimination
- * Block '<S10>/Saturation1' : Unused code path elimination
- * Block '<S10>/Sine Wave1' : Unused code path elimination
- * Block '<S10>/Sum' : Unused code path elimination
- * Block '<S10>/Sum1' : Unused code path elimination
- * Block '<S10>/Sum2' : Unused code path elimination
- * Block '<S10>/Sum3' : Unused code path elimination
- * Block '<S10>/Sum4' : Unused code path elimination
+ * Block '<S10>/Sine Wave2' : Unused code path elimination
+ * Block '<S10>/Sine Wave3' : Unused code path elimination
  * Block '<S10>/Sum5' : Unused code path elimination
- * Block '<S10>/Sum8' : Unused code path elimination
- * Block '<S36>/Constant' : Unused code path elimination
- * Block '<S36>/Constant1' : Unused code path elimination
- * Block '<S36>/Constant2' : Unused code path elimination
- * Block '<S36>/Logical Operator' : Unused code path elimination
- * Block '<S36>/Relational Operator' : Unused code path elimination
- * Block '<S36>/Relational Operator1' : Unused code path elimination
- * Block '<S36>/Sum' : Unused code path elimination
- * Block '<S36>/Sum1' : Unused code path elimination
- * Block '<S36>/Switch' : Unused code path elimination
- * Block '<S36>/Unit Delay' : Unused code path elimination
- * Block '<S36>/Unit Delay1' : Unused code path elimination
  * Block '<S10>/l1' : Unused code path elimination
  * Block '<S10>/l2' : Unused code path elimination
  * Block '<Root>/Data Type Conversion1' : Eliminate redundant data type conversion
  * Block '<S7>/Data Type Conversion2' : Eliminate redundant data type conversion
  * Block '<S7>/Data Type Conversion8' : Eliminate redundant data type conversion
  * Block '<S13>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S8>/Data Type Conversion2' : Eliminate redundant data type conversion
- * Block '<S8>/Data Type Conversion8' : Eliminate redundant data type conversion
  * Block '<S21>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion1' : Eliminate redundant data type conversion
+ * Block '<S10>/Data Type Conversion10' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion5' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion8' : Eliminate redundant data type conversion
  * Block '<S33>/Data Type Conversion' : Eliminate redundant data type conversion
