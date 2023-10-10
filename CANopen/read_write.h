@@ -1,0 +1,1 @@
+void read_write(int pdo_id, int num_motor, double* set_val, double* pos);
