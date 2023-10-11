@@ -59,6 +59,7 @@ move:
 	sudo cp init_can* ../../controller_ert_rtw/
 	sudo cp get_encoder* ../../controller_ert_rtw/
 	sudo cp set_motor* ../../controller_ert_rtw/
+	sudo cp read_write* ../../controller_ert_rtw/
 	sudo cp stop_motor* ../../controller_ert_rtw/
 	sudo cp datalog* ../../controller_ert_rtw/
 	sudo cp -r socketcan ../../controller_ert_rtw/

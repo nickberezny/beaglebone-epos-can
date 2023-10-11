@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.611
+ * Model version              : 4.648
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Oct  6 10:51:02 2023
+ * C source code generated on : Wed Oct 11 13:41:19 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -44,6 +44,69 @@ typedef struct tag_q4re843yYTsFSUEoF6hnJH beagleboneblue_bbblueADC_cont_T;
 
 /* Custom Type definition for MATLAB Function: '<S16>/MATLAB Function' */
 #include "coder_posix_time.h"
+#ifndef struct_tag_BomwZnYtwoEoC4SP7CGNiB
+#define struct_tag_BomwZnYtwoEoC4SP7CGNiB
+
+struct tag_BomwZnYtwoEoC4SP7CGNiB
+{
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T pCumSum;
+  real_T pCumSumRev[14];
+  real_T pCumRevIndex;
+  real_T pModValueRev;
+};
+
+#endif                                 /* struct_tag_BomwZnYtwoEoC4SP7CGNiB */
+
+#ifndef typedef_g_dsp_internal_SlidingWindowA_T
+#define typedef_g_dsp_internal_SlidingWindowA_T
+
+typedef struct tag_BomwZnYtwoEoC4SP7CGNiB g_dsp_internal_SlidingWindowA_T;
+
+#endif                             /* typedef_g_dsp_internal_SlidingWindowA_T */
+
+#ifndef struct_tag_BlgwLpgj2bjudmbmVKWwDE
+#define struct_tag_BlgwLpgj2bjudmbmVKWwDE
+
+struct tag_BlgwLpgj2bjudmbmVKWwDE
+{
+  uint32_T f1[8];
+};
+
+#endif                                 /* struct_tag_BlgwLpgj2bjudmbmVKWwDE */
+
+#ifndef typedef_cell_wrap_controller_T
+#define typedef_cell_wrap_controller_T
+
+typedef struct tag_BlgwLpgj2bjudmbmVKWwDE cell_wrap_controller_T;
+
+#endif                                 /* typedef_cell_wrap_controller_T */
+
+#ifndef struct_tag_FA92MfKCCbJl11xXJLsLGF
+#define struct_tag_FA92MfKCCbJl11xXJLsLGF
+
+struct tag_FA92MfKCCbJl11xXJLsLGF
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  boolean_T TunablePropsChanged;
+  cell_wrap_controller_T inputVarSize;
+  g_dsp_internal_SlidingWindowA_T *pStatistic;
+  int32_T NumChannels;
+  int32_T FrameLength;
+  g_dsp_internal_SlidingWindowA_T _pobj0;
+};
+
+#endif                                 /* struct_tag_FA92MfKCCbJl11xXJLsLGF */
+
+#ifndef typedef_dsp_simulink_MovingAverage_co_T
+#define typedef_dsp_simulink_MovingAverage_co_T
+
+typedef struct tag_FA92MfKCCbJl11xXJLsLGF dsp_simulink_MovingAverage_co_T;
+
+#endif                             /* typedef_dsp_simulink_MovingAverage_co_T */
 
 /* Custom Type definition for MATLABSystem: '<Root>/Digital Read3' */
 #include "MW_SVD.h"

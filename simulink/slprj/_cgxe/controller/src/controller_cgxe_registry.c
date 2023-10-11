@@ -83,10 +83,10 @@ static int cgxe_process_get_checksums(int nlhs, mxArray* plhs[], int nrhs, const
   {
     mxArray* mxMakefileChksum = mxCreateDoubleMatrix(1, 4, mxREAL);
     double* checksumData = (double*) mxGetData(mxMakefileChksum);
-    checksumData[0] = 2809433134;
-    checksumData[1] = 1899728385;
-    checksumData[2] = 4029315446;
-    checksumData[3] = 3589906152;
+    checksumData[0] = 3921607687;
+    checksumData[1] = 3335451835;
+    checksumData[2] = 3005448555;
+    checksumData[3] = 1408778803;
     mxSetField(mxChecksum, 0, "makefile", mxMakefileChksum);
   }
 
@@ -103,10 +103,10 @@ static int cgxe_process_get_checksums(int nlhs, mxArray* plhs[], int nrhs, const
   {
     mxArray* mxOverallChksum = mxCreateDoubleMatrix(1, 4, mxREAL);
     double* checksumData = (double*) mxGetData(mxOverallChksum);
-    checksumData[0] = 4082385575;
-    checksumData[1] = 4235639543;
-    checksumData[2] = 2238998720;
-    checksumData[3] = 170770721;
+    checksumData[0] = 3374967129;
+    checksumData[1] = 1144932856;
+    checksumData[2] = 1405137916;
+    checksumData[3] = 970915139;
     mxSetField(mxChecksum, 0, "overall", mxOverallChksum);
   }
 

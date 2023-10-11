@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.611
+ * Model version              : 4.648
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Oct  6 10:51:02 2023
+ * C source code generated on : Wed Oct 11 13:41:19 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -31,8 +31,8 @@
 
 #include "controller_types.h"
 #include "rtGetInf.h"
-#include "rt_nonfinite.h"
 #include <string.h>
+#include "rt_nonfinite.h"
 #include <stddef.h>
 #include "zero_crossing_types.h"
 
@@ -45,14 +45,6 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
-#ifndef rtmGetT
-#define rtmGetT(rtm)                   (rtmGetTPtr((rtm))[0])
-#endif
-
-#ifndef rtmGetTPtr
-#define rtmGetTPtr(rtm)                ((rtm)->Timing.t)
-#endif
-
 /* user code (top of header file) */
 #include "init_can.h"
 #include "get_encoder.h"
@@ -60,6 +52,7 @@
 #include "print_input.h"
 #include "stop_motor.h"
 #include "datalog.h"
+#include "read_write.h"
 
 /* Block signals for system '<Root>/Analog Input' */
 typedef struct {
@@ -99,35 +92,33 @@ typedef struct {
   real_T d_ahi_k;
 } B_MATLABFunction_controller_T;
 
+/* Block signals for system '<S10>/Moving Average' */
+typedef struct {
+  real_T csumrev[14];
+  real_T MovingAverage;                /* '<S10>/Moving Average' */
+} B_MovingAverage_controller_T;
+
+/* Block states (default storage) for system '<S10>/Moving Average' */
+typedef struct {
+  dsp_simulink_MovingAverage_co_T obj; /* '<S10>/Moving Average' */
+  boolean_T objisempty;                /* '<S10>/Moving Average' */
+} DW_MovingAverage_controller_T;
+
 /* Block signals (default storage) */
 typedef struct {
   real_T CCaller4[8];                  /* '<S10>/C Caller4' */
-  real_T Delay2[2];                    /* '<S35>/Delay2' */
-  real_T CCaller6[2];                  /* '<S10>/C Caller6' */
-  real_T Delay1[2];                    /* '<S35>/Delay1' */
-  real_T Switch2[2];                   /* '<S35>/Switch2' */
-  real_T Gain3[2];                     /* '<S35>/Gain3' */
-  real_T Divide[2];                    /* '<S35>/Divide' */
-  real_T Sum6_e[2];                    /* '<S23>/Sum6' */
-  real_T TmpSignalConversionAtCCal_e[2];
-  real_T Switch;                       /* '<S36>/Switch' */
-  real_T Sum6;                         /* '<S10>/Sum6' */
-  real_T Saturation;                   /* '<S10>/Saturation' */
-  real_T Saturation1;                  /* '<S10>/Saturation1' */
+  real_T CCaller5[4];                  /* '<S10>/C Caller5' */
+  real_T Gain3[2];                     /* '<S33>/Gain3' */
+  real_T Sum6[2];                      /* '<S33>/Sum6' */
+  real_T Divide[2];                    /* '<S33>/Divide' */
   real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
-  real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
-  real_T d;
-  real_T Sum1_b;                       /* '<S36>/Sum1' */
-  int32_T CCaller5[2];                 /* '<S9>/C Caller5' */
-  boolean_T Compare;                   /* '<S4>/Compare' */
-  boolean_T LogicalOperator3[2];       /* '<S35>/Logical Operator3' */
-  boolean_T Compare_ai;                /* '<S27>/Compare' */
-  boolean_T rtb_Compare_a_idx_1;
-  boolean_T rtb_IsNaN1_n_idx_0;
-  boolean_T rtb_IsNaN1_n_idx_1;
-  boolean_T Compare_kz;                /* '<S19>/Compare' */
-  boolean_T Compare_i;                 /* '<S11>/Compare' */
-  B_MATLABFunction_controller_T sf_MATLABFunction_e;/* '<S36>/MATLAB Function' */
+  real_T Saturation1;                  /* '<S10>/Saturation1' */
+  real_T DataStoreRead10;              /* '<S10>/Data Store Read10' */
+  real_T Sum1;                         /* '<S34>/Sum1' */
+  int32_T CCaller5_g[2];               /* '<S9>/C Caller5' */
+  B_MATLABFunction_controller_T sf_MATLABFunction_e;/* '<S34>/MATLAB Function' */
+  B_MovingAverage_controller_T MovingAverage1;/* '<S10>/Moving Average' */
+  B_MovingAverage_controller_T MovingAverage;/* '<S10>/Moving Average' */
   B_MATLABFunction_controller_T sf_MATLABFunction_l;/* '<S24>/MATLAB Function' */
   B_MATLABFunction_controller_T sf_MATLABFunction;/* '<S16>/MATLAB Function' */
   B_AnalogInput_controller_T AnalogInput1;/* '<Root>/Analog Input' */
@@ -140,10 +131,11 @@ typedef struct {
   beagleboneblue_bbblueDigitalR_T obj_l;/* '<Root>/Digital Read2' */
   beagleboneblue_bbblueDigitalR_T obj_a;/* '<Root>/Digital Read1' */
   beagleboneblue_bbblueDigitalR_T obj_b;/* '<Root>/Digital Read' */
-  real_T Delay2_DSTATE[2];             /* '<S35>/Delay2' */
-  real_T Delay1_DSTATE[2];             /* '<S35>/Delay1' */
-  real_T UnitDelay_DSTATE;             /* '<S36>/Unit Delay' */
-  real_T UnitDelay1_DSTATE;            /* '<S36>/Unit Delay1' */
+  real_T Delay1_DSTATE[4];             /* '<S10>/Delay1' */
+  real_T Delay1_DSTATE_j[2];           /* '<S33>/Delay1' */
+  real_T UnitDelay_DSTATE;             /* '<S34>/Unit Delay' */
+  real_T UnitDelay1_DSTATE;            /* '<S34>/Unit Delay1' */
+  real_T Delay2_DSTATE[2];             /* '<S33>/Delay2' */
   real_T Delay1_DSTATE_i[2];           /* '<S23>/Delay1' */
   real_T Delay1_DSTATE_e[2];           /* '<S15>/Delay1' */
   real_T state;                        /* '<Root>/Data Store Memory' */
@@ -157,10 +149,6 @@ typedef struct {
   real_T q01;                          /* '<Root>/Data Store Memory2' */
   real_T q02;                          /* '<Root>/Data Store Memory5' */
   real_T num_motors;                   /* '<Root>/Data Store Memory7' */
-  real_T TimeStampA;                   /* '<S10>/Derivative' */
-  real_T LastUAtTimeA;                 /* '<S10>/Derivative' */
-  real_T TimeStampB;                   /* '<S10>/Derivative' */
-  real_T LastUAtTimeB;                 /* '<S10>/Derivative' */
   int32_T pdo_id;                      /* '<Root>/Data Store Memory4' */
   int32_T cfg_id;                      /* '<Root>/Data Store Memory6' */
   boolean_T LS1_R;                     /* '<Root>/Data Store Memory1' */
@@ -174,6 +162,8 @@ typedef struct {
   boolean_T MainControl_MODE;          /* '<Root>/Main Control' */
   boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
   boolean_T Home1_MODE;                /* '<Root>/Home1' */
+  DW_MovingAverage_controller_T MovingAverage1;/* '<S10>/Moving Average' */
+  DW_MovingAverage_controller_T MovingAverage;/* '<S10>/Moving Average' */
   DW_AnalogInput_controller_T AnalogInput1;/* '<Root>/Analog Input' */
   DW_AnalogInput_controller_T AnalogInput;/* '<Root>/Analog Input' */
 } DW_controller_T;
@@ -276,43 +266,31 @@ struct P_controller_T_ {
                                         * Referenced by: '<S10>/Constant4'
                                         */
   real_T Constant1_Value_j;            /* Expression: 0.001
-                                        * Referenced by: '<S36>/Constant1'
+                                        * Referenced by: '<S34>/Constant1'
                                         */
   real_T Constant_Value_f;             /* Expression: 0
-                                        * Referenced by: '<S37>/Constant'
-                                        */
-  real_T Delay2_InitialCondition;      /* Expression: 0
-                                        * Referenced by: '<S35>/Delay2'
+                                        * Referenced by: '<S35>/Constant'
                                         */
   real_T Constant6_Value_c;            /* Expression: 4294967295
-                                        * Referenced by: '<S35>/Constant6'
-                                        */
-  real_T Constant8_Value;              /* Expression: -20000
-                                        * Referenced by: '<S35>/Constant8'
+                                        * Referenced by: '<S33>/Constant6'
                                         */
   real_T Delay1_InitialCondition_k;    /* Expression: 0
-                                        * Referenced by: '<S35>/Delay1'
+                                        * Referenced by: '<S10>/Delay1'
+                                        */
+  real_T Constant8_Value;              /* Expression: -20000
+                                        * Referenced by: '<S33>/Constant8'
+                                        */
+  real_T Delay1_InitialCondition_k5;   /* Expression: 0
+                                        * Referenced by: '<S33>/Delay1'
                                         */
   real_T Gain1_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S35>/Gain1'
+                                        * Referenced by: '<S33>/Gain1'
                                         */
   real_T Gain4_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S35>/Gain4'
+                                        * Referenced by: '<S33>/Gain4'
                                         */
   real_T Gain3_Gain;                   /* Expression: 2*pi
-                                        * Referenced by: '<S35>/Gain3'
-                                        */
-  real_T UnitDelay_InitialCondition;   /* Expression: 0
-                                        * Referenced by: '<S36>/Unit Delay'
-                                        */
-  real_T Constant_Value_m;             /* Expression: -30
-                                        * Referenced by: '<S36>/Constant'
-                                        */
-  real_T Constant2_Value;              /* Expression: 1
-                                        * Referenced by: '<S36>/Constant2'
-                                        */
-  real_T Constant1_Value_fp;           /* Expression: 4
-                                        * Referenced by: '<S10>/Constant1'
+                                        * Referenced by: '<S33>/Gain3'
                                         */
   real_T Constant9_Value;              /* Expression: 3
                                         * Referenced by: '<S10>/Constant9'
@@ -320,28 +298,64 @@ struct P_controller_T_ {
   real_T Constant14_Value;             /* Expression: 2
                                         * Referenced by: '<S10>/Constant14'
                                         */
-  real_T Constant_Value_i;             /* Expression: 1
-                                        * Referenced by: '<S10>/Constant'
+  real_T UnitDelay_InitialCondition;   /* Expression: 0
+                                        * Referenced by: '<S34>/Unit Delay'
+                                        */
+  real_T Constant_Value_m;             /* Expression: -30
+                                        * Referenced by: '<S34>/Constant'
+                                        */
+  real_T Constant2_Value;              /* Expression: 1
+                                        * Referenced by: '<S34>/Constant2'
                                         */
   real_T UnitDelay1_InitialCondition;  /* Expression: 0
-                                        * Referenced by: '<S36>/Unit Delay1'
+                                        * Referenced by: '<S34>/Unit Delay1'
                                         */
-  real_T SineWave1_Amp;                /* Expression: 0.3
+  real_T Delay2_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<S33>/Delay2'
+                                        */
+  real_T SineWave2_Amp;                /* Expression: 0.4
+                                        * Referenced by: '<S10>/Sine Wave2'
+                                        */
+  real_T SineWave2_Bias;               /* Expression: 0
+                                        * Referenced by: '<S10>/Sine Wave2'
+                                        */
+  real_T SineWave2_Freq;               /* Expression: 0.1
+                                        * Referenced by: '<S10>/Sine Wave2'
+                                        */
+  real_T SineWave2_Phase;              /* Expression: -pi/2
+                                        * Referenced by: '<S10>/Sine Wave2'
+                                        */
+  real_T SineWave1_Amp;                /* Expression: 0.4
                                         * Referenced by: '<S10>/Sine Wave1'
                                         */
-  real_T SineWave1_Bias;               /* Expression: 0.28
+  real_T SineWave1_Bias;               /* Expression: 0
                                         * Referenced by: '<S10>/Sine Wave1'
                                         */
-  real_T SineWave1_Freq;               /* Expression: 0.5
+  real_T SineWave1_Freq;               /* Expression: 0.3
                                         * Referenced by: '<S10>/Sine Wave1'
                                         */
   real_T SineWave1_Phase;              /* Expression: -pi/2
                                         * Referenced by: '<S10>/Sine Wave1'
                                         */
+  real_T SineWave3_Amp;                /* Expression: 0.4
+                                        * Referenced by: '<S10>/Sine Wave3'
+                                        */
+  real_T SineWave3_Bias;               /* Expression: 0
+                                        * Referenced by: '<S10>/Sine Wave3'
+                                        */
+  real_T SineWave3_Freq;               /* Expression: 0.5
+                                        * Referenced by: '<S10>/Sine Wave3'
+                                        */
+  real_T SineWave3_Phase;              /* Expression: -pi/2
+                                        * Referenced by: '<S10>/Sine Wave3'
+                                        */
+  real_T Constant3_Value_n;            /* Expression: 1.21
+                                        * Referenced by: '<S10>/Constant3'
+                                        */
   real_T Gain_Gain;                    /* Expression: 5000/1.4
                                         * Referenced by: '<S10>/Gain'
                                         */
-  real_T Gain2_Gain;                   /* Expression: 200
+  real_T Gain2_Gain;                   /* Expression: 1000
                                         * Referenced by: '<S10>/Gain2'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 400
@@ -350,13 +364,10 @@ struct P_controller_T_ {
   real_T Saturation_LowerSat;          /* Expression: -400
                                         * Referenced by: '<S10>/Saturation'
                                         */
-  real_T Constant5_Value_j;            /* Expression: 2
-                                        * Referenced by: '<S10>/Constant5'
-                                        */
-  real_T Gain5_Gain;                   /* Expression: 5000/1.4
+  real_T Gain5_Gain;                   /* Expression: 6000/1.4
                                         * Referenced by: '<S10>/Gain5'
                                         */
-  real_T Gain6_Gain;                   /* Expression: 200
+  real_T Gain6_Gain;                   /* Expression: 3000
                                         * Referenced by: '<S10>/Gain6'
                                         */
   real_T Saturation1_UpperSat;         /* Expression: 400
@@ -462,7 +473,6 @@ struct P_controller_T_ {
 /* Real-time Model Data Structure */
 struct tag_RTM_controller_T {
   const char_T *errorStatus;
-  RTWSolverInfo solverInfo;
 
   /*
    * Timing:
@@ -470,18 +480,9 @@ struct tag_RTM_controller_T {
    * the timing information for the model.
    */
   struct {
-    uint32_T clockTick0;
-    uint32_T clockTickH0;
-    time_T stepSize0;
-    uint32_T clockTick1;
-    uint32_T clockTickH1;
     struct {
-      uint32_T TID[8];
+      uint32_T TID[7];
     } TaskCounters;
-
-    SimTimeStep simTimeStep;
-    time_T *t;
-    time_T tArray[8];
   } Timing;
 };
 
@@ -547,7 +548,10 @@ extern volatile boolean_T runModel;
  * Block '<S24>/Unit Delay' : Unused code path elimination
  * Block '<S24>/Unit Delay1' : Unused code path elimination
  * Block '<S10>/Constant10' : Unused code path elimination
+ * Block '<S10>/Constant6' : Unused code path elimination
  * Block '<S10>/Constant7' : Unused code path elimination
+ * Block '<S10>/Delay2' : Unused code path elimination
+ * Block '<S10>/Divide' : Unused code path elimination
  * Block '<S30>/Add' : Unused code path elimination
  * Block '<S30>/Add1' : Unused code path elimination
  * Block '<S30>/Add2' : Unused code path elimination
@@ -566,9 +570,8 @@ extern volatile boolean_T runModel;
  * Block '<S31>/Product1' : Unused code path elimination
  * Block '<S31>/Trigonometric Function' : Unused code path elimination
  * Block '<S31>/Trigonometric Function1' : Unused code path elimination
- * Block '<S10>/Sine Wave2' : Unused code path elimination
- * Block '<S10>/Sine Wave3' : Unused code path elimination
  * Block '<S10>/Sum5' : Unused code path elimination
+ * Block '<S10>/Sum7' : Unused code path elimination
  * Block '<S10>/l1' : Unused code path elimination
  * Block '<S10>/l2' : Unused code path elimination
  * Block '<Root>/Data Type Conversion1' : Eliminate redundant data type conversion
@@ -578,10 +581,7 @@ extern volatile boolean_T runModel;
  * Block '<S21>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion1' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion10' : Eliminate redundant data type conversion
- * Block '<S10>/Data Type Conversion5' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion8' : Eliminate redundant data type conversion
- * Block '<S33>/Data Type Conversion' : Eliminate redundant data type conversion
- * Block '<S34>/Data Type Conversion' : Eliminate redundant data type conversion
  */
 
 /*-
@@ -631,11 +631,9 @@ extern volatile boolean_T runModel;
  * '<S30>'  : 'controller/Main Control/Kin X'
  * '<S31>'  : 'controller/Main Control/Kin X1'
  * '<S32>'  : 'controller/Main Control/Subsystem'
- * '<S33>'  : 'controller/Main Control/Subsystem1'
- * '<S34>'  : 'controller/Main Control/Subsystem2'
- * '<S35>'  : 'controller/Main Control/Subsystem3'
- * '<S36>'  : 'controller/Main Control/Sys Time'
- * '<S37>'  : 'controller/Main Control/Subsystem3/Compare To Zero2'
- * '<S38>'  : 'controller/Main Control/Sys Time/MATLAB Function'
+ * '<S33>'  : 'controller/Main Control/Subsystem3'
+ * '<S34>'  : 'controller/Main Control/Sys Time'
+ * '<S35>'  : 'controller/Main Control/Subsystem3/Compare To Zero2'
+ * '<S36>'  : 'controller/Main Control/Sys Time/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_controller_h_ */

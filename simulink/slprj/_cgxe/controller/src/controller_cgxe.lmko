@@ -4,7 +4,7 @@
 "m_ruThg8ilLzfH7h2KmGFzOE.obj"
 "controller_cgxe_registry.obj"
 "controller_cgxe.def"
-"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_slcc\93PxlelXaCo9MEus7lOweH\93PxlelXaCo9MEus7lOweH_cclib.lib"
+"C:\Users\ABL\Documents\beaglebone-epos-can\simulink\slprj\_slcc\f4hPWDm5DVUjJQx403Sq0F\f4hPWDm5DVUjJQx403Sq0F_cclib.lib"
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmx.lib"
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmex.lib"
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmat.lib"
@@ -21,4 +21,5 @@
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libcovrt.lib"
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwsl_sfcn_cov_bridge.lib"
 "C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\libmwdsp_halidesim.lib"
+"C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft\dspcgsim.lib"
 

@@ -10,7 +10,7 @@
 #include "cgxert.h"
 #include "cgxeooprt.h"
 #include "slccrt.h"
-#include "slcc_interface_93PxlelXaCo9MEus7lOweH.h"
+#include "slcc_interface_f4hPWDm5DVUjJQx403Sq0F.h"
 #define rtInf                          (mxGetInf())
 #define rtMinusInf                     (-(mxGetInf()))
 #define rtNaN                          (mxGetNaN())

@@ -15,17 +15,17 @@
 
 
 
-void read_write(int pdo_id, int num_motor, double* set_val, double* pos)
+extern void read_write(int pdo_id, int num_motor, double* val)
 {
 	for(int i = 0; i < num_motor; i++)
 	{
-		set_torque(pdo_id, (int)set_val[i], i);
+		set_torque(pdo_id, (int)val[i+num_motor], i+1);
 	}
 
 	for(int i = 0; i < num_motor; i++)
-		pos[i] = 0.0;
+		val[i] = 0.0;
 
-	vel_read(pdo_id, num_motor, pos, 10);
+	vel_read(pdo_id, num_motor, val, 10);
 	
 	return;
 }

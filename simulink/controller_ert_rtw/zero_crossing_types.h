@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.611
+ * Model version              : 4.648
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Fri Oct  6 10:51:02 2023
+ * C source code generated on : Wed Oct 11 13:41:19 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

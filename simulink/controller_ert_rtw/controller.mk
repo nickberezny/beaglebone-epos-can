@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Mon Oct 02 14:16:23 2023
+## Generated on : Wed Oct 11 13:28:43 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
@@ -163,9 +163,9 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 DEFINES_ = -D_roboticscape_in_use_ -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
-DEFINES_OPTS = -DTID01EQ=1
+DEFINES_OPTS = -DTID01EQ=0
 DEFINES_SKIPFORSIL = -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DSTACK_SIZE=64 -DRT
-DEFINES_STANDARD = -DMODEL=controller -DNUMST=8 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=controller -DNUMST=7 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD)
 
@@ -173,7 +173,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = coder_posix_time.c MW_digitalIO.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c stop_motor.c datalog.c MW_bbblue_init.c linuxinitialize.c
+SRCS = coder_posix_time.c MW_digitalIO.c controller.c controller_data.c rtGetInf.c rtGetNaN.c rt_nonfinite.c init_can.c set_motor.c get_encoder.c print_input.c stop_motor.c datalog.c read_write.c MW_bbblue_init.c linuxinitialize.c
 
 MAIN_SRC = ert_main.c
 
@@ -183,7 +183,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = coder_posix_time.c.o MW_digitalIO.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o stop_motor.c.o datalog.c.o MW_bbblue_init.c.o linuxinitialize.c.o
+OBJS = coder_posix_time.c.o MW_digitalIO.c.o controller.c.o controller_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o init_can.c.o set_motor.c.o get_encoder.c.o print_input.c.o stop_motor.c.o datalog.c.o read_write.c.o MW_bbblue_init.c.o linuxinitialize.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -483,6 +483,10 @@ stop_motor.c.o : stop_motor.c
 
 
 datalog.c.o : datalog.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+read_write.c.o : read_write.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
