@@ -1,1 +1,1 @@
-extern void read_write(int pdo_id, int num_motor, double* val);
+extern void read_write(int pdo_id, int num_motor, double t, double* val);

@@ -9,7 +9,7 @@
  *
  * Model version              : 1.0
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 14:02:28 2023
+ * C source code generated on : Wed Oct 11 16:42:57 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -38,7 +38,6 @@ static uint_T rtDataTypeSizes[] = {
   2*sizeof(uint32_T),
   sizeof(int32_T),
   sizeof(beagleboneblue_bbblueADC_unti_T),
-  sizeof(beagleboneblue_bbblueLED_unti_T),
   sizeof(uint_T),
   sizeof(char_T),
   sizeof(uchar_T),
@@ -63,7 +62,6 @@ static const char_T * rtDataTypeNames[] = {
   "timer_uint32_pair_T",
   "physical_connection",
   "beagleboneblue_bbblueADC_unti_T",
-  "beagleboneblue_bbblueLED_unti_T",
   "uint_T",
   "char_T",
   "uchar_T",
@@ -72,29 +70,27 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&untitled_B.AnalogInput), 0, 0, 1 }
+  { (char_T *)(&untitled_B.Sum1), 0, 0, 2 }
   ,
 
   { (char_T *)(&untitled_DW.obj), 15, 0, 1 },
 
-  { (char_T *)(&untitled_DW.obj_p), 16, 0, 1 },
+  { (char_T *)(&untitled_DW.UnitDelay_DSTATE), 0, 0, 1 },
 
-  { (char_T *)(&untitled_DW.Scope_PWORK.LoggedData), 11, 0, 1 },
+  { (char_T *)(&untitled_DW.Scope_PWORK.LoggedData), 11, 0, 2 },
 
-  { (char_T *)(&untitled_DW.clockTickCounter), 6, 0, 1 },
-
-  { (char_T *)(&untitled_DW.objisempty), 8, 0, 2 }
+  { (char_T *)(&untitled_DW.objisempty), 8, 0, 1 }
 };
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  6U,
+  5U,
   rtBTransitions
 };
 
 /* data type transitions for Parameters structure */
 static DataTypeTransition rtPTransitions[] = {
-  { (char_T *)(&untitled_P.AnalogInput_SampleTime), 0, 0, 5 }
+  { (char_T *)(&untitled_P.AnalogInput_SampleTime), 0, 0, 6 }
 };
 
 /* data type transition table for Parameters structure */

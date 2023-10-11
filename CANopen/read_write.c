@@ -15,8 +15,9 @@
 
 
 
-extern void read_write(int pdo_id, int num_motor, double* val)
+extern void read_write(int pdo_id, int num_motor, double t, double* val)
 {
+	printf("time: %f\n",t);
 	for(int i = 0; i < num_motor; i++)
 	{
 		set_torque(pdo_id, (int)val[i+num_motor], i+1);

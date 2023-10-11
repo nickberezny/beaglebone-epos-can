@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.656
+ * Model version              : 4.662
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 15:50:46 2023
+ * C source code generated on : Wed Oct 11 17:32:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -106,14 +106,16 @@ typedef struct {
 
 /* Block signals (default storage) */
 typedef struct {
+  real_T CCaller4[8];                  /* '<S10>/C Caller4' */
   real_T CCaller5[4];                  /* '<S10>/C Caller5' */
-  real_T Divide1[2];                   /* '<S33>/Divide1' */
+  real_T Sum6[2];                      /* '<S33>/Sum6' */
   real_T Divide[2];                    /* '<S33>/Divide' */
-  real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
-  real_T Switch_k;                     /* '<S34>/Switch' */
   real_T Sum1;                         /* '<S34>/Sum1' */
-  real_T Sum2;                         /* '<S10>/Sum2' */
-  real_T rtb_Sum6_idx_1;
+  real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
+  real_T DataStoreRead7_j;             /* '<S6>/Data Store Read7' */
+  real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
+  real_T rtb_Divide1_idx_0;
+  real_T rtb_Divide1_idx_1;
   int32_T CCaller5_g[2];               /* '<S9>/C Caller5' */
   B_MATLABFunction_controller_T sf_MATLABFunction_e;/* '<S34>/MATLAB Function' */
   B_MovingAverage_controller_T MovingAverage1;/* '<S10>/Moving Average' */
@@ -158,6 +160,7 @@ typedef struct {
   boolean_T objisempty_f;              /* '<Root>/Digital Read2' */
   boolean_T objisempty_i;              /* '<Root>/Digital Read1' */
   boolean_T objisempty_g;              /* '<Root>/Digital Read' */
+  boolean_T MainControl_MODE;          /* '<Root>/Main Control' */
   boolean_T Initialize_MODE;           /* '<Root>/Initialize' */
   boolean_T Home1_MODE;                /* '<Root>/Home1' */
   DW_MovingAverage_controller_T MovingAverage1;/* '<S10>/Moving Average' */
@@ -281,6 +284,33 @@ struct P_controller_T_ {
   real_T UnitDelay1_InitialCondition;  /* Expression: 0
                                         * Referenced by: '<S34>/Unit Delay1'
                                         */
+  real_T Constant9_Value;              /* Expression: 3
+                                        * Referenced by: '<S10>/Constant9'
+                                        */
+  real_T Constant6_Value_c;            /* Expression: 4294967295
+                                        * Referenced by: '<S33>/Constant6'
+                                        */
+  real_T Delay1_InitialCondition_k;    /* Expression: 0
+                                        * Referenced by: '<S10>/Delay1'
+                                        */
+  real_T Constant8_Value;              /* Expression: -20000
+                                        * Referenced by: '<S33>/Constant8'
+                                        */
+  real_T Delay1_InitialCondition_k5;   /* Expression: 0
+                                        * Referenced by: '<S33>/Delay1'
+                                        */
+  real_T Gain1_Gain;                   /* Expression: 4*1024
+                                        * Referenced by: '<S33>/Gain1'
+                                        */
+  real_T Gain4_Gain;                   /* Expression: 4*1024
+                                        * Referenced by: '<S33>/Gain4'
+                                        */
+  real_T Gain3_Gain;                   /* Expression: 2*pi
+                                        * Referenced by: '<S33>/Gain3'
+                                        */
+  real_T Delay2_InitialCondition;      /* Expression: 0
+                                        * Referenced by: '<S33>/Delay2'
+                                        */
   real_T SineWave2_Amp;                /* Expression: 0.4
                                         * Referenced by: '<S10>/Sine Wave2'
                                         */
@@ -320,34 +350,10 @@ struct P_controller_T_ {
   real_T Constant3_Value_n;            /* Expression: 1.21
                                         * Referenced by: '<S10>/Constant3'
                                         */
-  real_T Constant6_Value_c;            /* Expression: 4294967295
-                                        * Referenced by: '<S33>/Constant6'
-                                        */
-  real_T Delay1_InitialCondition_k;    /* Expression: 0
-                                        * Referenced by: '<S10>/Delay1'
-                                        */
-  real_T Constant8_Value;              /* Expression: -20000
-                                        * Referenced by: '<S33>/Constant8'
-                                        */
-  real_T Delay1_InitialCondition_k5;   /* Expression: 0
-                                        * Referenced by: '<S33>/Delay1'
-                                        */
-  real_T Gain1_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S33>/Gain1'
-                                        */
-  real_T Gain4_Gain;                   /* Expression: 4*1024
-                                        * Referenced by: '<S33>/Gain4'
-                                        */
-  real_T Gain3_Gain;                   /* Expression: 2*pi
-                                        * Referenced by: '<S33>/Gain3'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 5000/1.4
+  real_T Gain_Gain;                    /* Expression: 2000
                                         * Referenced by: '<S10>/Gain'
                                         */
-  real_T Delay2_InitialCondition;      /* Expression: 0
-                                        * Referenced by: '<S33>/Delay2'
-                                        */
-  real_T Gain2_Gain;                   /* Expression: 3000
+  real_T Gain2_Gain;                   /* Expression: 1000
                                         * Referenced by: '<S10>/Gain2'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 400
@@ -356,10 +362,10 @@ struct P_controller_T_ {
   real_T Saturation_LowerSat;          /* Expression: -400
                                         * Referenced by: '<S10>/Saturation'
                                         */
-  real_T Gain5_Gain;                   /* Expression: 5000/1.4
+  real_T Gain5_Gain;                   /* Expression: 1500
                                         * Referenced by: '<S10>/Gain5'
                                         */
-  real_T Gain6_Gain;                   /* Expression: 3000
+  real_T Gain6_Gain;                   /* Expression: 750
                                         * Referenced by: '<S10>/Gain6'
                                         */
   real_T Saturation1_UpperSat;         /* Expression: 400
@@ -367,6 +373,9 @@ struct P_controller_T_ {
                                         */
   real_T Saturation1_LowerSat;         /* Expression: -400
                                         * Referenced by: '<S10>/Saturation1'
+                                        */
+  real_T Constant2_Value_i;            /* Expression: 8
+                                        * Referenced by: '<S10>/Constant2'
                                         */
   real_T Constant12_Value;             /* Expression: 353
                                         * Referenced by: '<Root>/Constant12'
@@ -470,7 +479,7 @@ struct tag_RTM_controller_T {
    */
   struct {
     struct {
-      uint32_T TID[6];
+      uint32_T TID[7];
     } TaskCounters;
   } Timing;
 };
@@ -569,6 +578,7 @@ extern volatile boolean_T runModel;
  * Block '<S13>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S21>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S10>/Data Type Conversion10' : Eliminate redundant data type conversion
+ * Block '<S10>/Data Type Conversion8' : Eliminate redundant data type conversion
  */
 
 /*-

@@ -9,7 +9,7 @@
  *
  * Model version              : 1.0
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 14:02:28 2023
+ * C source code generated on : Wed Oct 11 16:42:57 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -41,24 +41,8 @@ typedef struct tag_q4re843yYTsFSUEoF6hnJH beagleboneblue_bbblueADC_unti_T;
 
 #endif                             /* typedef_beagleboneblue_bbblueADC_unti_T */
 
-#ifndef struct_tag_fYOEcv5C5Uqf6zenXgF1HG
-#define struct_tag_fYOEcv5C5Uqf6zenXgF1HG
-
-struct tag_fYOEcv5C5Uqf6zenXgF1HG
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-};
-
-#endif                                 /* struct_tag_fYOEcv5C5Uqf6zenXgF1HG */
-
-#ifndef typedef_beagleboneblue_bbblueLED_unti_T
-#define typedef_beagleboneblue_bbblueLED_unti_T
-
-typedef struct tag_fYOEcv5C5Uqf6zenXgF1HG beagleboneblue_bbblueLED_unti_T;
-
-#endif                             /* typedef_beagleboneblue_bbblueLED_unti_T */
+/* Custom Type definition for MATLAB Function: '<S1>/MATLAB Function' */
+#include "coder_posix_time.h"
 
 /* Parameters (default storage) */
 typedef struct P_untitled_T_ P_untitled_T;

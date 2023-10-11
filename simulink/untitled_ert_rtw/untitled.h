@@ -9,7 +9,7 @@
  *
  * Model version              : 1.0
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 14:02:28 2023
+ * C source code generated on : Wed Oct 11 16:42:57 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -82,38 +82,61 @@
 
 /* Block signals (default storage) */
 typedef struct {
+  creal_T d_data;
+  creal_T b_c;
+  creal_T t;
+  creal_T c_s;
+  creal_T d_ahi;
+  creal_T c;
+  creal_T t_m;
+  creal_T da;
+  creal_T t_c;
+  real_T Sum1;                         /* '<S1>/Sum1' */
   real_T AnalogInput;                  /* '<Root>/Analog Input' */
+  real_T c_tm_mon;
+  real_T c_tm_year;
+  real_T second;
+  real_T fracSecs;
+  real_T check;
+  real_T shi;
+  real_T b_alo;
+  real_T d_ahi_k;
 } B_untitled_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   beagleboneblue_bbblueADC_unti_T obj; /* '<Root>/Analog Input' */
-  beagleboneblue_bbblueLED_unti_T obj_p;/* '<Root>/LED' */
+  real_T UnitDelay_DSTATE;             /* '<S1>/Unit Delay' */
   struct {
     void *LoggedData;
   } Scope_PWORK;                       /* '<Root>/Scope' */
 
-  int32_T clockTickCounter;            /* '<Root>/Pulse Generator' */
-  boolean_T objisempty;                /* '<Root>/LED' */
-  boolean_T objisempty_g;              /* '<Root>/Analog Input' */
+  struct {
+    void *LoggedData;
+  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+
+  boolean_T objisempty;                /* '<Root>/Analog Input' */
 } DW_untitled_T;
 
 /* Parameters (default storage) */
 struct P_untitled_T_ {
-  real_T AnalogInput_SampleTime;       /* Expression: 0.1
+  real_T AnalogInput_SampleTime;       /* Expression: 0.001
                                         * Referenced by: '<Root>/Analog Input'
                                         */
-  real_T PulseGenerator_Amp;           /* Expression: 1
-                                        * Referenced by: '<Root>/Pulse Generator'
+  real_T Constant1_Value;              /* Expression: 0.001
+                                        * Referenced by: '<S1>/Constant1'
                                         */
-  real_T PulseGenerator_Period;     /* Computed Parameter: PulseGenerator_Period
-                                     * Referenced by: '<Root>/Pulse Generator'
-                                     */
-  real_T PulseGenerator_Duty;         /* Computed Parameter: PulseGenerator_Duty
-                                       * Referenced by: '<Root>/Pulse Generator'
-                                       */
-  real_T PulseGenerator_PhaseDelay;    /* Expression: 0
-                                        * Referenced by: '<Root>/Pulse Generator'
+  real_T UnitDelay_InitialCondition;   /* Expression: 0
+                                        * Referenced by: '<S1>/Unit Delay'
+                                        */
+  real_T Constant_Value;               /* Expression: -30
+                                        * Referenced by: '<S1>/Constant'
+                                        */
+  real_T Constant2_Value;              /* Expression: 1
+                                        * Referenced by: '<S1>/Constant2'
+                                        */
+  real_T UnitDelay1_InitialCondition;  /* Expression: 0
+                                        * Referenced by: '<S1>/Unit Delay1'
                                         */
 };
 
@@ -190,5 +213,7 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'untitled'
+ * '<S1>'   : 'untitled/Sys Time'
+ * '<S2>'   : 'untitled/Sys Time/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_untitled_h_ */

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.656
+ * Model version              : 4.662
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 15:50:46 2023
+ * C source code generated on : Wed Oct 11 17:32:11 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -182,6 +182,51 @@ P_controller_T controller_P = {
    */
   0.0,
 
+  /* Expression: 3
+   * Referenced by: '<S10>/Constant9'
+   */
+  3.0,
+
+  /* Expression: 4294967295
+   * Referenced by: '<S33>/Constant6'
+   */
+  4.294967295E+9,
+
+  /* Expression: 0
+   * Referenced by: '<S10>/Delay1'
+   */
+  0.0,
+
+  /* Expression: -20000
+   * Referenced by: '<S33>/Constant8'
+   */
+  -20000.0,
+
+  /* Expression: 0
+   * Referenced by: '<S33>/Delay1'
+   */
+  0.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S33>/Gain1'
+   */
+  4096.0,
+
+  /* Expression: 4*1024
+   * Referenced by: '<S33>/Gain4'
+   */
+  4096.0,
+
+  /* Expression: 2*pi
+   * Referenced by: '<S33>/Gain3'
+   */
+  6.2831853071795862,
+
+  /* Expression: 0
+   * Referenced by: '<S33>/Delay2'
+   */
+  0.0,
+
   /* Expression: 0.4
    * Referenced by: '<S10>/Sine Wave2'
    */
@@ -247,55 +292,15 @@ P_controller_T controller_P = {
    */
   1.21,
 
-  /* Expression: 4294967295
-   * Referenced by: '<S33>/Constant6'
-   */
-  4.294967295E+9,
-
-  /* Expression: 0
-   * Referenced by: '<S10>/Delay1'
-   */
-  0.0,
-
-  /* Expression: -20000
-   * Referenced by: '<S33>/Constant8'
-   */
-  -20000.0,
-
-  /* Expression: 0
-   * Referenced by: '<S33>/Delay1'
-   */
-  0.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S33>/Gain1'
-   */
-  4096.0,
-
-  /* Expression: 4*1024
-   * Referenced by: '<S33>/Gain4'
-   */
-  4096.0,
-
-  /* Expression: 2*pi
-   * Referenced by: '<S33>/Gain3'
-   */
-  6.2831853071795862,
-
-  /* Expression: 5000/1.4
+  /* Expression: 2000
    * Referenced by: '<S10>/Gain'
    */
-  3571.4285714285716,
+  2000.0,
 
-  /* Expression: 0
-   * Referenced by: '<S33>/Delay2'
-   */
-  0.0,
-
-  /* Expression: 3000
+  /* Expression: 1000
    * Referenced by: '<S10>/Gain2'
    */
-  3000.0,
+  1000.0,
 
   /* Expression: 400
    * Referenced by: '<S10>/Saturation'
@@ -307,15 +312,15 @@ P_controller_T controller_P = {
    */
   -400.0,
 
-  /* Expression: 5000/1.4
+  /* Expression: 1500
    * Referenced by: '<S10>/Gain5'
    */
-  3571.4285714285716,
+  1500.0,
 
-  /* Expression: 3000
+  /* Expression: 750
    * Referenced by: '<S10>/Gain6'
    */
-  3000.0,
+  750.0,
 
   /* Expression: 400
    * Referenced by: '<S10>/Saturation1'
@@ -326,6 +331,11 @@ P_controller_T controller_P = {
    * Referenced by: '<S10>/Saturation1'
    */
   -400.0,
+
+  /* Expression: 8
+   * Referenced by: '<S10>/Constant2'
+   */
+  8.0,
 
   /* Expression: 353
    * Referenced by: '<Root>/Constant12'

@@ -2,7 +2,7 @@
 ## Makefile generated for component 'untitled'. 
 ## 
 ## Makefile     : untitled.mk
-## Generated on : Wed Oct 11 14:00:55 2023
+## Generated on : Wed Oct 11 16:43:01 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/untitled.elf
 ## Product type : executable
 ## 
@@ -173,7 +173,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = rtGetInf.c rtGetNaN.c rt_nonfinite.c untitled.c untitled_data.c ext_svr.c updown.c ext_work.c rtiostream_utils.c MW_bbblue_init.c linuxinitialize.c rtiostream_interface.c rtiostream_tcpip.c
+SRCS = coder_posix_time.c rtGetInf.c rtGetNaN.c rt_nonfinite.c untitled.c untitled_data.c ext_svr.c updown.c ext_work.c rtiostream_utils.c MW_bbblue_init.c linuxinitialize.c rtiostream_interface.c rtiostream_tcpip.c
 
 MAIN_SRC = ert_main.c
 
@@ -183,7 +183,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o untitled.c.o untitled_data.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o MW_bbblue_init.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o
+OBJS = coder_posix_time.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o untitled.c.o untitled_data.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o MW_bbblue_init.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -428,6 +428,10 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 %.cpp.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+coder_posix_time.c.o : coder_posix_time.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 ert_main.c.o : ert_main.c
