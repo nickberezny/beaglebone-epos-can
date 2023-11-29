@@ -24,7 +24,7 @@ DLL_EXPORT_CC extern void e_stop_f4hPWDm5DVUjJQx403Sq0F(int32_T cfg_fd, int32_T 
 DLL_EXPORT_CC extern void init_datalog_f4hPWDm5DVUjJQx403Sq0F(void);
 DLL_EXPORT_CC extern void print_data_f4hPWDm5DVUjJQx403Sq0F(real_T *data, int32_T size);
 DLL_EXPORT_CC extern void close_datalog_f4hPWDm5DVUjJQx403Sq0F(void);
-DLL_EXPORT_CC extern void read_write_f4hPWDm5DVUjJQx403Sq0F(int32_T pdo_id, int32_T num_motor, real_T *val);
+DLL_EXPORT_CC extern void read_write_f4hPWDm5DVUjJQx403Sq0F(int32_T pdo_id, int32_T num_motor, real_T t, real_T *val);
 
 /* Function Definitions */
 DLL_EXPORT_CC const uint8_T *get_checksum_source_info(int32_T *size);

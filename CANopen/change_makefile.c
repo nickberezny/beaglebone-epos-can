@@ -1,3 +1,4 @@
+
 /**
  * C program to replace a specific line with another in a file.
  */
@@ -17,7 +18,7 @@ int main()
     
     char buffer[BUFFER_SIZE];
     char newline[BUFFER_SIZE] = "TOOLCHAIN_LIBS = -lm -lm -lstdc++ -lsocketcan -lcanopen -lmotor \n";
-    int line = 53;
+    int line = 58;
     int count;
 
     /*  Open all required files */

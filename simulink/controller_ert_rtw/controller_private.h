@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.662
- * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 17:32:11 2023
+ * Model version              : 4.670
+ * Simulink Coder version : 23.2 (R2023b) 01-Aug-2023
+ * C source code generated on : Wed Nov 29 14:25:05 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,6 +25,8 @@
 #include "zero_crossing_types.h"
 #include "controller.h"
 #include "controller_types.h"
+#include "rtw_continuous.h"
+#include "rtw_solver.h"
 
 extern real_T rt_roundd_snf(real_T u);
 extern int32_T div_s32(int32_T numerator, int32_T denominator);

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.662
- * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 17:32:11 2023
+ * Model version              : 4.670
+ * Simulink Coder version : 23.2 (R2023b) 01-Aug-2023
+ * C source code generated on : Wed Nov 29 14:25:05 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,6 +20,7 @@
 
 #ifndef RTW_HEADER_rtGetNaN_h_
 #define RTW_HEADER_rtGetNaN_h_
+#include "rt_nonfinite.h"
 #include "rtwtypes.h"
 
 extern real_T rtGetNaN(void);

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.662
- * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 17:32:11 2023
+ * Model version              : 4.670
+ * Simulink Coder version : 23.2 (R2023b) 01-Aug-2023
+ * C source code generated on : Wed Nov 29 14:25:05 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -44,27 +44,27 @@ typedef struct tag_q4re843yYTsFSUEoF6hnJH beagleboneblue_bbblueADC_cont_T;
 
 /* Custom Type definition for MATLAB Function: '<S16>/MATLAB Function' */
 #include "coder_posix_time.h"
-#ifndef struct_tag_BomwZnYtwoEoC4SP7CGNiB
-#define struct_tag_BomwZnYtwoEoC4SP7CGNiB
+#ifndef struct_tag_HqLxw8B3uXAAHBsMPHlV3B
+#define struct_tag_HqLxw8B3uXAAHBsMPHlV3B
 
-struct tag_BomwZnYtwoEoC4SP7CGNiB
+struct tag_HqLxw8B3uXAAHBsMPHlV3B
 {
   int32_T isInitialized;
   boolean_T isSetupComplete;
   real_T pCumSum;
-  real_T pCumSumRev[14];
+  real_T pCumSumRev[7];
   real_T pCumRevIndex;
   real_T pModValueRev;
 };
 
-#endif                                 /* struct_tag_BomwZnYtwoEoC4SP7CGNiB */
+#endif                                 /* struct_tag_HqLxw8B3uXAAHBsMPHlV3B */
 
-#ifndef typedef_g_dsp_internal_SlidingWindowA_T
-#define typedef_g_dsp_internal_SlidingWindowA_T
+#ifndef typedef_h_dsp_internal_SlidingWindowA_T
+#define typedef_h_dsp_internal_SlidingWindowA_T
 
-typedef struct tag_BomwZnYtwoEoC4SP7CGNiB g_dsp_internal_SlidingWindowA_T;
+typedef struct tag_HqLxw8B3uXAAHBsMPHlV3B h_dsp_internal_SlidingWindowA_T;
 
-#endif                             /* typedef_g_dsp_internal_SlidingWindowA_T */
+#endif                             /* typedef_h_dsp_internal_SlidingWindowA_T */
 
 #ifndef struct_tag_BlgwLpgj2bjudmbmVKWwDE
 #define struct_tag_BlgwLpgj2bjudmbmVKWwDE
@@ -83,28 +83,28 @@ typedef struct tag_BlgwLpgj2bjudmbmVKWwDE cell_wrap_controller_T;
 
 #endif                                 /* typedef_cell_wrap_controller_T */
 
-#ifndef struct_tag_FA92MfKCCbJl11xXJLsLGF
-#define struct_tag_FA92MfKCCbJl11xXJLsLGF
+#ifndef struct_tag_DlZBprYKBkC1pNUuVqWkcH
+#define struct_tag_DlZBprYKBkC1pNUuVqWkcH
 
-struct tag_FA92MfKCCbJl11xXJLsLGF
+struct tag_DlZBprYKBkC1pNUuVqWkcH
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
   boolean_T TunablePropsChanged;
   cell_wrap_controller_T inputVarSize;
-  g_dsp_internal_SlidingWindowA_T *pStatistic;
+  h_dsp_internal_SlidingWindowA_T *pStatistic;
   int32_T NumChannels;
   int32_T FrameLength;
-  g_dsp_internal_SlidingWindowA_T _pobj0;
+  h_dsp_internal_SlidingWindowA_T _pobj0;
 };
 
-#endif                                 /* struct_tag_FA92MfKCCbJl11xXJLsLGF */
+#endif                                 /* struct_tag_DlZBprYKBkC1pNUuVqWkcH */
 
 #ifndef typedef_dsp_simulink_MovingAverage_co_T
 #define typedef_dsp_simulink_MovingAverage_co_T
 
-typedef struct tag_FA92MfKCCbJl11xXJLsLGF dsp_simulink_MovingAverage_co_T;
+typedef struct tag_DlZBprYKBkC1pNUuVqWkcH dsp_simulink_MovingAverage_co_T;
 
 #endif                             /* typedef_dsp_simulink_MovingAverage_co_T */
 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.662
- * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Wed Oct 11 17:32:11 2023
+ * Model version              : 4.670
+ * Simulink Coder version : 23.2 (R2023b) 01-Aug-2023
+ * C source code generated on : Wed Nov 29 14:25:05 2023
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -30,7 +30,6 @@
 #endif                                 /* controller_COMMON_INCLUDES_ */
 
 #include "controller_types.h"
-#include "rtGetInf.h"
 #include <string.h>
 #include "rt_nonfinite.h"
 #include <stddef.h>
@@ -73,28 +72,22 @@ typedef struct {
 /* Block signals for system '<S16>/MATLAB Function' */
 typedef struct {
   creal_T d_data;
-  creal_T b_c;
-  creal_T t;
-  creal_T c_s;
-  creal_T d_ahi;
-  creal_T c;
-  creal_T t_m;
   creal_T da;
-  creal_T t_c;
+  creal_T d_ahi;
+  creal_T da_m;
   real_T y;                            /* '<S16>/MATLAB Function' */
-  real_T c_tm_mon;
+  real_T c_tm_min;
   real_T c_tm_year;
   real_T second;
   real_T fracSecs;
   real_T check;
-  real_T shi;
-  real_T b_alo;
-  real_T d_ahi_k;
+  real_T c_shi;
+  real_T c_slo;
 } B_MATLABFunction_controller_T;
 
 /* Block signals for system '<S10>/Moving Average' */
 typedef struct {
-  real_T csumrev[14];
+  real_T csumrev[7];
   real_T MovingAverage;                /* '<S10>/Moving Average' */
 } B_MovingAverage_controller_T;
 
@@ -108,14 +101,15 @@ typedef struct {
 typedef struct {
   real_T CCaller4[8];                  /* '<S10>/C Caller4' */
   real_T CCaller5[4];                  /* '<S10>/C Caller5' */
-  real_T Sum6[2];                      /* '<S33>/Sum6' */
+  real_T Sum6_c[2];                    /* '<S33>/Sum6' */
   real_T Divide[2];                    /* '<S33>/Divide' */
   real_T Sum1;                         /* '<S34>/Sum1' */
   real_T DataStoreRead1_c;             /* '<Root>/Data Store Read1' */
   real_T DataStoreRead7_j;             /* '<S6>/Data Store Read7' */
   real_T DataStoreRead8;               /* '<Root>/Data Store Read8' */
-  real_T rtb_Divide1_idx_0;
+  real_T Divide_e;                     /* '<S10>/Divide' */
   real_T rtb_Divide1_idx_1;
+  real_T d;
   int32_T CCaller5_g[2];               /* '<S9>/C Caller5' */
   B_MATLABFunction_controller_T sf_MATLABFunction_e;/* '<S34>/MATLAB Function' */
   B_MovingAverage_controller_T MovingAverage1;/* '<S10>/Moving Average' */
@@ -137,6 +131,7 @@ typedef struct {
   real_T Delay1_DSTATE[4];             /* '<S10>/Delay1' */
   real_T Delay1_DSTATE_j[2];           /* '<S33>/Delay1' */
   real_T Delay2_DSTATE[2];             /* '<S33>/Delay2' */
+  real_T Delay2_DSTATE_l;              /* '<S10>/Delay2' */
   real_T Delay1_DSTATE_i[2];           /* '<S23>/Delay1' */
   real_T Delay1_DSTATE_e[2];           /* '<S15>/Delay1' */
   real_T state;                        /* '<Root>/Data Store Memory' */
@@ -350,10 +345,13 @@ struct P_controller_T_ {
   real_T Constant3_Value_n;            /* Expression: 1.21
                                         * Referenced by: '<S10>/Constant3'
                                         */
-  real_T Gain_Gain;                    /* Expression: 2000
+  real_T Gain_Gain;                    /* Expression: 1800
                                         * Referenced by: '<S10>/Gain'
                                         */
-  real_T Gain2_Gain;                   /* Expression: 1000
+  real_T Delay2_InitialCondition_c;    /* Expression: 0
+                                        * Referenced by: '<S10>/Delay2'
+                                        */
+  real_T Gain2_Gain;                   /* Expression: 1200
                                         * Referenced by: '<S10>/Gain2'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 400
@@ -362,10 +360,10 @@ struct P_controller_T_ {
   real_T Saturation_LowerSat;          /* Expression: -400
                                         * Referenced by: '<S10>/Saturation'
                                         */
-  real_T Gain5_Gain;                   /* Expression: 1500
+  real_T Gain5_Gain;                   /* Expression: 1800
                                         * Referenced by: '<S10>/Gain5'
                                         */
-  real_T Gain6_Gain;                   /* Expression: 750
+  real_T Gain6_Gain;                   /* Expression: 1200
                                         * Referenced by: '<S10>/Gain6'
                                         */
   real_T Saturation1_UpperSat;         /* Expression: 400
@@ -548,8 +546,6 @@ extern volatile boolean_T runModel;
  * Block '<S10>/Constant10' : Unused code path elimination
  * Block '<S10>/Constant6' : Unused code path elimination
  * Block '<S10>/Constant7' : Unused code path elimination
- * Block '<S10>/Delay2' : Unused code path elimination
- * Block '<S10>/Divide' : Unused code path elimination
  * Block '<S30>/Add' : Unused code path elimination
  * Block '<S30>/Add1' : Unused code path elimination
  * Block '<S30>/Add2' : Unused code path elimination
@@ -569,7 +565,6 @@ extern volatile boolean_T runModel;
  * Block '<S31>/Trigonometric Function' : Unused code path elimination
  * Block '<S31>/Trigonometric Function1' : Unused code path elimination
  * Block '<S10>/Sum5' : Unused code path elimination
- * Block '<S10>/Sum7' : Unused code path elimination
  * Block '<S10>/l1' : Unused code path elimination
  * Block '<S10>/l2' : Unused code path elimination
  * Block '<Root>/Data Type Conversion1' : Eliminate redundant data type conversion

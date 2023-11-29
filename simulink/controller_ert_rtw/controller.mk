@@ -2,7 +2,7 @@
 ## Makefile generated for component 'controller'. 
 ## 
 ## Makefile     : controller.mk
-## Generated on : Wed Oct 11 17:09:12 2023
+## Generated on : Wed Nov 29 14:25:21 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/controller.elf
 ## Product type : executable
 ## 
@@ -37,16 +37,21 @@ CPP_STANDARD_OPTS         =
 
 # Toolchain Name:          GNU GCC BeagleBone Blue
 # Supported Version(s):    
-# ToolchainInfo Version:   2022b
+# ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
 # 
+#-------------------------------------------
+# Macros assumed to be defined elsewhere
+#-------------------------------------------
+
+# LINUX_TGT_LIBS
 
 #-----------
 # MACROS
 #-----------
 
-CCOUTPUTFLAG = --output_file=
-LDOUTPUTFLAG = --output_file=
+CCOUTPUTFLAG   = --output_file=
+LDOUTPUTFLAG   = --output_file=
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -199,7 +204,7 @@ PREBUILT_OBJS =
 ## LIBRARIES
 ###########################################################################
 
-LIBS = 
+LIBS = $(LINUX_TARGET_LIBS_MACRO)
 
 ###########################################################################
 ## SYSTEM LIBRARIES
@@ -296,7 +301,7 @@ all : build
 build : prebuild $(PRODUCT)
 
 
-buildobj : prebuild $(OBJS) $(PREBUILT_OBJS)
+buildobj : prebuild $(OBJS) $(PREBUILT_OBJS) $(LIBS)
 	echo "### Successfully generated all binary outputs."
 
 
@@ -320,9 +325,9 @@ execute : download
 # Create a standalone executable            
 #-------------------------------------------
 
-$(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
+$(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(LIBS) $(MAIN_OBJ)
 	echo "### Creating standalone executable "$(PRODUCT)" ..."
-	$(LD) $(LDFLAGS) -o $(PRODUCT) $(OBJS) $(MAIN_OBJ) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
+	$(LD) $(LDFLAGS) -o $(PRODUCT) $(OBJS) $(MAIN_OBJ) $(LIBS) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
 	echo "### Created: $(PRODUCT)"
 
 
@@ -333,6 +338,18 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 #---------------------
 # SOURCE-TO-OBJECT
 #---------------------
+
+%.c.o : %.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+%.s.o : %.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
+
+
+%.cpp.o : %.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
 
 %.c.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
@@ -539,7 +556,7 @@ info :
 
 
 clean : 
-	$(ECHO) "### Deleting all derived files..."
+	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(PRODUCT)
 	$(RM) $(ALL_OBJS)
 	$(RM) *.c.dep
