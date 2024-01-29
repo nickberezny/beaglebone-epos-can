@@ -135,16 +135,15 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 		pdo_filters[i+2] = PDO_TX2_ID + (i/2 + 1);
 	}
 
-	/*
-	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK, COB_MASK, COB_MASK};
+	
+	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[5] = {
 		0x00,
 		NMT_TX + 1,
 		SDO_TX + 1,
-		NMT_TX + 2,
-		SDO_TX + 2
+
 	};
-	*/
+	
 	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 2*num_motors + 1);
 
 	// Check that we connected OK
