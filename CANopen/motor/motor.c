@@ -136,8 +136,8 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	}
 
 	
-	uint16_t cfg_masks[5] = {COB_MASK, COB_MASK, COB_MASK};
-	uint16_t cfg_filters[5] = {
+	uint16_t cfg_masks[3] = {COB_MASK, COB_MASK, COB_MASK};
+	uint16_t cfg_filters[3] = {
 		0x00,
 		NMT_TX + 1,
 		SDO_TX + 1,
