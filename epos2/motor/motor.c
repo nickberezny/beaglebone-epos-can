@@ -22,7 +22,7 @@ static int motor_config_node(uint16_t node) {
 	int num_PDOs;
 
 	// Set Configuration parameters
-	err |= epos_Maximal_Profile_Velocity(node, 5000);
+	err |= epos_Maximal_Profile_Velocity(node, 5020);
 	if( err != 0 ) {
 		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
 		return err;
