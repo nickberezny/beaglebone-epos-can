@@ -146,6 +146,8 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	
 	motor_cfg_fd = socketcan_open(cfg_filters, cfg_masks, 2*num_motors + 1);
 
+	printf("pdo fd: %d, cfg_fd: %d\n",motor_pdo_fd,motor_cfg_fd );
+
 	// Check that we connected OK
 	if (motor_pdo_fd == -1 || motor_cfg_fd == -1) {
 		return MOTOR_ERROR;
