@@ -120,7 +120,7 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 	*/
 
 	motor_pdo_fd = socketcan_open(pdo_filters, pdo_masks, 2*num_motors);
-
+/*
 	uint16_t cfg_masks[2*num_motors + 1];
 	uint16_t cfg_filters[2*num_motors + 1];
 
@@ -134,7 +134,7 @@ int motor_init(int num_motors, int32_t maxSpeed, int32_t maxAccel, int* fds) {
 		pdo_filters[i+1] = PDO_TX1_ID + (i/2 + 1);
 		pdo_filters[i+2] = PDO_TX2_ID + (i/2 + 1);
 	}
-
+*/
 	
 	uint16_t cfg_masks[3] = {COB_MASK, COB_MASK, COB_MASK};
 	uint16_t cfg_filters[3] = {
