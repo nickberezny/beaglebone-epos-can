@@ -24,7 +24,7 @@ static int motor_config_node(uint16_t node, int32_t maxSpeed, int32_t maxAccel) 
 	// Set Configuration parameters
 	err |= epos_Maximal_Velocity(node, maxSpeed);
 	if( err != 0 ) {
-		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
+		printd(LOG_FATAL, "Motor: error configuring node %d, err: %d\n", node, err);
 		return err;
 	}
 
