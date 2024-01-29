@@ -7,9 +7,9 @@
  *
  * Code generation for model "controller".
  *
- * Model version              : 4.670
+ * Model version              : 6.2
  * Simulink Coder version : 23.2 (R2023b) 01-Aug-2023
- * C source code generated on : Wed Nov 29 14:25:05 2023
+ * C source code generated on : Mon Jan 29 14:30:37 2024
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,12 +22,27 @@
 
 /* Block parameters (default storage) */
 P_controller_T controller_P = {
+  /* Mask Parameter: CompareToConstant1_const
+   * Referenced by: '<S11>/Constant'
+   */
+  1.0,
+
+  /* Mask Parameter: CompareToConstant1_const_p
+   * Referenced by: '<S19>/Constant'
+   */
+  1.0,
+
+  /* Mask Parameter: CompareToConstant_const
+   * Referenced by: '<S29>/Constant'
+   */
+  1.0,
+
   /* Mask Parameter: CompareToConstant2_const
    * Referenced by: '<S2>/Constant'
    */
   0.0,
 
-  /* Mask Parameter: CompareToConstant1_const
+  /* Mask Parameter: CompareToConstant1_const_i
    * Referenced by: '<S1>/Constant'
    */
   1.0,
@@ -47,45 +62,10 @@ P_controller_T controller_P = {
    */
   6.0,
 
-  /* Mask Parameter: CompareToConstant_const
+  /* Mask Parameter: CompareToConstant_const_a
    * Referenced by: '<S27>/Constant'
    */
   0,
-
-  /* Mask Parameter: CompareToConstant1_const_j
-   * Referenced by: '<S11>/Constant'
-   */
-  true,
-
-  /* Mask Parameter: CompareToConstant1_const_p
-   * Referenced by: '<S19>/Constant'
-   */
-  true,
-
-  /* Mask Parameter: CompareToConstant_const_g
-   * Referenced by: '<S29>/Constant'
-   */
-  true,
-
-  /* Expression: 0.001
-   * Referenced by: '<Root>/Digital Read'
-   */
-  0.001,
-
-  /* Expression: 0.001
-   * Referenced by: '<Root>/Digital Read1'
-   */
-  0.001,
-
-  /* Expression: 0.001
-   * Referenced by: '<Root>/Digital Read2'
-   */
-  0.001,
-
-  /* Expression: 0.001
-   * Referenced by: '<Root>/Digital Read3'
-   */
-  0.001,
 
   /* Expression: 2
    * Referenced by: '<S7>/Constant1'
@@ -227,6 +207,11 @@ P_controller_T controller_P = {
    */
   0.0,
 
+  /* Expression: 0
+   * Referenced by: '<S10>/Constant6'
+   */
+  0.0,
+
   /* Expression: 0.4
    * Referenced by: '<S10>/Sine Wave2'
    */
@@ -292,55 +277,20 @@ P_controller_T controller_P = {
    */
   1.21,
 
-  /* Expression: 1800
-   * Referenced by: '<S10>/Gain'
-   */
-  1800.0,
-
-  /* Expression: 0
-   * Referenced by: '<S10>/Delay2'
-   */
-  0.0,
-
-  /* Expression: 1200
-   * Referenced by: '<S10>/Gain2'
-   */
-  1200.0,
-
-  /* Expression: 400
-   * Referenced by: '<S10>/Saturation'
-   */
-  400.0,
-
-  /* Expression: -400
-   * Referenced by: '<S10>/Saturation'
-   */
-  -400.0,
-
-  /* Expression: 1800
-   * Referenced by: '<S10>/Gain5'
-   */
-  1800.0,
-
-  /* Expression: 1200
-   * Referenced by: '<S10>/Gain6'
-   */
-  1200.0,
-
-  /* Expression: 400
-   * Referenced by: '<S10>/Saturation1'
-   */
-  400.0,
-
-  /* Expression: -400
-   * Referenced by: '<S10>/Saturation1'
-   */
-  -400.0,
-
   /* Expression: 8
    * Referenced by: '<S10>/Constant2'
    */
   8.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory10'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory11'
+   */
+  0.0,
 
   /* Expression: 353
    * Referenced by: '<Root>/Constant12'
@@ -398,12 +348,7 @@ P_controller_T controller_P = {
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<Root>/Data Store Memory10'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Data Store Memory11'
+   * Referenced by: '<Root>/Data Store Memory1'
    */
   0.0,
 
@@ -438,12 +383,27 @@ P_controller_T controller_P = {
   0.0,
 
   /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory3'
+   */
+  0.0,
+
+  /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory5'
    */
   0.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Data Store Memory7'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory8'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Data Store Memory9'
    */
   0.0,
 
@@ -455,45 +415,5 @@ P_controller_T controller_P = {
   /* Computed Parameter: DataStoreMemory6_InitialValue
    * Referenced by: '<Root>/Data Store Memory6'
    */
-  0,
-
-  /* Computed Parameter: DataStoreMemory1_InitialValue
-   * Referenced by: '<Root>/Data Store Memory1'
-   */
-  false,
-
-  /* Computed Parameter: DataStoreMemory3_InitialValue
-   * Referenced by: '<Root>/Data Store Memory3'
-   */
-  false,
-
-  /* Computed Parameter: DataStoreMemory8_InitialValue
-   * Referenced by: '<Root>/Data Store Memory8'
-   */
-  false,
-
-  /* Computed Parameter: DataStoreMemory9_InitialValue
-   * Referenced by: '<Root>/Data Store Memory9'
-   */
-  false,
-
-  /* Start of '<Root>/Analog Input1' */
-  {
-    /* Expression: 0.1
-     * Referenced by: '<Root>/Analog Input1'
-     */
-    0.1
-  }
-  ,
-
-  /* End of '<Root>/Analog Input1' */
-
-  /* Start of '<Root>/Analog Input' */
-  {
-    /* Expression: 0.1
-     * Referenced by: '<Root>/Analog Input'
-     */
-    0.1
-  }
-  /* End of '<Root>/Analog Input' */
+  0
 };
